@@ -2,7 +2,7 @@
   "personal": {
     "name": "Amber Bisht",
     "tagline": "Software Developer",
-    "description": "Passionate about creating beautiful, functional web applications with modern technologies."
+    "description": "I love creating fast, reliable, and stunning web apps — combining frontend creativity with backend power and cloud scalability."
   },
   "projects": [
     {
@@ -95,7 +95,7 @@
     }
   ],
   "contact": {
-    "email": "bishtamber0@email.com",
+    "email": "bishtamber0@gmail.com",
     "location": "India",
     "linkedin": "https://www.linkedin.com/in/amber-bisht-05a096294",
     "github": "https://github.com/amber-bisht",
@@ -104,7 +104,7 @@
     "instagram": "https://instagram.com/amber_bisht"
   },
   "_metadata": {
-    "lastUpdated": "2025-09-19T01:28:06.790Z",
+    "lastUpdated": "2025-10-07T14:31:38.993Z",
     "version": "1.0.0",
     "format": "portfolio-json-v1",
     "description": "Complete portfolio data for Amber Bisht - Software Developer",
@@ -112,7 +112,7 @@
     "crawlable": true,
     "aiTrainingFriendly": true,
     "siteUrl": "https://amberbisht.me",
-    "generatedAt": "2025-09-19T01:28:06.792Z",
+    "generatedAt": "2025-10-07T14:31:38.996Z",
     "keywords": [
       "software developer",
       "full stack developer",
@@ -199,7 +199,7 @@
   },
   "seo": {
     "title": "Amber Bisht - Software Developer",
-    "description": "Passionate about creating beautiful, functional web applications with modern technologies.",
+    "description": "I love creating fast, reliable, and stunning web apps — combining frontend creativity with backend power and cloud scalability.",
     "keywords": [
       "amber bisht",
       "software developer",
@@ -255,9 +255,9 @@
       "@type": "Person",
       "name": "Amber Bisht",
       "jobTitle": "Software Developer",
-      "description": "Passionate about creating beautiful, functional web applications with modern technologies.",
+      "description": "I love creating fast, reliable, and stunning web apps — combining frontend creativity with backend power and cloud scalability.",
       "url": "https://amberbisht.me",
-      "email": "bishtamber0@email.com",
+      "email": "bishtamber0@gmail.com",
       "sameAs": [
         "https://www.linkedin.com/in/amber-bisht-05a096294",
         "https://github.com/amber-bisht",

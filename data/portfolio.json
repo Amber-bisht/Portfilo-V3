@@ -2,7 +2,7 @@
   "personal": {
     "name": "Amber Bisht",
     "tagline": "Software Developer",
-    "description": "Passionate about creating beautiful, functional web applications with modern technologies."
+    "description": "I love creating fast, reliable, and stunning web apps — combining frontend creativity with backend power and cloud scalability."
   },
   "projects": [
     {
@@ -31,7 +31,35 @@
       "image": "/images/project3.jpg",
       "github": "https://github.com/Amber-bisht/codeEditor",
       "live": "https://codeeditor.amberbisht.me"
+    },
+    {
+      "id": 4,
+      "title": "E-Commerce Platform",
+      "description": "A full-featured e-commerce web application built using the MERN stack. Includes secure authentication, product listing, cart, and order management with integrated payment gateway and admin dashboard.",
+      "technologies": ["React.js", "Express.js", "MongoDB", "Node.js", "JWT", "Razorpay", "Redux", "Tailwind CSS"],
+      "image": "",
+      "github": "https://github.com/Amber-bisht/e-Store",
+      "live": ""
+    },    
+    {
+      "id": 5,
+      "title": "Telegram Uploader Bot",
+      "description": "A Node.js automation bot that uploads media files to Internet Archive, Dailymotion, and Terabox seamlessly. Handles authentication, metadata management, and upload tracking with efficient API integrations.",
+      "technologies": ["Node.js", "Express.js", "Axios", "Internet Archive API", "Dailymotion API", "Terabox API", "FFmpeg"],
+      "image": "",
+      "github": "https://github.com/Amber-bisht/internetarchive-uploaderbot",
+      "live": ""
+    },    
+    {
+      "id": 6,
+      "title": "Personal Portfolio - amberbisht.me",
+      "description": "A modern static portfolio website built with Next.js and Tailwind CSS, showcasing projects, skills, and achievements. Optimized with Static Site Generation (SSG) for high performance and fast loading.",
+      "technologies": ["Next.js", "Tailwind CSS", "SSG", "Docker", "React"],
+      "image": "",
+      "github": "https://github.com/Amber-bisht/AMBER-PORTFILO-MINECRAFT",
+      "live": "https://amberbisht.me/"
     }
+    
   ],
   "experience": [
     {
@@ -61,7 +89,7 @@
     }
   ],
   "contact": {
-    "email":"bishtamber0@email.com",
+    "email":"bishtamber0@gmail.com",
     "location": "India",
     "linkedin": "https://www.linkedin.com/in/amber-bisht-05a096294",
     "github": "https://github.com/amber-bisht",

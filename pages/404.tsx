@@ -21,15 +21,16 @@ const Custom404 = () => {
     personal: {
       name: "Amber Bisht",
       tagline: "Software Developer",
-      description: "Passionate about creating beautiful, functional web applications with modern technologies."
+      description: "I love creating fast, reliable, and stunning web apps — combining frontend creativity with backend power and cloud scalability."
     },
     contact: {
-      email: "bishtamber0@email.com",
+      email: "bishtamber0@gmail.com",
       location: "India",
-      linkedin: "https://linkedin.com/in/amber-bisht",
+      linkedin: "https://www.linkedin.com/in/amber-bisht-05a096294",
       github: "https://github.com/amber-bisht",
-      twitter: "https://twitter.com/amber_bisht",
-      telegram: "amber_bisht"
+      twitter: "https://x.com/amber_bisht",
+      telegram: "amber_bisht",
+      instagram: "https://instagram.com/amber_bisht"
     }
   };
 

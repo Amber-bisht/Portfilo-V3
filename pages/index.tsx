@@ -144,16 +144,16 @@ const Home: React.FC<HomeProps> = ({ portfolioData }) => {
         
         <main className="flex-1">
           {/* Minecraft-Style Hero Section */}
-          <section className="relative min-h-screen flex items-center justify-center py-8 px-4">
+          <section className="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-screen flex items-center justify-center py-4 sm:py-8 px-4">
             <div className="relative z-10 text-center max-w-4xl mx-auto">
               {/* Main Title - Minecraft Style */}
               <div className="mb-4">
                 <h1 className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black drop-shadow-2xl ${isDark ? 'text-white' : 'text-white'}`}
                     style={{
-                      fontFamily: 'Minercraftory, monospace',
+                      fontFamily: 'Roboto, sans-serif',
                       textShadow: isDark ? '3px 3px 0px #000000, 6px 6px 0px #333333' : '3px 3px 0px #000000, 6px 6px 0px #333333',
                       letterSpacing: '0.05em',
-                      fontWeight: '400',
+                      fontWeight: '900',
                       WebkitTextStroke: isDark ? 'none' : '3px #000000'
                     }}>
                   AMBER BISHT
@@ -161,55 +161,47 @@ const Home: React.FC<HomeProps> = ({ portfolioData }) => {
               </div>
               
               {/* Subtitle */}
-              <div className="mb-8 sm:mb-12">
+              <div className="mb-6 sm:mb-8">
                 <h2 className={`text-lg sm:text-xl md:text-3xl lg:text-4xl drop-shadow-lg ${isDark ? 'text-white' : 'text-white'}`}
                     style={{
-                      fontFamily: 'Minercraftory, monospace',
+                      fontFamily: 'Roboto, sans-serif',
                       textShadow: isDark ? '2px 2px 0px #000000' : '2px 2px 0px #000000',
-                      fontWeight: '400',
+                      fontWeight: '700',
                       WebkitTextStroke: isDark ? 'none' : '2px #000000'
                     }}>
                   SOFTWARE DEVELOPER
                 </h2>
               </div>
 
-              {/* Splash Text - "Is This Real?" */}
-              <div className="absolute top-16 right-2 sm:top-20 sm:right-1 transform -rotate-12"
+              {/* Description */}
+              <div className="mb-6 sm:mb-8">
+                <p className={`text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
                    style={{
-                     perspective: '1000px',
-                     transformStyle: 'preserve-3d'
+                     fontFamily: 'Roboto, sans-serif',
+                     fontWeight: '400'
                    }}>
-                <div className="px-2 py-1"
-                     style={{ 
-                       transform: 'rotateX(10deg) rotateY(-5deg)'
-                     }}>
-                  <span className="text-yellow-400 font-bold text-xl" 
-                        style={{ 
-                          fontFamily: 'monospace',
-                          textShadow: '2px 2px 0px #000000, 4px 4px 0px #333333',
-                          transform: 'translateZ(2px)'
-                        }}>
-                    Is This Real ?
-                  </span>
-                </div>
+                  {portfolioData.personal.description}
+                </p>
               </div>
 
+
+
               {/* Minecraft-style Menu Buttons */}
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {/* Level 1 - Tech Stack + Contact */}
-                <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
                   <button 
                     onClick={() => scrollToSection('tech-stack')}
-                    className={`flex items-center justify-center gap-2 px-6 sm:px-8 py-4 w-full sm:w-64 text-lg sm:text-xl font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
+                    className={`flex items-center justify-center gap-2 px-4 sm:px-8 py-3 sm:py-4 w-full sm:w-64 text-base sm:text-xl font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
                     style={{ borderRadius: '4px', fontFamily: 'monospace' }}>
-                    <Code className="w-4 h-4" />
+                    <Code className="w-3 h-3 sm:w-4 sm:h-4" />
                     Tech Stack
                   </button>
                   <button 
                     onClick={() => scrollToSection('contact')}
-                    className={`flex items-center justify-center gap-2 px-6 sm:px-8 py-4 w-full sm:w-64 text-lg sm:text-xl font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
+                    className={`flex items-center justify-center gap-2 px-4 sm:px-8 py-3 sm:py-4 w-full sm:w-64 text-base sm:text-xl font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
                     style={{ borderRadius: '4px', fontFamily: 'monospace' }}>
-                    <Heart className="w-4 h-4" />
+                    <Heart className="w-3 h-3 sm:w-4 sm:h-4" />
                     Contact
                   </button>
                 </div>
@@ -218,9 +210,9 @@ const Home: React.FC<HomeProps> = ({ portfolioData }) => {
                 <div className="flex justify-center">
                   <button 
                     onClick={() => scrollToSection('projects')}
-                    className={`flex items-center justify-center gap-2 px-6 sm:px-8 py-4 w-full sm:w-[544px] text-lg sm:text-xl font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
+                    className={`flex items-center justify-center gap-2 px-4 sm:px-8 py-3 sm:py-4 w-full sm:w-[544px] text-base sm:text-xl font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
                     style={{ borderRadius: '4px', fontFamily: 'monospace' }}>
-                    <Coffee className="w-4 h-4" />
+                    <Coffee className="w-3 h-3 sm:w-4 sm:h-4" />
                     Projects
                   </button>
                 </div>
@@ -257,20 +249,20 @@ export const getStaticProps: GetStaticProps = async () => {
       // Fallback to default data if JSON file is not found or invalid
       portfolioData = {
         personal: {
-          name: "John Developer",
-          tagline: "Full-Stack Developer & UI/UX Enthusiast",
-          description: "Passionate about creating beautiful, functional web applications with modern technologies."
+          name: "Amber Bisht",
+          tagline: "Software Developer",
+          description: "I love creating fast, reliable, and stunning web apps — combining frontend creativity with backend power and cloud scalability."
         },
         projects: [],
         experience: [],
         contact: {
-          email: "john.developer@email.com",
-          location: "San Francisco, CA",
-          linkedin: "https://linkedin.com/in/johndeveloper",
-          github: "https://github.com/johndeveloper",
-          twitter: "https://twitter.com/johndeveloper",
+          email: "bishtamber0@gmail.com",
+          location: "India",
+          linkedin: "https://www.linkedin.com/in/amber-bisht-05a096294",
+          github: "https://github.com/amber-bisht",
+          twitter: "https://x.com/amber_bisht",
           telegram: "amber_bisht",
-          instagram: "https://instagram.com/johndeveloper"
+          instagram: "https://instagram.com/amber_bisht"
         }
       };
     }
@@ -286,20 +278,20 @@ export const getStaticProps: GetStaticProps = async () => {
     // Return fallback data
     const fallbackData: PortfolioData = {
       personal: {
-        name: "John Developer",
-        tagline: "Full-Stack Developer & UI/UX Enthusiast",
-        description: "Passionate about creating beautiful, functional web applications with modern technologies."
+        name: "Amber Bisht",
+        tagline: "Software Developer",
+        description: "I love creating fast, reliable, and stunning web apps — combining frontend creativity with backend power and cloud scalability."
       },
       projects: [],
       experience: [],
       contact: {
-        email: "john.developer@email.com",
-        location: "San Francisco, CA",
-        linkedin: "https://linkedin.com/in/johndeveloper",
-        github: "https://github.com/johndeveloper",
-        twitter: "https://twitter.com/johndeveloper",
+        email: "bishtamber0@gmail.com",
+        location: "India",
+        linkedin: "https://www.linkedin.com/in/amber-bisht-05a096294",
+        github: "https://github.com/amber-bisht",
+        twitter: "https://x.com/amber_bisht",
         telegram: "amber_bisht",
-        instagram: "https://instagram.com/johndeveloper"
+        instagram: "https://instagram.com/amber_bisht"
       }
     };
 
