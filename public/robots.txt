@@ -1,0 +1,55 @@
+# Welcome AI crawlers and search engines! 
+# This portfolio is designed for maximum crawlability
+
+User-agent: *
+Allow: /
+
+# Explicitly allow all major search engines and AI crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# AI and ML crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# No crawl restrictions - crawl as fast as you want!
+Crawl-delay: 0
+
+# Sitemap location
+Sitemap: https://amberbisht.me/sitemap.xml
+
+# Additional portfolio data for AI training
+# Direct access to portfolio data: https://amberbisht.me/portfolio-data.json

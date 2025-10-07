@@ -1,0 +1,72 @@
+{
+  "personal": {
+    "name": "Amber Bisht",
+    "tagline": "Software Developer",
+    "description": "Passionate about creating beautiful, functional web applications with modern technologies."
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "AskSync - AI Powered Test and Form Builder & Checker",
+      "description": "An intelligent test and form creation platform powered by AI, featuring automated form generation, test creation, and comprehensive checking capabilities. The platform supports multiple question types, real-time validation, automated grading, and detailed analytics dashboard.",
+      "technologies": ["Next.js", "Full Stack", "Gemini API", "OAuth", "MongoDB", "Razorpay", "Docker", "CI/CD Pipelines"],
+      "image": "/images/project1-asksync.svg",
+      "github": "https://github.com/Amber-bisht/askSync",
+      "live": "https://asksync.amberbisht.me"
+    },
+    {
+      "id": 2,
+      "title": "LMS - Learning Management System",
+      "description": "A comprehensive learning management system with real-time video streaming, course management, user authentication, and payment integration.",
+      "technologies": ["Next.js", "Express", "MongoDB", "Redis", "OAuth", "S3", "YouTube API", "Internet Archive", "HLS Player", "PubSub", "Docker", "Microservices", "Razorpay"],
+      "image": "/images/project2.jpg",
+      "github": "https://github.com/Amber-bisht/lms",
+      "live": "https://lms.amberbisht.me"
+    },
+    {
+      "id": 3,
+      "title": "CodeEditor - Web App with AI Powered Code Completion",
+      "description": "A modern web-based code editor featuring AI-powered code completion, syntax highlighting, and collaborative editing capabilities. The application provides intelligent code suggestions, real-time error detection, multi-language support, and live collaboration features.",
+      "technologies": ["Next.js", "Express", "PostgreSQL", "Gemini API", "Docker", "Kubernetes", "Reverse Proxy", "CI/CD Pipelines", "S3","WebRTC"],
+      "image": "/images/project3.jpg",
+      "github": "https://github.com/Amber-bisht/codeEditor",
+      "live": "https://codeeditor.amberbisht.me"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Freelancer SWD",
+      "position": "Freelance Software Developer",
+      "duration": "Auguest 2025 - Present",
+      "description": "Developed comprehensive business solutions including PMS (Property Management System), hotel management systems, booking platforms, inventory management, reporting systems, and dashboard applications. Built a B2B hotel booking platform with advanced features and integrations.",
+      "achievements": [
+        "Successfully delivered multiple full-stack web applications",
+        "Built scalable PMS systems with real-time booking management and payment integration",
+        "Developed B2B hotel booking platform with advanced search, filtering, and reservation features",
+        "Implemented comprehensive inventory management systems with automated reporting",
+        "Created responsive dashboard applications with data visualization and analytics",
+        "Integrated multiple payment gateways and third-party APIs for seamless user experience"
+      ]
+    },
+    {
+      "company": "Delonix Travel Services Pvt Ltd",
+      "position": "Software Developer Intern",
+      "duration": "April 2025 - August 2025",
+      "description": "Developed a comprehensive CRM system for travel agency operations with advanced user management and reporting capabilities.",
+      "achievements": [
+        "Improved user experience through better UI design and PDF generation enhancements",
+        "Implemented role-based access control for different user types: Manager, Admin, Super Admin, Agent, and HR",
+        "Enhanced filtering, sorting, and pagination functionality for better data management"
+      ]
+    }
+  ],
+  "contact": {
+    "email":"bishtamber0@email.com",
+    "location": "India",
+    "linkedin": "https://www.linkedin.com/in/amber-bisht-05a096294",
+    "github": "https://github.com/amber-bisht",
+    "twitter": "https://x.com/amber_bisht",
+    "telegram": "amber_bisht",
+    "instagram": "https://instagram.com/amber_bisht"
+  }
+}
