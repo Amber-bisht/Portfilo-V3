@@ -12,7 +12,8 @@
       "technologies": ["Next.js", "Full Stack", "Gemini API", "OAuth", "MongoDB", "Razorpay", "Docker", "CI/CD Pipelines"],
       "image": "/images/project1-asksync.svg",
       "github": "https://github.com/Amber-bisht/askSync",
-      "live": "https://asksync.amberbisht.me"
+      "live": "https://asksync.amberbisht.me",
+      "system architecture": ""
     },
     {
       "id": 2,
@@ -21,7 +22,8 @@
       "technologies": ["Next.js", "Express", "MongoDB", "Redis", "OAuth", "S3", "YouTube API", "Internet Archive", "HLS Player", "PubSub", "Docker", "Microservices", "Razorpay"],
       "image": "/images/project2.jpg",
       "github": "https://github.com/Amber-bisht/lms",
-      "live": "https://lms.amberbisht.me"
+      "live": "https://lms.amberbisht.me",
+      "system architecture": "---\nconfig:\n  layout: dagre\n---\nflowchart TB\n subgraph subGraph0[\"Client Layer\"]\n        FE[\"React Frontend<br>Port 5173<br>- Auth UI<br>- Video Player<br>- Course Browser<br>- Admin Dashboard\"]\n  end\n subgraph subGraph1[\"API Gateway Layer\"]\n        GW[\"API Gateway<br>Port 3000<br>- Routing<br>- CORS<br>- Rate Limiting<br>- Health Checks\"]\n  end\n subgraph subGraph2[\"Microservices Layer\"]\n        AUTH[\"Auth Service<br>Port 3001<br>- OAuth Google/GitHub<br>- JWT/Sessions<br>- User Management<br>- Passport.js\"]\n        COURSE[\"Course Service<br>Port 3004<br>- Courses CRUD<br>- Enrollment<br>- Progress Tracking<br>- Lessons\"]\n        UPLOAD[\"Uploader Service<br>Port 3005<br>- File Upload<br>- Video Queue<br>- FFmpeg Processing<br>- HLS Conversion\"]\n        MEDIA[\"Media Service<br>Port 3008<br>- YouTube API<br>- Dailymotion<br>- Video Search<br>- Metadata\"]\n        COMMUNITY[\"Community Service<br>Port 3009<br>- Comments<br>- Reviews<br>- Ratings<br>- Discussions\"]\n        ADMIN[\"Admin Service<br>Port 3010<br>- Analytics<br>- User Management<br>- Moderation<br>- Cache Control\"]\n  end\n subgraph subGraph3[\"Data Layer\"]\n        MONGO[(\"MongoDB<br>Port 27017<br>- lms-auth<br>- lms-courses<br>- lms-uploader<br>- lms-community\")]\n        REDIS[(\"Redis<br>Port 6379<br>- Sessions<br>- Bull Queue<br>- Rate Limits<br>- Cache\")]\n  end\n subgraph subGraph4[\"Processing Layer\"]\n        QUEUE[\"Bull Queue<br>Redis-based<br>- Video Jobs<br>- Job Status<br>- Retries\"]\n        FFMPEG[\"FFmpeg<br>- Transcode 720p<br>- Transcode 1080p<br>- Generate HLS<br>- Create Thumbnails\"]\n        HLS[\"HLS Output<br>- .m3u8 Playlists<br>- .ts Segments<br>- Adaptive Bitrate<br>- Thumbnails\"]\n  end\n subgraph subGraph5[\"Storage Layer\"]\n        S3[\"AWS S3 / CDN<br>- Video Storage<br>- HLS Segments<br>- Thumbnails<br>- Presigned URLs\"]\n        LOCAL[\"Local Storage<br>- /uploads<br>- Development<br>- File Serving\"]\n  end\n subgraph subGraph6[\"External Services\"]\n        YT[\"YouTube API<br>- Video Search<br>- Metadata<br>- Thumbnails<br>- Statistics\"]\n        OAUTH[\"OAuth Providers<br>- Google OAuth<br>- GitHub OAuth<br>- User Info<br>- Profiles\"]\n        DM[\"Dailymotion API<br>- Video Search<br>- Metadata<br>- Embeds\"]\n  end\n    FE -- HTTP/HTTPS<br>Cookies --> GW\n    GW -- /api/auth --> AUTH\n    GW -- /api/courses --> COURSE\n    GW -- /api/upload<br>/api/videos --> UPLOAD\n    GW -- /api/media --> MEDIA\n    GW -- /api/comments<br>/api/reviews --> COMMUNITY\n    GW -- /api/admin --> ADMIN\n    AUTH -- Read/Write --> MONGO\n    AUTH -- Sessions --> REDIS\n    COURSE -- Read/Write --> MONGO\n    UPLOAD -- Read/Write --> MONGO\n    UPLOAD -- Jobs --> REDIS\n    COMMUNITY -- Read/Write --> MONGO\n    ADMIN -- Cache --> REDIS\n    UPLOAD -- Queue Job --> QUEUE\n    QUEUE -- Process --> FFMPEG\n    FFMPEG -- Output --> HLS\n    HLS -- Upload --> S3\n    HLS -- Store --> LOCAL\n    AUTH -- OAuth --> OAUTH\n    MEDIA -- API Calls --> YT & DM\n    COURSE -. Verify User .-> AUTH\n    UPLOAD -. Course Info .-> COURSE\n    COMMUNITY -. Course Exists .-> COURSE\n     FE:::frontend\n     GW:::gateway\n     AUTH:::service\n     COURSE:::service\n     UPLOAD:::service\n     MEDIA:::service\n     COMMUNITY:::service\n     ADMIN:::service\n     MONGO:::data\n     REDIS:::data\n     QUEUE:::processing\n     FFMPEG:::processing\n     HLS:::processing\n     S3:::storage\n     LOCAL:::storage\n     YT:::external\n     OAUTH:::external\n     DM:::external\n    classDef frontend fill:#7CB518,stroke:#000,stroke-width:3px,color:#000\n    classDef gateway fill:#C12E2A,stroke:#000,stroke-width:3px,color:#fff\n    classDef service fill:#3AAFFF,stroke:#000,stroke-width:3px,color:#000\n    classDef data fill:#8B6F47,stroke:#000,stroke-width:3px,color:#fff\n    classDef processing fill:#FFD700,stroke:#000,stroke-width:3px,color:#000\n    classDef storage fill:#A0885F,stroke:#000,stroke-width:3px,color:#000\n    classDef external fill:#FF6600,stroke:#000,stroke-width:3px,color:#fff"
     },
     {
       "id": 3,
@@ -30,36 +32,9 @@
       "technologies": ["Next.js", "Express", "PostgreSQL", "Gemini API", "Docker", "Kubernetes", "Reverse Proxy", "CI/CD Pipelines", "S3","WebRTC"],
       "image": "/images/project3.jpg",
       "github": "https://github.com/Amber-bisht/codeEditor",
-      "live": "https://codeeditor.amberbisht.me"
-    },
-    {
-      "id": 4,
-      "title": "E-Commerce Platform",
-      "description": "A full-featured e-commerce web application built using the MERN stack. Includes secure authentication, product listing, cart, and order management with integrated payment gateway and admin dashboard.",
-      "technologies": ["React.js", "Express.js", "MongoDB", "Node.js", "JWT", "Razorpay", "Redux", "Tailwind CSS"],
-      "image": "",
-      "github": "https://github.com/Amber-bisht/e-Store",
-      "live": ""
-    },    
-    {
-      "id": 5,
-      "title": "Telegram Uploader Bot",
-      "description": "A Node.js automation bot that uploads media files to Internet Archive, Dailymotion, and Terabox seamlessly. Handles authentication, metadata management, and upload tracking with efficient API integrations.",
-      "technologies": ["Node.js", "Express.js", "Axios", "Internet Archive API", "Dailymotion API", "Terabox API", "FFmpeg"],
-      "image": "",
-      "github": "https://github.com/Amber-bisht/internetarchive-uploaderbot",
-      "live": ""
-    },    
-    {
-      "id": 6,
-      "title": "Personal Portfolio - amberbisht.me",
-      "description": "A modern static portfolio website built with Next.js and Tailwind CSS, showcasing projects, skills, and achievements. Optimized with Static Site Generation (SSG) for high performance and fast loading.",
-      "technologies": ["Next.js", "Tailwind CSS", "SSG", "Docker", "React"],
-      "image": "",
-      "github": "https://github.com/Amber-bisht/AMBER-PORTFILO-MINECRAFT",
-      "live": "https://amberbisht.me/"
-    }
-    
+      "live": "https://codeeditor.amberbisht.me",
+      "system architecture": ""
+    } 
   ],
   "experience": [
     {

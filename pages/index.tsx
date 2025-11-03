@@ -13,6 +13,7 @@ import Contact from '../components/Contact';
 import TechStack from '../components/TechStack';
 import MetaTags from '../components/SEO/MetaTags';
 import StructuredData from '../components/SEO/StructuredData';
+import { useSoundEffect } from '../hooks/useSoundEffect';
 
 interface PortfolioData {
   personal: {
@@ -28,6 +29,7 @@ interface PortfolioData {
     image: string;
     github: string;
     live: string;
+    'system architecture'?: string;
   }>;
   experience: Array<{
     company: string;
@@ -53,6 +55,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ portfolioData }) => {
   const { theme } = useTheme();
+  const { playSound } = useSoundEffect();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -191,14 +194,20 @@ const Home: React.FC<HomeProps> = ({ portfolioData }) => {
                 {/* Level 1 - Tech Stack + Contact */}
                 <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
                   <button 
-                    onClick={() => scrollToSection('tech-stack')}
+                    onClick={() => {
+                      playSound('/stone-effect-254998.mp3', 0.5);
+                      scrollToSection('tech-stack');
+                    }}
                     className={`flex items-center justify-center gap-2 px-4 sm:px-8 py-3 sm:py-4 w-full sm:w-64 text-base sm:text-xl font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
                     style={{ borderRadius: '4px', fontFamily: 'monospace' }}>
                     <Code className="w-3 h-3 sm:w-4 sm:h-4" />
                     Tech Stack
                   </button>
                   <button 
-                    onClick={() => scrollToSection('contact')}
+                    onClick={() => {
+                      playSound('/stone-effect-254998.mp3', 0.5);
+                      scrollToSection('contact');
+                    }}
                     className={`flex items-center justify-center gap-2 px-4 sm:px-8 py-3 sm:py-4 w-full sm:w-64 text-base sm:text-xl font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
                     style={{ borderRadius: '4px', fontFamily: 'monospace' }}>
                     <Heart className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -209,7 +218,10 @@ const Home: React.FC<HomeProps> = ({ portfolioData }) => {
                 {/* Level 2 - Projects (Wide Button) */}
                 <div className="flex justify-center">
                   <button 
-                    onClick={() => scrollToSection('projects')}
+                    onClick={() => {
+                      playSound('/stone-effect-254998.mp3', 0.5);
+                      scrollToSection('projects');
+                    }}
                     className={`flex items-center justify-center gap-2 px-4 sm:px-8 py-3 sm:py-4 w-full sm:w-[544px] text-base sm:text-xl font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
                     style={{ borderRadius: '4px', fontFamily: 'monospace' }}>
                     <Coffee className="w-3 h-3 sm:w-4 sm:h-4" />

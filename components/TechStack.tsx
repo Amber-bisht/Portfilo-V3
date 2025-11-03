@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useSoundEffect } from '../hooks/useSoundEffect';
 import { 
   SiHtml5,
   SiCss3,
@@ -27,6 +28,7 @@ interface TechStackProps {}
 
 const TechStack: React.FC<TechStackProps> = () => {
   const { theme } = useTheme();
+  const { playSound } = useSoundEffect();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -242,7 +244,17 @@ const TechStack: React.FC<TechStackProps> = () => {
                 return (
                   <div
                     key={index}
-                    className={`group relative aspect-square ${isDark ? 'bg-gray-800 border-2 border-gray-600' : 'bg-gray-200 border-2 border-gray-400'} ${!isEmpty ? 'hover:border-cyan-400' : ''} transition-all duration-200`}
+                    onMouseEnter={() => {
+                      if (!isEmpty) {
+                        playSound('/minecraft-chest-open-made-with-Voicemod.mp3', 0.5);
+                      }
+                    }}
+                    onClick={() => {
+                      if (!isEmpty) {
+                        playSound('/minecraft-chest-open-made-with-Voicemod.mp3', 0.5);
+                      }
+                    }}
+                    className={`group relative aspect-square ${isDark ? 'bg-gray-800 border-2 border-gray-600' : 'bg-gray-200 border-2 border-gray-400'} ${!isEmpty ? 'hover:border-cyan-400 cursor-pointer' : ''} transition-all duration-200`}
                     style={{ 
                       borderRadius: '4px',
                       backgroundImage: isDark 

@@ -2,6 +2,8 @@ import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useEffect, useState } from 'react';
 import { Menu, X, Sun, Moon, Monitor } from 'lucide-react';
+import SoundToggle from '../SoundToggle';
+import { useSoundEffect } from '../../hooks/useSoundEffect';
 
 interface SiteHeaderProps {
   name?: string;
@@ -10,6 +12,7 @@ interface SiteHeaderProps {
 
 const SiteHeader: React.FC<SiteHeaderProps> = ({ name = "John Developer", tagline = "Full-Stack Developer & UI/UX Enthusiast" }) => {
   const { theme, setTheme, toggleTheme } = useTheme();
+  const { playSound } = useSoundEffect();
   const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -62,9 +65,15 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ name = "John Developer", taglin
 
           {/* Theme Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
+            {/* Sound Toggle */}
+            <SoundToggle />
+            
             {/* Enhanced Pixelated Theme Toggle */}
             <button
-              onClick={toggleTheme}
+              onClick={() => {
+                playSound('/minecraft-cave-sound-332982.mp3', 0.5);
+                toggleTheme();
+              }}
               className="relative w-16 h-8 border-4 border-black transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg"
               style={{ borderRadius: '6px' }}
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
@@ -94,7 +103,10 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ name = "John Developer", taglin
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => {
+                playSound('/stone-effect-254998.mp3', 0.5);
+                setIsMenuOpen(!isMenuOpen);
+              }}
               className={`md:hidden p-2 rounded-lg transition-colors ${isDark ? 'bg-gray-800 hover:bg-gray-700 text-gray-300' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
               aria-label="Toggle menu"
             >
@@ -123,7 +135,10 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ name = "John Developer", taglin
               Menu
             </h2>
             <button
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                playSound('/stone-effect-254998.mp3', 0.5);
+                setIsMenuOpen(false);
+              }}
               className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-gray-800 hover:bg-gray-700 text-gray-300' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
             >
               <X className="w-5 h-5" />

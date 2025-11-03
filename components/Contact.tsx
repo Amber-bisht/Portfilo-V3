@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Mail, MapPin, Linkedin, Github, Twitter, Send, MessageCircle } from 'lucide-react';
 import { SiGmail, SiGooglemaps, SiInstagram } from 'react-icons/si';
+import { useSoundEffect } from '../hooks/useSoundEffect';
 
 interface Contact {
   email: string;
@@ -19,6 +20,7 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ contact }) => {
   const { theme } = useTheme();
+  const { playSound } = useSoundEffect();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -176,6 +178,7 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                   <div className="mt-8">
                     <a
                       href={`mailto:${contact.email}?subject=Let's work together!`}
+                      onClick={() => playSound('/stone-effect-254998.mp3', 0.5)}
                       className={`inline-flex items-center gap-2 px-6 py-3 font-medium transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
                       style={{ borderRadius: '4px' }}
                     >

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import { Github, ExternalLink, Code, Database, Globe, ChevronDown, ChevronUp } from 'lucide-react';
+import { Github, ExternalLink, Code, Database, Globe, X, Network } from 'lucide-react';
+import { useSoundEffect } from '../hooks/useSoundEffect';
+import mermaid from 'mermaid';
 
 interface Project {
   id: number;
@@ -10,6 +12,7 @@ interface Project {
   image: string;
   github: string;
   live: string;
+  'system architecture'?: string;
 }
 
 interface ProjectsProps {
@@ -18,22 +21,104 @@ interface ProjectsProps {
 
 const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   const { theme } = useTheme();
+  const { playSound } = useSoundEffect();
   const [mounted, setMounted] = useState(false);
-  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const mermaidRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    // Initialize mermaid
+    mermaid.initialize({ 
+      startOnLoad: false,
+      theme: theme === 'dark' ? 'dark' : 'default',
+      securityLevel: 'loose',
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'basis'
+      }
+    });
+  }, [theme]);
+
+  useEffect(() => {
+    // Render mermaid diagram when modal opens
+    if (isModalOpen && selectedProject && selectedProject['system architecture'] && mermaidRef.current) {
+      let diagram = selectedProject['system architecture'];
+      mermaidRef.current.innerHTML = '';
+      
+      // Clean up the diagram - remove frontmatter and extract just the diagram
+      diagram = diagram.trim();
+      
+      // Remove frontmatter (---\nconfig: ... \n---\n)
+      if (diagram.includes('---')) {
+        const parts = diagram.split('---');
+        // Find the flowchart/graph part
+        for (let i = 0; i < parts.length; i++) {
+          if (parts[i].trim().startsWith('flowchart') || parts[i].trim().startsWith('graph')) {
+            diagram = parts[i].trim();
+            break;
+          }
+        }
+        // If we still have frontmatter, try to extract after the last ---
+        if (diagram.includes('---')) {
+          const lastDashIndex = diagram.lastIndexOf('---');
+          if (lastDashIndex !== -1) {
+            diagram = diagram.substring(lastDashIndex + 3).trim();
+          }
+        }
+      }
+      
+      // Remove any remaining incorrect prefixes
+      if (diagram.startsWith('--\n')) {
+        diagram = diagram.replace(/^--\n/, '');
+      }
+      
+      // Ensure we have a valid mermaid diagram
+      if (!diagram.startsWith('flowchart') && !diagram.startsWith('graph')) {
+        console.error('Invalid mermaid diagram format');
+        if (mermaidRef.current) {
+          mermaidRef.current.innerHTML = `<div class="p-4 text-center"><p class="text-red-500">Invalid diagram format</p></div>`;
+        }
+        return;
+      }
+      
+      // Use async/await for mermaid rendering
+      const renderDiagram = async () => {
+        try {
+          const { svg } = await mermaid.render(`mermaid-${selectedProject.id}`, diagram);
+          if (mermaidRef.current) {
+            mermaidRef.current.innerHTML = svg;
+          }
+        } catch (error) {
+          console.error('Error rendering mermaid diagram:', error);
+          if (mermaidRef.current) {
+            mermaidRef.current.innerHTML = `<div class="p-4 text-center"><p class="text-red-500 mb-2">Error rendering diagram</p><p class="text-sm text-gray-500">${error instanceof Error ? error.message : String(error)}</p></div>`;
+          }
+        }
+      };
+      
+      renderDiagram();
+    }
+  }, [isModalOpen, selectedProject]);
+
+  const openMermaidModal = (project: Project) => {
+    playSound('/stone-effect-254998.mp3', 0.5);
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    playSound('/stone-effect-254998.mp3', 0.5);
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
 
   const isDark = theme === 'dark';
   
   // Get featured projects from JSON (first 3 projects with images)
   const featuredProjects = projects.filter(project => project.image).slice(0, 3);
-  
-  // Get additional projects (remaining projects with images + projects without images)
-  const remainingFeaturedProjects = projects.filter(project => project.image).slice(3);
-  const projectsWithoutImages = projects.filter(project => !project.image);
-  const allAdditionalProjects = [...remainingFeaturedProjects, ...projectsWithoutImages];
 
   const getTechIcon = (tech: string) => {
     const techLower = tech.toLowerCase();
@@ -89,6 +174,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => playSound('/stone-effect-254998.mp3', 0.5)}
               className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
             >
               <Github className="w-6 h-6 text-white" />
@@ -98,6 +184,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => playSound('/stone-effect-254998.mp3', 0.5)}
                 className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
               >
                 <ExternalLink className="w-6 h-6 text-white" />
@@ -129,12 +216,13 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         </div>
         
         {/* Action Buttons */}
-        <div className={`flex ${project.live ? 'space-x-3' : 'justify-center'}`}>
+        <div className={`flex flex-wrap gap-3 ${project.live || project['system architecture'] ? '' : 'justify-center'}`}>
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${project.live ? 'flex-1' : 'w-full max-w-xs'} flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
+            onClick={() => playSound('/stone-effect-254998.mp3', 0.5)}
+            className={`${project.live || project['system architecture'] ? 'flex-1' : 'w-full max-w-xs'} flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
             style={{ borderRadius: '4px' }}
           >
             <Github className="w-4 h-4" />
@@ -145,12 +233,23 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => playSound('/stone-effect-254998.mp3', 0.5)}
               className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
               style={{ borderRadius: '4px' }}
             >
               <ExternalLink className="w-4 h-4" />
               Live Demo
             </a>
+          )}
+          {project['system architecture'] && (
+            <button
+              onClick={() => openMermaidModal(project)}
+              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
+              style={{ borderRadius: '4px' }}
+            >
+              <Network className="w-4 h-4" />
+              Architecture
+            </button>
           )}
         </div>
       </div>
@@ -183,52 +282,68 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           {featuredProjects.map((project) => renderProjectCard(project, true))}
         </div>
 
-        {/* See More Projects Button */}
-        {allAdditionalProjects.length > 0 && (
-          <div className="text-center mt-12">
-            <button
-              onClick={() => setShowAllProjects(!showAllProjects)}
-              className={`inline-flex items-center gap-2 px-8 py-4 text-lg font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
-              style={{ borderRadius: '4px', fontFamily: 'monospace' }}
-            >
-              {showAllProjects ? (
-                <>
-                  <ChevronUp className="w-5 h-5" />
-                  Show Less Projects
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-5 h-5" />
-                  See More Projects
-                </>
-              )}
-            </button>
-          </div>
-        )}
+        {/* View More Projects Button - Redirects to GitHub */}
+        <div className="text-center mt-12">
+          <a
+            href="https://github.com/amber-bisht"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => playSound('/stone-effect-254998.mp3', 0.5)}
+            className={`inline-flex items-center gap-2 px-8 py-4 text-lg font-bold transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
+            style={{ borderRadius: '4px', fontFamily: 'monospace' }}
+          >
+            <Github className="w-5 h-5" />
+            View More Projects on GitHub
+          </a>
+        </div>
+      </div>
 
-        {/* Additional Projects - shown when "See More" is clicked */}
-        {showAllProjects && allAdditionalProjects.length > 0 && (
-          <div className="mt-12">
-            <div className="text-center mb-8">
-              <h3 className={`text-2xl md:text-3xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
+      {/* Mermaid Diagram Modal */}
+      {isModalOpen && selectedProject && selectedProject['system architecture'] && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={closeModal}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+          
+          {/* Modal Content */}
+          <div 
+            className={`relative w-full max-w-6xl max-h-[90vh] ${isDark ? 'bg-gray-900 border-4 border-gray-700' : 'bg-white border-4 border-gray-300'} shadow-2xl overflow-hidden`}
+            style={{ borderRadius: '4px' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className={`flex items-center justify-between p-6 border-b-4 ${isDark ? 'border-gray-700 bg-gray-800' : 'border-gray-300 bg-gray-100'}`}>
+              <h3 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}
                   style={{
                     fontFamily: 'Minercraftory, monospace',
                     textShadow: isDark ? '2px 2px 0px #000000' : '1px 1px 0px #000000',
                     fontWeight: '400'
                   }}>
-                Additional Projects
+                {selectedProject.title} - System Architecture
               </h3>
-              <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
-                More projects showcasing my development skills and experience.
-              </p>
+              <button
+                onClick={closeModal}
+                className={`p-2 transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-gray-300 hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
+                style={{ borderRadius: '4px' }}
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {allAdditionalProjects.map((project) => renderProjectCard(project, false))}
+            {/* Modal Body - Mermaid Diagram */}
+            <div className={`p-6 overflow-auto max-h-[calc(90vh-120px)] ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+              <div 
+                ref={mermaidRef}
+                className="mermaid-diagram flex items-center justify-center"
+                style={{ minHeight: '400px' }}
+              />
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 };
