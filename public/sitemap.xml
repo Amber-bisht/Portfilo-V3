@@ -31,7 +31,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://amberbisht.me/images/project1.jpg</image:loc>
+      <image:loc>https://amberbisht.me/images/asksync.png</image:loc>
       <image:caption>AskSync - AI Powered Test and Form Builder & Checker</image:caption>
       <image:title>AskSync</image:title>
     </image:image>
@@ -43,7 +43,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://amberbisht.me/images/project2.jpg</image:loc>
+      <image:loc>https://amberbisht.me/images/lms.png</image:loc>
       <image:caption>LMS - Learning Management System</image:caption>
       <image:title>LMS</image:title>
     </image:image>
@@ -55,7 +55,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://amberbisht.me/images/project3.jpg</image:loc>
+      <image:loc>https://amberbisht.me/images/code.png</image:loc>
       <image:caption>CodeEditor - Web App with AI Powered Code Completion</image:caption>
       <image:title>CodeEditor</image:title>
     </image:image>
