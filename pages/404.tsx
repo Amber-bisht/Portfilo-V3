@@ -55,7 +55,7 @@ const Custom404 = () => {
         <title>404 - Page Not Found | Amber Bisht</title>
         <meta name="description" content="Oops! The page you're looking for doesn't exist." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/11423/11423254.png" />
       </Head>
 
       <div className={`min-h-screen relative ${isDark ? 'bg-gradient-to-br from-slate-900 via-blue-900 to-slate-950' : 'bg-gradient-to-br from-blue-100 via-blue-50 to-cyan-100'}`}>

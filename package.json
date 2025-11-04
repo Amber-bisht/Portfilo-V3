@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run generate-data && next build",
-    "start": "next start",
+    "start": "npx serve out",
     "lint": "next lint",
     "generate-data": "node scripts/generate-portfolio-data.js",
     "build:seo": "npm run generate-data && next build && npm run post-build",

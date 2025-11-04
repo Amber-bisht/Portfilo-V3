@@ -23,10 +23,9 @@ export default function Document() {
         />
         
         {/* Favicons */}
-        <link rel="icon" href="/favicon.ico?v=2" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
+        <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/11423/11423254.png" />
+        <link rel="shortcut icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/11423/11423254.png" />
+        <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/11423/11423254.png" />
         <link rel="manifest" href="/site.webmanifest" />
         
         {/* Theme Colors */}
@@ -41,8 +40,10 @@ export default function Document() {
         {/* Performance Hints */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn-icons-png.flaticon.com" />
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//linkedin.com" />
+        <link rel="dns-prefetch" href="//cdn-icons-png.flaticon.com" />
         
         {/* AI Crawler Instructions */}
         <meta name="ai-content-declaration" content="This portfolio contains original work by Amber Bisht and is available for AI training and indexing." />

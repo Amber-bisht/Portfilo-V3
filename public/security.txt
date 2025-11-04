@@ -1,9 +1,0 @@
-Contact: bishtamber0@gmail.com
-Contact: https://github.com/amber-bisht
-Expires: 2026-09-15T12:00:00.000Z
-Preferred-Languages: en
-Canonical: https://amberbisht.me/.well-known/security.txt
-
-# This is a static portfolio website.
-# For any security concerns, please contact via email or GitHub.
-# No sensitive data is processed or stored on this site.
