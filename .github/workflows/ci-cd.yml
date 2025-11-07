@@ -148,23 +148,58 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
           SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
         run: |
           # Set strict host key checking to avoid prompts
           ssh-keyscan -p ${SSH_PORT:-22} $SSH_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
           
-          # Execute deployment commands on server
-          sshpass -p "$SSH_PASSWORD" ssh -p ${SSH_PORT:-22} -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST bash << 'ENDSSH'
+          # Create deployment script with variables embedded
+          DEPLOY_SCRIPT=$(cat <<SCRIPT
             set -e
             
+            IMAGE_NAME='$IMAGE_NAME'
+            GITHUB_TOKEN='$GITHUB_TOKEN'
+            GITHUB_ACTOR='$GITHUB_ACTOR'
+            
+            echo "=== Starting Deployment ==="
+            echo "Image name: \${IMAGE_NAME}"
+            echo "GitHub actor: \${GITHUB_ACTOR}"
+            
+            # Check if Docker is installed
+            if ! command -v docker &> /dev/null; then
+              echo "❌ Error: Docker is not installed on the server"
+              echo "Please install Docker first: curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh"
+              exit 1
+            fi
+            
+            # Check if Docker daemon is running
+            if ! docker info &> /dev/null; then
+              echo "❌ Error: Docker daemon is not running or user doesn't have permission"
+              echo "Try: sudo systemctl start docker"
+              echo "Or add user to docker group: sudo usermod -aG docker \$USER"
+              exit 1
+            fi
+            
             # Login to GitHub Container Registry
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            echo "Logging into GitHub Container Registry..."
+            echo "\${GITHUB_TOKEN}" | docker login ghcr.io -u "\${GITHUB_ACTOR}" --password-stdin || {
+              echo "❌ Failed to login to GHCR"
+              exit 1
+            }
             
             # Pull latest image
-            echo "Pulling latest image..."
-            docker pull ${{ env.IMAGE_NAME }}:latest
+            echo "Pulling latest image: \${IMAGE_NAME}:latest"
+            docker pull "\${IMAGE_NAME}:latest" || {
+              echo "❌ Failed to pull image"
+              echo "Error details:"
+              docker pull "\${IMAGE_NAME}:latest" 2>&1 || true
+              exit 1
+            }
             
             # Stop and remove old container if it exists
-            echo "Stopping old container..."
+            echo "Stopping old container (if exists)..."
             docker stop portfolio-app 2>/dev/null || true
             docker rm portfolio-app 2>/dev/null || true
             
@@ -174,17 +209,42 @@ jobs:
               --name portfolio-app \
               -p 80:80 \
               --restart unless-stopped \
-              ${{ env.IMAGE_NAME }}:latest
+              "\${IMAGE_NAME}:latest" || {
+              echo "❌ Failed to start container"
+              echo "Error details:"
+              docker inspect portfolio-app 2>&1 || true
+              echo "Container logs:"
+              docker logs portfolio-app 2>&1 || true
+              exit 1
+            }
             
             # Wait a moment for container to start
-            sleep 2
+            echo "Waiting for container to start..."
+            sleep 5
             
-            # Show running containers
-            echo "Current containers:"
-            docker ps | grep portfolio-app || echo "Container not found"
+            # Check if container is running
+            if docker ps | grep -q portfolio-app; then
+              echo "✅ Container is running!"
+              docker ps | grep portfolio-app
+            else
+              echo "❌ Container failed to start or crashed immediately"
+              echo "Container status:"
+              docker ps -a | grep portfolio-app || true
+              echo "Container logs:"
+              docker logs portfolio-app 2>&1 || true
+              exit 1
+            fi
+            
+            # Check container logs for any errors
+            echo "Container logs (last 20 lines):"
+            docker logs portfolio-app 2>&1 | tail -20 || echo "No logs available"
             
             echo "✅ Deployment completed successfully!"
-          ENDSSH
+          SCRIPT
+          )
+          
+          # Execute deployment script on server
+          sshpass -p "$SSH_PASSWORD" ssh -p ${SSH_PORT:-22} -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST bash <<< "$DEPLOY_SCRIPT"
 
       - name: Deployment summary
         run: |
