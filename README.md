@@ -8,8 +8,9 @@ PWA,Open Graph
 SSG Next.js
 Framer Motion
 Mermaid
+ci cd pipline - (no need stil i have added)
 
 
-FOR HOSTING USE VERCEL SIMPLE 
+FOR HOSTING USE VERCEL
 
 MADE BY AMBER-BISHT 
