@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import fs from 'fs';
 import path from 'path';
 import { SiteHeader } from '../components/layout/site-header';
@@ -147,14 +148,14 @@ const Home: React.FC<HomeProps> = ({ portfolioData }) => {
         
         <main className="flex-1">
           {/* Minecraft-Style Hero Section */}
-          <section className="relative min-h-[calc(100vh-120px)] sm:min-h-[calc(100vh-120px)] flex items-center justify-center py-4 sm:py-8 px-4 pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-2 sm:pb-12">
+          <section className="relative min-h-[calc(100vh-120px)] sm:min-h-[calc(100vh-120px)] flex items-center justify-center py-4 sm:py-8 px-4 sm:px-6 md:px-8 pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-2 sm:pb-12">
             <div className="relative z-10 max-w-7xl mx-auto w-full">
               <div className="flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-12">
                 {/* Left Side - Text Content */}
-                <div className="flex-1 text-left lg:ml-16 lg:pl-16 lg:pr-8 order-1 lg:order-none mt-8 sm:mt-10 md:mt-12">
+                <div className="flex-1 text-left px-2 sm:px-4 md:px-6 lg:ml-16 lg:pl-16 lg:pr-8 order-1 lg:order-none mt-8 sm:mt-10 md:mt-12">
               {/* Main Title - Minecraft Style */}
-                  <div className="mb-3 flex items-center justify-start gap-1 lg:gap-2 flex-nowrap">
-                    <h1 className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black drop-shadow-2xl whitespace-nowrap ${isDark ? 'text-white' : 'text-white'}`}
+                  <div className="mb-3 flex items-center justify-start gap-1 lg:gap-2">
+                    <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black drop-shadow-2xl whitespace-nowrap ${isDark ? 'text-white' : 'text-gray-400'}`}
                     style={{
                       fontFamily: '"Times New Roman", Times, serif',
                       textShadow: isDark ? '0px 4px 20px rgba(0, 0, 0, 0.5), 0px 2px 8px rgba(0, 0, 0, 0.3)' : '0px 4px 20px rgba(0, 0, 0, 0.3), 0px 2px 8px rgba(0, 0, 0, 0.2)',
@@ -164,17 +165,11 @@ const Home: React.FC<HomeProps> = ({ portfolioData }) => {
                     }}>
                   AMBER BISHT
               </h1>
-                    <img 
-                      src="https://cdn-icons-png.flaticon.com/512/11423/11423254.png"
-                      alt="Sword"
-                      className="w-8 h-8 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain drop-shadow-lg flex-shrink-0"
-                      style={{ filter: 'brightness(0) invert(1)' }}
-                    />
               </div>
 
               {/* Description */}
               <div className="mb-4 sm:mb-5 md:mb-6">
-                    <p className={`text-base sm:text-base md:text-lg lg:text-xl max-w-xs sm:max-w-md md:max-w-2xl leading-relaxed text-left ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
+                    <p className={`text-sm sm:text-base md:text-lg lg:text-xl max-w-full sm:max-w-md md:max-w-2xl leading-relaxed text-left pr-2 sm:pr-0 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
                    style={{
                      fontFamily: 'Roboto, sans-serif',
                      fontWeight: '400'
@@ -201,12 +196,15 @@ const Home: React.FC<HomeProps> = ({ portfolioData }) => {
                 
                 {/* Right Side - Image */}
                 <div className="flex-1 flex items-center justify-center lg:justify-end order-2 lg:order-none">
-                  <div className="relative">
-                    <img 
-                      src="https://minecraft.wiki/images/Bee_JE1.gif"
+                  <div className="relative w-full max-w-[120px] sm:max-w-[180px] md:max-w-[240px] lg:max-w-[300px]">
+                    <Image 
+                      src="/images/Bee_JE1.gif"
                       alt="Minecraft Bee"
-                      className="w-full max-w-[200px] sm:max-w-[280px] md:max-w-md lg:max-w-lg h-auto object-contain drop-shadow-2xl"
+                      width={300}
+                      height={300}
+                      className="w-full h-auto object-contain drop-shadow-2xl"
                       style={{ mixBlendMode: 'normal' }}
+                      unoptimized
                     />
                   </div>
                 </div>

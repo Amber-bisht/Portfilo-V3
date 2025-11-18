@@ -4,23 +4,45 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Fonts */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
+        {/* Fonts - Load asynchronously to reduce render blocking */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var fonts = [
+                  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
+                  'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap',
+                  'https://fonts.cdnfonts.com/css/minercraftory',
+                  'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap'
+                ];
+                fonts.forEach(function(url) {
+                  var link = document.createElement('link');
+                  link.rel = 'stylesheet';
+                  link.href = url;
+                  document.head.appendChild(link);
+                });
+              })();
+            `,
+          }}
         />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
-          rel="stylesheet"
-        />
-        <link 
-          href="https://fonts.cdnfonts.com/css/minercraftory" 
-          rel="stylesheet" 
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
+        <noscript>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+            rel="stylesheet"
+          />
+          <link 
+            href="https://fonts.cdnfonts.com/css/minercraftory" 
+            rel="stylesheet" 
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+          />
+        </noscript>
         
         {/* Favicons */}
         <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/11423/11423254.png" />
@@ -40,10 +62,12 @@ export default function Document() {
         {/* Performance Hints */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
         <link rel="preconnect" href="https://cdn-icons-png.flaticon.com" />
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//linkedin.com" />
         <link rel="dns-prefetch" href="//cdn-icons-png.flaticon.com" />
+        <link rel="dns-prefetch" href="//fonts.cdnfonts.com" />
         
         {/* AI Crawler Instructions */}
         <meta name="ai-content-declaration" content="This portfolio contains original work by Amber Bisht and is available for AI training and indexing." />

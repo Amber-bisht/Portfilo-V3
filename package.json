@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run generate-data && next build",
+    "build": "npm run generate-data && npm run optimize-images && next build",
     "start": "npx serve out",
     "lint": "next lint",
     "generate-data": "node scripts/generate-portfolio-data.js",
-    "build:seo": "npm run generate-data && next build && npm run post-build",
+    "build:seo": "npm run generate-data && npm run optimize-images && next build && npm run post-build",
+    "optimize-images": "node scripts/optimize-images.js",
+    "analyze": "ANALYZE=true next build",
     "post-build": "echo 'Build complete with SEO optimizations!'"
   },
   "dependencies": {
@@ -31,7 +33,9 @@
     "eslint": "^8",
     "eslint-config-next": "^15.5.3",
     "postcss": "^8",
+    "sharp": "^0.33.0",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@next/bundle-analyzer": "^15.5.3"
   }
 }

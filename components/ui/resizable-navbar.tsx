@@ -5,6 +5,7 @@ import {
   motion,
   AnimatePresence,
 } from "motion/react";
+import Image from "next/image";
 
 import React, { useState, useEffect } from "react";
 
@@ -255,10 +256,13 @@ export const NavbarLogo = ({ name }: { name?: string }) => {
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-base font-semibold text-gray-900 dark:text-gray-100"
     >
       <span className="font-semibold text-gray-900 dark:text-gray-100">{name || "Startup"}</span>
-      <img 
+      <Image 
         src="https://cdn-icons-png.flaticon.com/512/11423/11423254.png"
         alt="Sword"
+        width={56}
+        height={56}
         className="w-5 h-5 object-contain dark:brightness-0 dark:invert"
+        unoptimized
       />
     </a>
   );

@@ -56,20 +56,24 @@ const SiteFooter: React.FC<SiteFooterProps> = ({ contact, personal }) => {
             </p>
             <div className="flex justify-center md:justify-start space-x-4">
               <a href={contact.github} target="_blank" rel="noopener noreferrer" 
+                 aria-label="Visit Amber Bisht's GitHub profile"
                  className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'}`}>
-                <Github className="w-5 h-5 text-gray-600" />
+                <Github className="w-5 h-5 text-gray-600" aria-hidden="true" />
               </a>
               <a href={contact.linkedin} target="_blank" rel="noopener noreferrer"
+                 aria-label="Visit Amber Bisht's LinkedIn profile"
                  className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'}`}>
-                <Linkedin className="w-5 h-5 text-gray-600" />
+                <Linkedin className="w-5 h-5 text-gray-600" aria-hidden="true" />
               </a>
               <a href={contact.twitter} target="_blank" rel="noopener noreferrer"
+                 aria-label="Visit Amber Bisht's Twitter profile"
                  className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'}`}>
-                <Twitter className="w-5 h-5 text-gray-600" />
+                <Twitter className="w-5 h-5 text-gray-600" aria-hidden="true" />
               </a>
               <a href={`mailto:${contact.email}`}
+                 aria-label={`Send email to ${contact.email}`}
                  className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'}`}>
-                <Mail className="w-5 h-5 text-gray-600" />
+                <Mail className="w-5 h-5 text-gray-600" aria-hidden="true" />
               </a>
             </div>
           </div>

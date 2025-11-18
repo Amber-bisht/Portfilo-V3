@@ -102,10 +102,11 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                       href={contact.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="Visit Amber Bisht's LinkedIn profile"
                       className={`group flex items-center p-4 rounded-xl transition-all duration-300 hover:scale-105 ${isDark ? 'bg-gray-800/50 border border-gray-700/50 hover:bg-gray-800' : 'bg-gray-50 border border-gray-200/50 hover:bg-gray-100'}`}
                     >
                       <div className="p-3 bg-blue-600 rounded-lg mr-4 group-hover:bg-blue-700 transition-colors">
-                        <Linkedin className="w-5 h-5 text-white" />
+                        <Linkedin className="w-5 h-5 text-white" aria-hidden="true" />
                       </div>
                       <div>
                         <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>LinkedIn</p>
@@ -117,10 +118,11 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                       href={contact.github}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="Visit Amber Bisht's GitHub profile"
                       className={`group flex items-center p-4 rounded-xl transition-all duration-300 hover:scale-105 ${isDark ? 'bg-gray-800/50 border border-gray-700/50 hover:bg-gray-800' : 'bg-gray-50 border border-gray-200/50 hover:bg-gray-100'}`}
                     >
                       <div className="p-3 bg-gray-800 rounded-lg mr-4 group-hover:bg-gray-900 transition-colors">
-                        <Github className="w-5 h-5 text-white" />
+                        <Github className="w-5 h-5 text-white" aria-hidden="true" />
                       </div>
                       <div>
                         <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>GitHub</p>
@@ -132,10 +134,11 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                       href={contact.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="Visit Amber Bisht's Twitter profile"
                       className={`group flex items-center p-4 rounded-xl transition-all duration-300 hover:scale-105 ${isDark ? 'bg-gray-800/50 border border-gray-700/50 hover:bg-gray-800' : 'bg-gray-50 border border-gray-200/50 hover:bg-gray-100'}`}
                     >
                       <div className="p-3 bg-blue-400 rounded-lg mr-4 group-hover:bg-blue-500 transition-colors">
-                        <Twitter className="w-5 h-5 text-white" />
+                        <Twitter className="w-5 h-5 text-white" aria-hidden="true" />
                       </div>
                       <div>
                         <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>Twitter</p>
@@ -147,10 +150,11 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                       href={`https://t.me/${contact.telegram}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="Contact Amber Bisht on Telegram"
                       className={`group flex items-center p-4 rounded-xl transition-all duration-300 hover:scale-105 ${isDark ? 'bg-gray-800/50 border border-gray-700/50 hover:bg-gray-800' : 'bg-gray-50 border border-gray-200/50 hover:bg-gray-100'}`}
                     >
                       <div className="p-3 bg-blue-500 rounded-lg mr-4 group-hover:bg-blue-600 transition-colors">
-                        <MessageCircle className="w-5 h-5 text-white" />
+                        <MessageCircle className="w-5 h-5 text-white" aria-hidden="true" />
                       </div>
                       <div>
                         <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>Telegram</p>
@@ -162,10 +166,11 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                       href={contact.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="Visit Amber Bisht's Instagram profile"
                       className={`group flex items-center p-4 rounded-xl transition-all duration-300 hover:scale-105 ${isDark ? 'bg-gray-800/50 border border-gray-700/50 hover:bg-gray-800' : 'bg-gray-50 border border-gray-200/50 hover:bg-gray-100'}`}
                     >
                       <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg mr-4 group-hover:from-purple-600 group-hover:to-pink-600 transition-all">
-                        <SiInstagram className="w-5 h-5 text-white" />
+                        <SiInstagram className="w-5 h-5 text-white" aria-hidden="true" />
                       </div>
                       <div>
                         <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>Instagram</p>
@@ -179,10 +184,11 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                     <a
                       href={`mailto:${contact.email}?subject=Let's work together!`}
                       onClick={() => playSound('/minecraft-click.mp3', 0.5)}
+                      aria-label={`Send email to ${contact.email}`}
                       className={`inline-flex items-center gap-2 px-6 py-3 font-medium transition-all duration-150 ${isDark ? 'bg-gray-600 border-2 border-t-gray-400 border-l-gray-400 border-r-gray-800 border-b-gray-800 text-white hover:bg-gray-500 active:border-t-gray-800 active:border-l-gray-800 active:border-r-gray-400 active:border-b-gray-400' : 'bg-gray-400 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 text-white hover:bg-gray-300 active:border-t-gray-600 active:border-l-gray-600 active:border-r-gray-200 active:border-b-gray-200'}`}
                       style={{ borderRadius: '4px' }}
                     >
-                      <Send className="w-4 h-4" />
+                      <Send className="w-4 h-4" aria-hidden="true" />
                       Send Message
                     </a>
                   </div>

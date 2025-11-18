@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import Image from 'next/image';
+import OptimizedImage from './OptimizedImage';
 import { useTheme } from '../contexts/ThemeContext';
 import { Github, ExternalLink, Code, Database, Globe, X, Network } from 'lucide-react';
 import { useSoundEffect } from '../hooks/useSoundEffect';
@@ -136,37 +138,38 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
       {/* Project Image - only show if showImage is true */}
       {showImage && (
         <div className="relative h-48 overflow-hidden">
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-            onLoad={(e) => {
-              console.log(`✅ Successfully loaded image: ${project.image}`);
-            }}
-            onError={(e) => {
-              console.error(`❌ Failed to load image: ${project.image}`, e);
-              // Try to set a fallback image
-              const target = e.target as HTMLImageElement;
-              
-              // Hide the broken image and show placeholder
-              target.style.display = 'none';
-              const placeholder = target.parentElement?.querySelector('.fallback-placeholder') as HTMLElement;
-              if (placeholder) {
-                placeholder.style.display = 'flex';
-              }
-            }}
-          />
-          {/* Fallback placeholder */}
-          <div className={`fallback-placeholder absolute inset-0 ${isDark ? 'bg-gradient-to-br from-gray-800 to-gray-700' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center ${project.image ? 'hidden' : 'flex'}`}>
-            <div className="text-center">
-              <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-300'} flex items-center justify-center`}>
-                <Code className={`w-8 h-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
+          {project.image ? (
+            project.image.endsWith('.png') ? (
+              <OptimizedImage 
+                src={project.image} 
+                alt={project.title}
+                width={768}
+                height={336}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                unoptimized
+              />
+            ) : (
+              <Image 
+                src={project.image} 
+                alt={project.title}
+                width={768}
+                height={336}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                unoptimized
+              />
+            )
+          ) : (
+            <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-br from-gray-800 to-gray-700' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center`}>
+              <div className="text-center">
+                <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-300'} flex items-center justify-center`}>
+                  <Code className={`w-8 h-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
+                </div>
+                <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Project Screenshot
+                </span>
               </div>
-              <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Project Screenshot
-              </span>
             </div>
-          </div>
+          )}
           
           {/* Hover Overlay */}
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
@@ -176,6 +179,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
               rel="noopener noreferrer"
               onClick={() => playSound('/minecraft-click.mp3', 0.5)}
               className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+              aria-label={`View ${project.title} on GitHub`}
             >
               <Github className="w-6 h-6 text-white" />
             </a>
@@ -186,6 +190,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
                 rel="noopener noreferrer"
                 onClick={() => playSound('/minecraft-click.mp3', 0.5)}
                 className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+                aria-label={`View ${project.title} live demo`}
               >
                 <ExternalLink className="w-6 h-6 text-white" />
               </a>
