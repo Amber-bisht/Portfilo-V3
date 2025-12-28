@@ -1,0 +1,85 @@
+{
+    "about": {
+        "name": "Amber Bisht",
+        "title": "DevOps Engineer",
+        "description": "DevOps isn’t just tools. It’s building systems that ship fast and stay stable.\nI design automated pipelines, cloud-native architectures, and resilient platforms.\nReliable delivery, clean code, and thoughtful engineering are what I work toward every day.",
+        "image": "/images/profile.jpeg"
+    },
+    "projects": [
+        {
+            "id": 1,
+            "title": "Automated CI/CD Pipeline",
+            "description": "Designed and implemented a complete CI/CD pipeline using Jenkins and GitHub Actions. Automated testing, building, and deployment to AWS EC2 instances.",
+            "technologies": [
+                "Jenkins",
+                "GitHub Actions",
+                "AWS",
+                "Docker",
+                "Bash"
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Kubernetes Cluster Management",
+            "description": "Deployed and managed a high-availability Kubernetes cluster on AWS EKS. Configured auto-scaling, monitoring using Prometheus and Grafana, and ingress controllers.",
+            "technologies": [
+                "Kubernetes",
+                "AWS EKS",
+                "Terraform",
+                "Prometheus",
+                "Grafana",
+                "Helm"
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Infrastructure as Code (IaC)",
+            "description": "Provisioned cloud infrastructure using Terraform. Managed VPCs, subnets, security groups, and EC2 instances with state management and modules.",
+            "technologies": [
+                "Terraform",
+                "AWS",
+                "HCL",
+                "State Management"
+            ]
+        }
+    ],
+    "techStack": {
+        "languages": [
+            "Python",
+            "Go",
+            "Bash",
+            "JavaScript/TypeScript"
+        ],
+        "tools": [
+            "Docker",
+            "Kubernetes",
+            "Jenkins",
+            "Git",
+            "Ansible",
+            "Terraform"
+        ],
+        "cloud": [
+            "AWS (EC2, S3, RDS, EKS, Lambda)"
+        ],
+        "monitoring": [
+            "Prometheus",
+            "Grafana"
+        ]
+    },
+    "certifications": [
+        {
+            "name": "AWS Certified Solutions Architect – Associate",
+            "issuer": "Amazon Web Services",
+            "date": "2026",
+            "url": "#",
+            "image": "/images/aws-cert.png"
+        }
+    ],
+    "contact": {
+        "email": "bishtamber0@gmail.com",
+        "linkedin": "https://www.linkedin.com/in/amber-bisht-05a096294",
+        "github": "https://github.com/amber-bisht",
+        "twitter": "https://x.com/amber_bisht",
+        "location": "India"
+    }
+}

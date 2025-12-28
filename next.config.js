@@ -36,7 +36,7 @@ const nextConfig = {
   },
   // Enable experimental features for better tree shaking
   experimental: {
-    optimizePackageImports: ['lucide-react', '@tabler/icons-react', 'react-icons'],
+    optimizePackageImports: ['lucide-react', 'react-icons'],
   },
   // Webpack optimizations
   webpack: (config, { dev, isServer }) => {

@@ -1,87 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <!-- Main Pages -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://amberbisht.me</loc>
-    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
+    <loc>https://amberbisht.me/</loc>
+    <lastmod>2025-12-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-  
-  <url>
-    <loc>https://amberbisht.me/404</loc>
-    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
-  <!-- Portfolio Data JSON -->
-  <url>
-    <loc>https://amberbisht.me/portfolio-data.json</loc>
-    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Individual Project Pages (based on portfolio data) -->
-  <url>
-    <loc>https://amberbisht.me/projects/1</loc>
-    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://amberbisht.me/images/asksync.png</image:loc>
-      <image:caption>AskSync - AI Powered Test and Form Builder & Checker</image:caption>
-      <image:title>AskSync</image:title>
-    </image:image>
-  </url>
-  
-  <url>
-    <loc>https://amberbisht.me/projects/2</loc>
-    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://amberbisht.me/images/lms.png</image:loc>
-      <image:caption>LMS - Learning Management System</image:caption>
-      <image:title>LMS</image:title>
-    </image:image>
-  </url>
-  
-  <url>
-    <loc>https://amberbisht.me/projects/3</loc>
-    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://amberbisht.me/images/code.png</image:loc>
-      <image:caption>CodeEditor - Web App with AI Powered Code Completion</image:caption>
-      <image:title>CodeEditor</image:title>
-    </image:image>
-  </url>
-  
-  <!-- Experience/Resume Page -->
-  <url>
-    <loc>https://amberbisht.me/experience</loc>
-    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- Contact Page -->
-  <url>
-    <loc>https://amberbisht.me/contact</loc>
-    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- Tech Stack Page -->
-  <url>
-    <loc>https://amberbisht.me/tech-stack</loc>
-    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
 </urlset>
