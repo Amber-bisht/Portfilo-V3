@@ -38,18 +38,7 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'react-icons'],
   },
-  // Webpack optimizations
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      // Enable better tree shaking and minification
-      config.optimization = {
-        ...config.optimization,
-        usedExports: true,
-        sideEffects: false,
-      };
-    }
-    return config;
-  },
+
 }
 
 module.exports = withBundleAnalyzer(nextConfig)
