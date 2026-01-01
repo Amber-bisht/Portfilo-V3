@@ -43,28 +43,84 @@
             ]
         }
     ],
-    "techStack": {
-        "languages": [
-            "Python",
-            "Go",
-            "Bash",
-            "JavaScript/TypeScript"
-        ],
-        "tools": [
-            "Docker",
-            "Kubernetes",
-            "Jenkins",
-            "Git",
-            "Ansible",
-            "Terraform"
-        ],
-        "cloud": [
-            "AWS (EC2, S3, RDS, EKS, Lambda)"
-        ],
-        "monitoring": [
-            "Prometheus",
-            "Grafana"
-        ]
+    "experience": [
+        {
+            "id": 1,
+            "title": "Software Intern",
+            "company": "Delonix Services",
+            "duration": "3 months",
+            "starttime": "April 2025",
+            "endtime": "July 2025",
+            "description": "Contributed to the development of a custom internal CRM using ReactJS and NodeJS. Containerized the application using Docker for consistent deployment environments.",
+            "tech used": [
+                "ReactJS",
+                "NodeJS",
+                "Docker",
+                "Hostinger",
+                "MongoDB"
+            ]
+        }
+    ],
+    "techStack": [
+        {
+            "name": "AWS Cloud",
+            "icon": "SiAmazonaws"
+        },
+        {
+            "name": "Docker",
+            "icon": "SiDocker"
+        },
+        {
+            "name": "Kubernetes",
+            "icon": "SiKubernetes"
+        },
+        {
+            "name": "Jenkins",
+            "icon": "SiJenkins"
+        },
+        {
+            "name": "Git",
+            "icon": "SiGit"
+        },
+        {
+            "name": "Ansible",
+            "icon": "SiAnsible"
+        },
+        {
+            "name": "Terraform",
+            "icon": "SiTerraform"
+        },
+        {
+            "name": "Prometheus",
+            "icon": "SiPrometheus"
+        },
+        {
+            "name": "Grafana",
+            "icon": "SiGrafana"
+        },
+        {
+            "name": "Python",
+            "icon": "SiPython"
+        },
+        {
+            "name": "Bash",
+            "icon": "SiGnubash"
+        },
+        {
+            "name": "JavaScript",
+            "icon": "SiJavascript"
+        },
+        {
+            "name": "Linux",
+            "icon": "SiLinux"
+        }
+    ],
+    "contact": {
+        "email": "bishtamber0@gmail.com",
+        "linkedin": "https://www.linkedin.com/in/amber-bisht-05a096294",
+        "github": "https://github.com/amber-bisht",
+        "twitter": "https://x.com/amber_bisht",
+        "location": "India"
     },
     "certifications": [
         {
@@ -74,12 +130,5 @@
             "url": "#",
             "image": "/images/aws-cert.png"
         }
-    ],
-    "contact": {
-        "email": "bishtamber0@gmail.com",
-        "linkedin": "https://www.linkedin.com/in/amber-bisht-05a096294",
-        "github": "https://github.com/amber-bisht",
-        "twitter": "https://x.com/amber_bisht",
-        "location": "India"
-    }
+    ]
 }

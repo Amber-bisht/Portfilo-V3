@@ -1,62 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&display=swap');
+
 @import "tailwindcss";
 
-@layer base {
-  html {
-    font-family: 'Inter', system-ui, sans-serif;
-  }
-
-  body {
-    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200;
-  }
+:root {
+  --foreground-rgb: 26, 27, 29;
+  --background-start-rgb: 245, 245, 245;
+  --background-end-rgb: 245, 245, 245;
 }
 
-@layer components {
-
-  /* ... existing postman styles ... */
-  .postman-header {
-    @apply bg-gray-900 text-white border-b border-gray-700;
-  }
-
-  .postman-sidebar {
-    @apply bg-gray-100 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700;
-  }
-
-  .postman-content {
-    @apply bg-white dark:bg-gray-900;
-  }
-
-  .postman-card {
-    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-all duration-200;
-  }
-
-  .postman-button {
-    @apply bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors duration-200;
-  }
-
-  .postman-button-secondary {
-    @apply bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200;
-  }
-
-
+[data-theme='dark'],
+.dark {
+  --foreground-rgb: 224, 224, 224;
+  --background-start-rgb: 10, 10, 10;
+  --background-end-rgb: 26, 27, 29;
 }
 
-@layer utilities {
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
 
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(30, 41, 59, 0.3);
-    border-radius: 3px;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Cinzel', serif;
+}
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(71, 85, 105, 0.6);
-    border-radius: 3px;
-  }
+::selection {
+  background: #f4c430;
+  /* Makima Gold */
+  color: #1a1b1d;
+}
 
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(100, 116, 139, 0.8);
-  }
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7a0000;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a00000;
 }
