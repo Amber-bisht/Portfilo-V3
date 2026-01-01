@@ -1,10 +1,12 @@
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
-import ProjectCard from '../components/ProjectCard';
-import Experience from '../components/Experience';
-import TechStack from '../components/TechStack';
 import data from '../data/data.json';
+import dynamic from 'next/dynamic';
+
+const ProjectCard = dynamic(() => import('../components/ProjectCard'));
+const Experience = dynamic(() => import('../components/Experience'));
+const TechStack = dynamic(() => import('../components/TechStack'));
 import { motion } from 'framer-motion';
 
 export default function Home() {

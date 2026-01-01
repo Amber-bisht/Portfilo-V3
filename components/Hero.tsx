@@ -85,16 +85,16 @@ const Hero = ({ data }: HeroProps) => {
                 </motion.div>
 
                 <motion.div variants={itemVariants} className="flex justify-center gap-6 text-2xl">
-                    <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
+                    <a href={data.contact.github} aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
                         <FaGithub />
                     </a>
-                    <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-[#0077b5] hover:border-[#0077b5] hover:scale-110 transition-all duration-300">
+                    <a href={data.contact.linkedin} aria-label="LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
                         <FaLinkedin />
                     </a>
-                    <a href={data.contact.twitter} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-[#1DA1F2] hover:border-[#1DA1F2] hover:scale-110 transition-all duration-300">
+                    <a href={data.contact.twitter} aria-label="Twitter Profile" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
                         <FaTwitter />
                     </a>
-                    <a href={`mailto:${data.contact.email}`} className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
+                    <a href={`mailto:${data.contact.email}`} aria-label="Email Contact" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
                         <IoMail />
                     </a>
                 </motion.div>
