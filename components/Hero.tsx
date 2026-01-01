@@ -94,9 +94,9 @@ const Hero = ({ data }: HeroProps) => {
                     <a href={data.contact.twitter} aria-label="Twitter Profile" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
                         <FaTwitter />
                     </a>
-                    <a href={`mailto:${data.contact.email}`} aria-label="Email Contact" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
+                    <button onClick={() => window.location.href = `mailto:${data.contact.email}`} aria-label="Email Contact" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
                         <IoMail />
-                    </a>
+                    </button>
                 </motion.div>
             </motion.div>
 
