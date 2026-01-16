@@ -62,17 +62,24 @@ const ProjectCard = ({ project, index }: ProjectProps) => {
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-6">
-                        {project.technologies.slice(0, 4).map((tech) => (
+                        {project.technologies.slice(0, 6).map((tech) => {
+                            const { icon: Icon, color } = getTechIcon(tech);
+                            return (
+                                <span
+                                    key={tech}
+                                    className="px-3 py-1 bg-[#27272a] text-gray-300 text-xs font-medium rounded-full flex items-center gap-1.5"
+                                >
+                                    <Icon style={{ color: color }} className="text-sm" />
+                                    {tech}
+                                </span>
+                            );
+                        })}
+                        {project.technologies.length > 6 && (
                             <span
-                                key={tech}
-                                className="px-3 py-1 bg-[#27272a] text-gray-300 text-xs font-medium rounded-full"
+                                className="px-3 py-1 bg-[#27272a] text-gray-300 text-xs font-medium rounded-full cursor-help hover:bg-[#3f3f46] transition-colors"
+                                title={project.technologies.slice(6).join(', ')}
                             >
-                                {tech}
-                            </span>
-                        ))}
-                        {project.technologies.length > 4 && (
-                            <span className="px-3 py-1 bg-[#27272a] text-gray-300 text-xs font-medium rounded-full">
-                                +{project.technologies.length - 4}
+                                +{project.technologies.length - 6}
                             </span>
                         )}
                     </div>
