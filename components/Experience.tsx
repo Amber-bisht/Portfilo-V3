@@ -1,11 +1,9 @@
-import { motion } from 'framer-motion';
+import { getTechIcon } from '../utils/techIcons';
 
 const Experience = ({ exp }: { exp: any }) => {
     return (
         <div className="relative border-l-2 border-makima-red/20 ml-4 md:ml-8 pl-8 py-4">
-            <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
+            <div
                 className="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-off-white dark:bg-charcoal-dark border-2 border-makima-red"
             />
 
@@ -21,14 +19,18 @@ const Experience = ({ exp }: { exp: any }) => {
             </p>
 
             <div className="flex flex-wrap gap-2">
-                {exp["tech used"].map((tech: string) => (
-                    <span
-                        key={tech}
-                        className="text-xs px-2 py-1 bg-charcoal-light/5 dark:bg-white/5 dark:text-gray-300 rounded-full"
-                    >
-                        {tech}
-                    </span>
-                ))}
+                {exp["tech used"].map((tech: string) => {
+                    const { icon: Icon, color } = getTechIcon(tech);
+                    return (
+                        <span
+                            key={tech}
+                            className="flex items-center gap-1.5 text-xs px-2 py-1 bg-charcoal-light/5 dark:bg-white/5 dark:text-gray-300 rounded-full border border-charcoal-light/10 dark:border-white/10"
+                        >
+                            <Icon style={{ color: color }} className="text-sm" />
+                            {tech}
+                        </span>
+                    );
+                })}
 
             </div>
         </div>

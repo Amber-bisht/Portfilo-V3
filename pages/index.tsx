@@ -7,7 +7,8 @@ import dynamic from 'next/dynamic';
 const ProjectCard = dynamic(() => import('../components/ProjectCard'));
 const Experience = dynamic(() => import('../components/Experience'));
 const TechStack = dynamic(() => import('../components/TechStack'));
-import { motion } from 'framer-motion';
+const GithubContributions = dynamic(() => import('../components/GithubContributions'));
+
 
 export default function Home() {
     return (
@@ -31,6 +32,8 @@ export default function Home() {
             <Section id="techstack">
                 <TechStack data={data.techStack} />
             </Section>
+
+
 
             <Section id="projects">
                 <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 text-left border-l-4 border-makima-red pl-6">
@@ -58,6 +61,10 @@ export default function Home() {
                         CONTACT
                     </a>
                 </div>
+            </Section>
+
+            <Section id="contributions">
+                <GithubContributions />
             </Section>
         </Layout >
     );

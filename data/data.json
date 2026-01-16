@@ -16,7 +16,10 @@
                 "AWS",
                 "Docker",
                 "Bash"
-            ]
+            ],
+            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=CI/CD+Pipeline",
+            "github": "https://github.com/amber-bisht",
+            "live": "#"
         },
         {
             "id": 2,
@@ -29,7 +32,10 @@
                 "Prometheus",
                 "Grafana",
                 "Helm"
-            ]
+            ],
+            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Kubernetes",
+            "github": "https://github.com/amber-bisht",
+            "live": "#"
         },
         {
             "id": 3,
@@ -40,7 +46,10 @@
                 "AWS",
                 "HCL",
                 "State Management"
-            ]
+            ],
+            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Terraform+IaC",
+            "github": "https://github.com/amber-bisht",
+            "live": "#"
         }
     ],
     "experience": [
@@ -51,7 +60,7 @@
             "duration": "3 months",
             "starttime": "April 2025",
             "endtime": "July 2025",
-            "description": "Contributed to the development of a custom internal CRM using ReactJS and NodeJS. Containerized the application using Docker for consistent deployment environments.",
+            "description": "Contributed to the design and development of a custom internal CRM system using ReactJS for the frontend and NodeJS for the backend, focusing on modular architecture and maintainable code practices. Implemented reusable UI components, integrated RESTful APIs, and collaborated closely with backend services to ensure smooth data flow and performance optimization. Containerized the entire application using Docker, creating consistent and reproducible development, testing, and production environments, which simplified deployments, reduced environment-specific issues, and improved overall release reliability.",
             "tech used": [
                 "ReactJS",
                 "NodeJS",

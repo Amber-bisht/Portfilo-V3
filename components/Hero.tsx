@@ -1,6 +1,5 @@
-import { motion, Variants } from 'framer-motion';
-import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
-import { IoMail } from 'react-icons/io5';
+import { FaLinkedin, FaGithub, FaTwitter, FaFileAlt, FaEnvelope } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
 
 interface HeroProps {
     data: {
@@ -19,100 +18,115 @@ interface HeroProps {
 }
 
 const Hero = ({ data }: HeroProps) => {
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-            },
-        },
-    };
+    const roles = ["DEVOPS ENGINEER", "FREELANCER"];
+    const [roleIndex, setRoleIndex] = useState(0);
 
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.8,
-                ease: "easeOut"
-            }
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setRoleIndex((prev) => (prev + 1) % roles.length);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const socialLinks = [
+        {
+            name: 'GitHub',
+            icon: FaGithub,
+            url: data.contact.github,
+            colorClass: 'hover:bg-white hover:text-black hover:border-white',
+            bgClass: 'bg-zinc-800/50'
         },
-    };
+        {
+            name: 'LinkedIn',
+            icon: FaLinkedin,
+            url: data.contact.linkedin,
+            colorClass: 'hover:border-makima-red hover:text-makima-red',
+            bgClass: 'bg-zinc-800/50'
+        },
+        {
+            name: 'Twitter',
+            icon: FaTwitter,
+            url: data.contact.twitter,
+            colorClass: 'hover:border-makima-red hover:text-makima-red',
+            bgClass: 'bg-zinc-800/50'
+        }
+    ];
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-            {/* Background Effect - "Eyes" or patterns could go here */}
-            {/* Background Effect - "Eyes" or patterns could go here */}
-            {/* Global background is now in Layout.tsx */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4 md:px-8">
+            <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-            <motion.div
-                className="relative z-10 text-center px-4 max-w-4xl mx-auto"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-            >
-                <motion.div variants={itemVariants} className="mb-4 inline-block relative">
-                    <span className="text-makima-red font-bold tracking-[0.2em] text-sm md:text-base uppercase border-b-2 border-makima-red pb-1">
-                        Identity: Confirmed
-                    </span>
-                </motion.div>
+                {/* Content Section (Left) */}
+                <div className="text-center md:text-left order-2 md:order-1 flex flex-col justify-center">
+                    <h2 className="text-3xl md:text-5xl font-serif font-medium text-white mb-4 tracking-tight">
+                        Hi,I'm
+                    </h2>
 
-                <motion.h1
-                    variants={itemVariants}
-                    className="text-5xl md:text-8xl font-serif font-black mb-6 tracking-tighter"
-                >
-                    {data.about.name.toUpperCase()}
-                </motion.h1>
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-black mb-6 tracking-tighter text-white">
+                        {data.about.name}
+                    </h1>
 
-                <motion.h2
-                    variants={itemVariants}
-                    className="text-xl md:text-3xl text-makima-red font-light mb-8 tracking-widest font-serif"
-                >
-                    {data.about.title}
-                </motion.h2>
+                    {/* Role Badge */}
+                    <div className="mb-8">
+                        <span className="inline-block px-6 py-3 bg-zinc-800 rounded-lg text-lg md:text-2xl font-bold tracking-wide text-white border border-white/5">
+                            A {roles[roleIndex]}
+                        </span>
+                    </div>
 
-                <motion.div variants={itemVariants} className="mb-12">
-                    <h3 className="text-lg font-serif font-bold mb-4 border-b border-makima-red/30 inline-block pb-1">
-                        THE CONTRACT
-                    </h3>
-                    <p className="text-black dark:text-gray-400 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
-                        {data.about.description.split('\n').map((line, i) => (
-                            <span key={i} className="block mb-2">{line}</span>
-                        ))}
+                    <p className="text-gray-400 max-w-xl mx-auto md:mx-0 text-base md:text-lg leading-relaxed mb-10">
+                        {data.about.description}
                     </p>
-                </motion.div>
 
-                <motion.div variants={itemVariants} className="flex justify-center gap-6 text-2xl">
-                    <a href={data.contact.github} aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
-                        <FaGithub />
-                    </a>
-                    <a href={data.contact.linkedin} aria-label="LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
-                        <FaLinkedin />
-                    </a>
-                    <a href={data.contact.twitter} aria-label="Twitter Profile" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
-                        <FaTwitter />
-                    </a>
-                    <button onClick={() => window.location.href = `mailto:${data.contact.email}`} aria-label="Email Contact" className="flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-white/10 rounded-full shadow-md border border-black/20 dark:border-white/10 text-black dark:text-white hover:border-makima-red hover:text-makima-red hover:scale-110 transition-all duration-300">
-                        <IoMail />
-                    </button>
-                </motion.div>
-            </motion.div>
+                    {/* Buttons Group */}
+                    <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
+                        <a
+                            href={`mailto:${data.contact.email}`}
+                            className="flex items-center gap-2 px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition-colors shadow-lg"
+                        >
+                            <FaEnvelope />
+                            Contact
+                        </a>
+                        <a
+                            href="#"
+                            className="flex items-center gap-2 px-8 py-3 bg-zinc-800 text-gray-300 font-bold rounded-lg border border-zinc-700 hover:bg-zinc-700 hover:text-white transition-colors shadow-lg"
+                        >
+                            <FaFileAlt />
+                            Resume
+                        </a>
+                    </div>
 
-            {/* Decorative Chains (CSS borders) */}
-            <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: "40vh" }}
-                transition={{ duration: 1.5, delay: 0.5 }}
-                className="absolute top-0 left-10 md:left-20 w-[1px] bg-gradient-to-b from-makima-red to-transparent opacity-50"
-            />
-            <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: "60vh" }}
-                transition={{ duration: 1.5, delay: 0.7 }}
-                className="absolute top-0 right-10 md:right-20 w-[1px] bg-gradient-to-b from-makima-red to-transparent opacity-50"
-            />
+                    {/* Social Icons */}
+                    <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                        {socialLinks.map((link) => (
+                            <a
+                                key={link.name}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`flex items-center justify-center w-12 h-12 rounded-lg border border-zinc-700 text-gray-400 transition-all duration-300 hover:-translate-y-1 ${link.bgClass} ${link.colorClass}`}
+                            >
+                                <link.icon className="text-xl" />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Profile Image (Right) */}
+                <div className="flex justify-center md:justify-end order-1 md:order-2 relative">
+                    <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px]">
+                        <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-zinc-800/50 shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                            <img
+                                src="/images/profile.jpeg"
+                                alt="Amber Bisht"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Background elements */}
+            <div className="absolute top-0 right-0 w-1/3 h-full bg-makima-red/5 blur-[120px] -z-10 pointer-events-none" />
         </section>
     );
 };

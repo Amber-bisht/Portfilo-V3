@@ -1,5 +1,5 @@
 
-import { motion } from 'framer-motion';
+
 
 import {
     SiPython,
@@ -60,13 +60,9 @@ const TechStack = ({ data }: TechStackProps) => {
                     const Icon = techData.icon;
 
                     return (
-                        <motion.div
+                        <div
                             key={tech.name}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            className="flex flex-col items-center gap-2 group cursor-pointer"
+                            className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 hover:rotate-6 transition-transform duration-300"
                         >
                             <div className="w-16 h-16 md:w-20 md:h-20 bg-white dark:bg-charcoal-dark/50 rounded-xl flex items-center justify-center text-3xl md:text-4xl border border-charcoal-light/10 shadow-sm group-hover:border-makima-red/50 transition-all duration-300">
                                 <Icon
@@ -77,7 +73,7 @@ const TechStack = ({ data }: TechStackProps) => {
                             <span className="text-xs font-mono tracking-widest text-charcoal-light/70 group-hover:text-makima-red transition-colors uppercase">
                                 {tech.name}
                             </span>
-                        </motion.div>
+                        </div>
                     );
                 })}
             </div>
