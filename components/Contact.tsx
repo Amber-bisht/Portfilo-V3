@@ -40,16 +40,19 @@ const Contact = ({ data }: ContactProps) => {
                     <div className="relative z-10 h-full flex flex-col justify-between">
                         <div>
                             <h3 className="text-gray-400 font-medium mb-1">Current Status</h3>
-                            <p className="text-2xl md:text-3xl font-bold text-white">Open to Opportunities</p>
+                            <p className="text-2xl md:text-3xl font-bold text-white mb-2">Open to Opportunities</p>
+                            <a href="/freelance" className="inline-flex items-center gap-2 text-sm text-makima-red hover:text-white transition-colors font-semibold">
+                                View My Freelance Work <ExternalLink size={14} />
+                            </a>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 mt-8">
                             <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm">
-                                <span className="block text-3xl font-bold text-makima-red mb-1">2+</span>
+                                <span className="block text-3xl font-bold text-makima-red mb-1">1+</span>
                                 <span className="text-xs text-gray-400 uppercase tracking-wider">Years Exp.</span>
                             </div>
                             <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm">
-                                <span className="block text-3xl font-bold text-makima-red mb-1">10+</span>
+                                <span className="block text-3xl font-bold text-makima-red mb-1">5+</span>
                                 <span className="text-xs text-gray-400 uppercase tracking-wider">Projects</span>
                             </div>
                         </div>

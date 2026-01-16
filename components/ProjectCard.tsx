@@ -13,6 +13,7 @@ interface ProjectProps {
         image?: string;
         github?: string;
         live?: string;
+        tag?: string;
     };
     index: number;
 }
@@ -27,6 +28,11 @@ const ProjectCard = ({ project, index }: ProjectProps) => {
                 <div className="relative h-56 w-full overflow-hidden p-4 pb-0">
                     <div className="rounded-2xl overflow-hidden h-full w-full relative">
                         <div className="absolute inset-0 bg-transparent z-10" />
+                        {project.tag && (
+                            <div className="absolute top-2 right-2 z-20 px-3 py-1 bg-makima-red text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg">
+                                {project.tag}
+                            </div>
+                        )}
                         <img
                             src={project.image || "https://placehold.co/600x400/1a1a1a/FFF?text=Project"}
                             alt={project.title}

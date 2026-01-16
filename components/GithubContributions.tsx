@@ -25,8 +25,9 @@ const GithubContributions = () => {
     }, []);
 
     return (
-        <div className="w-full h-full flex flex-row items-center justify-between gap-6 px-2">
-            <div className="flex-1 flex flex-col items-center justify-center">
+        <div className="w-full h-full flex flex-row items-center md:justify-between gap-6 px-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {/* Calendar Section */}
+            <div className="min-w-full md:min-w-0 md:flex-1 flex flex-col items-center justify-center snap-center">
                 <GitHubCalendar
                     username="amber-bisht"
                     blockSize={13}
@@ -62,8 +63,9 @@ const GithubContributions = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-4 min-w-[140px] border-l border-white/10 pl-6 py-2">
-                <div className="flex items-center gap-3 group">
+            {/* Stats Section */}
+            <div className="flex flex-col gap-4 min-w-full md:min-w-[140px] md:border-l border-white/10 pl-0 md:pl-6 py-2 snap-center items-center md:items-start justify-center">
+                <div className="flex items-center gap-3 group w-full md:w-auto justify-center md:justify-start">
                     <div className="p-2 bg-white/5 rounded-lg text-gray-300 group-hover:text-makima-red group-hover:bg-makima-red/10 transition-colors">
                         <Book size={18} />
                     </div>
@@ -73,7 +75,7 @@ const GithubContributions = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-3 group">
+                <div className="flex items-center gap-3 group w-full md:w-auto justify-center md:justify-start">
                     <div className="p-2 bg-white/5 rounded-lg text-gray-300 group-hover:text-makima-red group-hover:bg-makima-red/10 transition-colors">
                         <Code size={18} />
                     </div>
@@ -83,7 +85,7 @@ const GithubContributions = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-3 group">
+                <div className="flex items-center gap-3 group w-full md:w-auto justify-center md:justify-start">
                     <div className="p-2 bg-white/5 rounded-lg text-gray-300 group-hover:text-makima-red group-hover:bg-makima-red/10 transition-colors">
                         <Users size={18} />
                     </div>

@@ -139,5 +139,100 @@
             "url": "#",
             "image": "/images/aws-cert.png"
         }
+    ],
+    "freelance": [
+        {
+            "id": 1,
+            "title": "Novello Hotels",
+            "description": "A high-performance hotel showcase platform. Optimized image uploads and achieved a 95+ performance score using Next.js.",
+            "technologies": [
+                "Next.js",
+                "Image Optimization",
+                "Performance"
+            ],
+            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Novello+Hotels",
+            "github": "",
+            "live": "https://www.novellohotels.com"
+        },
+        {
+            "id": 2,
+            "title": "Novello Educare",
+            "description": "University configuration platform with Admin panel. Built with Next.js, MongoDB, and SSG. Hosted on VPS with custom CI/CD pipeline.",
+            "technologies": [
+                "Next.js",
+                "MongoDB",
+                "SSG",
+                "Admin Panel",
+                "CI/CD",
+                "VPS"
+            ],
+            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Novello+Educare",
+            "github": "",
+            "live": "https://novelloeducare.com"
+        },
+        {
+            "id": 4,
+            "title": "Tripbazzar PMS",
+            "description": "Integration with MakeMyTrip and OYO. Currently undergoing major refactoring and updates.",
+            "technologies": [
+                "PostgreSQL",
+                "Docker",
+                "AWS",
+                "Working on it"
+            ],
+            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Tripbazzar",
+            "tag": "Working on it",
+            "github": "",
+            "live": "#"
+        },
+        {
+            "id": 5,
+            "title": "Links by Asprin.dev",
+            "description": "Advanced link shortener with OAuth, MongoDB, Cipher encryption, and Cloudflare Turnstile captcha integration.",
+            "technologies": [
+                "Next.js",
+                "MongoDB",
+                "OAuth",
+                "Cloudflare",
+                "Cipher"
+            ],
+            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=asprin.dev",
+            "github": "",
+            "live": "https://links.asprin.dev"
+        },
+        {
+            "id": 6,
+            "title": "AskSyn AI",
+            "description": "AI-powered MCQ and question generation platform. Features Google OAuth, Gemini AI API integration, and Razorpay payment gateway.",
+            "technologies": [
+                "Next.js",
+                "MongoDB",
+                "Gemini AI",
+                "Razorpay",
+                "OAuth"
+            ],
+            "tag": "Personal Project",
+            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=AskSyn+AI",
+            "github": "",
+            "live": "https://asksyn.amberbisht.me"
+        },
+        {
+            "id": 7,
+            "title": "LMS Platform",
+            "description": "Microservices-based Learning Management System. Features AES encryption, HLS video player with Web Workers, and OAuth authentication.",
+            "technologies": [
+                "Node.js",
+                "Next.js",
+                "Microservices",
+                "AES Encryption",
+                "HLS",
+                "Web Worker",
+                "OAuth"
+            ],
+            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=LMS+Platform",
+            "tag": "Personal Project",
+            "github": "",
+            "live": "https://lms.amberbisht.me"
+        }
     ]
 }

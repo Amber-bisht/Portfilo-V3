@@ -59,6 +59,27 @@ const techIconMap: { [key: string]: TechIcon } = {
     "Linux": { icon: SiLinux, color: "#FCC624" },
     "Git": { icon: SiGit, color: "#F05032" },
     "Ansible": { icon: SiAnsible, color: "#EE0000" },
+
+    // Freelance / New
+    "PostgreSQL": { icon: FaDatabase, color: "#336791" },
+    "Nginx": { icon: FaServer, color: "#009639" },
+    "Cloudflare": { icon: FaCloud, color: "#F38020" },
+    "OAuth": { icon: FaCode, color: "#EB5424" }, // Fallback
+    "SSG": { icon: FaCode, color: "#000000" },
+    "HLS": { icon: FaCode, color: "#FF0000" },
+    "Admin Panel": { icon: FaTerminal, color: "#333333" },
+    "VPS": { icon: FaServer, color: "#000000" },
+    "Performance": { icon: FaCode, color: "#00FF00" },
+    "Image Optimization": { icon: FaCode, color: "#FF00FF" },
+    "Cipher": { icon: FaCode, color: "#000000" },
+    "Open Source": { icon: FaCode, color: "#000000" },
+    "Gemini AI": { icon: FaCode, color: "#8E75B2" },
+    "Razorpay": { icon: FaCode, color: "#3395FF" },
+    "Integration": { icon: FaCode, color: "#000000" },
+    "Microservices": { icon: FaServer, color: "#333333" },
+    "AES Encryption": { icon: FaCode, color: "#000000" },
+    "Web Worker": { icon: FaCode, color: "#F7DF1E" },
+    "Working on it": { icon: FaCode, color: "#FF9900" }
 };
 
 export const getTechIcon = (techName: string): TechIcon => {

@@ -1,6 +1,8 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ReactNode, useState } from 'react';
-import { FaHome, FaFolder, FaEnvelope, FaLayerGroup } from 'react-icons/fa';
+import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase } from 'react-icons/fa';
 
 interface LayoutProps {
     children: ReactNode;
@@ -8,14 +10,24 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, title = 'Amber Bisht | DevOps Engineer' }: LayoutProps) => {
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState('Home');
 
     const navItems = [
-        { name: 'Home', icon: FaHome, href: '#' },
-        { name: 'Projects', icon: FaFolder, href: '#projects' },
-        { name: 'Tech Stack', icon: FaLayerGroup, href: '#techstack' },
-        { name: 'Contact', icon: FaEnvelope, href: '#contact' },
+        { name: 'Home', icon: FaHome, href: '/#' },
+        { name: 'Projects', icon: FaFolder, href: '/#projects' },
+        { name: 'Freelance', icon: FaBriefcase, href: '/freelance' },
+        { name: 'Tech Stack', icon: FaLayerGroup, href: '/#techstack' },
+        { name: 'Contact', icon: FaEnvelope, href: '/#contact' },
     ];
+
+    // Helper to determine if a link is active
+    const isLinkActive = (itemHref: string) => {
+        if (itemHref === '/freelance' && router.pathname === '/freelance') return true;
+        if (itemHref.startsWith('/#') && router.pathname === '/' && activeTab === itemHref.replace('/#', '')) return true; // Approximation
+        if (itemHref === '/#' && router.pathname === '/' && activeTab === 'Home') return true;
+        return false;
+    };
 
     return (
         <div className="min-h-screen bg-neutral-950 text-off-white relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300">
@@ -48,19 +60,34 @@ const Layout = ({ children, title = 'Amber Bisht | DevOps Engineer' }: LayoutPro
             <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-1000">
                 <nav className="flex items-center p-1 bg-[#1a1a1a]/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_0_30px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
                     {navItems.map((item) => {
-                        const isActive = activeTab === item.name;
+                        const isActive = isLinkActive(item.href) || (activeTab === item.name && router.pathname === '/');
+
                         return (
-                            <a
+                            <Link
                                 key={item.name}
                                 href={item.href}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setActiveTab(item.name);
-                                    if (item.href !== '#') {
-                                        const element = document.querySelector(item.href);
-                                        element?.scrollIntoView({ behavior: 'smooth' });
+                                onClick={(e: any) => {
+                                    // If we are on the same page and it's a hash link, handle smooth scroll manually?
+                                    // Next.js Link handles navigation.
+                                    // If we are on Home and clicking hash, we want smooth scroll.
+
+                                    if (item.href.startsWith('/#')) {
+                                        const hash = item.href.replace('/', '');
+                                        if (router.pathname === '/') {
+                                            e.preventDefault();
+                                            setActiveTab(item.name);
+                                            if (hash !== '#') {
+                                                const element = document.querySelector(hash);
+                                                element?.scrollIntoView({ behavior: 'smooth' });
+                                            } else {
+                                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                            }
+                                        } else {
+                                            // Navigation handled by Link, but we might want to set active tab for when we land?
+                                            // setActiveTab can't be persisted easily without context/url state.
+                                        }
                                     } else {
-                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        setActiveTab(item.name);
                                     }
                                 }}
                                 className={`
@@ -81,7 +108,7 @@ const Layout = ({ children, title = 'Amber Bisht | DevOps Engineer' }: LayoutPro
                                 >
                                     {item.name}
                                 </span>
-                            </a>
+                            </Link>
                         );
                     })}
                 </nav>
