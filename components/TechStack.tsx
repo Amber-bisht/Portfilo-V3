@@ -50,7 +50,7 @@ const TechStack = ({ data }: TechStackProps) => {
         <div className="py-8">
             <h2 className="text-4xl font-serif font-bold mb-12 text-center text-makima-red flex items-center justify-center gap-4">
                 <span className="w-12 h-px bg-makima-red/50"></span>
-                DEVIL CONTRACTS
+                TECH STACK
                 <span className="w-12 h-px bg-makima-red/50"></span>
             </h2>
 
@@ -62,9 +62,9 @@ const TechStack = ({ data }: TechStackProps) => {
                     return (
                         <div
                             key={tech.name}
-                            className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 hover:rotate-6 transition-transform duration-300"
+                            className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-105 hover:-translate-y-1 transition-all duration-300"
                         >
-                            <div className="w-16 h-16 md:w-20 md:h-20 bg-white dark:bg-neutral-900/50 rounded-xl flex items-center justify-center text-3xl md:text-4xl border border-charcoal-light/10 shadow-sm group-hover:border-makima-red/50 transition-all duration-300">
+                            <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-xl flex items-center justify-center text-3xl md:text-4xl border border-charcoal-light/10 shadow-sm group-hover:shadow-lg group-hover:border-makima-red/50 transition-all duration-300">
                                 <Icon
                                     className={`w-[60%] h-[60%] ${techData.className || ''}`}
                                     style={{ color: techData.color || undefined }}

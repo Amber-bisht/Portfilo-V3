@@ -44,24 +44,43 @@ const Layout = ({ children, title = 'Amber Bisht | DevOps Engineer' }: LayoutPro
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            {/* Island Navbar */}
-            <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-                <nav className="flex items-center gap-2 p-1.5 bg-zinc-900/90 backdrop-blur-md rounded-full border border-white/10 shadow-2xl">
+            {/* Premium Navigator */}
+            <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-1000">
+                <nav className="flex items-center p-1 bg-[#1a1a1a]/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_0_30px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
                     {navItems.map((item) => {
                         const isActive = activeTab === item.name;
                         return (
                             <a
                                 key={item.name}
                                 href={item.href}
-                                onClick={() => setActiveTab(item.name)}
-                                className={`flex items-center gap-2 rounded-full transition-all duration-300 font-medium ${isActive
-                                    ? 'bg-off-white text-black px-4 py-2'
-                                    : 'text-white p-3 hover:bg-white/10'
-                                    }`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setActiveTab(item.name);
+                                    if (item.href !== '#') {
+                                        const element = document.querySelector(item.href);
+                                        element?.scrollIntoView({ behavior: 'smooth' });
+                                    } else {
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    }
+                                }}
+                                className={`
+                                    relative flex items-center justify-center gap-2 px-4 py-2 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+                                    ${isActive
+                                        ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]'
+                                        : 'text-white hover:text-white hover:bg-white/5'
+                                    }
+                                `}
                                 aria-label={item.name}
                             >
-                                <item.icon className="text-lg" />
-                                {isActive && <span className="whitespace-nowrap">{item.name}</span>}
+                                <item.icon className={`text-lg transition-transform duration-300 ${isActive ? 'scale-105' : 'group-hover:scale-110'}`} />
+                                <span
+                                    className={`
+                                        overflow-hidden whitespace-nowrap transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] font-medium text-sm
+                                        ${isActive ? 'max-w-[200px] opacity-100 ml-1' : 'max-w-0 opacity-0'}
+                                    `}
+                                >
+                                    {item.name}
+                                </span>
                             </a>
                         );
                     })}

@@ -45,7 +45,7 @@ const Hero = ({ data }: HeroProps) => {
     ];
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4 md:px-8">
+        <section className="relative min-h-screen flex items-center overflow-hidden py-20 px-4 md:px-8">
             <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
                 {/* Content Section (Left) */}
@@ -78,13 +78,6 @@ const Hero = ({ data }: HeroProps) => {
                             <FaEnvelope />
                             Contact
                         </a>
-                        <a
-                            href="#"
-                            className="flex items-center gap-2 px-8 py-3 bg-zinc-800 text-gray-300 font-bold rounded-lg border border-zinc-700 hover:bg-zinc-700 hover:text-white transition-colors shadow-lg"
-                        >
-                            <FaFileAlt />
-                            Resume
-                        </a>
                     </div>
 
                     {/* Social Icons */}
@@ -95,8 +88,11 @@ const Hero = ({ data }: HeroProps) => {
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`flex items-center justify-center w-12 h-12 rounded-lg border border-zinc-700 text-gray-400 transition-all duration-300 hover:-translate-y-1 ${link.bgClass} ${link.colorClass}`}
+                                className={`group relative flex items-center justify-center w-12 h-12 rounded-lg border border-zinc-700 text-gray-400 transition-all duration-300 hover:-translate-y-1 ${link.bgClass} ${link.colorClass}`}
                             >
+                                <span className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-white text-black text-sm font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-50 group-hover:scale-100 origin-bottom z-50 shadow-[0_0_15px_rgba(255,255,255,0.2)] whitespace-nowrap pointer-events-none after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-[6px] after:border-transparent after:border-t-white">
+                                    {link.name}
+                                </span>
                                 <link.icon className="text-xl" />
                             </a>
                         ))}
@@ -105,10 +101,10 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* Profile Image (Right) */}
                 <div className="flex justify-center md:justify-end order-1 md:order-2 relative">
-                    <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px]">
-                        <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-zinc-800/50 shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                    <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] group">
+                        <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-zinc-800/50 shadow-2xl transition-all duration-700 hover:scale-[1.02]">
                             <img
-                                src="/images/profile.jpeg"
+                                src="https://i.pinimg.com/736x/33/41/62/33416285e35ed1ea6e1cc48a5ff4155a.jpg"
                                 alt="Amber Bisht"
                                 className="w-full h-full object-cover"
                             />
