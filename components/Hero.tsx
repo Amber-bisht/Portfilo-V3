@@ -1,5 +1,5 @@
 import { FaLinkedin, FaGithub, FaTwitter, FaFileAlt, FaEnvelope } from 'react-icons/fa';
-import { useState, useEffect } from 'react';
+
 
 interface HeroProps {
     data: {
@@ -18,15 +18,7 @@ interface HeroProps {
 }
 
 const Hero = ({ data }: HeroProps) => {
-    const roles = ["DEVOPS ENGINEER", "FREELANCER"];
-    const [roleIndex, setRoleIndex] = useState(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setRoleIndex((prev) => (prev + 1) % roles.length);
-        }, 2000);
-        return () => clearInterval(interval);
-    }, []);
 
     const socialLinks = [
         {
@@ -69,7 +61,7 @@ const Hero = ({ data }: HeroProps) => {
                     {/* Role Badge */}
                     <div className="mb-8">
                         <span className="inline-block px-6 py-3 bg-zinc-800 rounded-lg text-lg md:text-2xl font-bold tracking-wide text-white border border-white/5">
-                            A {roles[roleIndex]}
+                            A DEVOPS ENGINEER
                         </span>
                     </div>
 
@@ -126,7 +118,7 @@ const Hero = ({ data }: HeroProps) => {
             </div>
 
             {/* Background elements */}
-            <div className="absolute top-0 right-0 w-1/3 h-full bg-makima-red/5 blur-[120px] -z-10 pointer-events-none" />
+
         </section>
     );
 };

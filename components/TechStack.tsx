@@ -64,7 +64,7 @@ const TechStack = ({ data }: TechStackProps) => {
                             key={tech.name}
                             className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 hover:rotate-6 transition-transform duration-300"
                         >
-                            <div className="w-16 h-16 md:w-20 md:h-20 bg-white dark:bg-charcoal-dark/50 rounded-xl flex items-center justify-center text-3xl md:text-4xl border border-charcoal-light/10 shadow-sm group-hover:border-makima-red/50 transition-all duration-300">
+                            <div className="w-16 h-16 md:w-20 md:h-20 bg-white dark:bg-neutral-900/50 rounded-xl flex items-center justify-center text-3xl md:text-4xl border border-charcoal-light/10 shadow-sm group-hover:border-makima-red/50 transition-all duration-300">
                                 <Icon
                                     className={`w-[60%] h-[60%] ${techData.className || ''}`}
                                     style={{ color: techData.color || undefined }}

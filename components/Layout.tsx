@@ -18,7 +18,7 @@ const Layout = ({ children, title = 'Amber Bisht | DevOps Engineer' }: LayoutPro
     ];
 
     return (
-        <div className="min-h-screen bg-charcoal-dark text-off-white relative selection:bg-makima-gold selection:text-charcoal-dark transition-colors duration-300">
+        <div className="min-h-screen bg-neutral-950 text-off-white relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300">
             <Head>
                 <title>{title}</title>
                 <meta name="description" content="Amber Bisht - DevOps Engineer Portfolio. Building resilient systems and automated pipelines." />
@@ -43,9 +43,6 @@ const Layout = ({ children, title = 'Amber Bisht | DevOps Engineer' }: LayoutPro
                 <link rel="canonical" href="https://amberbisht.me/" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            {/* Global Background Pattern */}
-            <div className="fixed inset-0 z-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-repeat" style={{ backgroundBlendMode: 'overlay' }} />
 
             {/* Island Navbar */}
             <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50">

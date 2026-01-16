@@ -4,7 +4,7 @@ const Experience = ({ exp }: { exp: any }) => {
     return (
         <div className="relative border-l-2 border-makima-red/20 ml-4 md:ml-8 pl-8 py-4">
             <div
-                className="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-off-white dark:bg-charcoal-dark border-2 border-makima-red"
+                className="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-off-white dark:bg-neutral-950 border-2 border-makima-red"
             />
 
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">

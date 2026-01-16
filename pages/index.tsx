@@ -7,8 +7,7 @@ import dynamic from 'next/dynamic';
 const ProjectCard = dynamic(() => import('../components/ProjectCard'));
 const Experience = dynamic(() => import('../components/Experience'));
 const TechStack = dynamic(() => import('../components/TechStack'));
-const GithubContributions = dynamic(() => import('../components/GithubContributions'));
-
+const Contact = dynamic(() => import('../components/Contact'));
 
 export default function Home() {
     return (
@@ -33,8 +32,6 @@ export default function Home() {
                 <TechStack data={data.techStack} />
             </Section>
 
-
-
             <Section id="projects">
                 <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 text-left border-l-4 border-makima-red pl-6">
                     Arsenal
@@ -46,26 +43,7 @@ export default function Home() {
                 </div>
             </Section>
 
-            <Section id="contact" className="text-center pb-32">
-                <h2 className="text-4xl font-serif font-bold mb-8">
-                    Establish Connection
-                </h2>
-                <p className="mb-8">
-                    Are you ready to make a contract?
-                </p>
-                <div className="flex justify-center">
-                    <a
-                        href={`mailto:${data.contact.email}`}
-                        className="inline-block bg-makima-red font-serif font-bold py-4 px-12 text-lg tracking-widest border border-transparent hover:bg-transparent hover:text-makima-red hover:border-makima-red transition-all duration-300 clip-path-polygon"
-                    >
-                        CONTACT
-                    </a>
-                </div>
-            </Section>
-
-            <Section id="contributions">
-                <GithubContributions />
-            </Section>
+            <Contact data={data} />
         </Layout >
     );
 }
