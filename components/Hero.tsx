@@ -51,7 +51,7 @@ const Hero = ({ data }: HeroProps) => {
                 {/* Content Section (Left) */}
                 <div className="text-center md:text-left order-2 md:order-1 flex flex-col justify-center">
                     <h2 className="text-3xl md:text-5xl font-serif font-medium text-white mb-4 tracking-tight">
-                        Hi,I'm
+                        Hi, I&apos;m
                     </h2>
 
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-black mb-6 tracking-tighter text-white">
@@ -60,8 +60,8 @@ const Hero = ({ data }: HeroProps) => {
 
                     {/* Role Badge */}
                     <div className="mb-8">
-                        <span className="inline-block px-6 py-3 bg-zinc-800 rounded-lg text-lg md:text-2xl font-bold tracking-wide text-white border border-white/5">
-                            A DEVOPS ENGINEER
+                        <span className="inline-block px-6 py-3 bg-zinc-800 rounded-lg text-lg md:text-2xl font-bold tracking-wide text-white border border-white/5 uppercase">
+                            {data.about.title}
                         </span>
                     </div>
 

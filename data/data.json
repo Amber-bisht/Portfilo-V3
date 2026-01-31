@@ -1,55 +1,85 @@
 {
     "about": {
         "name": "Amber Bisht",
-        "title": "DevOps Engineer",
-        "description": "DevOps isn’t just tools. It’s building systems that ship fast and stay stable.\nI design automated pipelines, cloud-native architectures, and resilient platforms.\nReliable delivery, clean code, and thoughtful engineering are what I work toward every day.",
+        "title": "Full Stack Developer and DevOps",
+        "description": "Full Stack Developer passionate about building end-to-end applications, currently mastering DevOps and Cloud Infrastructure to build resilient platforms.",
         "image": "https://i.pinimg.com/736x/33/41/62/33416285e35ed1ea6e1cc48a5ff4155a.jpg"
     },
     "projects": [
         {
             "id": 1,
-            "title": "Automated CI/CD Pipeline",
-            "description": "Designed and implemented a complete CI/CD pipeline using Jenkins and GitHub Actions. Automated testing, building, and deployment to AWS EC2 instances.",
-            "technologies": [
-                "Jenkins",
-                "GitHub Actions",
-                "AWS",
-                "Docker",
-                "Bash"
+            "title": "AI MCQ & Test Platform",
+            "slug": "ai-mcq-test-platform",
+            "description": "A full-stack AI-powered testing and survey platform where users can host and attempt tests. Supports AI-based question generation using Groq API as well as manual test creation. Includes surveys, role-based access control, payments, authentication, and CI/CD.",
+            "features": [
+                "AI-based MCQ generation",
+                "Manual test & survey creation",
+                "Role-based access (Admin / Teacher / User)",
+                "Test attempts with scoring & analytics",
+                "Survey creation & responses",
+                "Google OAuth authentication",
+                "Razorpay payment integration",
+                "CI/CD pipeline"
             ],
-            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=CI/CD+Pipeline",
-            "github": "https://github.com/amber-bisht",
-            "live": "#"
+            "technologies": [
+                "Next.js",
+                "Tailwind CSS",
+                "MongoDB",
+                "JWT",
+                "Google OAuth",
+                "Razorpay",
+                "Groq AI API",
+                "CI/CD Pipeline"
+            ],
+            "image": "/images/projects/asksync-amberbisht.webp",
+            "github": "https://github.com/Amber-bisht/watch-me",
+            "live": "https://asksync.amberbisht.me"
         },
         {
             "id": 2,
-            "title": "Kubernetes Cluster Management",
-            "description": "Deployed and managed a high-availability Kubernetes cluster on AWS EKS. Configured auto-scaling, monitoring using Prometheus and Grafana, and ingress controllers.",
-            "technologies": [
-                "Kubernetes",
-                "AWS EKS",
-                "Terraform",
-                "Prometheus",
-                "Grafana",
-                "Helm"
+            "title": "Watch E-Commerce Store",
+            "slug": "watch-ecommerce-store",
+            "description": "A full-stack e-commerce platform for selling watches with secure authentication, online payments, order management, and shipping integration.",
+            "features": [
+                "Product listing & detail pages",
+                "Cart & checkout system",
+                "Secure online payments",
+                "Order tracking & management",
+                "Shipping integration",
+                "OAuth-based authentication"
             ],
-            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Kubernetes",
-            "github": "https://github.com/amber-bisht",
-            "live": "#"
+            "technologies": [
+                "Next.js",
+                "Tailwind CSS",
+                "MongoDB",
+                "OAuth",
+                "Razorpay",
+                "Shiprocket"
+            ],
+            "image": "/images/projects/e-store.webp",
+            "github": "https://github.com/Amber-bisht/askSync",
+            "live": "https://watch-me-eight.vercel.app/"
         },
         {
             "id": 3,
-            "title": "Infrastructure as Code (IaC)",
-            "description": "Provisioned cloud infrastructure using Terraform. Managed VPCs, subnets, security groups, and EC2 instances with state management and modules.",
-            "technologies": [
-                "Terraform",
-                "AWS",
-                "HCL",
-                "State Management"
+            "title": "Secure Link Wrapper System",
+            "slug": "secure-link-wrapper",
+            "description": "A link protection system designed to prevent automated abuse and bot access. Uses multi-layer challenge verification, CAPTCHA protection, and Cloudflare-based defenses to secure sensitive links.",
+            "features": [
+                "Protected link redirection",
+                "Challenge-based verification system",
+                "Multiple CAPTCHA layers",
+                "Bot & automation prevention",
+                "Image & object-based challenges"
             ],
-            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Terraform+IaC",
-            "github": "https://github.com/amber-bisht",
-            "live": "#"
+            "technologies": [
+                "Next.js",
+                "Google reCAPTCHA v3",
+                "Cloudflare Turnstile"
+            ],
+            "image": "/images/projects/links-asprin-dev.webp",
+            "github": "https://github.com/Amber-bisht/link-secure-advance",
+            "live": "https://links.asprin.dev"
         }
     ],
     "experience": [
@@ -70,60 +100,146 @@
             ]
         }
     ],
-    "techStack": [
-        {
-            "name": "AWS Cloud",
-            "icon": "SiAmazonaws"
-        },
-        {
-            "name": "Docker",
-            "icon": "SiDocker"
-        },
-        {
-            "name": "Kubernetes",
-            "icon": "SiKubernetes"
-        },
-        {
-            "name": "Jenkins",
-            "icon": "SiJenkins"
-        },
-        {
-            "name": "Git",
-            "icon": "SiGit"
-        },
-        {
-            "name": "Ansible",
-            "icon": "SiAnsible"
-        },
-        {
-            "name": "Terraform",
-            "icon": "SiTerraform"
-        },
-        {
-            "name": "Prometheus",
-            "icon": "SiPrometheus"
-        },
-        {
-            "name": "Grafana",
-            "icon": "SiGrafana"
-        },
-        {
-            "name": "Python",
-            "icon": "SiPython"
-        },
-        {
-            "name": "Bash",
-            "icon": "SiGnubash"
-        },
-        {
-            "name": "JavaScript",
-            "icon": "SiJavascript"
-        },
-        {
-            "name": "Linux",
-            "icon": "SiLinux"
-        }
-    ],
+    "techStack": {
+        "fullStack": [
+            {
+                "name": "HTML",
+                "icon": "SiHtml5"
+            },
+            {
+                "name": "CSS",
+                "icon": "SiCss3"
+            },
+            {
+                "name": "JavaScript",
+                "icon": "SiJavascript"
+            },
+            {
+                "name": "TypeScript",
+                "icon": "SiTypescript"
+            },
+            {
+                "name": "React.js",
+                "icon": "SiReact"
+            },
+            {
+                "name": "Next.js",
+                "icon": "SiNextdotjs"
+            },
+            {
+                "name": "Tailwind CSS",
+                "icon": "SiTailwindcss"
+            },
+            {
+                "name": "Node.js",
+                "icon": "SiNodedotjs"
+            },
+            {
+                "name": "MongoDB",
+                "icon": "SiMongodb"
+            },
+            {
+                "name": "PostgreSQL",
+                "icon": "SiPostgresql"
+            },
+            {
+                "name": "Redis",
+                "icon": "SiRedis"
+            },
+            {
+                "name": "Microservices",
+                "icon": "FaServer"
+            },
+            {
+                "name": "BullMQ",
+                "icon": "FaCode"
+            },
+            {
+                "name": "OAuth",
+                "icon": "SiAuth0"
+            },
+            {
+                "name": "Lambda",
+                "icon": "SiAwslambda"
+            },
+            {
+                "name": "Rate Limit",
+                "icon": "FaLock"
+            },
+            {
+                "name": "Socket.io",
+                "icon": "SiSocketdotio"
+            },
+            {
+                "name": "CAPTCHA",
+                "icon": "SiCloudflare"
+            },
+            {
+                "name": "Razorpay",
+                "icon": "SiRazorpay"
+            },
+            {
+                "name": "S3",
+                "icon": "SiAmazons3"
+            }
+        ],
+        "devOpsLearning": [
+            {
+                "name": "AWS Cloud",
+                "icon": "SiAmazonaws"
+            },
+            {
+                "name": "Docker",
+                "icon": "SiDocker"
+            },
+            {
+                "name": "Kubernetes",
+                "icon": "SiKubernetes",
+                "blur": true
+            },
+            {
+                "name": "Jenkins",
+                "icon": "SiJenkins",
+                "blur": true
+            },
+            {
+                "name": "Git",
+                "icon": "SiGit"
+            },
+            {
+                "name": "Ansible",
+                "icon": "SiAnsible",
+                "blur": true
+            },
+            {
+                "name": "Terraform",
+                "icon": "SiTerraform",
+                "blur": true
+            },
+            {
+                "name": "Prometheus",
+                "icon": "SiPrometheus",
+                "blur": true
+            },
+            {
+                "name": "Grafana",
+                "icon": "SiGrafana",
+                "blur": true
+            },
+            {
+                "name": "Python",
+                "icon": "SiPython"
+            },
+            {
+                "name": "Bash",
+                "icon": "SiGnubash"
+            },
+            {
+                "name": "NGINX",
+                "icon": "SiNginx"
+            }
+        ]
+    },
     "contact": {
         "email": "bishtamber0@gmail.com",
         "linkedin": "https://www.linkedin.com/in/amber-bisht-05a096294",
@@ -196,7 +312,7 @@
                 "Cloudflare",
                 "Cipher"
             ],
-            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=asprin.dev",
+            "image": "/images/projects/links-asprin-dev.webp",
             "github": "",
             "live": "https://links.asprin.dev"
         },
@@ -212,7 +328,7 @@
                 "OAuth"
             ],
             "tag": "Personal Project",
-            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=AskSyn+AI",
+            "image": "/images/projects/asksync-amberbisht.webp",
             "github": "",
             "live": "https://asksyn.amberbisht.me"
         },

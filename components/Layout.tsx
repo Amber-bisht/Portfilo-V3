@@ -9,7 +9,7 @@ interface LayoutProps {
     title?: string;
 }
 
-const Layout = ({ children, title = 'Amber Bisht | DevOps Engineer' }: LayoutProps) => {
+const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevOps' }: LayoutProps) => {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState('Home');
 
@@ -33,7 +33,7 @@ const Layout = ({ children, title = 'Amber Bisht | DevOps Engineer' }: LayoutPro
         <div className="min-h-screen bg-neutral-950 text-off-white relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300">
             <Head>
                 <title>{title}</title>
-                <meta name="description" content="Amber Bisht - DevOps Engineer Portfolio. Building resilient systems and automated pipelines." />
+                <meta name="description" content="Amber Bisht - Full Stack Developer and DevOps Portfolio. Building resilient systems and automated pipelines." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="author" content="Amber Bisht" />
                 <meta name="keywords" content="DevOps, Amber Bisht, Cloud Engineer, AWS, Kubernetes, Terraform, CI/CD" />
@@ -41,15 +41,15 @@ const Layout = ({ children, title = 'Amber Bisht | DevOps Engineer' }: LayoutPro
                 {/* Open Graph / Facebook */}
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://amberbisht.me/" />
-                <meta property="og:title" content="Amber Bisht | DevOps Engineer" />
-                <meta property="og:description" content="DevOps Engineer specializing in AWS, Kubernetes, and automated pipelines. View my portfolio." />
+                <meta property="og:title" content="Amber Bisht | Full Stack Developer and DevOps" />
+                <meta property="og:description" content="Full Stack Developer and DevOps specializing in AWS, Kubernetes, and automated pipelines. View my portfolio." />
                 <meta property="og:image" content="https://amberbisht.me/images/og-image.png" />
 
                 {/* Twitter */}
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="https://amberbisht.me/" />
-                <meta property="twitter:title" content="Amber Bisht | DevOps Engineer" />
-                <meta property="twitter:description" content="DevOps Engineer specializing in AWS, Kubernetes, and automated pipelines. View my portfolio." />
+                <meta property="twitter:title" content="Amber Bisht | Full Stack Developer and DevOps" />
+                <meta property="twitter:description" content="Full Stack Developer and DevOps specializing in AWS, Kubernetes, and automated pipelines. View my portfolio." />
                 <meta property="twitter:image" content="https://amberbisht.me/images/og-image.png" />
 
                 <link rel="canonical" href="https://amberbisht.me/" />

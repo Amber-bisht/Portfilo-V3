@@ -68,7 +68,7 @@ const ProjectCard = ({ project, index }: ProjectProps) => {
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-6">
-                        {project.technologies.slice(0, 6).map((tech) => {
+                        {(project.technologies || []).slice(0, 6).map((tech) => {
                             const { icon: Icon, color } = getTechIcon(tech);
                             return (
                                 <span
@@ -80,12 +80,12 @@ const ProjectCard = ({ project, index }: ProjectProps) => {
                                 </span>
                             );
                         })}
-                        {project.technologies.length > 6 && (
+                        {(project.technologies || []).length > 6 && (
                             <span
                                 className="px-3 py-1 bg-[#27272a] text-gray-300 text-xs font-medium rounded-full cursor-help hover:bg-[#3f3f46] transition-colors"
-                                title={project.technologies.slice(6).join(', ')}
+                                title={(project.technologies || []).slice(6).join(', ')}
                             >
-                                +{project.technologies.length - 6}
+                                +{(project.technologies || []).length - 6}
                             </span>
                         )}
                     </div>
@@ -152,10 +152,10 @@ const ProjectCard = ({ project, index }: ProjectProps) => {
                             </p>
 
                             <h4 className="text-white font-semibold mb-3">
-                                Technolgies
+                                Technologies
                             </h4>
                             <div className="flex flex-wrap gap-2 mb-8">
-                                {project.technologies.map((tech) => {
+                                {(project.technologies || []).map((tech) => {
                                     const { icon: Icon, color } = getTechIcon(tech);
                                     return (
                                         <span

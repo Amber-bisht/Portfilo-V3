@@ -3,6 +3,7 @@ import { SiGmail } from 'react-icons/si';
 import { GitHubCalendar } from 'react-github-calendar';
 import dynamic from 'next/dynamic';
 import { ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 const GithubContributions = dynamic(() => import('./GithubContributions'), { ssr: false });
 
@@ -41,9 +42,9 @@ const Contact = ({ data }: ContactProps) => {
                         <div>
                             <h3 className="text-gray-400 font-medium mb-1">Current Status</h3>
                             <p className="text-2xl md:text-3xl font-bold text-white mb-2">Open to Opportunities</p>
-                            <a href="/freelance" className="inline-flex items-center gap-2 text-sm text-makima-red hover:text-white transition-colors font-semibold">
+                            <Link href="/freelance" className="inline-flex items-center gap-2 text-sm text-makima-red hover:text-white transition-colors font-semibold">
                                 View My Freelance Work <ExternalLink size={14} />
-                            </a>
+                            </Link>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 mt-8">
@@ -117,7 +118,7 @@ const Contact = ({ data }: ContactProps) => {
                             {data.contact.email}
                         </h3>
                         <p className="text-gray-400 max-w-sm">
-                            Let's build something extraordinary together.
+                            &apos;Let&apos;s build something great together.&apos;
                         </p>
                     </div>
 

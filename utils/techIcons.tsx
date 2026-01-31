@@ -19,9 +19,17 @@ import {
     SiPython,
     SiJavascript,
     SiGo,
-    SiNextdotjs
+    SiNextdotjs,
+    SiTailwindcss,
+    SiJsonwebtokens,
+    SiGoogle,
+    SiRazorpay,
+    SiCloudflare,
+    SiPostgresql,
+    SiGooglegemini,
+    SiOpenai
 } from 'react-icons/si';
-import { FaDatabase, FaServer, FaCode, FaCloud, FaTerminal } from 'react-icons/fa';
+import { FaDatabase, FaServer, FaCode, FaCloud, FaTerminal, FaLock, FaTruck, FaVideo, FaRobot } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
 interface TechIcon {
@@ -61,25 +69,30 @@ const techIconMap: { [key: string]: TechIcon } = {
     "Ansible": { icon: SiAnsible, color: "#EE0000" },
 
     // Freelance / New
-    "PostgreSQL": { icon: FaDatabase, color: "#336791" },
-    "Nginx": { icon: FaServer, color: "#009639" },
-    "Cloudflare": { icon: FaCloud, color: "#F38020" },
-    "OAuth": { icon: FaCode, color: "#EB5424" }, // Fallback
+    "Tailwind CSS": { icon: SiTailwindcss, color: "#06B6D4" },
+    "JWT": { icon: SiJsonwebtokens, color: "#000000" },
+    "Google OAuth": { icon: SiGoogle, color: "#4285F4" },
+    "Razorpay": { icon: SiRazorpay, color: "#3395FF" },
+    "Cloudflare": { icon: SiCloudflare, color: "#F38020" },
+    "Cloudflare Turnstile": { icon: SiCloudflare, color: "#F38020" },
+    "Google reCAPTCHA v3": { icon: SiGoogle, color: "#4285F4" },
+    "PostgreSQL": { icon: SiPostgresql, color: "#4169E1" },
+    "Gemini AI": { icon: SiGooglegemini, color: "#8E75B2" },
+    "Groq AI API": { icon: SiOpenai, color: "#412991" },
+    "Shiprocket": { icon: FaTruck, color: "#E02128" },
+    "HLS": { icon: FaVideo, color: "#FF8800" },
+    "Microservices": { icon: FaServer, color: "#333333" },
+    "AES Encryption": { icon: FaLock, color: "#A0A0A0" },
+    "Web Worker": { icon: FaTerminal, color: "#F7DF1E" },
+    "Working on it": { icon: FaCode, color: "#FF9900" },
+    "Image Optimization": { icon: FaCode, color: "#FF00FF" },
+    "Performance": { icon: FaCode, color: "#00FF00" },
     "SSG": { icon: FaCode, color: "#000000" },
-    "HLS": { icon: FaCode, color: "#FF0000" },
     "Admin Panel": { icon: FaTerminal, color: "#333333" },
     "VPS": { icon: FaServer, color: "#000000" },
-    "Performance": { icon: FaCode, color: "#00FF00" },
-    "Image Optimization": { icon: FaCode, color: "#FF00FF" },
-    "Cipher": { icon: FaCode, color: "#000000" },
+    "Cipher": { icon: FaLock, color: "#000000" },
     "Open Source": { icon: FaCode, color: "#000000" },
-    "Gemini AI": { icon: FaCode, color: "#8E75B2" },
-    "Razorpay": { icon: FaCode, color: "#3395FF" },
-    "Integration": { icon: FaCode, color: "#000000" },
-    "Microservices": { icon: FaServer, color: "#333333" },
-    "AES Encryption": { icon: FaCode, color: "#000000" },
-    "Web Worker": { icon: FaCode, color: "#F7DF1E" },
-    "Working on it": { icon: FaCode, color: "#FF9900" }
+    "Integration": { icon: FaCode, color: "#000000" }
 };
 
 export const getTechIcon = (techName: string): TechIcon => {
