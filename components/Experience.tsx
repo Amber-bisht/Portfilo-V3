@@ -18,6 +18,19 @@ const Experience = ({ experiences }: { experiences: any[] }) => {
                     >
                         <div className="absolute top-0 right-0 w-64 h-64 bg-makima-red/5 blur-[80px] rounded-full pointer-events-none -mr-16 -mt-16" />
 
+                        {/* Background Icon Watermark */}
+                        {(() => {
+                            const watermarkTech = exp.company === 'Freelance' ? 'CI/CD' : exp["tech used"]?.[0];
+                            if (!watermarkTech) return null;
+
+                            const { icon: MainIcon, color: MainColor } = getTechIcon(watermarkTech);
+                            return (
+                                <div className="absolute -right-6 -bottom-6 opacity-5 pointer-events-none transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                                    <MainIcon style={{ color: MainColor }} size={200} />
+                                </div>
+                            );
+                        })()}
+
                         <div className="relative z-10">
                             <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
                                 <div>

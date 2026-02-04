@@ -28,9 +28,15 @@ import {
     SiPostgresql,
     SiGooglegemini,
     SiOpenai,
-    SiExpress
+    SiExpress,
+    SiRedis,
+    SiDjango,
+    SiHtml5,
+    SiCss3,
+    SiCloudinary,
+    SiAuth0
 } from 'react-icons/si';
-import { FaDatabase, FaServer, FaCode, FaCloud, FaTerminal, FaLock, FaTruck, FaVideo, FaRobot } from 'react-icons/fa';
+import { FaDatabase, FaServer, FaCode, FaCloud, FaTerminal, FaLock, FaTruck, FaVideo, FaRobot, FaEnvelope } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
 interface TechIcon {
@@ -95,7 +101,21 @@ const techIconMap: { [key: string]: TechIcon } = {
     "Open Source": { icon: FaCode, color: "#000000" },
     "Integration": { icon: FaCode, color: "#000000" },
     "Express.js": { icon: SiExpress, color: "#000000" },
-    "CI/CD": { icon: SiGithubactions, color: "#2088FF" }
+    "CI/CD": { icon: SiGithubactions, color: "#2088FF" },
+
+    // Fixes/Aliases
+    "React.js": { icon: SiReact, color: "#61DAFB" },
+    "Node.js": { icon: SiNodedotjs, color: "#339933" },
+    "Redis": { icon: SiRedis, color: "#DC382D" },
+    "BullMQ": { icon: FaServer, color: "#A0A0A0" }, // No direct icon in simple-icons
+    "Resend.com": { icon: FaEnvelope, color: "#000000" },
+    "Turnstile": { icon: SiCloudflare, color: "#F38020" },
+    "OAuth": { icon: SiAuth0, color: "#EB5424" },
+    "Cloudinary": { icon: SiCloudinary, color: "#3448C5" },
+    "Django": { icon: SiDjango, color: "#092E20" },
+    "HTML": { icon: SiHtml5, color: "#E34F26" },
+    "CSS": { icon: SiCss3, color: "#1572B6" },
+    "Markdown": { icon: FaCode, color: "#000000" }
 };
 
 export const getTechIcon = (techName: string): TechIcon => {
