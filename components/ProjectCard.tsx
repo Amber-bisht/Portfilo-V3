@@ -92,15 +92,15 @@ const ProjectCard = ({ project, index }: ProjectProps) => {
 
 
                     {/* Actions */}
-                    <div className="grid grid-cols-2 gap-3 mt-auto">
+                    <div className={`mt-auto gap-3 ${project.live ? "grid grid-cols-2" : "flex"}`}>
                         <button
                             onClick={() => setIsInternalModalOpen(true)}
-                            className="flex items-center justify-center py-2.5 bg-white text-black text-sm font-semibold rounded-xl hover:bg-gray-200 transition-colors"
+                            className={`flex items-center justify-center py-2.5 bg-white text-black text-sm font-semibold rounded-xl hover:bg-gray-200 transition-colors ${!project.live ? "w-full" : ""}`}
                         >
                             Details
                         </button>
 
-                        {project.live ? (
+                        {project.live && (
                             <a
                                 href={project.live}
                                 target="_blank"
@@ -109,10 +109,6 @@ const ProjectCard = ({ project, index }: ProjectProps) => {
                             >
                                 Live
                             </a>
-                        ) : (
-                            <button disabled className="flex items-center justify-center py-2.5 bg-[#27272a]/50 text-gray-500 text-sm font-semibold rounded-xl cursor-not-allowed">
-                                Live
-                            </button>
                         )}
                     </div>
                 </div>

@@ -41,6 +41,16 @@ export default function Home() {
                         <ProjectCard key={project.id} project={project} index={index} />
                     ))}
                 </div>
+                {/* View More Button */}
+                <div className="flex justify-center mt-12">
+                    <a
+                        href="/freelance"
+                        className="px-8 py-3 bg-[#27272a] hover:bg-[#3f3f46] text-white font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 group border border-white/5"
+                    >
+                        View More Projects
+                        <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                </div>
             </Section>
 
             <Contact data={data} />

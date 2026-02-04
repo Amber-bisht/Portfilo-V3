@@ -266,7 +266,7 @@
                 "Image Optimization",
                 "Performance"
             ],
-            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Novello+Hotels",
+            "image": "/images/projects/novello.webp",
             "github": "",
             "live": "https://novellohotels.vercel.app"
         },
@@ -282,73 +282,75 @@
                 "CI/CD",
                 "VPS"
             ],
-            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Novello+Educare",
+            "image": "/images/projects/studyabroad.webp",
             "github": "",
             "live": "https://novelloeducare.com"
         },
         {
             "id": 4,
             "title": "Tripbazzar PMS",
-            "description": "Integration with MakeMyTrip and OYO. Currently undergoing major refactoring and updates.",
+            "description": "Integration with MakeMyTrip and OYO + Your Own Inventoryß. Internally Used by the company.",
             "technologies": [
                 "PostgreSQL",
                 "Docker",
-                "AWS",
-                "Working on it"
+                "AWS"
             ],
             "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Tripbazzar",
-            "tag": "Working on it",
-            "github": "",
-            "live": "#"
+            "tag": "",
+            "github": ""
         },
         {
             "id": 5,
-            "title": "Links by Asprin.dev",
-            "description": "Advanced link shortener with OAuth, MongoDB, Cipher encryption, and Cloudflare Turnstile captcha integration.",
+            "title": "jbDrench",
+            "description": "A full-stack platform built with React.js and Node.js. Features include Redis & BullMQ for background jobs, email integration via Resend.com, comprehensive CI/CD pipelines, and a robust admin panel.",
             "technologies": [
-                "Next.js",
-                "MongoDB",
-                "OAuth",
-                "Cloudflare",
-                "Cipher"
+                "React.js",
+                "Node.js",
+                "Redis",
+                "BullMQ",
+                "Resend.com",
+                "CI/CD",
+                "Admin Panel"
             ],
-            "image": "/images/projects/links-asprin-dev.webp",
+            "image": "/images/projects/jbDrench.webp",
             "github": "",
-            "live": "https://links.asprin.dev"
+            "live": "https://jbrench.com"
         },
         {
             "id": 6,
-            "title": "AskSyn AI",
-            "description": "AI-powered MCQ and question generation platform. Features Google OAuth, Gemini AI API integration, and Razorpay payment gateway.",
+            "title": "NotesFind",
+            "description": "A role-based platform built with Next.js. Features include Cloudflare Turnstile protection, OAuth authentication, Cloudinary integration for media, and markdown content display with a dedicated admin panel.",
             "technologies": [
                 "Next.js",
-                "MongoDB",
-                "Gemini AI",
-                "Razorpay",
-                "OAuth"
+                "Cloudflare",
+                "Turnstile",
+                "Admin Panel",
+                "OAuth",
+                "Cloudinary",
+                "Markdown"
             ],
-            "tag": "Personal Project",
-            "image": "/images/projects/asksync-amberbisht.webp",
+            "image": "/images/projects/notesfind.webp",
             "github": "",
-            "live": "https://asksync.amberbisht.me"
-        },
+            "live": "https://notesfind.com"
+        }
+    ],
+    "studentProjects": [
         {
-            "id": 7,
-            "title": "LMS Platform",
-            "description": "Microservices-based Learning Management System. Features AES encryption, HLS video player with Web Workers, and OAuth authentication.",
+            "id": 1,
+            "title": "EcoSmart",
+            "description": "A Python Django application for waste classification using Gemini AI. Features include HTML/CSS/JS frontend, user analytics, history log, and AI-powered image analysis to determine waste categories.",
             "technologies": [
-                "Node.js",
-                "Next.js",
-                "Microservices",
-                "AES Encryption",
-                "HLS",
-                "Web Worker",
-                "OAuth"
+                "Python",
+                "Django",
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Gemini AI",
+                "Analytics"
             ],
-            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=LMS+Platform",
-            "tag": "Personal Project",
+            "image": "/images/projects/ecosmart.webp",
             "github": "",
-            "live": "https://lms.amberbisht.me"
+            "live": ""
         }
     ]
 }

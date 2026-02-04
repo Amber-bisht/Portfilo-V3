@@ -69,6 +69,9 @@ const Hero = ({ data }: HeroProps) => {
                         {data.about.description}
                     </p>
 
+                    <p className="text-gray-400 max-w-xl mx-auto md:mx-0 text-base md:text-lg leading-relaxed mb-4 -mt-2">
+                        Want to build something custom?
+                    </p>
                     {/* Buttons Group */}
                     <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
                         <a
@@ -77,6 +80,13 @@ const Hero = ({ data }: HeroProps) => {
                         >
                             <FaEnvelope />
                             Contact
+                        </a>
+                        <a
+                            href="/freelance"
+                            className="flex items-center gap-2 px-8 py-3 bg-[#27272a] text-white font-bold rounded-lg hover:bg-[#3f3f46] transition-colors border border-zinc-700"
+                        >
+                            <FaFileAlt />
+                            View More Projects
                         </a>
                     </div>
 
