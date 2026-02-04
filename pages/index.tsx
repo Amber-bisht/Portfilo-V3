@@ -16,17 +16,7 @@ export default function Home() {
 
             <div id="about" />
 
-            <Section id="experience">
-                <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 text-right text-makima-red border-r-4 border-makima-red pr-6">
-                    Operations
-                </h2>
-                <div className="space-y-12 max-w-4xl mx-auto">
-                    {/* Mapping experience array */}
-                    {data.experience.map((exp) => (
-                        <Experience key={exp.id} exp={exp} />
-                    ))}
-                </div>
-            </Section>
+            <Experience experiences={data.experience} />
 
             <Section id="techstack">
                 <TechStack data={data.techStack} />

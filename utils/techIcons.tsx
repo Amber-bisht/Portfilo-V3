@@ -27,7 +27,8 @@ import {
     SiCloudflare,
     SiPostgresql,
     SiGooglegemini,
-    SiOpenai
+    SiOpenai,
+    SiExpress
 } from 'react-icons/si';
 import { FaDatabase, FaServer, FaCode, FaCloud, FaTerminal, FaLock, FaTruck, FaVideo, FaRobot } from 'react-icons/fa';
 import { IconType } from 'react-icons';
@@ -92,7 +93,9 @@ const techIconMap: { [key: string]: TechIcon } = {
     "VPS": { icon: FaServer, color: "#000000" },
     "Cipher": { icon: FaLock, color: "#000000" },
     "Open Source": { icon: FaCode, color: "#000000" },
-    "Integration": { icon: FaCode, color: "#000000" }
+    "Integration": { icon: FaCode, color: "#000000" },
+    "Express.js": { icon: SiExpress, color: "#000000" },
+    "CI/CD": { icon: SiGithubactions, color: "#2088FF" }
 };
 
 export const getTechIcon = (techName: string): TechIcon => {

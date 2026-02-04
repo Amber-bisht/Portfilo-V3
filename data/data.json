@@ -84,6 +84,25 @@
     ],
     "experience": [
         {
+            "id": 2,
+            "title": "Full Stack Developer",
+            "company": "Freelance",
+            "duration": "Ongoing",
+            "starttime": "Sep 2025",
+            "endtime": "Present",
+            "description": "Delivered 6+ production-grade web platforms across hospitality, EdTech, and SaaS domains using Next.js and Node.js, supporting hundreds of daily active users. Designed modular backend services with Express.js, MongoDB, and PostgreSQL, improving API response times by 25–40% and reducing feature delivery time by 30%. Containerized applications deployed and operated using Docker, CI/CD pipelines, cron jobs, and third-party integrations (Razorpay, OAuth), achieving 99%+ deployment reliability.",
+            "tech used": [
+                "Next.js",
+                "Node.js",
+                "Express.js",
+                "MongoDB",
+                "PostgreSQL",
+                "Docker",
+                "CI/CD",
+                "Razorpay"
+            ]
+        },
+        {
             "id": 1,
             "title": "Software Intern",
             "company": "Delonix Services",
