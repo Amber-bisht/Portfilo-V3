@@ -34,6 +34,7 @@ import {
     SiAuth0
 } from 'react-icons/si';
 import { FaServer, FaCode, FaLock } from 'react-icons/fa';
+import Marquee from "react-fast-marquee";
 
 // Map icon strings to React Icons and their brand colors
 const IconData: { [key: string]: { icon: any; color: string; className?: string } } = {
@@ -80,67 +81,57 @@ interface TechStackProps {
 }
 
 const TechStack = ({ data }: TechStackProps) => {
-    const renderTechGrid = (items: any[]) => {
+    const renderMarqueeRow = (items: any[], direction: "left" | "right" = "left", speed: number = 30) => {
         // Sort items: non-blurred first, blurred last
         const sortedItems = [...items].sort((a, b) => (a.blur === b.blur ? 0 : a.blur ? 1 : -1));
 
         return (
-            <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-5xl mx-auto">
-                {sortedItems.map((tech) => {
-                    const techData = IconData[tech.icon] || { icon: FaCode, color: "#000000" };
-                    const Icon = techData.icon;
+            <Marquee
+                speed={speed}
+                gradient={false}
+                direction={direction}
+                pauseOnHover
+                className="py-4 overflow-hidden"
+            >
+                <div className="flex items-center gap-4 px-4">
+                    {sortedItems.map((tech) => {
+                        const techData = IconData[tech.icon] || { icon: FaCode, color: "#000000" };
+                        const Icon = techData.icon;
 
-                    return (
-                        <div
-                            key={tech.name}
-                            className={`flex flex-col items-center gap-2 group cursor-pointer hover:scale-105 hover:-translate-y-1 transition-all duration-300 relative ${tech.blur ? 'opacity-50 hover:opacity-100 grayscale hover:grayscale-0' : ''}`}
-                        >
-                            <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-xl flex items-center justify-center text-3xl md:text-4xl border border-charcoal-light/10 shadow-sm group-hover:shadow-lg group-hover:border-makima-red/50 transition-all duration-300 relative">
+                        return (
+                            <div
+                                key={tech.name}
+                                className="flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm group hover:border-makima-red/50 hover:bg-white/10 transition-all duration-300 relative"
+                            >
                                 <Icon
-                                    className={`w-[60%] h-[60%] ${techData.className || ''}`}
+                                    className={`text-xl ${techData.className || ''} group-hover:scale-110 transition-transform`}
                                     style={{ color: techData.color || undefined }}
                                 />
+                                <span className="text-sm font-medium tracking-wide text-gray-200 group-hover:text-white transition-colors whitespace-nowrap">
+                                    {tech.name}
+                                </span>
+
                                 {tech.status && (
-                                    <span className="absolute -top-2 -right-2 bg-makima-red text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tighter z-10">
+                                    <span className="absolute -top-1 -right-1 bg-makima-red text-white text-[7px] px-1 py-0.5 rounded-full font-bold uppercase tracking-tighter z-10">
                                         {tech.status}
                                     </span>
                                 )}
-
-                                {/* Hover Tooltip for Blurred Items */}
-                                {tech.blur && (
-                                    <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-zinc-900 text-white text-[10px] font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-50 group-hover:scale-100 origin-bottom z-50 shadow-xl whitespace-nowrap pointer-events-none border border-white/10 after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-[6px] after:border-transparent after:border-t-zinc-900">
-                                        Amber is still learning or practicing it
-                                    </div>
-                                )}
                             </div>
-                            <span className="text-xs font-mono tracking-widest text-charcoal-light/70 group-hover:text-makima-red transition-colors uppercase text-center max-w-[80px]">
-                                {tech.name}
-                            </span>
-                        </div>
-                    );
-                })}
-            </div>
+                        );
+                    })}
+                </div>
+            </Marquee>
         );
     };
 
     return (
-        <div className="py-8 space-y-20">
+        <div className="py-8 space-y-4">
             <div>
-                <h2 className="text-3xl font-serif font-bold mb-12 text-center text-makima-red flex items-center justify-center gap-4">
-                    <span className="w-12 h-px bg-makima-red/50"></span>
-                    ARSENAL (FULL STACK)
-                    <span className="w-12 h-px bg-makima-red/50"></span>
+                <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 text-left border-l-4 border-makima-red pl-6">
+                    TECH STACK & TOOLS
                 </h2>
-                {renderTechGrid(data.fullStack)}
-            </div>
-
-            <div className="pt-8 border-t border-white/5">
-                <h2 className="text-3xl font-serif font-bold mb-12 text-center text-makima-red flex items-center justify-center gap-4">
-                    <span className="w-12 h-px bg-makima-red/50"></span>
-                    UNDER CONSTRUCTION (DEVOPS)
-                    <span className="w-12 h-px bg-makima-red/50"></span>
-                </h2>
-                {renderTechGrid(data.devOpsLearning)}
+                {renderMarqueeRow(data.fullStack, "left", 35)}
+                {renderMarqueeRow(data.devOpsLearning, "right", 25)}
             </div>
         </div>
     );

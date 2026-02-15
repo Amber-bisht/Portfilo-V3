@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode, useState } from 'react';
 import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase } from 'react-icons/fa';
+import ParticlesBg from './ParticlesBg';
 
 interface LayoutProps {
     children: ReactNode;
@@ -31,6 +32,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
     return (
         <div className="min-h-screen bg-neutral-950 text-off-white relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300">
+            <ParticlesBg />
             <Head>
                 <title>{title}</title>
                 <meta name="description" content="Amber Bisht - Full Stack Developer and DevOps Portfolio. Building resilient systems and automated pipelines." />

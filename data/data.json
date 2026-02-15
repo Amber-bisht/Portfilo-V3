@@ -1,9 +1,9 @@
 {
     "about": {
         "name": "Amber Bisht",
-        "title": "Full Stack Developer and DevOps",
+        "title": "Scalable Systems Engineer | Full-Stack & DevOps",
         "description": "Full Stack Developer passionate about building end-to-end applications, currently mastering DevOps and Cloud Infrastructure to build resilient platforms.",
-        "image": "https://i.pinimg.com/736x/33/41/62/33416285e35ed1ea6e1cc48a5ff4155a.jpg"
+        "image": "https://i.pinimg.com/1200x/ad/f8/cb/adf8cbc0c6f2b3f964ce6f6def9658db.jpg"
     },
     "projects": [
         {
@@ -171,7 +171,7 @@
             },
             {
                 "name": "BullMQ",
-                "icon": "FaCode"
+                "icon": "FaServer"
             },
             {
                 "name": "OAuth",

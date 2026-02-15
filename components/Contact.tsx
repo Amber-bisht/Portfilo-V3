@@ -26,9 +26,6 @@ interface ContactProps {
 const Contact = ({ data }: ContactProps) => {
     return (
         <section id="contact" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 text-center">
-                Establish Connection
-            </h2>
 
 
 
@@ -109,10 +106,6 @@ const Contact = ({ data }: ContactProps) => {
                     </div>
 
                     <div className="relative z-10">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full backdrop-blur-md border border-white/10 text-xs font-medium text-gray-300 mb-6">
-                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                            Available for hire
-                        </div>
 
                         <h3 className="text-3xl font-serif font-bold text-white mb-2">
                             {data.contact.email}

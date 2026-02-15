@@ -69,9 +69,6 @@ const Hero = ({ data }: HeroProps) => {
                         {data.about.description}
                     </p>
 
-                    <p className="text-gray-400 max-w-xl mx-auto md:mx-0 text-base md:text-lg leading-relaxed mb-4 -mt-2">
-                        Want to build something custom?
-                    </p>
                     {/* Buttons Group */}
                     <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
                         <a
@@ -80,13 +77,6 @@ const Hero = ({ data }: HeroProps) => {
                         >
                             <FaEnvelope />
                             Contact
-                        </a>
-                        <a
-                            href="/freelance"
-                            className="flex items-center gap-2 px-8 py-3 bg-[#27272a] text-white font-bold rounded-lg hover:bg-[#3f3f46] transition-colors border border-zinc-700"
-                        >
-                            <FaFileAlt />
-                            View More Projects
                         </a>
                     </div>
 
@@ -114,7 +104,7 @@ const Hero = ({ data }: HeroProps) => {
                     <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] group">
                         <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-zinc-800/50 shadow-2xl transition-all duration-700 hover:scale-[1.02]">
                             <img
-                                src="https://i.pinimg.com/736x/33/41/62/33416285e35ed1ea6e1cc48a5ff4155a.jpg"
+                                src="https://i.pinimg.com/1200x/ad/f8/cb/adf8cbc0c6f2b3f964ce6f6def9658db.jpg"
                                 alt="Amber Bisht"
                                 className="w-full h-full object-cover"
                             />
