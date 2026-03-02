@@ -102,7 +102,13 @@ const Mascot = () => {
 
     return (
         <div className="fixed -bottom-2 -right-4 md:-bottom-4 md:-right-8 z-50 pointer-events-none">
-            <div className="relative w-32 h-32 md:w-56 md:h-56 drop-shadow-xl animate-in fade-in slide-in-from-bottom-5 duration-700">
+            <div className="relative w-32 h-32 md:w-56 md:h-56 drop-shadow-xl animate-in fade-in slide-in-from-bottom-5 duration-700 pointer-events-auto group">
+
+                {/* Tooltip */}
+                <div className="absolute bottom-[80%] right-4 md:right-16 mb-2 bg-black/80 backdrop-blur-sm text-white text-xs md:text-sm px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none w-max max-w-[150px] md:max-w-[250px] shadow-lg border border-gray-800 text-left">
+                    This is Makima, Amber&apos;s Assistant. <br /> Press keys to interact with me!
+                </div>
+
                 <Image
                     src="/notplaying.png"
                     alt="Mascot Idle"
