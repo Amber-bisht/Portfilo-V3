@@ -3,41 +3,66 @@ import Image from 'next/image';
 
 const Mascot = () => {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isSpecialAudioPlaying, setIsSpecialAudioPlaying] = useState(false);
     const keysDown = useRef<Set<string>>(new Set());
 
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            // Ignore repetitive keydown events when holding a key
             if (e.repeat) return;
 
             keysDown.current.add(e.code);
             setIsPlaying(true);
 
-            // If the special audio is currently playing, don't interrupt it
-            if (audioRef.current && !audioRef.current.paused && audioRef.current.src.includes('makima.mp3')) {
-                return;
-            }
-
-            let audioSrc = '';
+            // Special handling for number keys
             if (e.key >= '0' && e.key <= '9') {
-                audioSrc = '/makima.mp3';
+                // If already playing makima.mp3, don't interrupt it.
+                // But do trigger the visual states if we just started typing again.
+                if (audioRef.current && !audioRef.current.paused && audioRef.current.src.includes('makima.mp3')) {
+                    return;
+                }
+
+                if (audioRef.current) {
+                    audioRef.current.pause();
+                }
+
+                setIsSpecialAudioPlaying(true);
+                audioRef.current = new Audio('/makima.mp3');
+                audioRef.current.volume = 0.6;
+                audioRef.current.play().catch(err => {
+                    console.warn("Audio playback prevented:", err);
+                    setIsSpecialAudioPlaying(false);
+                });
+
+                audioRef.current.onended = () => {
+                    setIsSpecialAudioPlaying(false);
+                };
             } else {
+                // For non-number keys:
+                // Don't interrupt if makima audio is playing
+                if (audioRef.current && !audioRef.current.paused && audioRef.current.src.includes('makima.mp3')) {
+                    return;
+                }
+
+                // Play normal keyboard sound
+                if (audioRef.current) {
+                    // We don't want strict lock of previous normal keystrokes if typing fast, 
+                    // so we restart or let it overlap. 
+                    // Re-using same audio element but changing src might cause clipping if fast typing.
+                    // The requirement says: "the key locks first play first then play next fix it"
+                    // This could mean we want polyphony (multiple overlapping sounds) or we want strict sequencing.
+                    // A simple way to get 'overlapping' keyboard clacks is to use a new Audio object for fast typing:
+                }
+
                 const randomSoundIndex = Math.floor(Math.random() * 10);
-                audioSrc = `/sounds/keyboard${randomSoundIndex}.mp3`;
-            }
+                const currentClack = new Audio(`/sounds/keyboard${randomSoundIndex}.mp3`);
+                currentClack.volume = 0.6;
+                currentClack.play().catch(console.warn);
 
-            if (audioRef.current) {
-                audioRef.current.pause();
+                // We don't set it to audioRef because we don't want to track/pause these tight clacks
+                // But wait, the previous code *did* set it. If the requirement is actually "don't cut off previous keystroke", using fresh Audio objects works best.
             }
-
-            audioRef.current = new Audio(audioSrc);
-            audioRef.current.volume = 0.6;
-            audioRef.current.play().catch(err => {
-                // Autoplay policy might block audio before first user interaction
-                console.warn("Audio playback prevented:", err);
-            });
         };
 
         const handleKeyUp = (e: KeyboardEvent) => {
@@ -63,13 +88,17 @@ const Mascot = () => {
         };
     }, []);
 
-    // Ensure we don't render on the server to avoid hydration mismatch if needed
     const [isMounted, setIsMounted] = useState(false);
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
     if (!isMounted) return null;
+
+    // Determine which image to show based on state priorities
+    const showSpecialImage = isSpecialAudioPlaying;
+    const showPlayingImage = isPlaying && !showSpecialImage;
+    const showIdleImage = !isPlaying && !showSpecialImage;
 
     return (
         <div className="fixed -bottom-2 -right-4 md:-bottom-4 md:-right-8 z-50 pointer-events-none">
@@ -80,7 +109,7 @@ const Mascot = () => {
                     fill
                     priority
                     sizes="(max-width: 768px) 128px, 224px"
-                    className={`object-contain object-bottom transition-opacity duration-150 ease-in-out ${isPlaying ? 'opacity-0' : 'opacity-100'}`}
+                    className={`object-contain object-bottom transition-opacity duration-150 ease-in-out ${showIdleImage ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                 />
                 <Image
                     src="/playing.png"
@@ -88,7 +117,15 @@ const Mascot = () => {
                     fill
                     priority
                     sizes="(max-width: 768px) 128px, 224px"
-                    className={`object-contain object-bottom transition-opacity duration-150 ease-in-out ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
+                    className={`object-contain object-bottom transition-opacity duration-150 ease-in-out ${showPlayingImage ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                />
+                <Image
+                    src="/sayingownname.png"
+                    alt="Mascot Special"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 128px, 224px"
+                    className={`object-contain object-bottom transition-opacity duration-150 ease-in-out ${showSpecialImage ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                 />
             </div>
         </div>
