@@ -1,4 +1,5 @@
 import { FaLinkedin, FaGithub, FaTwitter, FaFileAlt, FaEnvelope } from 'react-icons/fa';
+import Image from 'next/image';
 
 
 interface HeroProps {
@@ -103,10 +104,11 @@ const Hero = ({ data }: HeroProps) => {
                 <div className="flex justify-center md:justify-end order-1 md:order-2 relative">
                     <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] group">
                         <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-zinc-800/50 shadow-2xl transition-all duration-700 hover:scale-[1.02]">
-                            <img
+                            <Image
                                 src="https://i.pinimg.com/1200x/ad/f8/cb/adf8cbc0c6f2b3f964ce6f6def9658db.jpg"
                                 alt="Amber Bisht"
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
                             />
                         </div>
                     </div>

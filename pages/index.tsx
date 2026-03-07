@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 import Section from '../components/Section';
 import data from '../data/data.json';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 const ProjectCard = dynamic(() => import('../components/ProjectCard'));
 const Experience = dynamic(() => import('../components/Experience'));
@@ -33,13 +34,13 @@ export default function Home() {
                 </div>
                 {/* View More Button */}
                 <div className="flex justify-center mt-12">
-                    <a
+                    <Link
                         href="/freelance"
                         className="px-8 py-3 bg-[#27272a] hover:bg-[#3f3f46] text-white font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 group border border-white/5"
                     >
                         View More Projects
                         <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                    </a>
+                    </Link>
                 </div>
             </Section>
 

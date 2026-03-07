@@ -167,11 +167,11 @@
             },
             {
                 "name": "Microservices",
-                "icon": "FaServer"
+                "icon": "SiMicroservices"
             },
             {
                 "name": "BullMQ",
-                "icon": "FaServer"
+                "icon": "SiBullmq"
             },
             {
                 "name": "OAuth",
@@ -256,6 +256,41 @@
             {
                 "name": "NGINX",
                 "icon": "SiNginx"
+            }
+        ],
+        "ai": [
+            {
+                "name": "Antigravity",
+                "icon": "FaSpaceShuttle"
+            },
+            {
+                "name": "Moltbot",
+                "icon": "SiMoltbot"
+            },
+            {
+                "name": "Cursor IDE",
+                "icon": "FaMousePointer"
+            },
+            {
+                "name": "Kiro",
+                "icon": "FaRobot"
+            },
+            {
+                "name": "Claude Code",
+                "icon": "SiAnthropic"
+            },
+            {
+                "name": "GitHub Copilot",
+                "icon": "SiGithubcopilot"
+            },
+            {
+                "name": "Codex",
+                "icon": "SiOpenai"
+            },
+            {
+                "name": "CodeRabbit",
+                "icon": "GiRabbit",
+                "blur": true
             }
         ]
     },

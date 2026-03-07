@@ -4,6 +4,7 @@ import { GitHubCalendar } from 'react-github-calendar';
 import dynamic from 'next/dynamic';
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const GithubContributions = dynamic(() => import('./GithubContributions'), { ssr: false });
 
@@ -77,7 +78,7 @@ const Contact = ({ data }: ContactProps) => {
                 {/* Bottom Left: Profile */}
                 <div className="md:col-span-1 h-full min-h-[240px] bg-neutral-900/50 border border-white/5 rounded-3xl p-4 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors">
                     <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-4 flex-1">
-                        <img src={data.about.image} alt={data.about.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                        <Image src={data.about.image} alt={data.about.name} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                         <div className="absolute bottom-4 left-4">
                             <h3 className="text-lg font-bold text-white leading-tight">{data.about.name}</h3>

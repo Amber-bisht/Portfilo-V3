@@ -102,6 +102,7 @@ const techIconMap: { [key: string]: TechIcon } = {
     "Integration": { icon: FaCode, color: "#000000" },
     "Express.js": { icon: SiExpress, color: "#000000" },
     "CI/CD": { icon: SiGithubactions, color: "#2088FF" },
+    "Moltbot": { icon: FaRobot, color: "#ff4d4d" },
 
     // Fixes/Aliases
     "React.js": { icon: SiReact, color: "#61DAFB" },

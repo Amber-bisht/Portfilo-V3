@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Github, ExternalLink, Info, X } from 'lucide-react';
+import Image from 'next/image';
 import { getTechIcon } from '../utils/techIcons';
 
 interface ProjectProps {
@@ -33,10 +34,11 @@ const ProjectCard = ({ project, index }: ProjectProps) => {
                                 {project.tag}
                             </div>
                         )}
-                        <img
+                        <Image
                             src={project.image || "https://placehold.co/600x400/1a1a1a/FFF?text=Project"}
                             alt={project.title}
-                            className="w-full h-full object-cover transform"
+                            fill
+                            className="object-cover transform"
                         />
                     </div>
                 </div>
@@ -127,10 +129,11 @@ const ProjectCard = ({ project, index }: ProjectProps) => {
 
                         <div className="relative h-64 w-full">
                             <div className="absolute inset-0 bg-gradient-to-t from-[#18181b] to-transparent z-10" />
-                            <img
+                            <Image
                                 src={project.image || "https://placehold.co/600x400/1a1a1a/FFF?text=Project"}
                                 alt={project.title}
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
                             />
                             <div className="absolute bottom-6 left-8 z-20">
                                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">

@@ -35,7 +35,7 @@ export default function Custom404() {
                         </div>
                         <h3 className="text-xl font-bold text-white mb-2">Page Not Found</h3>
                         <p className="text-gray-400 max-w-xs">
-                            The coordinates you entered don't map to any known sector in this portfolio.
+                            The coordinates you entered don&apos;t map to any known sector in this portfolio.
                         </p>
                     </div>
 
