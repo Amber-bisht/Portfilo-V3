@@ -65,7 +65,7 @@ const Contact = ({ data }: ContactProps) => {
                             <FaGithub className="text-xl text-white" />
                             <span className="font-bold text-gray-200">Activity</span>
                         </div>
-                        <a href={data.contact.github} className="text-xs text-gray-500 hover:text-white transition-colors">View Github</a>
+                        <a href={data.contact.github} className="text-xs text-gray-400 hover:text-white transition-colors">View Github</a>
                     </div>
                     <div className="flex-1 flex items-center justify-center w-full">
                         <div className="w-full">
@@ -89,11 +89,11 @@ const Contact = ({ data }: ContactProps) => {
 
                 {/* Bottom Mid: Socials */}
                 <div className="md:col-span-1 h-full min-h-[240px] flex flex-col gap-4">
-                    <a href={data.contact.linkedin} target="_blank" rel="noreferrer" className="flex-1 bg-[#0a66c2] rounded-3xl flex items-center justify-center relative overflow-hidden group hover:opacity-90 transition-opacity">
+                    <a href={data.contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="flex-1 bg-[#0a66c2] rounded-3xl flex items-center justify-center relative overflow-hidden group hover:opacity-90 transition-opacity">
                         <FaLinkedin className="text-4xl text-white" />
                         <ExternalLink className="absolute top-3 right-3 text-white/50 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
-                    <a href={data.contact.twitter} target="_blank" rel="noreferrer" className="flex-1 bg-black border border-white/10 rounded-3xl flex items-center justify-center relative overflow-hidden group hover:bg-neutral-900 transition-colors">
+                    <a href={data.contact.twitter} target="_blank" rel="noreferrer" aria-label="Twitter" className="flex-1 bg-black border border-white/10 rounded-3xl flex items-center justify-center relative overflow-hidden group hover:bg-neutral-900 transition-colors">
                         <FaTwitter className="text-4xl text-white" />
                         <ExternalLink className="absolute top-3 right-3 text-white/50 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>

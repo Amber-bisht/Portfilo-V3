@@ -39,7 +39,7 @@ const Experience = ({ experiences }: { experiences: any[] }) => {
                                 </div>
                                 <div className="mt-2 md:mt-0 flex flex-col md:items-end">
                                     <span className="text-gray-400 font-mono text-sm">{exp.duration}</span>
-                                    <span className="text-gray-500 text-xs">{exp.starttime} - {exp.endtime}</span>
+                                    <span className="text-gray-400 text-xs">{exp.starttime} - {exp.endtime}</span>
                                 </div>
                             </div>
 

@@ -120,7 +120,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 {children}
             </main>
 
-            <footer className="py-8 text-center text-sm text-gray-600 border-t border-makima-red/10">
+            <footer className="py-8 text-center text-sm text-gray-400 border-t border-makima-red/10">
                 <p>&copy; {new Date().getFullYear()} Amber Bisht. All rights reserved.</p>
             </footer>
         </div>

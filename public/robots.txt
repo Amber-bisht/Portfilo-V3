@@ -1,4 +1,4 @@
-# Welcome AI crawlers and search engines! 
+# Welcome AI crawlers and search engines!
 # This portfolio is designed for maximum crawlability
 
 User-agent: *
@@ -45,7 +45,7 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-# No crawl restrictions - crawl as fast as you want!
+# No crawl restrictions
 Crawl-delay: 0
 
 # Sitemap location

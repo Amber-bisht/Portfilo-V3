@@ -71,7 +71,7 @@ const GithubContributions = () => {
                     </div>
                     <div>
                         <p className="text-xl font-bold text-white leading-none">{stats.repos}</p>
-                        <p className="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Public Repos</p>
+                        <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Public Repos</p>
                     </div>
                 </div>
 
@@ -81,7 +81,7 @@ const GithubContributions = () => {
                     </div>
                     <div>
                         <p className="text-xl font-bold text-white leading-none">{stats.topLang}</p>
-                        <p className="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Top Language</p>
+                        <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Top Language</p>
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@ const GithubContributions = () => {
                     </div>
                     <div>
                         <p className="text-xl font-bold text-white leading-none">{stats.followers}</p>
-                        <p className="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Followers</p>
+                        <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Followers</p>
                     </div>
                 </div>
             </div>
