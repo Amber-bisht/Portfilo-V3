@@ -121,7 +121,6 @@ const Mascot = () => {
                     src="/playing.webp"
                     alt="Mascot Playing"
                     fill
-                    priority
                     sizes="(max-width: 768px) 128px, 224px"
                     className={`object-contain object-bottom transition-opacity duration-150 ease-in-out ${showPlayingImage ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                 />
@@ -129,7 +128,6 @@ const Mascot = () => {
                     src="/sayingownname.webp"
                     alt="Mascot Special"
                     fill
-                    priority
                     sizes="(max-width: 768px) 128px, 224px"
                     className={`object-contain object-bottom transition-opacity duration-150 ease-in-out ${showSpecialImage ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                 />
