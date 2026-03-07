@@ -4,7 +4,6 @@ export default function Document() {
     return (
         <Html lang="en" className="dark">
             <Head>
-                <link rel="preconnect" href="https://www.transparenttextures.com" />
             </Head>
             <body>
                 <Main />

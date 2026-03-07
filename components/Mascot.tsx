@@ -110,7 +110,7 @@ const Mascot = () => {
                 </div>
 
                 <Image
-                    src="/notplaying.png"
+                    src="/notplaying.webp"
                     alt="Mascot Idle"
                     fill
                     priority
@@ -118,7 +118,7 @@ const Mascot = () => {
                     className={`object-contain object-bottom transition-opacity duration-150 ease-in-out ${showIdleImage ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                 />
                 <Image
-                    src="/playing.png"
+                    src="/playing.webp"
                     alt="Mascot Playing"
                     fill
                     priority
@@ -126,7 +126,7 @@ const Mascot = () => {
                     className={`object-contain object-bottom transition-opacity duration-150 ease-in-out ${showPlayingImage ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                 />
                 <Image
-                    src="/sayingownname.png"
+                    src="/sayingownname.webp"
                     alt="Mascot Special"
                     fill
                     priority
