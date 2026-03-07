@@ -108,6 +108,8 @@ const Hero = ({ data }: HeroProps) => {
                                 src="https://i.pinimg.com/1200x/ad/f8/cb/adf8cbc0c6f2b3f964ce6f6def9658db.jpg"
                                 alt="Amber Bisht"
                                 fill
+                                priority={true}
+                                sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 450px"
                                 className="object-cover"
                             />
                         </div>
