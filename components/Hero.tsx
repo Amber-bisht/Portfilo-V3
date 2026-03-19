@@ -54,7 +54,7 @@ const Hero = ({ data }: HeroProps) => {
         <section className="relative min-h-[60vh] flex flex-col items-center justify-center py-12 px-4 md:px-8 max-w-7xl mx-auto">
             {/* Top Header Section */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-7xl">
-
+                
                 {/* 1. Profile Image Card (Tall) */}
                 <div className="md:col-span-1 md:row-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-4 backdrop-blur-sm relative overflow-hidden flex items-center justify-center group outline outline-1 outline-white/5">
                     <div className="relative w-full aspect-square md:aspect-auto md:h-full overflow-hidden rounded-2xl">
@@ -76,7 +76,7 @@ const Hero = ({ data }: HeroProps) => {
                         </h1>
                         <VerifiedBadge />
                     </div>
-
+                    
                     <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-gray-400 font-mono mb-6">
                         <div className="flex items-center gap-1.5 uppercase">
                             <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
@@ -107,18 +107,19 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* 4. Quick Actions Card */}
                 <div className="md:col-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 backdrop-blur-sm relative overflow-hidden flex items-center gap-4">
-                    <a
-                        href="/cv.pdf"
+                    <a 
+                        href="/resume.pdf" 
                         target="_blank"
                         className="flex-1 bg-neutral-100 text-neutral-950 font-bold py-3 px-6 rounded-2xl text-center hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] active:scale-95 uppercase text-sm tracking-widest"
                     >
                         Download CV
                     </a>
-                    <a
-                        href="#contact"
+                    <a 
+                        href="#contact" 
                         className="flex-1 bg-neutral-800/50 text-white font-bold py-3 px-6 rounded-2xl text-center border border-white/10 hover:bg-neutral-800 transition-all duration-300 active:scale-95 uppercase text-sm tracking-widest"
                     >
-                        Contact Me                    </a>
+                        Contact Me
+                    </a>
                 </div>
 
                 {/* 5. Description Card */}

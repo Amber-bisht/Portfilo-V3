@@ -51,7 +51,7 @@ const Contact = ({ data }: ContactProps) => {
                                 <span className="text-xs text-gray-400 uppercase tracking-wider">Years Exp.</span>
                             </div>
                             <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm">
-                                <span className="block text-3xl font-bold text-makima-red mb-1">5+</span>
+                                <span className="block text-3xl font-bold text-makima-red mb-1">6+</span>
                                 <span className="text-xs text-gray-400 uppercase tracking-wider">Projects</span>
                             </div>
                         </div>

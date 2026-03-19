@@ -59,8 +59,8 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
             </Head>
 
             {/* Premium Navigator */}
-            <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-1000">
-                <nav className="flex items-center p-1.5 bg-neutral-900/60 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/5 mx-auto">
+            <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-1000 w-full max-w-fit px-4">
+                <nav className="flex items-center justify-center p-1 bg-neutral-900/60 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
                     {navItems.map((item) => {
                         const isActive = isLinkActive(item.href) || (activeTab === item.name && router.pathname === '/');
 
@@ -86,26 +86,23 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                                     }
                                 }}
                                 className={`
-                                    relative flex items-center justify-center gap-2 px-4 py-2.5 rounded-full transition-all duration-300 ease-out group
+                                    relative flex items-center justify-center gap-2 px-3.5 md:px-5 py-2.5 rounded-full transition-all duration-500 ease-out group
                                     ${isActive
-                                        ? 'bg-neutral-100 text-neutral-950 shadow-[0_0_15px_rgba(255,255,255,0.3)] scale-[1.02]'
+                                        ? 'bg-neutral-100 text-neutral-950 shadow-[0_0_15px_rgba(255,255,255,0.3)]'
                                         : 'text-neutral-400 hover:text-white hover:bg-white/5'
                                     }
                                 `}
                                 aria-label={item.name}
                             >
-                                <item.icon className={`text-lg transition-all duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-125 group-hover:text-white'}`} />
+                                <item.icon className={`text-lg md:text-xl transition-all duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110 group-hover:text-white'}`} />
                                 <span
                                     className={`
-                                        overflow-hidden whitespace-nowrap transition-all duration-300 ease-out font-medium text-xs uppercase tracking-widest
-                                        ${isActive ? 'max-w-[200px] opacity-100 ml-1' : 'max-w-0 opacity-0'}
+                                        hidden md:flex overflow-hidden whitespace-nowrap transition-all duration-500 ease-out font-medium text-xs uppercase tracking-widest
+                                        ${isActive ? 'max-w-[150px] opacity-100 ml-2' : 'max-w-0 opacity-0'}
                                     `}
                                 >
                                     {item.name}
                                 </span>
-                                {isActive && (
-                                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-neutral-950 rounded-full opacity-50 shrink-0" />
-                                )}
                             </Link>
                         );
                     })}

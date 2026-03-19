@@ -91,7 +91,7 @@
             "duration": "Ongoing",
             "starttime": "Sep 2025",
             "endtime": "Present",
-            "description": "Delivered 6+ production-grade web platforms across hospitality, EdTech, and SaaS domains using Next.js and Node.js, supporting hundreds of daily active users. Designed modular backend services with Express.js, MongoDB, and PostgreSQL, improving API response times by 25–40% and reducing feature delivery time by 30%. Containerized applications deployed and operated using Docker, CI/CD pipelines, cron jobs, and third-party integrations (Razorpay, OAuth), achieving 99%+ deployment reliability.",
+            "description": "Delivered 6+ production-grade web platforms across hospitality, EdTech, and SaaS domains using Next.js and Node.js, supporting hundreds of daily active users. Designed modular backend services with Express.js, MongoDB, and PostgreSQL, improving API response times by 25\u201340% and reducing feature delivery time by 30%. Containerized applications deployed and operated using Docker, CI/CD pipelines, cron jobs, and third-party integrations (Razorpay, OAuth), achieving 99%+ deployment reliability.",
             "tech used": [
                 "Next.js",
                 "Node.js",
@@ -214,8 +214,7 @@
             },
             {
                 "name": "Jenkins",
-                "icon": "SiJenkins",
-                "blur": true
+                "icon": "SiJenkins"
             },
             {
                 "name": "Git",
@@ -223,13 +222,11 @@
             },
             {
                 "name": "Prometheus",
-                "icon": "SiPrometheus",
-                "blur": true
+                "icon": "SiPrometheus"
             },
             {
                 "name": "Grafana",
-                "icon": "SiGrafana",
-                "blur": true
+                "icon": "SiGrafana"
             },
             {
                 "name": "Python",
@@ -272,7 +269,7 @@
     },
     "certifications": [
         {
-            "name": "AWS Certified Solutions Architect – Associate",
+            "name": "AWS Certified Solutions Architect \u2013 Associate",
             "issuer": "Amazon Web Services",
             "date": "2026",
             "url": "#",
@@ -294,31 +291,15 @@
             "live": "https://novellohotels.vercel.app"
         },
         {
-            "id": 2,
-            "title": "Novello Educare",
-            "description": "University configuration platform with Admin panel. Built with Next.js, MongoDB, and SSG. Hosted on VPS with custom CI/CD pipeline.",
-            "technologies": [
-                "Next.js",
-                "MongoDB",
-                "SSG",
-                "Admin Panel",
-                "CI/CD",
-                "VPS"
-            ],
-            "image": "/images/projects/studyabroad.webp",
-            "github": "",
-            "live": "https://novelloeducare.com"
-        },
-        {
             "id": 4,
             "title": "Tripbazzar PMS",
-            "description": "Integration with MakeMyTrip and OYO + Your Own Inventoryß. Internally Used by the company.",
+            "description": "Integration with MakeMyTrip and OYO + Your Own Inventory\u00df. Internally Used by the company.",
             "technologies": [
                 "PostgreSQL",
                 "Docker",
                 "AWS"
             ],
-            "image": "https://placehold.co/600x400/1a1a1a/FFF?text=Tripbazzar",
+            "image": "/images/projects/tripbazzar.webp",
             "tag": "",
             "github": ""
         },
@@ -355,25 +336,40 @@
             "image": "/images/projects/notesfind.webp",
             "github": "",
             "live": "https://notesfind.com"
-        }
-    ],
-    "studentProjects": [
+        },
         {
-            "id": 1,
-            "title": "EcoSmart",
-            "description": "A Python Django application for waste classification using Gemini AI. Features include HTML/CSS/JS frontend, user analytics, history log, and AI-powered image analysis to determine waste categories.",
+            "id": 7,
+            "title": "JB Kadaknath Farm",
+            "description": "An end-to-end e-commerce platform for a premium meat store. Features integrated Razorpay payments, Cloudinary for media, Cloudflare protection, and a custom delivery/shipping tracking system.",
             "technologies": [
-                "Python",
-                "Django",
-                "HTML",
-                "CSS",
-                "JavaScript",
-                "Gemini AI",
-                "Analytics"
+                "Next.js",
+                "Node.js",
+                "TypeScript",
+                "Cloudinary",
+                "Cloudflare",
+                "Razorpay",
+                "Shipping Integration"
             ],
-            "image": "/images/projects/ecosmart.webp",
+            "image": "/images/projects/kadaknath.webp",
             "github": "",
-            "live": ""
+            "live": "https://jbkadaknathfarm.com/"
+        },
+        {
+            "id": 8,
+            "title": "Quick to Services",
+            "description": "A comprehensive service booking and management system. Features an inquiry form, city-based dynamic pricing, and a robust admin dashboard for service configuration and city management.",
+            "technologies": [
+                "Next.js",
+                "TypeScript",
+                "Tailwind CSS",
+                "Prisma",
+                "PostgreSQL",
+                "Admin Dashboard",
+                "Booking System"
+            ],
+            "image": "/images/projects/quick-to-services.webp",
+            "github": "",
+            "live": "https://quick-to-services-q8m4.vercel.app/"
         }
     ]
 }
