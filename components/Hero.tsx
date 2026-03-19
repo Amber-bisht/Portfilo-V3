@@ -108,7 +108,7 @@ const Hero = ({ data }: HeroProps) => {
                 {/* 4. Quick Actions Card */}
                 <div className="md:col-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 backdrop-blur-sm relative overflow-hidden flex items-center gap-4">
                     <a 
-                        href="/resume.pdf" 
+                        href="/cv.pdf" 
                         target="_blank"
                         className="flex-1 bg-neutral-100 text-neutral-950 font-bold py-3 px-6 rounded-2xl text-center hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] active:scale-95 uppercase text-sm tracking-widest"
                     >
