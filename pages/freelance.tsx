@@ -14,13 +14,8 @@ const Freelance = () => {
         tag: "Personal Project"
     }));
 
-    const studentProjects = (data.studentProjects || []).map(p => ({
-        ...p,
-        tag: "Final Year Project"
-    }));
-
-    // Order: Freelance -> Personal -> Student
-    const allProjects = [...freelanceProjects, ...personalProjects, ...studentProjects];
+    // Order: Freelance -> Personal
+    const allProjects = [...freelanceProjects, ...personalProjects];
 
     return (
         <Layout title="All Projects | Amber Bisht">
@@ -30,14 +25,6 @@ const Freelance = () => {
                         All <span className="text-makima-red">Projects</span>
                     </h1>
 
-                    {/* Visual Tags / Categories display */}
-                    <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-                        {["Freelancing", "Personal Projects", "Final Year Projects"].map((tag, i) => (
-                            <span key={i} className="px-4 py-2 bg-[#18181b] border border-white/10 rounded-full text-gray-400 text-sm font-medium">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
