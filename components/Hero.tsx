@@ -1,6 +1,7 @@
-import { FaLinkedin, FaGithub, FaTwitter, FaFileAlt, FaEnvelope } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { SiGmail } from 'react-icons/si';
+import { BadgeCheck } from 'lucide-react';
 import Image from 'next/image';
-
 
 interface HeroProps {
     data: {
@@ -8,6 +9,7 @@ interface HeroProps {
             name: string;
             title: string;
             description: string;
+            location?: string;
         };
         contact: {
             github: string;
@@ -18,108 +20,120 @@ interface HeroProps {
     };
 }
 
+const VerifiedBadge = () => (
+    <div className="flex items-center justify-center bg-blue-500 rounded-full p-0.5 shadow-[0_0_10px_rgba(59,130,246,0.5)]">
+        <BadgeCheck className="w-4 h-4 md:w-5 md:h-5 text-white" strokeWidth={3} />
+    </div>
+);
+
 const Hero = ({ data }: HeroProps) => {
-
-
     const socialLinks = [
-        {
-            name: 'GitHub',
-            icon: FaGithub,
-            url: data.contact.github,
-            colorClass: 'hover:bg-white hover:text-black hover:border-white',
-            bgClass: 'bg-zinc-800/50'
-        },
         {
             name: 'LinkedIn',
             icon: FaLinkedin,
             url: data.contact.linkedin,
-            colorClass: 'hover:border-makima-red hover:text-makima-red',
-            bgClass: 'bg-zinc-800/50'
         },
         {
             name: 'Twitter',
             icon: FaTwitter,
             url: data.contact.twitter,
-            colorClass: 'hover:border-makima-red hover:text-makima-red',
-            bgClass: 'bg-zinc-800/50'
+        },
+        {
+            name: 'GitHub',
+            icon: FaGithub,
+            url: data.contact.github,
+        },
+        {
+            name: 'Gmail',
+            icon: SiGmail,
+            url: `mailto:${data.contact.email}`,
         }
     ];
 
     return (
-        <section className="relative min-h-screen flex items-center overflow-hidden py-20 px-4 md:px-8">
-            <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <section className="relative min-h-[60vh] flex flex-col items-center justify-center py-12 px-4 md:px-8 max-w-7xl mx-auto">
+            {/* Top Header Section */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-7xl">
 
-                {/* Content Section (Left) */}
-                <div className="text-center md:text-left order-2 md:order-1 flex flex-col justify-center">
-                    <h2 className="text-3xl md:text-5xl font-serif font-medium text-white mb-4 tracking-tight">
-                        Hi, I&apos;m
-                    </h2>
+                {/* 1. Profile Image Card (Tall) */}
+                <div className="md:col-span-1 md:row-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-4 backdrop-blur-sm relative overflow-hidden flex items-center justify-center group outline outline-1 outline-white/5">
+                    <div className="relative w-full aspect-square md:aspect-auto md:h-full overflow-hidden rounded-2xl">
+                        <Image
+                            src="/hero-profile.webp"
+                            alt={data.about.name}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            priority
+                        />
+                    </div>
+                </div>
 
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-black mb-6 tracking-tighter text-white">
-                        {data.about.name}
-                    </h1>
-
-                    {/* Role Badge */}
-                    <div className="mb-8">
-                        <span className="inline-block px-6 py-3 bg-zinc-800 rounded-lg text-lg md:text-2xl font-bold tracking-wide text-white border border-white/5 uppercase">
-                            {data.about.title}
-                        </span>
+                {/* 2. Personal Data Card */}
+                <div className="md:col-span-3 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 backdrop-blur-sm relative overflow-hidden flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-2">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter uppercase">
+                            {data.about.name}
+                        </h1>
+                        <VerifiedBadge />
                     </div>
 
-                    <p className="text-gray-400 max-w-xl mx-auto md:mx-0 text-base md:text-lg leading-relaxed mb-10">
-                        {data.about.description}
-                    </p>
-
-                    {/* Buttons Group */}
-                    <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
-                        <a
-                            href={`mailto:${data.contact.email}`}
-                            className="flex items-center gap-2 px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition-colors shadow-lg"
-                        >
-                            <FaEnvelope />
-                            Contact
-                        </a>
+                    <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-gray-400 font-mono mb-6">
+                        <div className="flex items-center gap-1.5 uppercase">
+                            <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                            {data.about.location || "Uttarakhand, IND"}
+                        </div>
+                        <span className="text-gray-700">|</span>
+                        <div className="uppercase tracking-widest">{data.about.title}</div>
                     </div>
+                </div>
 
-                    {/* Social Icons */}
-                    <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                {/* 3. Social Icons Card */}
+                <div className="md:col-span-1 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 backdrop-blur-sm relative overflow-hidden">
+                    <div className="flex justify-around items-center w-full h-full">
                         {socialLinks.map((link) => (
                             <a
                                 key={link.name}
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`group relative flex items-center justify-center w-12 h-12 rounded-lg border border-zinc-700 text-gray-400 transition-all duration-300 hover:-translate-y-1 ${link.bgClass} ${link.colorClass}`}
+                                className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-125"
+                                title={link.name}
                             >
-                                <span className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-white text-black text-sm font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-50 group-hover:scale-100 origin-bottom z-50 shadow-[0_0_15px_rgba(255,255,255,0.2)] whitespace-nowrap pointer-events-none after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-[6px] after:border-transparent after:border-t-white">
-                                    {link.name}
-                                </span>
-                                <link.icon className="text-xl" />
+                                <link.icon size={22} />
                             </a>
                         ))}
                     </div>
                 </div>
 
-                {/* Profile Image (Right) */}
-                <div className="flex justify-center md:justify-end order-1 md:order-2 relative">
-                    <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] group">
-                        <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-zinc-800/50 shadow-2xl transition-all duration-700 hover:scale-[1.02]">
-                            <Image
-                                src="/hero-profile.webp"
-                                alt="Amber Bisht"
-                                fill
-                                priority={true}
-                                fetchPriority="high"
-                                sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 450px"
-                                className="object-cover"
-                            />
-                        </div>
-                    </div>
+                {/* 4. Quick Actions Card */}
+                <div className="md:col-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 backdrop-blur-sm relative overflow-hidden flex items-center gap-4">
+                    <a
+                        href="/cv.pdf"
+                        target="_blank"
+                        className="flex-1 bg-neutral-100 text-neutral-950 font-bold py-3 px-6 rounded-2xl text-center hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] active:scale-95 uppercase text-sm tracking-widest"
+                    >
+                        Download CV
+                    </a>
+                    <a
+                        href="#contact"
+                        className="flex-1 bg-neutral-800/50 text-white font-bold py-3 px-6 rounded-2xl text-center border border-white/10 hover:bg-neutral-800 transition-all duration-300 active:scale-95 uppercase text-sm tracking-widest"
+                    >
+                        Contact Me                    </a>
                 </div>
+
+                {/* 5. Description Card */}
+                <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden">
+                    <h2 className="text-xl md:text-3xl lg:text-4xl font-mono text-gray-400 leading-relaxed md:leading-snug uppercase">
+                        {data.about.description}
+                    </h2>
+                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
+                </div>
+
             </div>
 
-            {/* Background elements */}
-
+            {/* Background elements - Subtle red glow at edges */}
+            <div className="absolute top-1/4 -left-20 w-80 h-80 bg-makima-red/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-makima-red/5 blur-[120px] rounded-full pointer-events-none" />
         </section>
     );
 };

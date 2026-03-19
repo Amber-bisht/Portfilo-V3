@@ -24,19 +24,27 @@ export default function Home() {
             </Section>
 
             <Section id="projects">
-                <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 text-left border-l-4 border-makima-red pl-6">
-                    Arsenal
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {data.projects.map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index} />
-                    ))}
+                <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 md:gap-8">
+                    {/* Project 1 - Wide */}
+                    <div className="md:col-span-2 md:row-span-1">
+                        <ProjectCard project={data.projects[0]} index={0} orientation="horizontal" />
+                    </div>
+
+                    {/* Project 3 - Tall (Special placement) */}
+                    <div className="md:col-span-1 md:row-span-2 h-full">
+                        <ProjectCard project={data.projects[2]} index={2} orientation="vertical" />
+                    </div>
+
+                    {/* Project 2 - Wide */}
+                    <div className="md:col-span-2 md:row-span-1">
+                        <ProjectCard project={data.projects[1]} index={1} orientation="horizontal" />
+                    </div>
                 </div>
                 {/* View More Button */}
                 <div className="flex justify-center mt-12">
                     <Link
                         href="/freelance"
-                        className="px-8 py-3 bg-[#27272a] hover:bg-[#3f3f46] text-white font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 group border border-white/5"
+                        className="px-8 py-3 bg-neutral-900/50 hover:bg-neutral-800 text-white font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 group border border-white/5 hover:border-white/10 shadow-lg"
                     >
                         View More Projects
                         <span className="transform group-hover:translate-x-1 transition-transform">→</span>

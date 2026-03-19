@@ -155,59 +155,94 @@ interface TechStackProps {
 }
 
 const TechStack = ({ data }: TechStackProps) => {
-    const renderMarqueeRow = (items: any[], direction: "left" | "right" = "left", speed: number = 30) => {
+    const renderTechGrid = (items: any[]) => {
         // Sort items: non-blurred first, blurred last
         const sortedItems = [...items].sort((a, b) => (a.blur === b.blur ? 0 : a.blur ? 1 : -1));
 
         return (
-            <Marquee
-                speed={speed}
-                gradient={false}
-                direction={direction}
-                pauseOnHover
-                className="py-4 overflow-hidden"
-            >
-                <div className="flex items-center gap-4 px-4">
-                    {sortedItems.map((tech) => {
-                        const techData = IconData[tech.icon] || { icon: FaCode, color: "#000000" };
-                        const Icon = techData.icon;
+            <div className="flex flex-wrap gap-3">
+                {sortedItems.map((tech) => {
+                    const techData = IconData[tech.icon] || { icon: FaCode, color: "#000000" };
+                    const Icon = techData.icon;
 
-                        return (
-                            <div
-                                key={tech.name}
-                                className="flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm group hover:border-makima-red/50 hover:bg-white/10 transition-all duration-300 relative"
-                            >
-                                <Icon
-                                    className={`text-xl ${techData.className || ''} group-hover:scale-110 transition-transform`}
-                                    style={{ color: techData.color || undefined }}
-                                />
-                                <span className="text-sm font-medium tracking-wide text-gray-200 group-hover:text-white transition-colors whitespace-nowrap">
-                                    {tech.name}
+                    return (
+                        <div
+                            key={tech.name}
+                            className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 relative ${tech.blur ? 'opacity-40 grayscale blur-[1px]' : ''}`}
+                        >
+                            <Icon
+                                className={`text-lg ${techData.className || ''}`}
+                                style={{ color: techData.color || undefined }}
+                            />
+                            <span className="text-xs font-medium tracking-wide text-gray-200 whitespace-nowrap">
+                                {tech.name}
+                            </span>
+
+                            {tech.status && (
+                                <span className="absolute -top-1 -right-1 bg-makima-red text-white text-[7px] px-1 py-0.5 rounded-full font-bold uppercase tracking-tighter z-10">
+                                    {tech.status}
                                 </span>
-
-                                {tech.status && (
-                                    <span className="absolute -top-1 -right-1 bg-makima-red text-white text-[7px] px-1 py-0.5 rounded-full font-bold uppercase tracking-tighter z-10">
-                                        {tech.status}
-                                    </span>
-                                )}
-                            </div>
-                        );
-                    })}
-                </div>
-            </Marquee>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
         );
     };
 
     return (
-        <div className="py-8 space-y-4">
-            <div>
-                <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 text-left border-l-4 border-makima-red pl-6">
-                    TECH STACK & TOOLS
-                </h2>
-                {renderMarqueeRow(data.fullStack, "left", 35)}
-                {renderMarqueeRow(data.devOpsLearning, "right", 25)}
-                {data.ai && renderMarqueeRow(data.ai, "left", 30)}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+            {/* Full Stack Card - TOP FULL WIDTH */}
+            <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-makima-red/5 blur-[80px] rounded-full pointer-events-none -mr-16 -mt-16" />
+                
+                {/* Background Logo */}
+                <div className="absolute -right-8 -bottom-8 opacity-[0.03] text-white pointer-events-none transform -rotate-12">
+                    <SiReact size={240} />
+                </div>
+
+                <div className="relative z-10">
+                    <div className="flex items-center gap-2 mb-6">
+                        <div className="w-1.5 h-6 bg-makima-red rounded-full" />
+                        <h3 className="text-xl font-bold text-white tracking-tight uppercase">Full Stack</h3>
+                    </div>
+                    {renderTechGrid(data.fullStack)}
+                </div>
             </div>
+
+            {/* DevOps Card - BOTTOM LEFT BIGGER */}
+            <div className="md:col-span-3 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
+                 <div className="absolute top-0 left-0 w-96 h-96 bg-makima-red/5 blur-[100px] rounded-full pointer-events-none -ml-32 -mt-32" />
+                
+                {/* Background Logo */}
+                <div className="absolute -right-12 -bottom-12 opacity-[0.03] text-white pointer-events-none transform rotate-12">
+                    <SiDocker size={300} />
+                </div>
+
+                <div className="relative z-10">
+                    <div className="flex items-center gap-2 mb-6">
+                        <div className="w-1.5 h-6 bg-makima-red rounded-full" />
+                        <h3 className="text-xl font-bold text-white tracking-tight uppercase">DevOps & Infrastructure</h3>
+                    </div>
+                    {renderTechGrid(data.devOpsLearning)}
+                </div>
+            </div>
+
+            {/* AI Card - BOTTOM RIGHT SMALLER */}
+            {data.ai && (
+                <div className="md:col-span-1 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
+                    <div className="absolute -right-4 -bottom-4 opacity-[0.05] text-white pointer-events-none">
+                        <FaRobot size={120} />
+                    </div>
+                    <div className="relative z-10">
+                        <div className="flex items-center gap-2 mb-6">
+                            <div className="w-1.5 h-6 bg-makima-red rounded-full" />
+                            <h3 className="text-xl font-bold text-white tracking-tight uppercase">AI TOOLS</h3>
+                        </div>
+                        {renderTechGrid(data.ai)}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

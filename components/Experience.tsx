@@ -6,12 +6,8 @@ import Link from 'next/link';
 const Experience = ({ experiences }: { experiences: any[] }) => {
     return (
         <section id="experience" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 text-right text-makima-red border-r-4 border-makima-red pr-6">
-                Operations
-            </h2>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {experiences.map((exp) => (
+                {experiences.map((exp, index) => (
                     <div
                         key={exp.id}
                         className="col-span-1 md:col-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors"

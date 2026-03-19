@@ -2,7 +2,8 @@
     "about": {
         "name": "Amber Bisht",
         "title": "Scalable Systems Engineer | Full-Stack & DevOps",
-        "description": "Full Stack Developer passionate about building end-to-end applications, currently mastering DevOps and Cloud Infrastructure to build resilient platforms.",
+        "description": "Scalable Systems Engineer focused on building production-grade, end-to-end platforms with strong emphasis on backend architecture, performance optimization, and infrastructure reliability.",
+        "location": "Uttarakhand, IND",
         "image": "https://i.pinimg.com/1200x/ad/f8/cb/adf8cbc0c6f2b3f964ce6f6def9658db.jpg"
     },
     "projects": [
@@ -212,11 +213,6 @@
                 "icon": "SiDocker"
             },
             {
-                "name": "Kubernetes",
-                "icon": "SiKubernetes",
-                "blur": true
-            },
-            {
                 "name": "Jenkins",
                 "icon": "SiJenkins",
                 "blur": true
@@ -224,16 +220,6 @@
             {
                 "name": "Git",
                 "icon": "SiGit"
-            },
-            {
-                "name": "Ansible",
-                "icon": "SiAnsible",
-                "blur": true
-            },
-            {
-                "name": "Terraform",
-                "icon": "SiTerraform",
-                "blur": true
             },
             {
                 "name": "Prometheus",
@@ -264,18 +250,6 @@
                 "icon": "FaSpaceShuttle"
             },
             {
-                "name": "Moltbot",
-                "icon": "SiMoltbot"
-            },
-            {
-                "name": "Cursor IDE",
-                "icon": "FaMousePointer"
-            },
-            {
-                "name": "Kiro",
-                "icon": "FaRobot"
-            },
-            {
                 "name": "Claude Code",
                 "icon": "SiAnthropic"
             },
@@ -286,11 +260,6 @@
             {
                 "name": "Codex",
                 "icon": "SiOpenai"
-            },
-            {
-                "name": "CodeRabbit",
-                "icon": "GiRabbit",
-                "blur": true
             }
         ]
     },

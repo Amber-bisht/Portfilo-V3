@@ -60,7 +60,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
             {/* Premium Navigator */}
             <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-1000">
-                <nav className="flex items-center p-1 bg-[#1a1a1a]/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_0_30px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
+                <nav className="flex items-center p-1.5 bg-neutral-900/60 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/5 mx-auto">
                     {navItems.map((item) => {
                         const isActive = isLinkActive(item.href) || (activeTab === item.name && router.pathname === '/');
 
@@ -69,10 +69,6 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                                 key={item.name}
                                 href={item.href}
                                 onClick={(e: any) => {
-                                    // If we are on the same page and it's a hash link, handle smooth scroll manually?
-                                    // Next.js Link handles navigation.
-                                    // If we are on Home and clicking hash, we want smooth scroll.
-
                                     if (item.href.startsWith('/#')) {
                                         const hash = item.href.replace('/', '');
                                         if (router.pathname === '/') {
@@ -84,39 +80,39 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                                             } else {
                                                 window.scrollTo({ top: 0, behavior: 'smooth' });
                                             }
-                                        } else {
-                                            // Navigation handled by Link, but we might want to set active tab for when we land?
-                                            // setActiveTab can't be persisted easily without context/url state.
                                         }
                                     } else {
                                         setActiveTab(item.name);
                                     }
                                 }}
                                 className={`
-                                    relative flex items-center justify-center gap-2 px-4 py-2 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+                                    relative flex items-center justify-center gap-2 px-4 py-2.5 rounded-full transition-all duration-300 ease-out group
                                     ${isActive
-                                        ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]'
-                                        : 'text-white hover:text-white hover:bg-white/5'
+                                        ? 'bg-neutral-100 text-neutral-950 shadow-[0_0_15px_rgba(255,255,255,0.3)] scale-[1.02]'
+                                        : 'text-neutral-400 hover:text-white hover:bg-white/5'
                                     }
                                 `}
                                 aria-label={item.name}
                             >
-                                <item.icon className={`text-lg transition-transform duration-300 ${isActive ? 'scale-105' : 'group-hover:scale-110'}`} />
+                                <item.icon className={`text-lg transition-all duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-125 group-hover:text-white'}`} />
                                 <span
                                     className={`
-                                        overflow-hidden whitespace-nowrap transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] font-medium text-sm
+                                        overflow-hidden whitespace-nowrap transition-all duration-300 ease-out font-medium text-xs uppercase tracking-widest
                                         ${isActive ? 'max-w-[200px] opacity-100 ml-1' : 'max-w-0 opacity-0'}
                                     `}
                                 >
                                     {item.name}
                                 </span>
+                                {isActive && (
+                                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-neutral-950 rounded-full opacity-50 shrink-0" />
+                                )}
                             </Link>
                         );
                     })}
                 </nav>
             </header>
 
-            <main className="relative z-10 pt-16">
+            <main className="relative z-10 pt-8">
                 {children}
             </main>
 
