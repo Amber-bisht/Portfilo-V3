@@ -32,37 +32,12 @@
                 "Groq AI API",
                 "CI/CD Pipeline"
             ],
-            "image": "/images/projects/asksync-amberbisht.webp",
+            "image": "/images/projects/ai-mcq.webp",
             "github": "https://github.com/Amber-bisht/watch-me",
             "live": "https://asksync.amberbisht.me"
         },
         {
             "id": 2,
-            "title": "Watch E-Commerce Store",
-            "slug": "watch-ecommerce-store",
-            "description": "A full-stack e-commerce platform for selling watches with secure authentication, online payments, order management, and shipping integration.",
-            "features": [
-                "Product listing & detail pages",
-                "Cart & checkout system",
-                "Secure online payments",
-                "Order tracking & management",
-                "Shipping integration",
-                "OAuth-based authentication"
-            ],
-            "technologies": [
-                "Next.js",
-                "Tailwind CSS",
-                "MongoDB",
-                "OAuth",
-                "Razorpay",
-                "Shiprocket"
-            ],
-            "image": "/images/projects/e-store.webp",
-            "github": "https://github.com/Amber-bisht/askSync",
-            "live": "https://watch-me-eight.vercel.app/"
-        },
-        {
-            "id": 3,
             "title": "Secure Link Wrapper System",
             "slug": "secure-link-wrapper",
             "description": "A link protection system designed to prevent automated abuse and bot access. Uses multi-layer challenge verification, CAPTCHA protection, and Cloudflare-based defenses to secure sensitive links.",
@@ -81,6 +56,35 @@
             "image": "/images/projects/links-asprin-dev.webp",
             "github": "https://github.com/Amber-bisht/link-secure-advance",
             "live": "https://links.asprin.dev"
+        },
+        {
+            "id": 3,
+            "title": "AES-128 LMS – Secure Scalable Learning Platform",
+            "slug": "aes-128-lms",
+            "description": "A full-stack LMS with TypeScript, React (Next.js) and Node.js microservices, backed by PostgreSQL + Prisma ORM, supporting secure multi-quality HLS streaming (480p–1080p).",
+            "features": [
+                "Full-stack LMS with microservices architecture",
+                "PostgreSQL + Prisma ORM integration",
+                "Multi-quality HLS streaming (480p–1080p)",
+                "Serverless pipeline (AWS Lambda + FFmpeg) for transcoding",
+                "AES-128 encryption for video content",
+                "Secure delivery with CloudFront signed URLs & private S3",
+                "Custom HLS player with Web Worker-based decryption"
+            ],
+            "technologies": [
+                "Next.js",
+                "Node.js",
+                "TypeScript",
+                "PostgreSQL",
+                "Prisma",
+                "AWS Lambda",
+                "FFmpeg",
+                "CloudFront",
+                "S3"
+            ],
+            "image": "/images/projects/lms.webp",
+            "github": "https://github.com/Amber-bisht/aes128-lms-admin-lambda-nextjs",
+            "live": "https://lms.amberbisht.me"
         }
     ],
     "experience": [
@@ -91,7 +95,7 @@
             "duration": "Ongoing",
             "starttime": "Sep 2025",
             "endtime": "Present",
-            "description": "Delivered 6+ production-grade web platforms across hospitality, EdTech, and SaaS domains using Next.js and Node.js, supporting hundreds of daily active users. Designed modular backend services with Express.js, MongoDB, and PostgreSQL, improving API response times by 25\u201340% and reducing feature delivery time by 30%. Containerized applications deployed and operated using Docker, CI/CD pipelines, cron jobs, and third-party integrations (Razorpay, OAuth), achieving 99%+ deployment reliability.",
+            "description": "Delivered 6+ production-grade web platforms across hospitality, EdTech, and SaaS domains using Next.js and Node.js, supporting hundreds of daily active users. Designed modular backend services with Express.js, MongoDB, and PostgreSQL, improving API response times by 25–40% and reducing feature delivery time by 30%. Containerized applications deployed and operated using Docker, CI/CD pipelines, cron jobs, and third-party integrations (Razorpay, OAuth), achieving 99%+ deployment reliability.",
             "tech used": [
                 "Next.js",
                 "Node.js",
@@ -269,7 +273,7 @@
     },
     "certifications": [
         {
-            "name": "AWS Certified Solutions Architect \u2013 Associate",
+            "name": "AWS Certified Solutions Architect – Associate",
             "issuer": "Amazon Web Services",
             "date": "2026",
             "url": "#",
@@ -279,6 +283,47 @@
     "freelance": [
         {
             "id": 1,
+            "title": "Makima AI – Telegram Owner-Reply Bot",
+            "description": "A specialized Telegram bot that acts as the owner's virtual assistant. It uses Groq-powered AI (Llama 3.3) to reply in groups when tagged, maintains per-user memory in MongoDB, and supports administrative commands like banning/muting across multiple authorized groups.",
+            "features": [
+                "AI-powered owner-persona replies via Groq (Llama 3.3)",
+                "Per-user persistent memory with MongoDB + LRU-like in-memory caching",
+                "Real-time context enrichment (Weather, News, Wikipedia, Tavily)",
+                "Multi-group administrative controls (Ban/Mute/Fban)",
+                "Automated failover with multiple Groq API keys",
+                "CI/CD pipeline with Docker + GitHub Actions for VPS deployment"
+            ],
+            "technologies": [
+                "Node.js",
+                "JavaScript",
+                "Telegram Bot API",
+                "Groq AI",
+                "MongoDB",
+                "Docker",
+                "GitHub Actions"
+            ],
+            "image": "/images/projects/makima-bot.webp",
+            "github": "https://github.com/Amber-bisht/makima-ai-chat-bot",
+            "live": ""
+        },
+        {
+            "id": 2,
+            "title": "Watch E-Commerce Store",
+            "description": "A full-stack e-commerce platform for selling watches with secure authentication, online payments, order management, and shipping integration.",
+            "technologies": [
+                "Next.js",
+                "Tailwind CSS",
+                "MongoDB",
+                "OAuth",
+                "Razorpay",
+                "Shiprocket"
+            ],
+            "image": "/images/projects/e-store.webp",
+            "github": "https://github.com/Amber-bisht/askSync",
+            "live": "https://watch-me-eight.vercel.app/"
+        },
+        {
+            "id": 3,
             "title": "Novello Hotels",
             "description": "A high-performance hotel showcase platform. Optimized image uploads and achieved a 95+ performance score using Next.js.",
             "technologies": [
@@ -293,14 +338,13 @@
         {
             "id": 4,
             "title": "Tripbazzar PMS",
-            "description": "Integration with MakeMyTrip and OYO + Your Own Inventory\u00df. Internally Used by the company.",
+            "description": "Integration with MakeMyTrip and OYO + Your Own Inventory. Internally Used by the company.",
             "technologies": [
                 "PostgreSQL",
                 "Docker",
                 "AWS"
             ],
             "image": "/images/projects/tripbazzar.webp",
-            "tag": "",
             "github": ""
         },
         {

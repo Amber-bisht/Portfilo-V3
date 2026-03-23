@@ -6,7 +6,7 @@ const Freelance = () => {
     // 1. Prepare and merge data with tags
     const freelanceProjects = (data.freelance || []).map(p => ({
         ...p,
-        tag: p.tag || "Freelance Project" // Use existing tag if present (e.g. for "Working on it"), otherwise default
+        tag: p.tag || "Personal Project" // Changed from Freelance Project
     }));
 
     const personalProjects = (data.projects || []).map(p => ({
