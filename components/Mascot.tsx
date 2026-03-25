@@ -101,7 +101,7 @@ const Mascot = () => {
     const showIdleImage = !isPlaying && !showSpecialImage;
 
     return (
-        <div className="fixed -bottom-2 -right-4 md:-bottom-4 md:-right-8 z-50 pointer-events-none">
+        <div className="hidden lg:block fixed -bottom-2 -right-4 md:-bottom-4 md:-right-8 z-50 pointer-events-none">
             <div className="relative w-32 h-32 md:w-56 md:h-56 drop-shadow-xl animate-in fade-in slide-in-from-bottom-5 duration-700 pointer-events-auto group">
 
                 {/* Tooltip */}
