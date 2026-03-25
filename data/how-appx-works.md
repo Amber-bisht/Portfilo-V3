@@ -54,7 +54,7 @@ flowchart TB
     subgraph "Layer 4: HLS Segment Decryption"
         I --> J["AES-128-CBC per segment"]
         H --> J
-        J --> K["🎬 Playable Video"]
+        J --> K["Playable Video"]
     end
 
     style A fill:#c41e3a,color:#fff,stroke:none
@@ -188,7 +188,7 @@ flowchart TB
     
     F -->|"SHA-256"| G["32-byte hash"]
     
-    G -->|"keyType=0 → full hash"| H["AES-256 Key ✅"]
+    G -->|"keyType=0 → full hash"| H["AES-256 Key"]
 
     style A fill:#c41e3a,color:#fff,stroke:none
     style H fill:#10b981,color:#fff,stroke:none
@@ -368,7 +368,7 @@ flowchart TB
     K --> L["11. AES-128-CBC decrypt each"]
     L --> M["12. Concatenate → .ts"]
     M --> N["13. FFmpeg remux → .mp4"]
-    N --> O["🎬 Full HD Video<br/>(154 MB, 1600×900)"]
+    N --> O["Full HD Video<br/>(154 MB, 1600×900)"]
 
     style A fill:#c41e3a,color:#fff,stroke:none
     style O fill:#10b981,color:#fff,stroke:none
@@ -486,12 +486,12 @@ flowchart TB
 
 | Layer | Vulnerability | Severity | Why It Fails |
 |:------|:-------------|:---------|:-------------|
-| 1. Code Protection | Hardcoded password `appx123` | 🔴 Critical | Same password for all users. One person finds it → everyone has it. |
-| 2. Key Derivation | Runs entirely client-side | 🔴 Critical | All parameters visible in browser JS. Cannot be hidden. |
-| 3. Window Variables | Keys exposed as globals | 🔴 Critical | `window.lv` in console = game over. |
-| 4. HLS Encryption | Standard AES-128 | 🟡 Medium | Encryption is sound, but key delivery is the weak point. |
-| 5. Domain Whitelist | String comparison only | 🟢 Low | Trivially bypassed with proxy or JS modification. |
-| 6. Anti-Tamper | `Object.freeze` timing | 🟢 Low | Attacker can hook APIs before freeze executes. |
+| 1. Code Protection | Hardcoded password `appx123` | Critical | Same password for all users. One person finds it → everyone has it. |
+| 2. Key Derivation | Runs entirely client-side | Critical | All parameters visible in browser JS. Cannot be hidden. |
+| 3. Window Variables | Keys exposed as globals | Critical | `window.lv` in console = game over. |
+| 4. HLS Encryption | Standard AES-128 | Medium | Encryption is sound, but key delivery is the weak point. |
+| 5. Domain Whitelist | String comparison only | Low | Trivially bypassed with proxy or JS modification. |
+| 6. Anti-Tamper | `Object.freeze` timing | Low | Attacker can hook APIs before freeze executes. |
 
 ### The Fundamental Problem
 
@@ -564,7 +564,7 @@ Even with DRM, determined attackers can use screen recording. The defense:
 
 ### 4. Token Best Practices
 
-- **One-time tokens**: ✅ ClassX already does this
+- **One-time tokens**: ClassX already does this
 - **Short TTL**: Tokens should expire in < 5 minutes
 - **IP binding**: Tie tokens to the requester's IP
 - **Rate limiting**: Limit token generation per user per day

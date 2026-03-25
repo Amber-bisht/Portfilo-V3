@@ -59,10 +59,10 @@ const Mermaid: React.FC<MermaidProps> = ({ chart }) => {
   }, [chart]);
 
   return (
-    <div className="mermaid-container w-full my-12 group">
+    <div className="mermaid-container w-full my-12 flex justify-center">
       <div 
         ref={ref} 
-        className="w-full bg-neutral-900/40 backdrop-blur-xl border border-white/5 rounded-[3rem] p-8 md:p-16 group-hover:border-white/10 transition-all duration-500 shadow-[0_40px_100px_rgba(0,0,0,0.4)] overflow-visible flex justify-center"
+        className="w-full max-w-4xl overflow-x-auto text-neutral-400"
       />
     </div>
   );

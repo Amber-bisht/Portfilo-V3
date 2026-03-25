@@ -21,6 +21,76 @@ interface BlogPostProps {
   postData: BlogPost;
 }
 
+const getTextFromReactChildren = (children: any): string => {
+  if (typeof children === 'string' || typeof children === 'number') return String(children);
+  if (Array.isArray(children)) return children.map(getTextFromReactChildren).join('');
+  if (children && children.props && children.props.children) {
+    return getTextFromReactChildren(children.props.children);
+  }
+  return '';
+};
+
+const CodeBlock = ({ node, inline, className, children, ...props }: any) => {
+  const [copied, setCopied] = useState(false);
+  const match = /language-(\w+)/.exec(className || '');
+
+  if (!inline && match && match[1] === 'mermaid') {
+    return <Mermaid chart={String(children).replace(/\n$/, '')} />;
+  }
+
+  if (!inline && match) {
+    const codeString = getTextFromReactChildren(children).replace(/\n$/, '');
+
+    const handleCopy = () => {
+      navigator.clipboard.writeText(codeString);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    };
+
+    return (
+      <div className="relative group my-12 rounded-[14px] overflow-hidden bg-[#0d0d0d] border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
+        <div className="flex items-center justify-between px-4 py-3 bg-[#1e1e1e] border-b border-white/10">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+            <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+          </div>
+          
+          <div className="absolute left-1/2 -translate-x-1/2 text-[10px] font-black text-neutral-500 uppercase tracking-widest">
+            {match[1]}
+          </div>
+
+          <button 
+            onClick={handleCopy}
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-all cursor-pointer z-10"
+            title="Copy code"
+          >
+            {copied ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-green-400"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            )}
+          </button>
+        </div>
+        <div className="p-0 overflow-x-auto">
+          <pre className="!m-0 !p-5 md:!p-6 !bg-transparent min-w-full">
+            <code className={`${className} !bg-transparent !p-0 text-[13px] md:text-[14px] leading-[1.6] !block font-mono font-medium`} style={{ display: 'inline-block', minWidth: '100%' }} {...props}>
+              {children}
+            </code>
+          </pre>
+        </div>
+      </div>
+    );
+  }
+
+  // Inline code block
+  return (
+    <code className={`${className} bg-white/5 px-2 py-1 rounded text-makima-gold font-mono text-[14px]`} {...props}>
+      {children}
+    </code>
+  );
+};
+
 export default function Post({ postData }: BlogPostProps) {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
@@ -119,41 +189,28 @@ export default function Post({ postData }: BlogPostProps) {
 
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-20 mt-20 relative z-10">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }}
-            className="prose prose-invert prose-neutral max-w-none 
-              prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-white
-              prose-h2:text-4xl prose-h2:mt-24 prose-h2:mb-10 prose-h2:flex prose-h2:items-center prose-h2:gap-4
-              prose-h2:before:content-[''] prose-h2:before:w-1.5 prose-h2:before:h-10 prose-h2:before:bg-makima-red prose-h2:before:rounded-full
-              prose-p:text-neutral-400 prose-p:text-lg prose-p:leading-[1.8] prose-p:mb-10
-              prose-strong:text-white prose-strong:font-bold
-              prose-a:text-makima-red prose-a:underline-offset-4 hover:prose-a:text-makima-gold transition-all
-              prose-blockquote:border-l-4 prose-blockquote:border-makima-red prose-blockquote:bg-white/5 prose-blockquote:py-8 prose-blockquote:px-10 prose-blockquote:rounded-2xl prose-blockquote:italic prose-blockquote:text-neutral-300 prose-blockquote:text-xl
-              prose-pre:bg-neutral-900/80 prose-pre:border prose-pre:border-white/5 prose-pre:rounded-[2rem] prose-pre:p-8 prose-pre:shadow-2xl
-              prose-code:text-makima-gold prose-code:bg-makima-gold/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-code:text-base
-              prose-img:rounded-[2rem] prose-img:border prose-img:border-white/10
-              prose-li:text-neutral-400 prose-li:text-lg prose-li:mb-4 prose-li:marker:text-makima-red
-            "
+            className="max-w-none text-neutral-400"
           >
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}
               components={{
-                h2: ({ node, ...props }) => <h2 id={props.children?.toString().toLowerCase().replace(/\s+/g, '-')} {...props} />,
-                code: ({ node, inline, className, children, ...props }: any) => {
-                  const match = /language-(\w+)/.exec(className || '');
-                  if (!inline && match && match[1] === 'mermaid') {
-                    return <Mermaid chart={String(children).replace(/\n$/, '')} />;
-                  }
-                  return !inline && match ? (
-                    <div className="relative group my-12">
-                      <div className="absolute -top-3 right-6 px-3 py-1 bg-neutral-800 text-white text-[9px] font-black uppercase tracking-widest rounded-full border border-white/10 z-20">
-                        {match[1]}
-                      </div>
-                      <pre className={`${className} !m-0 !overflow-visible !bg-transparent`} {...props}>
-                        <code className="!bg-transparent !p-0 !text-sm !leading-relaxed !block">{children}</code>
-                      </pre>
-                    </div>
-                  ) : (
-                    <code className={`${className} bg-white/5 px-1.5 py-0.5 rounded text-makima-gold`} {...props}>{children}</code>
-                  );
-                }
+                h1: ({ node, ...props }) => <h1 className="text-5xl md:text-6xl font-black mt-32 mb-16 flex items-center gap-6 before:content-[''] before:w-3 before:h-14 before:bg-makima-red before:rounded-full text-white font-sans tracking-tight" id={props.children?.toString().toLowerCase().replace(/\s+/g, '-')} {...props} />,
+                h2: ({ node, ...props }) => <h2 className="text-4xl md:text-5xl font-black mt-24 mb-12 flex items-center gap-5 before:content-[''] before:w-2.5 before:h-12 before:bg-makima-red before:rounded-full text-white font-sans tracking-tight leading-tight" id={props.children?.toString().toLowerCase().replace(/\s+/g, '-')} {...props} />,
+                h3: ({ node, ...props }) => <h3 className="text-2xl md:text-3xl font-black mt-16 mb-8 flex items-center gap-4 before:content-[''] before:w-1.5 before:h-8 before:bg-makima-gold before:rounded-full text-white font-sans tracking-tight leading-snug" id={props.children?.toString().toLowerCase().replace(/\s+/g, '-')} {...props} />,
+                h4: ({ node, ...props }) => <h4 className="text-xl md:text-2xl font-bold mt-12 mb-6 text-white font-sans tracking-wide" id={props.children?.toString().toLowerCase().replace(/\s+/g, '-')} {...props} />,
+                p: ({ node, ...props }) => <p className="text-neutral-400 text-lg md:text-xl leading-[1.8] mb-10 font-sans font-medium" {...props} />,
+                ul: ({ node, ...props }) => <ul className="list-none md:text-xl space-y-4 text-neutral-400 text-lg mb-10 font-sans font-medium ml-4 border-l-2 border-white/10 pl-6" {...props} />,
+                ol: ({ node, ...props }) => <ol className="list-decimal md:text-xl list-inside space-y-4 text-neutral-400 text-lg mb-10 font-sans font-medium ml-4" {...props} />,
+                li: ({ node, ...props }) => <li className="text-neutral-400 relative before:content-[''] before:absolute before:-left-6 before:top-3 before:w-2 before:h-2 before:rounded-full before:bg-makima-red" {...props} />,
+                a: ({ node, ...props }) => <a className="text-makima-red underline underline-offset-8 hover:text-makima-gold transition-colors font-bold" target="_blank" rel="noopener noreferrer" {...props} />,
+                strong: ({ node, ...props }) => <strong className="text-white font-black" {...props} />,
+                blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-makima-red bg-neutral-900/50 py-10 px-12 rounded-[2rem] italic text-neutral-300 text-xl md:text-2xl my-16 shadow-2xl relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-makima-red/5 before:to-transparent before:pointer-events-none" {...props} />,
+                hr: () => null,
+                table: ({ node, ...props }) => <div className="overflow-x-auto my-16 bg-neutral-900/50 rounded-[2rem] border border-white/10 shadow-2xl"><table className="w-full border-collapse text-left" {...props} /></div>,
+                th: ({ node, ...props }) => <th className="border-b border-white/10 bg-black/40 px-8 py-6 text-left text-white font-black tracking-[0.2em] uppercase text-xs" {...props} />,
+                td: ({ node, ...props }) => <td className="border-b border-white/5 px-8 py-6 text-neutral-400 font-sans text-sm md:text-base font-medium" {...props} />,
+                img: ({ node, ...props }) => <img className="rounded-[2rem] border border-white/10 my-16 w-full object-cover shadow-2xl hover:scale-[1.02] transition-transform duration-700" {...props} />,
+                pre: ({ children }) => <>{children}</>,
+                code: CodeBlock
               }}
             >
               {postData.content}
