@@ -33,7 +33,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
     };
 
     return (
-        <div className="min-h-screen bg-neutral-950 text-off-white relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300">
+        <div className="min-h-screen bg-neutral-950 text-off-white relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw]">
             <ParticlesBg />
             <Head>
                 <title>{title}</title>
@@ -61,8 +61,9 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
             </Head>
 
             {/* Premium Navigator */}
-            <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-1000 w-full max-w-fit px-4">
-                <nav className="flex items-center justify-center p-1 bg-neutral-900/60 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
+            <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-1000 w-[95vw] md:w-max max-w-fit">
+                <nav className="flex items-center justify-start md:justify-center p-1 bg-neutral-900/60 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/5 overflow-x-auto overflow-y-hidden" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <style jsx>{`nav::-webkit-scrollbar { display: none; }`}</style>
                     {navItems.map((item) => {
                         const isActive = isLinkActive(item.href) || (activeTab === item.name && router.pathname === '/');
 
@@ -88,7 +89,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                                     }
                                 }}
                                 className={`
-                                    relative flex items-center justify-center gap-2 px-3.5 md:px-5 py-2.5 rounded-full transition-all duration-500 ease-out group
+                                    relative flex items-center justify-center gap-2 px-3.5 md:px-5 py-2.5 rounded-full transition-all duration-500 ease-out group shrink-0
                                     ${isActive
                                         ? 'bg-neutral-100 text-neutral-950 shadow-[0_0_15px_rgba(255,255,255,0.3)]'
                                         : 'text-neutral-400 hover:text-white hover:bg-white/5'
