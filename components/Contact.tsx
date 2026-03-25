@@ -108,7 +108,7 @@ const Contact = ({ data }: ContactProps) => {
 
                     <div className="relative z-10">
 
-                        <h3 className="text-3xl font-serif font-bold text-white mb-2">
+                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-white mb-2 break-all md:break-words">
                             {data.contact.email}
                         </h3>
                         <p className="text-gray-400 max-w-sm">
