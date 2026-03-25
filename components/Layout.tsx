@@ -17,6 +17,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
     const navItems = [
         { name: 'Home', icon: FaHome, href: '/#' },
         { name: 'Projects', icon: FaFolder, href: '/#projects' },
+        { name: 'Blog', icon: FaLayerGroup, href: '/blog' },
         { name: 'Freelance', icon: FaBriefcase, href: '/freelance' },
         { name: 'Tech Stack', icon: FaLayerGroup, href: '/#techstack' },
         { name: 'Contact', icon: FaEnvelope, href: '/#contact' },
@@ -25,6 +26,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
     // Helper to determine if a link is active
     const isLinkActive = (itemHref: string) => {
         if (itemHref === '/freelance' && router.pathname === '/freelance') return true;
+        if (itemHref === '/blog' && (router.pathname === '/blog' || router.pathname.startsWith('/blog/'))) return true;
         if (itemHref.startsWith('/#') && router.pathname === '/' && activeTab === itemHref.replace('/#', '')) return true; // Approximation
         if (itemHref === '/#' && router.pathname === '/' && activeTab === 'Home') return true;
         return false;
