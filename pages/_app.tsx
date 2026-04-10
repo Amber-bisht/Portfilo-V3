@@ -6,12 +6,14 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel' });
 
 import Mascot from '../components/Mascot';
+import PochitaFollower from '../components/PochitaFollower';
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <main className={`${inter.variable} ${cinzel.variable} font-sans`}>
             <Component {...pageProps} />
             <Mascot />
+            <PochitaFollower />
         </main>
     );
 }

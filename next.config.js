@@ -13,7 +13,7 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export', // Removed to enable API routes for AI chat
   images: {
     unoptimized: true, // Required for static export
     remotePatterns: [
@@ -25,6 +25,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn-icons-png.flaticon.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
         pathname: '/**',
       },
     ],

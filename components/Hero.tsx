@@ -97,7 +97,7 @@ const Hero = ({ data }: HeroProps) => {
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-125"
+                                className="text-white hover:text-white/80 transition-all duration-300 hover:scale-125"
                                 title={link.name}
                             >
                                 <link.icon size={22} />
@@ -115,7 +115,7 @@ const Hero = ({ data }: HeroProps) => {
                         Read Blog
                     </Link>
                     <a 
-                        href="#contact" 
+                        href={`mailto:${data.contact.email}`} 
                         className="flex-1 bg-neutral-800/50 text-white font-bold py-3 px-6 rounded-2xl text-center border border-white/10 hover:bg-neutral-800 transition-all duration-300 active:scale-95 uppercase text-sm tracking-widest"
                     >
                         Contact Me
@@ -123,11 +123,13 @@ const Hero = ({ data }: HeroProps) => {
                 </div>
 
                 {/* 5. Description Card */}
-                <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden">
-                    <h2 className="text-xl md:text-3xl lg:text-4xl font-mono text-gray-400 leading-relaxed md:leading-snug uppercase">
-                        {data.about.description}
+                <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden group">
+                    <h2 className="text-xl md:text-3xl lg:text-4xl font-mono leading-relaxed md:leading-snug uppercase transition-all duration-300">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-white/90 to-zinc-500 tracking-tight">
+                            {data.about.description}
+                        </span>
                     </h2>
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
+                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 blur-[80px] rounded-full pointer-events-none group-hover:bg-white/10 transition-colors duration-500" />
                 </div>
 
             </div>
