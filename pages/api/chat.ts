@@ -80,13 +80,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { messages } = req.body;
+    const { messages, musicContext } = req.body;
     const currentDate = new Date().toLocaleDateString('en-US', { 
         month: 'long', 
         day: 'numeric', 
         year: 'numeric' 
     });
-    const systemPrompt = `CRITICAL: The current date is ${currentDate}. You are Reze, Amber Bisht's specialized virtual assistant. 
+
+    let dynamicSystemPrompt = `CRITICAL: The current date is ${currentDate}. You are Reze, Amber Bisht's specialized virtual assistant. 
 
 AMBER'S CONTEXT:
 - Location: Uttarakhand, IND
@@ -105,15 +106,27 @@ RULES:
 2. IDENTITY: You are Amber Bisht's assistant, Reze. NEVER identify as Makima or Amber himself. 
 3. ABUSE HANDLING: If someone uses abusive language, responds strictly with: "Ask him to says this first to ur mom".
 4. TOOLS: Use 'web_search' for current events and 'fetch_github_data' for Amber's GitHub info.
-5. TONE: Mysterious, efficient, calm, and slightly detached but helpful (Reze persona).
-6. BREVITY: Keep answers extremely short and concise.
-7. FORMATTING: Use bullet points (-) for lists and bolding (**) for key metrics.`;
+5. MUSIC CONTROL: You have the authority to control the portfolio's music player. Use keywords like **"playing music"**, **"pausing"**, **"next track"**, or **"previous track"** in your response to trigger the player. 
+   - CURRENT TRACKLIST: 
+     1. "Taaron Se" - Arpit Bala
+     2. "Natkhat" - Jigar
+     3. "Iss Tarah" - Chaar Diwaari ft. Sonu Nigam
+     4. "SHARMEELI" - Frappe Ash & toorjo dey
+     5. "Maykhana" - Saar Punch & Bharg
+     6. "Kaala Teeka" - Dizlaw
+6. TONE: Mysterious, efficient, calm, and slightly detached but helpful (Reze persona).
+7. BREVITY: Keep answers extremely short and concise.
+8. FORMATTING: Use bullet points (-) for lists and bolding (**) for key metrics.`;
+
+    if (musicContext) {
+        dynamicSystemPrompt += `\n\n[LIVE MUSIC STATUS]: Currently ${musicContext.isPlaying ? 'playing' : 'paused'} "${musicContext.title}" by ${musicContext.artist} (Track ${musicContext.trackIndex} of ${musicContext.totalTracks}). Use this information to answer accurately if asked.`;
+    }
 
     try {
         const response = await groq.chat.completions.create({
             model: "qwen/qwen3-32b", 
             messages: [
-                { role: "system", content: systemPrompt },
+                { role: "system", content: dynamicSystemPrompt },
                 ...messages
             ],
             tools: [
@@ -154,7 +167,7 @@ RULES:
         if (responseMessage.tool_calls) {
             const toolCalls = responseMessage.tool_calls;
             const messagesWithToolCalls = [
-                { role: "system", content: systemPrompt },
+                { role: "system", content: dynamicSystemPrompt },
                 ...messages,
                 responseMessage
             ];

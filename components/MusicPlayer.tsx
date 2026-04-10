@@ -166,6 +166,47 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
+    // Global Command Listener for Mascot interaction
+    useEffect(() => {
+        const handleCommand = (e: any) => {
+            const { action } = e.detail;
+            if (!isPlayerReady || !playerRef.current) return;
+
+            switch (action) {
+                case 'play':
+                    playerRef.current.playVideo();
+                    break;
+                case 'pause':
+                    playerRef.current.pauseVideo();
+                    break;
+                case 'next':
+                    handleNext();
+                    break;
+                case 'prev':
+                    handlePrev();
+                    break;
+            }
+        };
+
+        window.addEventListener('music-command', handleCommand);
+        return () => window.removeEventListener('music-command', handleCommand);
+    }, [isPlayerReady, currentIndex]); // currentIndex needed because handleNext/Prev use closure
+
+    // Broadcast status for Mascot awareness
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('music-status-update', { 
+                detail: { 
+                    title: currentTrack.title, 
+                    artist: currentTrack.artist,
+                    isPlaying,
+                    trackIndex: currentIndex + 1,
+                    totalTracks: tracks.length
+                } 
+            }));
+        }
+    }, [currentIndex, isPlaying, currentTrack, tracks.length]);
+
     const thumbnailUrl = `https://img.youtube.com/vi/${currentTrack.videoId}/maxresdefault.jpg`;
 
     return (

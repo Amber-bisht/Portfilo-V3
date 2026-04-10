@@ -2,7 +2,7 @@ import { FaLinkedin, FaGithub, FaTwitter, FaDiscord } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
 import { GitHubCalendar } from 'react-github-calendar';
 import dynamic from 'next/dynamic';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Mail } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import MusicPlayer from './MusicPlayer';
@@ -103,25 +103,30 @@ const Contact = ({ data }: ContactProps) => {
                 {/* Bottom Right: Stacked Mail & Spotify */}
                 <div className="md:col-span-2 h-full min-h-[240px] flex flex-col gap-4">
                     {/* Mail Part */}
-                    <div className="flex-1 relative bg-[#1e1f22] rounded-3xl p-6 flex flex-col justify-center overflow-hidden group border border-white/5 hover:border-white/10 transition-colors">
-                        <div className="absolute -right-4 -bottom-4 opacity-10 text-white transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
-                            <SiGmail size={120} />
+                    <div className="flex-1 relative bg-neutral-900/40 backdrop-blur-xl rounded-3xl p-8 flex flex-col justify-center overflow-hidden group border border-white/5 hover:border-red-500/20 transition-all duration-500">
+                        {/* Background Decorative Icon */}
+                        <div className="absolute -right-8 -bottom-8 opacity-[0.03] text-white transform rotate-12 group-hover:rotate-0 transition-transform duration-700 pointer-events-none">
+                            <SiGmail size={200} />
                         </div>
-                        <div className="relative z-10 flex flex-row items-center justify-between gap-4">
-                            <div>
-                                <h3 className="text-lg sm:text-xl font-bold text-white mb-1 break-all">
+                        
+                        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                            <div className="space-y-2">
+                                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                                     {data.contact.email}
                                 </h3>
-                                <p className="text-gray-400 text-xs">
+                                <p className="text-gray-400 text-sm font-medium italic opacity-70">
                                     &apos;Let&apos;s build something great together.&apos;
                                 </p>
                             </div>
+                            
                             <a
                                 href={`mailto:${data.contact.email}`}
-                                className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black text-xs font-bold rounded-xl hover:bg-gray-200 transition-colors whitespace-nowrap"
+                                className="group/btn relative px-8 py-3 bg-white text-black text-xs font-bold rounded-2xl hover:bg-zinc-200 transition-all duration-300 shadow-xl overflow-hidden"
                             >
-                                <SiGmail />
-                                Send Email
+                                <span className="relative z-10 flex items-center gap-2">
+                                    <Mail size={16} />
+                                    Send Email
+                                </span>
                             </a>
                         </div>
                     </div>

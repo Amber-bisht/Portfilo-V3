@@ -17,6 +17,18 @@ const Mascot = () => {
     const [isLoading, setIsLoading] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
 
+    const [isMounted, setIsMounted] = useState(false);
+    const [musicStatus, setMusicStatus] = useState<any>(null);
+
+    useEffect(() => { 
+        setIsMounted(true); 
+        const handleStatusUpdate = (e: any) => {
+            setMusicStatus(e.detail);
+        };
+        window.addEventListener('music-status-update', handleStatusUpdate);
+        return () => window.removeEventListener('music-status-update', handleStatusUpdate);
+    }, []);
+
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -35,7 +47,10 @@ const Mascot = () => {
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ messages: [...messages, userMessage] }),
+                body: JSON.stringify({ 
+                    messages: [...messages, userMessage],
+                    musicContext: musicStatus // Inject current music state
+                }),
             });
 
             if (!response.ok) throw new Error('Failed to fetch response');
@@ -44,6 +59,25 @@ const Mascot = () => {
             // Strip any <think> reasoning blocks if they slip through
             const cleanContent = data.content.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
             setMessages(prev => [...prev, { role: 'assistant', content: cleanContent }]);
+
+            // Scan for music commands in the assistant's response
+            const lowerContent = cleanContent.toLowerCase();
+            let action = '';
+            
+            if (lowerContent.includes('playing') || lowerContent.includes('play music') || lowerContent.includes('play some music')) {
+                action = 'play';
+            } else if (lowerContent.includes('pausing') || lowerContent.includes('pause music') || lowerContent.includes('stopping')) {
+                action = 'pause';
+            } else if (lowerContent.includes('next song') || lowerContent.includes('next track') || lowerContent.includes('skip')) {
+                action = 'next';
+            } else if (lowerContent.includes('previous song') || lowerContent.includes('previous track') || lowerContent.includes('back')) {
+                action = 'prev';
+            }
+
+            if (action) {
+                window.dispatchEvent(new CustomEvent('music-command', { detail: { action } }));
+            }
+
         } catch (error) {
             console.error(error);
             setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }]);
@@ -51,9 +85,6 @@ const Mascot = () => {
             setIsLoading(false);
         }
     };
-
-    const [isMounted, setIsMounted] = useState(false);
-    useEffect(() => { setIsMounted(true); }, []);
 
     if (!isMounted) return null;
 
