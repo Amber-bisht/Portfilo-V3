@@ -105,8 +105,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
                     : "none",
                 width: visible ? "800px" : "100%",
                 y: visible ? 20 : 0,
-                paddingLeft: visible ? "20px" : "40px",
-                paddingRight: visible ? "20px" : "40px",
+                paddingLeft: visible ? "20px" : "24px",
+                paddingRight: visible ? "20px" : "24px",
             }}
             transition={{
                 type: "spring",

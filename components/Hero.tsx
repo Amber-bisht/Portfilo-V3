@@ -52,7 +52,7 @@ const Hero = ({ data }: HeroProps) => {
     ];
 
     return (
-        <section className="relative min-h-[60vh] flex flex-col items-center justify-center py-12 px-4 md:px-8 max-w-7xl mx-auto">
+        <section className="relative min-h-[60vh] flex flex-col items-center justify-center py-8 px-4 md:px-8 max-w-7xl mx-auto">
             {/* Top Header Section */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-7xl">
                 

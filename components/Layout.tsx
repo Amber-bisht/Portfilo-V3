@@ -93,7 +93,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 </MobileNav>
             </Navbar>
 
-            <main className="relative z-10 pt-24 md:pt-32">
+            <main className="relative z-10 pt-12 md:pt-16">
                 {children}
             </main>
 
