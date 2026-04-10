@@ -159,10 +159,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
                 <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-mono text-gray-500">
                     <p>
-                        &copy; {new Date().getFullYear()} Amber Bisht. Precision Built.
-                    </p>
-                    <p className="flex items-center gap-1">
-                        Designed with Intent <span className="text-red-500">_</span>
+                        &copy; {new Date().getFullYear()} Amber Bisht
                     </p>
                 </div>
             </footer>

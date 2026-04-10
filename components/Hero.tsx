@@ -1,6 +1,6 @@
 import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
-import { BadgeCheck } from 'lucide-react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -20,12 +20,6 @@ interface HeroProps {
         };
     };
 }
-
-const VerifiedBadge = () => (
-    <div className="flex items-center justify-center bg-blue-500 rounded-full p-0.5 shadow-[0_0_10px_rgba(59,130,246,0.5)]">
-        <BadgeCheck className="w-4 h-4 md:w-5 md:h-5 text-white" strokeWidth={3} />
-    </div>
-);
 
 const Hero = ({ data }: HeroProps) => {
     const socialLinks = [
@@ -75,7 +69,6 @@ const Hero = ({ data }: HeroProps) => {
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter uppercase">
                             {data.about.name}
                         </h1>
-                        <VerifiedBadge />
                     </div>
                     
                     <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-gray-400 font-mono mb-6">
