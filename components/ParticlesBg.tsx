@@ -44,20 +44,16 @@ const ParticlesBg: React.FC = () => {
                         value: "#ffffff",
                     },
                     links: {
-                        color: "#ffffff",
-                        distance: 150,
-                        enable: true,
-                        opacity: 0.1,
-                        width: 1,
+                        enable: false,
                     },
                     move: {
                         direction: "none",
                         enable: true,
                         outModes: {
-                            default: "bounce",
+                            default: "out",
                         },
-                        random: false,
-                        speed: 1,
+                        random: true,
+                        speed: 0.4,
                         straight: false,
                     },
                     number: {
@@ -67,13 +63,18 @@ const ParticlesBg: React.FC = () => {
                         value: 80,
                     },
                     opacity: {
-                        value: 0.2,
+                        value: { min: 0.1, max: 0.4 },
+                        animation: {
+                            enable: true,
+                            speed: 1.5,
+                            sync: false
+                        }
                     },
                     shape: {
                         type: "circle",
                     },
                     size: {
-                        value: { min: 1, max: 3 },
+                        value: { min: 1, max: 3.5 },
                     },
                 },
                 detectRetina: true,

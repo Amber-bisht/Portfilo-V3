@@ -29,6 +29,29 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
     return (
         <div className="min-h-screen bg-neutral-950 text-off-white relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw]">
+            {/* Layered Atmospheric Background */}
+            <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+                {/* Base Layer */}
+                <div className="absolute inset-0 bg-neutral-950" />
+                
+                {/* Moving Atmospheric Blobs */}
+                <div className="absolute top-[10%] left-[10%] w-[600px] h-[600px] bg-red-950/30 rounded-full blur-[100px] animate-blob" />
+                <div className="absolute bottom-[10%] right-[10%] w-[700px] h-[700px] bg-zinc-900/50 rounded-full blur-[100px] animate-blob animation-delay-2000" />
+                <div className="absolute top-[40%] right-[30%] w-[500px] h-[500px] bg-red-900/20 rounded-full blur-[80px] animate-blob animation-delay-4000" />
+
+                {/* Vertical Scanline Beam */}
+                <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-transparent via-red-500/5 to-transparent animate-scanline z-[5]" />
+
+                {/* Structural Grid */}
+                <div className="absolute inset-0 bg-grid-pattern opacity-100" />
+                
+                {/* Cinematic Noise */}
+                <div className="absolute inset-0 bg-noise opacity-[0.08] mix-blend-overlay" />
+                
+                {/* Gradient Fades */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+            </div>
+
             <ParticlesBg />
             <Head>
                 <title>{title}</title>
