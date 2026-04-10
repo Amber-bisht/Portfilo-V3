@@ -197,22 +197,25 @@ const Mascot = () => {
             </AnimatePresence>
 
             {!isChatOpen && (
-                <div className="relative w-48 h-48 md:w-[400px] md:h-[400px] drop-shadow-xl animate-in fade-in slide-in-from-bottom-5 duration-700 pointer-events-auto group cursor-pointer translate-x-[15%] md:translate-x-[25%]"
-                    onClick={() => setIsChatOpen(!isChatOpen)}
-                >
+                <div className="relative w-48 h-48 md:w-[280px] md:h-[280px] drop-shadow-xl animate-in fade-in slide-in-from-bottom-5 duration-700 pointer-events-auto group translate-x-[10%] md:translate-x-[15%]">
                     {/* Tooltip */}
-                    <div className="absolute bottom-[80%] right-4 md:right-16 mb-2 bg-black/80 backdrop-blur-sm text-white text-xs md:text-sm px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none w-max max-w-[150px] md:max-w-[250px] shadow-lg border border-gray-800 text-left">
+                    <div className="absolute bottom-[10%] left-[-100px] md:left-[-180px] bg-black/80 backdrop-blur-sm text-white text-xs md:text-sm px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none w-max max-w-[150px] md:max-w-[200px] shadow-lg border border-gray-800 text-left z-[60]">
                         This is Makima, Amber&apos;s Assistant. <br /> Tap to chat with me!
                     </div>
 
-                    <Image
-                        src="/reze.webp"
-                        alt="Reze Assistant"
-                        fill
-                        priority
-                        sizes="(max-width: 768px) 128px, 224px"
-                        className="object-contain object-bottom transition-opacity duration-150 ease-in-out"
-                    />
+                    <div 
+                        className="relative w-full h-full cursor-pointer"
+                        onClick={() => setIsChatOpen(true)}
+                    >
+                        <Image
+                            src="/reze.webp"
+                            alt="Reze Assistant"
+                            fill
+                            priority
+                            sizes="(max-width: 768px) 128px, 180px"
+                            className="object-contain object-bottom transition-opacity duration-150 ease-in-out"
+                        />
+                    </div>
                 </div>
             )}
         </div>

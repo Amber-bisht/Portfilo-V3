@@ -2,7 +2,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode, useState } from 'react';
-import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase } from 'react-icons/fa';
+import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { SiGmail } from 'react-icons/si';
+import data from '../data/data.json';
 import ParticlesBg from './ParticlesBg';
 import { Navbar, NavBody, NavItems, NavbarLogo, NavbarButton, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './Navbar';
 
@@ -97,8 +99,72 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 {children}
             </main>
 
-            <footer className="py-8 text-center text-sm text-gray-400 border-t border-white/5">
-                <p>&copy; {new Date().getFullYear()} Amber Bisht. All rights reserved.</p>
+            <footer className="relative z-10 border-t border-white/5 pt-16 pb-8 px-4 md:px-8 mt-20 bg-black/20 backdrop-blur-sm">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    {/* Column 1: Branding */}
+                    <div className="md:col-span-2">
+                        <Link href="/" className="text-2xl font-bold text-white tracking-tighter uppercase mb-4 block">
+                            Amber Bisht
+                        </Link>
+                        <p className="text-gray-400 max-w-sm mb-6 text-sm leading-relaxed">
+                            Full Stack Developer and DevOps Engineer specializing in building redundant systems and automated pipelines with precision and performance.
+                        </p>
+                        <div className="flex items-center gap-4">
+                            <a href={data.contact.linkedin} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110">
+                                <FaLinkedin size={20} />
+                            </a>
+                            <a href={data.contact.twitter} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110">
+                                <FaTwitter size={20} />
+                            </a>
+                            <a href={data.contact.github} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110">
+                                <FaGithub size={20} />
+                            </a>
+                            <a href={`mailto:${data.contact.email}`} className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110">
+                                <SiGmail size={20} />
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Column 2: Navigation */}
+                    <div>
+                        <h4 className="text-white font-bold uppercase tracking-widest text-[10px] mb-6 px-2 border-l-2 border-red-600">Navigation</h4>
+                        <ul className="space-y-3">
+                            {navItems.map((item) => (
+                                <li key={item.name}>
+                                    <Link href={item.href} className="text-gray-400 hover:text-white transition-colors text-xs uppercase tracking-wider">
+                                        {item.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Column 3: Contact Info */}
+                    <div>
+                        <h4 className="text-white font-bold uppercase tracking-widest text-[10px] mb-6 px-2 border-l-2 border-red-600">Contact</h4>
+                        <ul className="space-y-4 text-xs font-mono">
+                            <li className="text-gray-400">
+                                <span className="block text-white font-bold mb-1 uppercase tracking-tighter">Email</span>
+                                <a href={`mailto:${data.contact.email}`} className="hover:text-white transition-colors break-all">
+                                    {data.contact.email}
+                                </a>
+                            </li>
+                            <li className="text-gray-400">
+                                <span className="block text-white font-bold mb-1 uppercase tracking-tighter">Availability</span>
+                                <span className="text-green-500 animate-pulse">●</span> Open for Freelance
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-mono text-gray-500">
+                    <p>
+                        &copy; {new Date().getFullYear()} Amber Bisht. Precision Built.
+                    </p>
+                    <p className="flex items-center gap-1">
+                        Designed with Intent <span className="text-red-500">_</span>
+                    </p>
+                </div>
             </footer>
         </div>
     );

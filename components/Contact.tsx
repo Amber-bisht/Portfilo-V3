@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import MusicPlayer from './MusicPlayer';
 
 const GithubContributions = dynamic(() => import('./GithubContributions'), { ssr: false });
 
@@ -99,30 +100,70 @@ const Contact = ({ data }: ContactProps) => {
                     </a>
                 </div>
 
-                {/* Bottom Right: Main Contact (Discord style) */}
-                <div className="md:col-span-2 h-full min-h-[240px] relative bg-[#1e1f22] rounded-3xl p-8 flex flex-col justify-between overflow-hidden group">
-                    {/* Background Icon */}
-                    <div className="absolute -right-4 -bottom-4 opacity-10 text-white transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
-                        <SiGmail size={180} />
+                {/* Bottom Right: Stacked Mail & Spotify */}
+                <div className="md:col-span-2 h-full min-h-[240px] flex flex-col gap-4">
+                    {/* Mail Part */}
+                    <div className="flex-1 relative bg-[#1e1f22] rounded-3xl p-6 flex flex-col justify-center overflow-hidden group border border-white/5 hover:border-white/10 transition-colors">
+                        <div className="absolute -right-4 -bottom-4 opacity-10 text-white transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                            <SiGmail size={120} />
+                        </div>
+                        <div className="relative z-10 flex flex-row items-center justify-between gap-4">
+                            <div>
+                                <h3 className="text-lg sm:text-xl font-bold text-white mb-1 break-all">
+                                    {data.contact.email}
+                                </h3>
+                                <p className="text-gray-400 text-xs">
+                                    &apos;Let&apos;s build something great together.&apos;
+                                </p>
+                            </div>
+                            <a
+                                href={`mailto:${data.contact.email}`}
+                                className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black text-xs font-bold rounded-xl hover:bg-gray-200 transition-colors whitespace-nowrap"
+                            >
+                                <SiGmail />
+                                Send Email
+                            </a>
+                        </div>
                     </div>
 
-                    <div className="relative z-10">
-
-                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-white mb-2 break-all md:break-words">
-                            {data.contact.email}
-                        </h3>
-                        <p className="text-gray-400 max-w-sm">
-                            &apos;Let&apos;s build something great together.&apos;
-                        </p>
+                    {/* Custom Music Player (Full Playback) */}
+                    <div className="h-[152px] bg-[#1e1f22] border border-white/5 rounded-3xl overflow-hidden group hover:border-white/10 transition-colors">
+                        <MusicPlayer
+                            tracks={[
+                                {
+                                    videoId: "WrczwHORF60",
+                                    title: "Taaron Se",
+                                    artist: "Arpit Bala"
+                                },
+                                {
+                                    videoId: "GbJoSYIECJY",
+                                    title: "Natkhat",
+                                    artist: "Jigar"
+                                },
+                                {
+                                    videoId: "s4fYA_wkta8",
+                                    title: "Iss Tarah",
+                                    artist: "Chaar Diwaari ft. Sonu Nigam"
+                                },
+                                {
+                                    videoId: "AXeB1vrz7II",
+                                    title: "SHARMEELI",
+                                    artist: "Frappe Ash & toorjo dey"
+                                },
+                                {
+                                    videoId: "9CxYG79GTOw",
+                                    title: "Maykhana",
+                                    artist: "Saar Punch, Bharg"
+                                },
+                                {
+                                    videoId: "7xutG743GJI",
+                                    title: "Kaala Teeka",
+                                    artist: "Dizlaw",
+                                    startTime: 66
+                                }
+                            ]}
+                        />
                     </div>
-
-                    <a
-                        href={`mailto:${data.contact.email}`}
-                        className="relative z-10 inline-flex items-center gap-2 self-start px-6 py-3 bg-white text-black font-bold rounded-xl mt-6 hover:bg-gray-200 transition-colors"
-                    >
-                        <SiGmail />
-                        Send Email
-                    </a>
                 </div>
 
             </div>
