@@ -35,7 +35,18 @@ const Contact = ({ data }: ContactProps) => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-6">
                 {/* Top Left: Status / Location */}
                 <div className="md:col-span-2 h-full min-h-[240px] bg-neutral-900/50 border border-white/5 rounded-3xl p-8 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-makima-red/10 blur-[80px] rounded-full pointer-events-none -mr-16 -mt-16" />
+                    {/* Background Image Layer */}
+                    <div className="absolute inset-0 z-0 opacity-60 transition-all duration-700">
+                        <Image
+                            src="/makima.png"
+                            alt="Status Background"
+                            fill
+                            className="object-cover object-center brightness-[1.1]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/10 to-transparent" />
+                    </div>
+
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-makima-red/10 blur-[80px] rounded-full pointer-events-none -mr-16 -mt-16 z-[1]" />
 
                     <div className="relative z-10 h-full flex flex-col justify-between">
                         <div>
@@ -61,6 +72,16 @@ const Contact = ({ data }: ContactProps) => {
 
                 {/* Top Right: Github Graph */}
                 <div className="md:col-span-2 h-full min-h-[240px] bg-neutral-900/50 border border-white/5 rounded-3xl p-6 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors">
+                    {/* Background Image Layer */}
+                    <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700">
+                        <Image
+                            src="/activity.png"
+                            alt="Activity Background"
+                            fill
+                            className="object-cover object-center brightness-[1.1]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                    </div>
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2">
                             <FaGithub className="text-xl text-white" />
@@ -104,11 +125,17 @@ const Contact = ({ data }: ContactProps) => {
                 <div className="md:col-span-2 h-full min-h-[240px] flex flex-col gap-4">
                     {/* Mail Part */}
                     <div className="flex-1 relative bg-neutral-900/40 backdrop-blur-xl rounded-3xl p-8 flex flex-col justify-center overflow-hidden group border border-white/5 hover:border-red-500/20 transition-all duration-500">
-                        {/* Background Decorative Icon */}
-                        <div className="absolute -right-8 -bottom-8 opacity-[0.03] text-white transform rotate-12 group-hover:rotate-0 transition-transform duration-700 pointer-events-none">
-                            <SiGmail size={200} />
+                        {/* Background Image Layer */}
+                        <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700">
+                            <Image
+                                src="/contract.png"
+                                alt="Mail Background"
+                                fill
+                                className="object-cover object-[center_7%] brightness-[1.1]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
                         </div>
-                        
+
                         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                             <div className="space-y-2">
                                 <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -118,7 +145,7 @@ const Contact = ({ data }: ContactProps) => {
                                     &apos;Let&apos;s build something great together.&apos;
                                 </p>
                             </div>
-                            
+
                             <a
                                 href={`mailto:${data.contact.email}`}
                                 className="group/btn relative px-8 py-3 bg-white text-black text-xs font-bold rounded-2xl hover:bg-zinc-200 transition-all duration-300 shadow-xl overflow-hidden"
