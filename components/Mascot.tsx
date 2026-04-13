@@ -20,8 +20,8 @@ const Mascot = () => {
     const [isMounted, setIsMounted] = useState(false);
     const [musicStatus, setMusicStatus] = useState<any>(null);
 
-    useEffect(() => { 
-        setIsMounted(true); 
+    useEffect(() => {
+        setIsMounted(true);
         const handleStatusUpdate = (e: any) => {
             setMusicStatus(e.detail);
         };
@@ -47,7 +47,7 @@ const Mascot = () => {
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     messages: [...messages, userMessage],
                     musicContext: musicStatus // Inject current music state
                 }),
@@ -63,7 +63,7 @@ const Mascot = () => {
             // Scan for music commands in the assistant's response
             const lowerContent = cleanContent.toLowerCase();
             let action = '';
-            
+
             if (lowerContent.includes('playing') || lowerContent.includes('play music') || lowerContent.includes('play some music')) {
                 action = 'play';
             } else if (lowerContent.includes('pausing') || lowerContent.includes('pause music') || lowerContent.includes('stopping')) {
@@ -98,22 +98,22 @@ const Mascot = () => {
                         initial={{ opacity: 0, scale: 0.9, y: 20, x: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 20, x: 20 }}
-                        className="absolute bottom-4 right-4 md:right-8 w-[350px] md:w-[400px] h-[500px] bg-black/90 backdrop-blur-xl border border-red-900/30 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto flex flex-col z-[100]"
+                        className="absolute bottom-4 right-4 md:right-8 w-[350px] md:w-[400px] h-[500px] bg-black/90 backdrop-blur-xl border border-white/20 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto flex flex-col z-[100]"
                     >
-                        {/* Background Watermark */}
-                        <div className="absolute inset-0 opacity-20 pointer-events-none flex items-center justify-center">
+                        {/* Background Watermark with Frame */}
+                        <div className="absolute inset-2 border border-white/10 rounded-2xl opacity-20 pointer-events-none overflow-hidden">
                             <div className="relative w-full h-full">
                                 <Image
-                                    src="/reze.webp"
+                                    src="/reze.png"
                                     alt="Background Watermark"
                                     fill
-                                    className="object-cover object-bottom"
+                                    className="object-cover object-center"
                                 />
                             </div>
                         </div>
 
                         {/* Chat Header */}
-                        <div className="p-4 bg-gradient-to-r from-red-950/50 to-black border-b border-red-900/20 flex items-center justify-between gap-2">
+                        <div className="p-4 bg-black border-b border-black flex items-center justify-between gap-2">
                             <div className="flex items-center gap-3 min-w-0">
                                 <div className="w-8 h-8 rounded-full overflow-hidden border border-red-500/30 flex-shrink-0">
                                     <Image
@@ -170,8 +170,8 @@ const Mascot = () => {
                                     className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                                 >
                                     <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.role === 'user'
-                                            ? 'bg-red-600 text-white rounded-tr-none'
-                                            : 'bg-white/5 border border-white/10 text-gray-200 rounded-tl-none'
+                                        ? 'bg-red-600 text-white rounded-tr-none'
+                                        : 'bg-white/5 border border-white/10 text-gray-200 rounded-tl-none'
                                         }`}>
                                         <ReactMarkdown
                                             remarkPlugins={[remarkGfm]}
@@ -202,7 +202,7 @@ const Mascot = () => {
                         </div>
 
                         {/* Input Area */}
-                        <div className="p-4 bg-black/50 border-t border-white/5">
+                        <div className="p-4 bg-black/50 border-t border-black">
                             <form
                                 onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
                                 className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-2xl p-1 focus-within:border-red-600/50 transition-colors"
@@ -234,7 +234,7 @@ const Mascot = () => {
                         This is Makima, Amber&apos;s Assistant. <br /> Tap to chat with me!
                     </div>
 
-                    <div 
+                    <div
                         className="relative w-full h-full cursor-pointer"
                         onClick={() => setIsChatOpen(true)}
                     >

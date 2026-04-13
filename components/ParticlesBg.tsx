@@ -31,26 +31,37 @@ const ParticlesBg: React.FC = () => {
                 fpsLimit: 120,
                 interactivity: {
                     events: {
-                        onClick: { enable: false },
-                        onHover: { enable: true, mode: "repulse" },
+                        onHover: {
+                            enable: true,
+                            mode: "grab",
+                        },
                         resize: { enable: true },
                     },
                     modes: {
-                        repulse: { distance: 100, duration: 0.4 },
+                        grab: {
+                            distance: 200,
+                            links: {
+                                opacity: 0.4,
+                            },
+                        },
                     },
                 },
                 particles: {
                     color: {
-                        value: "#ffffff",
+                        value: ["#00001a", "#000033", "#00004d", "#000080"],
                     },
                     links: {
-                        enable: false,
+                        color: "#000080",
+                        distance: 220,
+                        enable: true,
+                        opacity: 0.15,
+                        width: 1,
                     },
                     move: {
                         direction: "none",
                         enable: true,
                         outModes: {
-                            default: "out",
+                            default: "bounce",
                         },
                         random: true,
                         speed: 0.4,
@@ -60,21 +71,16 @@ const ParticlesBg: React.FC = () => {
                         density: {
                             enable: true,
                         },
-                        value: 80,
+                        value: 60,
                     },
                     opacity: {
-                        value: { min: 0.1, max: 0.4 },
-                        animation: {
-                            enable: true,
-                            speed: 1.5,
-                            sync: false
-                        }
+                        value: { min: 0.05, max: 0.3 },
                     },
                     shape: {
                         type: "circle",
                     },
                     size: {
-                        value: { min: 1, max: 3.5 },
+                        value: { min: 3, max: 6 },
                     },
                 },
                 detectRetina: true,

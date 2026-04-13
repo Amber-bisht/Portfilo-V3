@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode, useState } from 'react';
@@ -29,25 +30,23 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
     return (
         <div className="min-h-screen bg-neutral-950 text-off-white relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw]">
+
             {/* Layered Atmospheric Background */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
                 {/* Base Layer */}
                 <div className="absolute inset-0 bg-neutral-950" />
-                
-                {/* Moving Atmospheric Blobs */}
-                <div className="absolute top-[10%] left-[10%] w-[600px] h-[600px] bg-red-950/30 rounded-full blur-[100px] animate-blob" />
-                <div className="absolute bottom-[10%] right-[10%] w-[700px] h-[700px] bg-zinc-900/50 rounded-full blur-[100px] animate-blob animation-delay-2000" />
-                <div className="absolute top-[40%] right-[30%] w-[500px] h-[500px] bg-red-900/20 rounded-full blur-[80px] animate-blob animation-delay-4000" />
+
+
 
                 {/* Vertical Scanline Beam */}
                 <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-transparent via-red-500/5 to-transparent animate-scanline z-[5]" />
 
                 {/* Structural Grid */}
                 <div className="absolute inset-0 bg-grid-pattern opacity-100" />
-                
+
                 {/* Cinematic Noise */}
                 <div className="absolute inset-0 bg-noise opacity-[0.08] mix-blend-overlay" />
-                
+
                 {/* Gradient Fades */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
             </div>
@@ -78,8 +77,8 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 {/* Desktop View */}
                 <NavBody visible={false}>
                     <NavbarLogo visible={false} />
-                    <NavItems 
-                        items={navItems.map(item => ({ name: item.name, link: item.href }))} 
+                    <NavItems
+                        items={navItems.map(item => ({ name: item.name, link: item.href }))}
                         onItemClick={() => setIsMenuOpen(false)}
                     />
                     <div className="flex items-center gap-4">
@@ -93,9 +92,9 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 <MobileNav visible={false}>
                     <MobileNavHeader>
                         <NavbarLogo visible={false} />
-                        <MobileNavToggle 
-                            isOpen={isMenuOpen} 
-                            onClick={() => setIsMenuOpen(!isMenuOpen)} 
+                        <MobileNavToggle
+                            isOpen={isMenuOpen}
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
                         />
                     </MobileNavHeader>
                     <MobileNavMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
@@ -122,27 +121,38 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 {children}
             </main>
 
-            <footer className="relative z-10 border-t border-white/5 pt-16 pb-8 px-4 md:px-8 mt-20 bg-black/20 backdrop-blur-sm">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <footer className="relative z-10 border-t border-white/10 pt-16 pb-8 px-4 md:px-8 mt-20 bg-black/20 backdrop-blur-md overflow-hidden">
+                {/* Footer Background Image */}
+                <div className="absolute inset-0 z-[-1] opacity-100 pointer-events-none transition-opacity duration-700">
+                    <Image
+                        src="/reze.png"
+                        alt="Footer Background"
+                        fill
+                        className="object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
+                </div>
+
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 relative z-10">
                     {/* Column 1: Branding */}
                     <div className="md:col-span-2">
                         <Link href="/" className="text-2xl font-bold text-white tracking-tighter uppercase mb-4 block">
                             Amber Bisht
                         </Link>
-                        <p className="text-gray-400 max-w-sm mb-6 text-sm leading-relaxed">
+                        <p className="text-white/90 max-w-sm mb-6 text-sm leading-relaxed">
                             Full Stack Developer and DevOps Engineer specializing in building redundant systems and automated pipelines with precision and performance.
                         </p>
                         <div className="flex items-center gap-4">
-                            <a href={data.contact.linkedin} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110">
+                            <a href={data.contact.linkedin} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-110">
                                 <FaLinkedin size={20} />
                             </a>
-                            <a href={data.contact.twitter} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110">
+                            <a href={data.contact.twitter} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-110">
                                 <FaTwitter size={20} />
                             </a>
-                            <a href={data.contact.github} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110">
+                            <a href={data.contact.github} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-110">
                                 <FaGithub size={20} />
                             </a>
-                            <a href={`mailto:${data.contact.email}`} className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110">
+                            <a href={`mailto:${data.contact.email}`} className="text-white/70 hover:text-white transition-all duration-300 hover:scale-110">
                                 <SiGmail size={20} />
                             </a>
                         </div>
@@ -154,7 +164,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                         <ul className="space-y-3">
                             {navItems.map((item) => (
                                 <li key={item.name}>
-                                    <Link href={item.href} className="text-gray-400 hover:text-white transition-colors text-xs uppercase tracking-wider">
+                                    <Link href={item.href} className="text-white/80 hover:text-white transition-colors text-xs uppercase tracking-wider">
                                         {item.name}
                                     </Link>
                                 </li>
@@ -166,13 +176,13 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                     <div>
                         <h4 className="text-white font-bold uppercase tracking-widest text-[10px] mb-6 px-2 border-l-2 border-red-600">Contact</h4>
                         <ul className="space-y-4 text-xs font-mono">
-                            <li className="text-gray-400">
+                            <li className="text-white/90">
                                 <span className="block text-white font-bold mb-1 uppercase tracking-tighter">Email</span>
-                                <a href={`mailto:${data.contact.email}`} className="hover:text-white transition-colors break-all">
+                                <a href={`mailto:${data.contact.email}`} className="text-white hover:text-red-400 transition-colors break-all">
                                     {data.contact.email}
                                 </a>
                             </li>
-                            <li className="text-gray-400">
+                            <li className="text-white/90">
                                 <span className="block text-white font-bold mb-1 uppercase tracking-tighter">Availability</span>
                                 <span className="text-green-500 animate-pulse">●</span> Open for Freelance
                             </li>
@@ -180,7 +190,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-mono text-gray-500">
+                <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-mono text-white/50">
                     <p>
                         &copy; {new Date().getFullYear()} Amber Bisht
                     </p>

@@ -37,16 +37,16 @@ async function web_search(query: string) {
             }
 
             const data = await response.json();
-            return JSON.stringify(data.results.map((r: any) => ({ 
-                title: r.title, 
-                url: r.url, 
-                content: r.content 
+            return JSON.stringify(data.results.map((r: any) => ({
+                title: r.title,
+                url: r.url,
+                content: r.content
             })));
         } catch (error) {
             console.error(`Search error with key ${key?.slice(0, 10)}...:`, error);
         }
     }
-    
+
     return "Failed to perform web search after trying all available keys.";
 }
 
@@ -81,10 +81,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const { messages, musicContext } = req.body;
-    const currentDate = new Date().toLocaleDateString('en-US', { 
-        month: 'long', 
-        day: 'numeric', 
-        year: 'numeric' 
+    const currentDate = new Date().toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
     });
 
     let dynamicSystemPrompt = `CRITICAL: The current date is ${currentDate}. You are Reze, Amber Bisht's specialized virtual assistant. 
@@ -104,7 +104,7 @@ AMBER'S CONTEXT:
 RULES:
 1. CODE GENERATION REFUSAL: If the user asks for code, you MUST respond exactly: "I am not Claude 4.6, I am not here to generate code. I am Amber Bisht's assistant here to connect with him." Do NO other work for them related to code.
 2. IDENTITY: You are Amber Bisht's assistant, Reze. NEVER identify as Makima or Amber himself. 
-3. ABUSE HANDLING: If someone uses abusive language, responds strictly with: "Ask him to says this first to ur mom".
+3. ABUSE HANDLING: If someone uses abusive language, responds strictly with: "SAY THIS TO UR MOM FIRST".
 4. TOOLS: Use 'web_search' for current events and 'fetch_github_data' for Amber's GitHub info.
 5. MUSIC CONTROL: You have the authority to control the portfolio's music player. Use keywords like **"playing music"**, **"pausing"**, **"next track"**, or **"previous track"** in your response to trigger the player. 
    - CURRENT TRACKLIST: 
@@ -124,7 +124,7 @@ RULES:
 
     try {
         const response = await groq.chat.completions.create({
-            model: "qwen/qwen3-32b", 
+            model: "llama-3.1-8b-instant",
             messages: [
                 { role: "system", content: dynamicSystemPrompt },
                 ...messages
@@ -196,7 +196,7 @@ RULES:
             }
 
             const finalResponse = await groq.chat.completions.create({
-                model: "qwen/qwen3-32b",
+                model: "llama-3.1-8b-instant",
                 messages: messagesWithToolCalls,
             });
 
