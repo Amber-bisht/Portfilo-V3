@@ -1,9 +1,12 @@
 import { getTechIcon } from '../utils/techIcons';
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useTheme } from '../context/ThemeContext';
 
 
 const Experience = ({ experiences }: { experiences: any[] }) => {
+    const { isCinematicMode } = useTheme();
     return (
         <section id="experience" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -14,18 +17,18 @@ const Experience = ({ experiences }: { experiences: any[] }) => {
                     >
                         <div className="absolute top-0 right-0 w-64 h-64 bg-makima-red/5 blur-[80px] rounded-full pointer-events-none -mr-16 -mt-16" />
 
-                        {/* Background Icon Watermark */}
-                        {(() => {
-                            const watermarkTech = exp.company === 'Freelance' ? 'CI/CD' : exp["tech used"]?.[0];
-                            if (!watermarkTech) return null;
-
-                            const { icon: MainIcon, color: MainColor } = getTechIcon(watermarkTech);
-                            return (
-                                <div className="absolute -right-6 -bottom-6 opacity-5 pointer-events-none transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
-                                    <MainIcon style={{ color: MainColor }} size={200} />
-                                </div>
-                            );
-                        })()}
+                        {/* Background Image Layer */}
+                        {isCinematicMode && (
+                            <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
+                                <Image
+                                    src="/experience.png"
+                                    alt="Experience Background"
+                                    fill
+                                    className="object-cover object-center"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                            </div>
+                        )}
 
                         <div className="relative z-10">
                             <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">

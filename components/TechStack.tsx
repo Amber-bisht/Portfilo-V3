@@ -40,6 +40,7 @@ import { FaServer, FaCode, FaLock, FaSpaceShuttle, FaMousePointer, FaRobot } fro
 import { GiRabbit } from 'react-icons/gi';
 import Marquee from "react-fast-marquee";
 import Image from 'next/image';
+import { useTheme } from '../context/ThemeContext';
 
 const CustomAntigravityIcon = (props: any) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -155,6 +156,7 @@ interface TechStackProps {
 }
 
 const TechStack = ({ data }: TechStackProps) => {
+    const { isCinematicMode } = useTheme();
     const renderTechGrid = (items: any[]) => {
         // Sort items: non-blurred first, blurred last
         const sortedItems = [...items].sort((a, b) => (a.blur === b.blur ? 0 : a.blur ? 1 : -1));
@@ -195,11 +197,19 @@ const TechStack = ({ data }: TechStackProps) => {
             {/* Full Stack Card - TOP FULL WIDTH */}
             <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-makima-red/5 blur-[80px] rounded-full pointer-events-none -mr-16 -mt-16" />
-                
-                {/* Background Logo */}
-                <div className="absolute -right-8 -bottom-8 opacity-[0.03] text-white pointer-events-none transform -rotate-12">
-                    <SiReact size={240} />
-                </div>
+
+                {/* Background Image Layer */}
+                {isCinematicMode && (
+                    <div className="absolute inset-0 z-0 opacity-50 transition-all duration-700 pointer-events-none">
+                        <Image
+                            src="/image copy.png"
+                            alt="Full Stack Background"
+                            fill
+                            className="object-cover object-center"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                    </div>
+                )}
 
                 <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-6">
@@ -212,12 +222,20 @@ const TechStack = ({ data }: TechStackProps) => {
 
             {/* DevOps Card - BOTTOM LEFT BIGGER */}
             <div className="md:col-span-3 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
-                 <div className="absolute top-0 left-0 w-96 h-96 bg-makima-red/5 blur-[100px] rounded-full pointer-events-none -ml-32 -mt-32" />
-                
-                {/* Background Logo */}
-                <div className="absolute -right-12 -bottom-12 opacity-[0.03] text-white pointer-events-none transform rotate-12">
-                    <SiDocker size={300} />
-                </div>
+                <div className="absolute top-0 left-0 w-96 h-96 bg-makima-red/5 blur-[100px] rounded-full pointer-events-none -ml-32 -mt-32" />
+
+                {/* Background Image Layer */}
+                {isCinematicMode && (
+                    <div className="absolute inset-0 z-0 opacity-50 transition-all duration-700 pointer-events-none">
+                        <Image
+                            src="/image copy.png"
+                            alt="DevOps Background"
+                            fill
+                            className="object-cover object-center"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                    </div>
+                )}
 
                 <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-6">
@@ -231,9 +249,18 @@ const TechStack = ({ data }: TechStackProps) => {
             {/* AI Card - BOTTOM RIGHT SMALLER */}
             {data.ai && (
                 <div className="md:col-span-1 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
-                    <div className="absolute -right-4 -bottom-4 opacity-[0.05] text-white pointer-events-none">
-                        <FaRobot size={120} />
-                    </div>
+                    {/* Background Image Layer */}
+                    {isCinematicMode && (
+                        <div className="absolute inset-0 z-0 opacity-50 transition-all duration-700 pointer-events-none">
+                            <Image
+                                src="/image copy.png"
+                                alt="AI Background"
+                                fill
+                                className="object-cover object-center"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                        </div>
+                    )}
                     <div className="relative z-10">
                         <div className="flex items-center gap-2 mb-6">
                             <div className="w-1.5 h-6 bg-makima-red rounded-full" />

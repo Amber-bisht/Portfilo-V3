@@ -2,12 +2,13 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode, useState } from 'react';
-import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { ReactNode, useState, useEffect } from 'react';
+import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase, FaLinkedin, FaGithub, FaTwitter, FaMusic, FaPause } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
 import data from '../data/data.json';
 import ParticlesBg from './ParticlesBg';
 import { Navbar, NavBody, NavItems, NavbarLogo, NavbarButton, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './Navbar';
+import { useTheme } from '../context/ThemeContext';
 
 interface LayoutProps {
     children: ReactNode;
@@ -15,9 +16,25 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevOps' }: LayoutProps) => {
+    const { isCinematicMode } = useTheme();
+    const [isPlaying, setIsPlaying] = useState(false);
     const router = useRouter();
     const [activeTab, setActiveTab] = useState('Home');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Sync with global music status
+    useEffect(() => {
+        const handleStatusUpdate = (e: any) => {
+            setIsPlaying(e.detail.isPlaying);
+        };
+        window.addEventListener('music-status-update', handleStatusUpdate);
+        return () => window.removeEventListener('music-status-update', handleStatusUpdate);
+    }, []);
+
+    const toggleMusic = () => {
+        const action = isPlaying ? 'pause' : 'play';
+        window.dispatchEvent(new CustomEvent('music-command', { detail: { action } }));
+    };
 
     const navItems = [
         { name: 'Home', icon: FaHome, href: '/#' },
@@ -38,6 +55,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
 
 
+
                 {/* Vertical Scanline Beam */}
                 <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-transparent via-red-500/5 to-transparent animate-scanline z-[5]" />
 
@@ -52,6 +70,32 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
             </div>
 
             <ParticlesBg />
+
+            {/* Cinematic Theme Pillar Backgrounds - Continuous Aesthetic Frame */}
+            {isCinematicMode && (
+                <div className="fixed inset-0 pointer-events-none z-[5] overflow-hidden">
+                    <div
+                        className="absolute inset-y-0 left-0 w-[200px] opacity-[0.12] transition-opacity duration-1000"
+                        style={{
+                            backgroundImage: 'url(/pillars_seamless.png)',
+                            backgroundSize: '100% auto',
+                            backgroundRepeat: 'repeat-y',
+                            backgroundPosition: 'top left'
+                        }}
+                    />
+                    <div
+                        className="absolute inset-y-0 right-0 w-[200px] opacity-[0.12] transition-opacity duration-1000"
+                        style={{
+                            backgroundImage: 'url(/pillars_seamless.png)',
+                            backgroundSize: '100% auto',
+                            backgroundRepeat: 'repeat-y',
+                            backgroundPosition: 'top right'
+                        }}
+                    />
+                </div>
+            )}
+
+
             <Head>
                 <title>{title}</title>
                 <meta name="description" content="Amber Bisht - Full Stack Developer and DevOps Portfolio. Building resilient systems and automated pipelines." />
@@ -81,10 +125,24 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                         items={navItems.map(item => ({ name: item.name, link: item.href }))}
                         onItemClick={() => setIsMenuOpen(false)}
                     />
-                    <div className="flex items-center gap-4">
-                        <NavbarButton href="mailto:bishtamber0@gmail.com" variant="primary">
-                            Hire Me
-                        </NavbarButton>
+                    <div className="flex items-center gap-4 relative">
+                        <div className="relative group">
+                            <NavbarButton href="mailto:bishtamber0@gmail.com" variant="hireme">
+                                Hire Me
+                            </NavbarButton>
+
+                            {/* Navbar Decorative Lantern - Hanging under Hire Me */}
+                            {isCinematicMode && (
+                                <div className="absolute top-[95%] left-1/2 -translate-x-1/2 w-16 h-40 md:w-20 md:h-48 opacity-95 pointer-events-none transition-all duration-700 -mt-8">
+                                    <Image
+                                        src="/lattern.png"
+                                        alt="Decorative Lantern"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </NavBody>
 
@@ -123,15 +181,17 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
             <footer className="relative z-10 border-t border-white/10 pt-16 pb-8 px-4 md:px-8 mt-20 bg-black/20 backdrop-blur-md overflow-hidden">
                 {/* Footer Background Image */}
-                <div className="absolute inset-0 z-[-1] opacity-100 pointer-events-none transition-opacity duration-700">
-                    <Image
-                        src="/reze.png"
-                        alt="Footer Background"
-                        fill
-                        className="object-cover object-center"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
-                </div>
+                {isCinematicMode && (
+                    <div className="absolute inset-0 z-[-1] opacity-100 pointer-events-none transition-opacity duration-700">
+                        <Image
+                            src="/reze.png"
+                            alt="Footer Background"
+                            fill
+                            className="object-cover object-center"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
+                    </div>
+                )}
 
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 relative z-10">
                     {/* Column 1: Branding */}
@@ -196,6 +256,36 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                     </p>
                 </div>
             </footer>
+
+            {/* Global Music Aside Toggle */}
+            <button
+                onClick={toggleMusic}
+                className="fixed right-0 top-1/2 -translate-y-1/2 z-[100] group flex items-center"
+            >
+                <div className={`flex flex-col items-center gap-4 py-8 px-2 rounded-l-2xl border-y border-l transition-all duration-500 backdrop-blur-xl ${isPlaying ? 'bg-makima-red/20 border-makima-red/30 text-white shadow-[0_0_30px_rgba(239,68,68,0.2)]' : 'bg-white/5 border-white/10 text-white/40 hover:text-white/70'}`}>
+                    <div className="flex flex-col gap-1 items-center">
+                        {isPlaying ? (
+                            <div className="flex flex-col gap-0.5 items-center">
+                                <div className="w-1 h-3 bg-white rounded-full animate-music-bar-1" />
+                                <div className="w-1 h-5 bg-white rounded-full animate-music-bar-2" />
+                                <div className="w-1 h-2 bg-white rounded-full animate-music-bar-3" />
+                            </div>
+                        ) : (
+                            <FaMusic size={14} className="opacity-50" />
+                        )}
+                    </div>
+
+                    <span className="[writing-mode:vertical-lr] rotate-180 text-[10px] font-bold uppercase tracking-[0.4em] mt-2">
+                        {isPlaying ? 'Playing' : 'Music'}
+                    </span>
+
+                    {isPlaying && (
+                        <div className="mt-2 text-white/80 scale-75">
+                            <FaPause size={12} />
+                        </div>
+                    )}
+                </div>
+            </button>
         </div>
     );
 };

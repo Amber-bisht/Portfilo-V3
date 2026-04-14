@@ -255,10 +255,6 @@
                 "icon": "SiAnthropic"
             },
             {
-                "name": "GitHub Copilot",
-                "icon": "SiGithubcopilot"
-            },
-            {
                 "name": "Codex",
                 "icon": "SiOpenai"
             }

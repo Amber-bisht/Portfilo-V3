@@ -7,14 +7,17 @@ const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel' });
 
 import Mascot from '../components/Mascot';
 import PochitaFollower from '../components/PochitaFollower';
+import { ThemeProvider } from '../context/ThemeContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <main className={`${inter.variable} ${cinzel.variable} font-sans`}>
-            <Component {...pageProps} />
-            <Mascot />
-            <PochitaFollower />
-        </main>
+        <ThemeProvider>
+            <main className={`${inter.variable} ${cinzel.variable} font-sans`}>
+                <Component {...pageProps} />
+                <Mascot />
+                <PochitaFollower />
+            </main>
+        </ThemeProvider>
     );
 }
 

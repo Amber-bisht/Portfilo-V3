@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Github, ExternalLink, Info, X } from 'lucide-react';
 import Image from 'next/image';
 import { getTechIcon } from '../utils/techIcons';
+import { useTheme } from '../context/ThemeContext';
 
 interface ProjectProps {
     project: {
@@ -21,20 +22,34 @@ interface ProjectProps {
 }
 
 const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps) => {
+    const { isCinematicMode } = useTheme();
     const [isInternalModalOpen, setIsInternalModalOpen] = useState(false);
     const isHorizontal = orientation === "horizontal";
 
     return (
         <>
             <div className={`group relative bg-neutral-900/50 border border-white/5 rounded-3xl overflow-hidden hover:border-white/10 transition-all duration-300 shadow-xl flex ${isHorizontal ? "md:flex-row flex-col h-full" : "flex-col h-full"}`}>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-makima-red/5 blur-[40px] rounded-full pointer-events-none -mr-8 -mt-8 group-hover:bg-makima-red/10 transition-colors" />
-                
+                {/* Background Image Layer */}
+                {isCinematicMode && (
+                    <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700 pointer-events-none">
+                        <Image
+                            src="/waves.png"
+                            alt="Project Background"
+                            fill
+                            className="object-cover object-center"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                    </div>
+                )}
+
+                <div className="absolute top-0 right-0 w-32 h-32 bg-makima-red/5 blur-[40px] rounded-full pointer-events-none -mr-8 -mt-8 group-hover:bg-makima-red/10 transition-colors z-[1]" />
+
                 {/* Image Section */}
-                <div className={`relative overflow-hidden p-4 ${isHorizontal ? "md:w-2/5 w-full h-48 md:h-full" : "h-56 w-full pb-0"}`}>
-                    <div className="rounded-2xl overflow-hidden h-full w-full relative">
+                <div className={`relative overflow-hidden ${isHorizontal ? "md:w-2/5 w-full h-48 md:h-full" : "h-64 w-full"}`}>
+                    <div className="h-full w-full relative bg-white/5">
                         <div className="absolute inset-0 bg-transparent z-10" />
                         {project.tag && (
-                            <div className="absolute top-2 right-2 z-20 px-3 py-1 bg-makima-red text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg">
+                            <div className="absolute top-4 left-4 z-20 px-3 py-1 bg-makima-red text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg">
                                 {project.tag}
                             </div>
                         )}
@@ -42,8 +57,9 @@ const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps)
                             src={project.image || "https://placehold.co/600x400/1a1a1a/FFF?text=Project"}
                             alt={project.title}
                             fill
-                            className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            className="object-contain transform group-hover:scale-110 transition-transform duration-500"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-[5]" />
                     </div>
                 </div>
 

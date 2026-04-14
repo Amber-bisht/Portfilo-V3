@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Play, Pause, SkipForward, SkipBack, Volume2, Music, Loader2 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 declare global {
   interface Window {
@@ -21,8 +22,11 @@ interface MusicPlayerProps {
 }
 
 const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
+    const { isCinematicMode } = useTheme();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
+    const isFirstMount = useRef(true);
+    const hasRestoredPosition = useRef(false);
     const [progress, setProgress] = useState(0);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
@@ -31,6 +35,19 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
     
     const playerRef = useRef<any>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+
+    // Initial load from localStorage
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const savedIndex = localStorage.getItem('music-current-index');
+            if (savedIndex !== null) {
+                const idx = parseInt(savedIndex);
+                if (idx >= 0 && idx < tracks.length) {
+                    setCurrentIndex(idx);
+                }
+            }
+        }
+    }, [tracks.length]);
 
     const currentTrack = tracks[currentIndex];
 
@@ -73,7 +90,9 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                     modestbranding: 1,
                     rel: 0,
                     showinfo: 0,
-                    start: currentTrack.startTime || 0
+                    start: currentTrack.startTime || 0,
+                    enablejsapi: 1,
+                    origin: window.location.origin
                 },
                 events: {
                     onReady: (event: any) => {
@@ -111,7 +130,7 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
         }
     }, [currentIndex]);
 
-    // Update progress bar
+    // Update progress bar and save state
     useEffect(() => {
         let interval: NodeJS.Timeout;
         if (isPlaying && playerRef.current && playerRef.current.getCurrentTime) {
@@ -122,11 +141,30 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                     setDuration(total);
                     setCurrentTime(current);
                     setProgress((current / total) * 100);
+                    
+                    // Persist state
+                    localStorage.setItem('music-current-index', currentIndex.toString());
+                    localStorage.setItem('music-current-time', current.toString());
                 }
             }, 1000);
         }
         return () => clearInterval(interval);
-    }, [isPlaying]);
+    }, [isPlaying, currentIndex]);
+
+    // Initial Seek once ready
+    useEffect(() => {
+        if (isPlayerReady && !hasRestoredPosition.current && playerRef.current && playerRef.current.seekTo) {
+            const savedTime = localStorage.getItem('music-current-time');
+            if (savedTime) {
+                const time = parseFloat(savedTime);
+                playerRef.current.seekTo(time, true);
+                if (isCinematicMode) {
+                    playerRef.current.playVideo();
+                }
+            }
+            hasRestoredPosition.current = true;
+        }
+    }, [isPlayerReady, isCinematicMode]);
 
     const togglePlay = () => {
         if (!isPlayerReady || !playerRef.current) return;
@@ -165,6 +203,27 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
         const seconds = Math.floor(time % 60);
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
+
+    // Sync with Cinematic Mode transitions - SEAMLESS
+    useEffect(() => {
+        if (isFirstMount.current) {
+            isFirstMount.current = false;
+            return;
+        }
+
+        if (isPlayerReady && playerRef.current) {
+            try {
+                if (isCinematicMode) {
+                    playerRef.current.unMute();
+                    playerRef.current.playVideo();
+                } else {
+                    playerRef.current.pauseVideo();
+                }
+            } catch (err) {
+                // Silently handle if player state is not ready for playback commands
+            }
+        }
+    }, [isCinematicMode, isPlayerReady]);
 
     // Global Command Listener for Mascot interaction
     useEffect(() => {

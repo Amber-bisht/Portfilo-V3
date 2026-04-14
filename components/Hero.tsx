@@ -1,8 +1,9 @@
-import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaTwitter, FaImage } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTheme } from '../context/ThemeContext';
 
 interface HeroProps {
     data: {
@@ -22,6 +23,8 @@ interface HeroProps {
 }
 
 const Hero = ({ data }: HeroProps) => {
+    const { isCinematicMode, toggleCinematicMode } = useTheme();
+
     const socialLinks = [
         {
             name: 'LinkedIn',
@@ -49,10 +52,23 @@ const Hero = ({ data }: HeroProps) => {
         <section className="relative min-h-[60vh] flex flex-col items-center justify-center py-8 px-4 md:px-8 max-w-7xl mx-auto">
             {/* Top Header Section */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-7xl">
-                
+
                 {/* 1. Profile Image Card (Tall) */}
-                <div className="md:col-span-1 md:row-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-4 backdrop-blur-sm relative overflow-hidden flex items-center justify-center group outline outline-1 outline-white/5">
-                    <div className="relative w-full aspect-square md:aspect-auto md:h-full overflow-hidden rounded-2xl">
+                <div className="md:col-span-1 md:row-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-4 backdrop-blur-sm relative overflow-hidden flex items-center justify-center group outline outline-1 outline-white/5 w-full max-w-sm mx-auto md:max-w-none md:mx-0 min-h-[350px] md:min-h-0">
+                    {/* Background Image Layer */}
+                    {isCinematicMode && (
+                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
+                            <Image
+                                src="/pfp.png"
+                                alt="Profile Background"
+                                fill
+                                className="object-cover object-center brightness-[1.1]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                        </div>
+                    )}
+
+                    <div className="relative w-48 h-48 md:w-48 md:h-48 overflow-hidden rounded-2xl z-10 border border-white/10 shadow-2xl">
                         <Image
                             src="/hero-profile.webp"
                             alt={data.about.name}
@@ -65,25 +81,64 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* 2. Personal Data Card */}
                 <div className="md:col-span-3 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 backdrop-blur-sm relative overflow-hidden flex flex-col justify-center">
-                    <div className="flex items-center gap-3 mb-2">
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter uppercase">
-                            {data.about.name}
-                        </h1>
-                    </div>
-                    
-                    <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-gray-400 font-mono mb-6">
-                        <div className="flex items-center gap-1.5 uppercase">
-                            <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                            {data.about.location || "Uttarakhand, IND"}
+                    {/* Background Image Layer */}
+                    {isCinematicMode && (
+                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
+                            <Image
+                                src="/name.png"
+                                alt="Personal Data Background"
+                                fill
+                                className="object-cover object-center brightness-[1.1]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
                         </div>
-                        <span className="text-gray-700">|</span>
-                        <div className="uppercase tracking-widest">{data.about.title}</div>
+                    )}
+
+                    <div className="relative z-10">
+                        <div className="flex items-center gap-6 mb-2">
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter uppercase">
+                                {data.about.name}
+                            </h1>
+
+                            {/* Cinematic Mode Toggle */}
+                            <button
+                                onClick={toggleCinematicMode}
+                                className={`flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all duration-300 ${isCinematicMode ? 'bg-white/20 border-white/30 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]' : 'bg-white/5 border-white/10 text-white/40 hover:text-white/70'}`}
+                                title={isCinematicMode ? "Disable Cinematic Mode" : "Enable Cinematic Mode"}
+                            >
+                                <span className="text-[10px] font-bold uppercase tracking-[0.3em]">
+                                    {isCinematicMode ? "Cinematic ON" : "Cinematic OFF"}
+                                </span>
+                            </button>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-white/90 font-mono mb-6">
+                            <div className="flex items-center gap-1.5 uppercase font-bold">
+                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                                {data.about.location || "Uttarakhand, IND"}
+                            </div>
+                            <span className="text-white/40">|</span>
+                            <div className="uppercase tracking-widest font-bold">{data.about.title}</div>
+                        </div>
                     </div>
                 </div>
 
                 {/* 3. Social Icons Card */}
                 <div className="md:col-span-1 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 backdrop-blur-sm relative overflow-hidden">
-                    <div className="flex justify-around items-center w-full h-full">
+                    {/* Background Image Layer */}
+                    {isCinematicMode && (
+                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
+                            <Image
+                                src="/sunflower.png"
+                                alt="Social Background"
+                                fill
+                                className="object-cover object-center brightness-[1.1]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                        </div>
+                    )}
+
+                    <div className="relative z-10 flex justify-around items-center w-full h-full">
                         {socialLinks.map((link) => (
                             <a
                                 key={link.name}
@@ -101,15 +156,28 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* 4. Quick Actions Card */}
                 <div className="md:col-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 backdrop-blur-sm relative overflow-hidden flex items-center gap-4">
-                    <Link 
-                        href="/blog" 
-                        className="flex-1 bg-neutral-100 text-neutral-950 font-bold py-3 px-6 rounded-2xl text-center hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] active:scale-95 uppercase text-sm tracking-widest"
+                    {/* Background Image Layer */}
+                    {isCinematicMode && (
+                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
+                            <Image
+                                src="/spin.png"
+                                alt="Actions Background"
+                                fill
+                                className="object-cover object-center brightness-[1.1]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                        </div>
+                    )}
+
+                    <Link
+                        href="/blog"
+                        className="relative z-10 flex-1 bg-neutral-100 text-neutral-950 font-bold py-3 px-6 rounded-2xl text-center hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] active:scale-95 uppercase text-sm tracking-widest"
                     >
                         Read Blog
                     </Link>
-                    <a 
-                        href={`mailto:${data.contact.email}`} 
-                        className="flex-1 bg-neutral-800/50 text-white font-bold py-3 px-6 rounded-2xl text-center border border-white/10 hover:bg-neutral-800 transition-all duration-300 active:scale-95 uppercase text-sm tracking-widest"
+                    <a
+                        href={`mailto:${data.contact.email}`}
+                        className="relative z-10 flex-1 bg-neutral-800/50 text-white font-bold py-3 px-6 rounded-2xl text-center border border-white/10 hover:bg-neutral-800 transition-all duration-300 active:scale-95 uppercase text-sm tracking-widest"
                     >
                         Contact Me
                     </a>
@@ -117,12 +185,24 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* 5. Description Card */}
                 <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden group">
-                    <h2 className="text-xl md:text-3xl lg:text-4xl font-mono leading-relaxed md:leading-snug uppercase transition-all duration-300">
-                        <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-white/90 to-zinc-500 tracking-tight">
-                            {data.about.description}
-                        </span>
-                    </h2>
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 blur-[80px] rounded-full pointer-events-none group-hover:bg-white/10 transition-colors duration-500" />
+                    {/* Background Image Layer */}
+                    {isCinematicMode && (
+                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
+                            <Image
+                                src="/desc.png"
+                                alt="Description Background"
+                                fill
+                                className="object-cover object-center brightness-[1.1]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent" />
+                        </div>
+                    )}
+
+                    <div className="relative z-10">
+                        <h2 className="text-xl md:text-3xl lg:text-4xl font-mono leading-relaxed md:leading-snug uppercase transition-all duration-300 text-white tracking-tight">
+                            {data.about.description || "Scalable Systems Engineer focused on building production-grade, end-to-end platforms with emphasis on backend architecture, performance optimization, and infrastructure reliability."}
+                        </h2>
+                    </div>
                 </div>
 
             </div>

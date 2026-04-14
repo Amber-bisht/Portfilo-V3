@@ -9,7 +9,8 @@ import {
 } from "framer-motion"; // Reverting to framer-motion for maximum compatibility
 
 import React, { useRef, useState } from "react";
-
+import Image from "next/image";
+import { useTheme } from "../context/ThemeContext";
 
 interface NavbarProps {
     children: React.ReactNode;
@@ -51,11 +52,12 @@ interface MobileNavMenuProps {
 
 export const Navbar = ({ children, className }: NavbarProps) => {
     const { scrollY } = useScroll();
+    const { isCinematicMode } = useTheme();
     const [visible, setVisible] = useState<boolean>(true);
     const [isSmall, setIsSmall] = useState<boolean>(false);
-
+    
     // Initial check on mount
-    React.useLayoutEffect(() => {
+    React.useEffect(() => {
         const current = scrollY.get();
         setIsSmall(current > 50);
         setVisible(true);
@@ -74,12 +76,12 @@ export const Navbar = ({ children, className }: NavbarProps) => {
     return (
         <motion.div
             animate={{
-                y: visible ? 0 : "-110%",
-                opacity: visible ? 1 : 0,
+                y: 0,
+                opacity: 1,
             }}
             transition={{
-                duration: 0.3,
-                ease: "easeInOut",
+                duration: 0.5,
+                ease: [0.23, 1, 0.32, 1],
             }}
             className={cn("fixed inset-x-0 top-0 z-[110] w-full", className)}
         >
@@ -96,6 +98,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 };
 
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
+    const { isCinematicMode } = useTheme();
     return (
         <motion.div
             animate={{
@@ -272,7 +275,7 @@ export const NavbarButton = ({
     as?: React.ElementType;
     children: React.ReactNode;
     className?: string;
-    variant?: "primary" | "secondary" | "dark" | "gradient" | "pink";
+    variant?: "primary" | "secondary" | "dark" | "gradient" | "pink" | "hireme";
 } & (
         | React.ComponentPropsWithoutRef<"a">
         | React.ComponentPropsWithoutRef<"button">
@@ -288,6 +291,7 @@ export const NavbarButton = ({
         gradient:
             "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]",
         pink: "bg-brand-pink text-brand-bg shadow-lg shadow-brand-pink/20 glow-pink hover:brightness-110",
+        hireme: "text-white bg-transparent border border-white/20 hover:border-white/40 shadow-2xl relative overflow-hidden",
     };
 
     const Component = Tag as any;
@@ -295,9 +299,17 @@ export const NavbarButton = ({
         <Component
             href={href || undefined}
             className={cn(baseStyles, variantStyles[variant], className)}
+            style={variant === 'hireme' ? { backgroundImage: 'url(/hireme.png)', backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
             {...props}
         >
-            {children}
+            {variant === 'hireme' ? (
+                <>
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                    <span className="relative z-10">{children}</span>
+                </>
+            ) : (
+                children
+            )}
         </Component>
     );
 };

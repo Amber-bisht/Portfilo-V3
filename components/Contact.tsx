@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { ExternalLink, Mail } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTheme } from '../context/ThemeContext';
 import MusicPlayer from './MusicPlayer';
 
 const GithubContributions = dynamic(() => import('./GithubContributions'), { ssr: false });
@@ -26,6 +27,7 @@ interface ContactProps {
 }
 
 const Contact = ({ data }: ContactProps) => {
+    const { isCinematicMode } = useTheme();
     return (
         <section id="contact" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
 
@@ -36,15 +38,17 @@ const Contact = ({ data }: ContactProps) => {
                 {/* Top Left: Status / Location */}
                 <div className="md:col-span-2 h-full min-h-[240px] bg-neutral-900/50 border border-white/5 rounded-3xl p-8 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors">
                     {/* Background Image Layer */}
-                    <div className="absolute inset-0 z-0 opacity-60 transition-all duration-700">
-                        <Image
-                            src="/makima.png"
-                            alt="Status Background"
-                            fill
-                            className="object-cover object-center brightness-[1.1]"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/10 to-transparent" />
-                    </div>
+                    {isCinematicMode && (
+                        <div className="absolute inset-0 z-0 opacity-60 transition-all duration-700">
+                            <Image
+                                src="/makima.png"
+                                alt="Status Background"
+                                fill
+                                className="object-cover object-center brightness-[1.1]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/10 to-transparent" />
+                        </div>
+                    )}
 
                     <div className="absolute top-0 right-0 w-64 h-64 bg-makima-red/10 blur-[80px] rounded-full pointer-events-none -mr-16 -mt-16 z-[1]" />
 
@@ -73,15 +77,17 @@ const Contact = ({ data }: ContactProps) => {
                 {/* Top Right: Github Graph */}
                 <div className="md:col-span-2 h-full min-h-[240px] bg-neutral-900/50 border border-white/5 rounded-3xl p-6 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors">
                     {/* Background Image Layer */}
-                    <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700">
-                        <Image
-                            src="/activity.png"
-                            alt="Activity Background"
-                            fill
-                            className="object-cover object-center brightness-[1.1]"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
-                    </div>
+                    {isCinematicMode && (
+                        <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700">
+                            <Image
+                                src="/activity.png"
+                                alt="Activity Background"
+                                fill
+                                className="object-cover object-center brightness-[1.1]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
+                        </div>
+                    )}
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2">
                             <FaGithub className="text-xl text-white" />
@@ -126,15 +132,18 @@ const Contact = ({ data }: ContactProps) => {
                     {/* Mail Part */}
                     <div className="flex-1 relative bg-neutral-900/40 backdrop-blur-xl rounded-3xl p-8 flex flex-col justify-center overflow-hidden group border border-white/5 hover:border-red-500/20 transition-all duration-500">
                         {/* Background Image Layer */}
-                        <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700">
-                            <Image
-                                src="/contract.png"
-                                alt="Mail Background"
-                                fill
-                                className="object-cover object-[center_7%] brightness-[1.1]"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
-                        </div>
+                        {isCinematicMode && (
+                            <div className="absolute top-0 right-0 z-0 opacity-40 transition-all duration-700 pointer-events-none">
+                                <Image
+                                    src="/mail.png"
+                                    alt="Mail Background"
+                                    width={220}
+                                    height={220}
+                                    className="object-contain brightness-[1.1]"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-transparent" />
+                            </div>
+                        )}
 
                         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                             <div className="space-y-2">
