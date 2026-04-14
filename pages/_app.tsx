@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Inter, Cinzel } from 'next/font/google';
-import { GoogleAnalytics } from '@next/third-parties/google';
+
 import Script from 'next/script';
 
 
@@ -17,11 +17,24 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider>
             <main className={`${inter.variable} ${cinzel.variable} font-sans`}>
-                {/* Google Analytics via next/third-parties */}
-                <GoogleAnalytics gaId="G-JC7JKNWZ0W" />
+                {/* Google Analytics via Partytown */}
+                <Script
+                    type="text/partytown"
+                    src="https://www.googletagmanager.com/gtag/js?id=G-JC7JKNWZ0W"
+                />
+                <Script type="text/partytown" id="google-analytics">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-JC7JKNWZ0W', {
+                            page_path: window.location.pathname,
+                        });
+                    `}
+                </Script>
 
-                {/* Microsoft Clarity */}
-                <Script id="microsoft-clarity" strategy="lazyOnload">
+                {/* Microsoft Clarity via Partytown */}
+                <Script type="text/partytown" id="microsoft-clarity">
                     {`
                         (function(c,l,a,r,i,t,y){
                             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

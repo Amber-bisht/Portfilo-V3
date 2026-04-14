@@ -10,8 +10,11 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+/.next
+out
+
+# Partytown auto-generated library files
+public/~partytown/
 
 # production
 /build
