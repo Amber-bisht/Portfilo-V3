@@ -1,6 +1,6 @@
 import { FaLinkedin, FaGithub, FaTwitter, FaDiscord } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
-import { GitHubCalendar } from 'react-github-calendar';
+
 import dynamic from 'next/dynamic';
 import { ExternalLink, Mail } from 'lucide-react';
 import Link from 'next/link';

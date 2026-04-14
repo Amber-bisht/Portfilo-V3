@@ -1,4 +1,4 @@
-import ActivityCalendar from 'react-activity-calendar';
+import { ActivityCalendar } from 'react-activity-calendar';
 import { Book, Users, Code } from 'lucide-react';
 
 const GithubContributions = ({ githubStats }: { githubStats?: any }) => {
@@ -29,7 +29,7 @@ const GithubContributions = ({ githubStats }: { githubStats?: any }) => {
                             dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
                         }}
                         colorScheme='dark'
-                        hideColorLegend={true}
+                        renderColorLegend={() => <></>}
                         labels={{
                             totalCount: '{{count}} contributions in the last 3 months',
                             legend: {
