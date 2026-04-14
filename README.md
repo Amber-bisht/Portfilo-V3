@@ -71,4 +71,4 @@ To achieve Lighthouse PageSpeed scores of 90+ without sacrificing heavy analytic
     ```
 
 ---
-Made by [Amber Bisht](https://amberbisht.me)
+Made by [Amber Bisht](https://amberbisht.me). 

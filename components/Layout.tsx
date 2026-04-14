@@ -97,14 +97,14 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
             <Head>
                 <title>{title}</title>
                 <link rel="preload" as="image" href="/pillars_seamless.webp" fetchPriority="high" />
-                <meta name="description" content="Amber Bisht - Full Stack Developer and DevOps Portfolio. Building resilient systems and automated pipelines." />
+                <meta name="description" content="Amber Bisht - DevOps & Full Stack Developer. He builds resilient systems, automated pipelines and production-grade web platforms." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="author" content="Amber Bisht" />
                 <meta name="keywords" content="DevOps, Amber Bisht, Cloud Engineer, AWS, Kubernetes, Terraform, CI/CD" />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://amberbisht.me/" />
                 <meta property="og:title" content="Amber Bisht | Full Stack Developer and DevOps" />
-                <meta property="og:description" content="Full Stack Developer and DevOps specializing in AWS, Kubernetes, and automated pipelines. View my portfolio." />
+                <meta property="og:description" content="DevOps & Full Stack Developer specializing in AWS, Kubernetes, and automated pipelines. View his portfolio." />
                 <meta property="og:image" content="https://amberbisht.me/images/og-image.webp" />
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="https://amberbisht.me/" />

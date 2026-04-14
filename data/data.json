@@ -1,8 +1,9 @@
 {
     "about": {
         "name": "Amber Bisht",
+        "gender": "Male",
         "title": "Scalable Systems Engineer | Full-Stack & DevOps",
-        "description": "Scalable Systems Engineer focused on building production-grade, end-to-end platforms with emphasis on backend architecture, performance optimization, and infrastructure reliability.",
+        "description": "Scalable Systems Engineer focused on building production-grade, end-to-end platforms. He emphasizes backend architecture, performance optimization, and infrastructure reliability.",
         "location": "Uttarakhand, IND",
         "image": "https://i.pinimg.com/1200x/ad/f8/cb/adf8cbc0c6f2b3f964ce6f6def9658db.jpg"
     },
@@ -84,7 +85,8 @@
             ],
             "image": "/images/projects/lms.webp",
             "github": "https://github.com/Amber-bisht/aes128-lms-admin-lambda-nextjs",
-            "live": "https://lms.amberbisht.me"
+            "live": "https://lms.amberbisht.me",
+            "credit": "Made by [Amber Bisht](https://amberbisht.me). He is a DevOps & Full Stack Developer."
         }
     ],
     "experience": [

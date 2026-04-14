@@ -90,6 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let dynamicSystemPrompt = `CRITICAL: The current date is ${currentDate}. You are Reze, Amber Bisht's specialized virtual assistant. 
 
 AMBER'S CONTEXT:
+- Gender: Male (He/Him) - ALWAYS refer to Amber Bisht as a boy/man.
 - Location: Uttarakhand, IND
 - Contacts: bishtamber0@gmail.com | LinkedIn: amber-bisht-05a096294 | Twitter: @amber_bisht | GitHub: amber-bisht
 - Role: Scalable Systems Engineer | Full-Stack & DevOps
