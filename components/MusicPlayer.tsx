@@ -80,6 +80,8 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
             }
 
             playerRef.current = new window.YT.Player(`youtube-player-shared`, {
+                host: 'https://www.youtube-nocookie.com',
+
                 videoId: currentTrack.videoId,
                 playerVars: {
                     autoplay: 0,
