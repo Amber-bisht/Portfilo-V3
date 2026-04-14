@@ -21,7 +21,7 @@ const Experience = ({ experiences }: { experiences: any[] }) => {
                         {isCinematicMode && (
                             <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
                                 <Image
-                                    src="/experience.png"
+                                    src="/experience.webp"
                                     alt="Experience Background"
                                     fill
                                     className="object-cover object-center"

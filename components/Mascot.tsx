@@ -104,7 +104,7 @@ const Mascot = () => {
                         <div className="absolute inset-2 border border-white/10 rounded-2xl opacity-20 pointer-events-none overflow-hidden">
                             <div className="relative w-full h-full">
                                 <Image
-                                    src="/reze.png"
+                                    src="/reze's.webp"
                                     alt="Background Watermark"
                                     fill
                                     className="object-cover object-center"
@@ -239,7 +239,7 @@ const Mascot = () => {
                         onClick={() => setIsChatOpen(true)}
                     >
                         <Image
-                            src="/reze.webp"
+                            src="/reze's.webp"
                             alt="Reze Assistant"
                             fill
                             priority

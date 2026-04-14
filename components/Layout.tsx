@@ -77,7 +77,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                     <div
                         className="absolute inset-y-0 left-0 w-[200px] opacity-[0.12] transition-opacity duration-1000"
                         style={{
-                            backgroundImage: 'url(/pillars_seamless.png)',
+                            backgroundImage: 'url(/pillars_seamless.webp)',
                             backgroundSize: '100% auto',
                             backgroundRepeat: 'repeat-y',
                             backgroundPosition: 'top left'
@@ -86,7 +86,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                     <div
                         className="absolute inset-y-0 right-0 w-[200px] opacity-[0.12] transition-opacity duration-1000"
                         style={{
-                            backgroundImage: 'url(/pillars_seamless.png)',
+                            backgroundImage: 'url(/pillars_seamless.webp)',
                             backgroundSize: '100% auto',
                             backgroundRepeat: 'repeat-y',
                             backgroundPosition: 'top right'
@@ -106,12 +106,12 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 <meta property="og:url" content="https://amberbisht.me/" />
                 <meta property="og:title" content="Amber Bisht | Full Stack Developer and DevOps" />
                 <meta property="og:description" content="Full Stack Developer and DevOps specializing in AWS, Kubernetes, and automated pipelines. View my portfolio." />
-                <meta property="og:image" content="https://amberbisht.me/images/og-image.png" />
+                <meta property="og:image" content="https://amberbisht.me/images/og-image.webp" />
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="https://amberbisht.me/" />
                 <meta property="twitter:title" content="Amber Bisht | Full Stack Developer and DevOps" />
                 <meta property="twitter:description" content="Full Stack Developer and DevOps specializing in AWS, Kubernetes, and automated pipelines. View my portfolio." />
-                <meta property="twitter:image" content="https://amberbisht.me/images/og-image.png" />
+                <meta property="twitter:image" content="https://amberbisht.me/images/og-image.webp" />
                 <link rel="canonical" href="https://amberbisht.me/" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -135,7 +135,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                             {isCinematicMode && (
                                 <div className="absolute top-[95%] left-1/2 -translate-x-1/2 w-16 h-40 md:w-20 md:h-48 opacity-95 pointer-events-none transition-all duration-700 -mt-8">
                                     <Image
-                                        src="/lattern.png"
+                                        src="/lattern.webp"
                                         alt="Decorative Lantern"
                                         fill
                                         className="object-contain"
@@ -184,7 +184,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 {isCinematicMode && (
                     <div className="absolute inset-0 z-[-1] opacity-100 pointer-events-none transition-opacity duration-700">
                         <Image
-                            src="/reze.png"
+                            src="/reze.webp"
                             alt="Footer Background"
                             fill
                             className="object-cover object-center"

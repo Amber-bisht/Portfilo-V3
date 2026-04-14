@@ -90,13 +90,13 @@ const CustomMoltbotIcon = (props: any) => (
 
 const BullMQIcon = ({ className, style }: any) => (
     <div className={`relative w-[1em] h-[1em] ${className}`} style={style}>
-        <Image src="/images/bullmq-logo.png" alt="BullMQ" fill className="object-contain" />
+        <Image src="/images/bullmq-logo.webp" alt="BullMQ" fill className="object-contain" />
     </div>
 );
 
 const MicroservicesIcon = ({ className, style }: any) => (
     <div className={`relative w-[1em] h-[1em] ${className}`} style={style}>
-        <Image src="/images/microservices.png" alt="Microservices" fill className="object-contain" />
+        <Image src="/images/microservices.webp" alt="Microservices" fill className="object-contain" />
     </div>
 );
 
@@ -202,7 +202,7 @@ const TechStack = ({ data }: TechStackProps) => {
                 {isCinematicMode && (
                     <div className="absolute inset-0 z-0 opacity-50 transition-all duration-700 pointer-events-none">
                         <Image
-                            src="/image copy.png"
+                            src="/image copy.webp"
                             alt="Full Stack Background"
                             fill
                             className="object-cover object-center"
@@ -228,7 +228,7 @@ const TechStack = ({ data }: TechStackProps) => {
                 {isCinematicMode && (
                     <div className="absolute inset-0 z-0 opacity-50 transition-all duration-700 pointer-events-none">
                         <Image
-                            src="/image copy.png"
+                            src="/image copy.webp"
                             alt="DevOps Background"
                             fill
                             className="object-cover object-center"
@@ -253,7 +253,7 @@ const TechStack = ({ data }: TechStackProps) => {
                     {isCinematicMode && (
                         <div className="absolute inset-0 z-0 opacity-50 transition-all duration-700 pointer-events-none">
                             <Image
-                                src="/image copy.png"
+                                src="/image copy.webp"
                                 alt="AI Background"
                                 fill
                                 className="object-cover object-center"

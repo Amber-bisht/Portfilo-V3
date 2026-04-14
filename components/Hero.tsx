@@ -59,7 +59,7 @@ const Hero = ({ data }: HeroProps) => {
                     {isCinematicMode && (
                         <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
                             <Image
-                                src="/pfp.png"
+                                src="/pfp.webp"
                                 alt="Profile Background"
                                 fill
                                 className="object-cover object-center brightness-[1.1]"
@@ -85,7 +85,7 @@ const Hero = ({ data }: HeroProps) => {
                     {isCinematicMode && (
                         <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
                             <Image
-                                src="/name.png"
+                                src="/name.webp"
                                 alt="Personal Data Background"
                                 fill
                                 className="object-cover object-center brightness-[1.1]"
@@ -129,7 +129,7 @@ const Hero = ({ data }: HeroProps) => {
                     {isCinematicMode && (
                         <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
                             <Image
-                                src="/sunflower.png"
+                                src="/sunflower.webp"
                                 alt="Social Background"
                                 fill
                                 className="object-cover object-center brightness-[1.1]"
@@ -160,7 +160,7 @@ const Hero = ({ data }: HeroProps) => {
                     {isCinematicMode && (
                         <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
                             <Image
-                                src="/spin.png"
+                                src="/spin.webp"
                                 alt="Actions Background"
                                 fill
                                 className="object-cover object-center brightness-[1.1]"
@@ -189,7 +189,7 @@ const Hero = ({ data }: HeroProps) => {
                     {isCinematicMode && (
                         <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
                             <Image
-                                src="/desc.png"
+                                src="/desc.webp"
                                 alt="Description Background"
                                 fill
                                 className="object-cover object-center brightness-[1.1]"

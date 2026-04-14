@@ -41,7 +41,7 @@ const Contact = ({ data }: ContactProps) => {
                     {isCinematicMode && (
                         <div className="absolute inset-0 z-0 opacity-60 transition-all duration-700">
                             <Image
-                                src="/makima.png"
+                                src="/makima.webp"
                                 alt="Status Background"
                                 fill
                                 className="object-cover object-center brightness-[1.1]"
@@ -80,7 +80,7 @@ const Contact = ({ data }: ContactProps) => {
                     {isCinematicMode && (
                         <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700">
                             <Image
-                                src="/activity.png"
+                                src="/activity.webp"
                                 alt="Activity Background"
                                 fill
                                 className="object-cover object-center brightness-[1.1]"
@@ -135,7 +135,7 @@ const Contact = ({ data }: ContactProps) => {
                         {isCinematicMode && (
                             <div className="absolute top-0 right-0 z-0 opacity-40 transition-all duration-700 pointer-events-none">
                                 <Image
-                                    src="/mail.png"
+                                    src="/mail.webp"
                                     alt="Mail Background"
                                     width={220}
                                     height={220}

@@ -33,7 +33,7 @@ const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps)
                 {isCinematicMode && (
                     <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700 pointer-events-none">
                         <Image
-                            src="/waves.png"
+                            src="/waves.webp"
                             alt="Project Background"
                             fill
                             className="object-cover object-center"

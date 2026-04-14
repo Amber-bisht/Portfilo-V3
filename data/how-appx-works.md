@@ -35,7 +35,7 @@ What makes this interesting is the **depth of the defense** — six distinct lay
 ```mermaid
 flowchart TB
     subgraph "Layer 1: Code Protection"
-        A["video1.png<br/>(Fake PNG)"] -->|"SJCL Decrypt<br/>password: appx123"| B["Base64 String"]
+        A["video1.webp<br/>(Fake PNG)"] -->|"SJCL Decrypt<br/>password: appx123"| B["Base64 String"]
         B -->|"atob() + pako.inflate()"| C["50K-line video.js"]
     end
 
@@ -70,7 +70,7 @@ flowchart TB
 The first surprise: the entire video player JavaScript (**50,000 lines**) is encrypted and served disguised as a PNG image.
 
 ```
-GET /uhs-hls-player/images/watermark-2/video1.png
+GET /uhs-hls-player/images/watermark-2/video1.webp
 Content-Type: text/html   ← Not actually a PNG!
 ```
 
@@ -121,7 +121,7 @@ After SJCL decryption, the payload is:
 
 ```mermaid
 flowchart LR
-    A["video1.png<br/>(3.2 MB)"] -->|"SJCL AES-CCM<br/>key: appx123"| B["Base64 String<br/>(5.8 MB)"]
+    A["video1.webp<br/>(3.2 MB)"] -->|"SJCL AES-CCM<br/>key: appx123"| B["Base64 String<br/>(5.8 MB)"]
     B -->|"atob()"| C["Pako Compressed<br/>(4.3 MB)"]
     C -->|"pako.inflate()"| D["video.js Source<br/>(50K lines, 2.1 MB)"]
 

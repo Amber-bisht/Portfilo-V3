@@ -299,7 +299,7 @@ export const NavbarButton = ({
         <Component
             href={href || undefined}
             className={cn(baseStyles, variantStyles[variant], className)}
-            style={variant === 'hireme' ? { backgroundImage: 'url(/hireme.png)', backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
+            style={variant === 'hireme' ? { backgroundImage: 'url(/hireme.webp)', backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
             {...props}
         >
             {variant === 'hireme' ? (
