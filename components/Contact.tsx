@@ -153,7 +153,7 @@ const Contact = ({ data }: ContactProps) => {
                                 <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                                     {data.contact.email}
                                 </h3>
-                                <p className="text-gray-400 text-sm font-medium italic opacity-70">
+                                <p className="text-zinc-300 text-sm font-medium italic">
                                     &apos;Let&apos;s build something great together.&apos;
                                 </p>
                             </div>

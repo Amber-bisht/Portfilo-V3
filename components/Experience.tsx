@@ -26,6 +26,7 @@ const Experience = ({ experiences }: { experiences: any[] }) => {
                                     fill
                                     sizes="(max-width: 1200px) 100vw, 1200px"
                                     className="object-cover object-center"
+                                    quality={60}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
                             </div>

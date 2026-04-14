@@ -244,7 +244,11 @@ export const MobileNavToggle = ({
     onClick: () => void;
 }) => {
     return (
-        <button onClick={onClick} className="p-2 text-white">
+        <button 
+            onClick={onClick} 
+            className="p-2 text-white"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+        >
             {isOpen ? <IconX size={24} /> : <IconMenu2 size={24} />}
         </button>
     );
@@ -257,7 +261,7 @@ export const NavbarLogo = ({ visible }: { visible?: boolean }) => {
             className="relative z-20 flex items-center gap-2"
         >
             <span className="text-xl font-bold tracking-tight text-white uppercase">
-                AMBER<span className="text-white/50">BISHT</span>
+                AMBER<span className="text-white/80">BISHT</span>
             </span>
         </a>
     );

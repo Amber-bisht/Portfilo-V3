@@ -16,6 +16,7 @@ const nextConfig = {
   // output: 'export', // Removed to enable API routes for AI chat
   images: {
     unoptimized: false, // Enabled for Vercel
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',

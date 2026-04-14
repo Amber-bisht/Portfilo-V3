@@ -64,6 +64,7 @@ const Hero = ({ data }: HeroProps) => {
                                 fill
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 className="object-cover object-center brightness-[1.1]"
+                                quality={60}
                             />
                             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
                         </div>
@@ -74,9 +75,10 @@ const Hero = ({ data }: HeroProps) => {
                             src="/hero-profile.webp"
                             alt={data.about.name}
                             fill
-                            sizes="(max-width: 768px) 200px, 300px"
+                            sizes="(max-width: 768px) 192px, 192px"
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                             priority
+                            quality={60}
                         />
                     </div>
                 </div>
@@ -90,8 +92,9 @@ const Hero = ({ data }: HeroProps) => {
                                 src="/name.webp"
                                 alt="Personal Data Background"
                                 fill
-                                sizes="(max-width: 1200px) 100vw, 1200vw"
+                                sizes="(max-width: 1200px) 100vw, 1200px"
                                 className="object-cover object-center brightness-[1.1]"
+                                quality={60}
                             />
                             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
                         </div>
@@ -106,7 +109,7 @@ const Hero = ({ data }: HeroProps) => {
                             {/* Cinematic Mode Toggle */}
                             <button
                                 onClick={toggleCinematicMode}
-                                className={`flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all duration-300 ${isCinematicMode ? 'bg-white/20 border-white/30 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]' : 'bg-white/10 border-white/20 text-gray-300 hover:text-white'}`}
+                                className={`flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all duration-300 ${isCinematicMode ? 'bg-white/20 border-white/30 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]' : 'bg-white/10 border-white/30 text-zinc-200 hover:text-white'}`}
                                 aria-label={isCinematicMode ? "Disable Cinematic Mode" : "Enable Cinematic Mode"}
                                 title={isCinematicMode ? "Disable Cinematic Mode" : "Enable Cinematic Mode"}
                             >
@@ -121,7 +124,7 @@ const Hero = ({ data }: HeroProps) => {
                                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
                                 {data.about.location || "Uttarakhand, IND"}
                             </div>
-                            <span className="text-white/40">|</span>
+                            <span className="text-white/60">|</span>
                             <div className="uppercase tracking-widest font-bold">{data.about.title}</div>
                         </div>
                     </div>
@@ -138,6 +141,7 @@ const Hero = ({ data }: HeroProps) => {
                                 fill
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 className="object-cover object-center brightness-[1.1]"
+                                quality={60}
                             />
                             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
                         </div>
@@ -169,8 +173,9 @@ const Hero = ({ data }: HeroProps) => {
                                 src="/spin.webp"
                                 alt="Actions Background"
                                 fill
-                                sizes="(max-width: 1200px) 100vw, 1000px"
+                                sizes="(max-width: 1200px) 100vw, 800px"
                                 className="object-cover object-center brightness-[1.1]"
+                                quality={60}
                             />
                             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
                         </div>
@@ -202,6 +207,7 @@ const Hero = ({ data }: HeroProps) => {
                                 sizes="100vw"
                                 priority
                                 className="object-cover object-center brightness-[1.1]"
+                                quality={60}
                             />
                             <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent" />
                         </div>

@@ -45,7 +45,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
     ];
 
     return (
-        <div className="min-h-screen bg-neutral-950 text-off-white relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw]">
+        <div className="min-h-screen bg-neutral-950 text-zinc-100 relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw]">
 
             {/* Layered Atmospheric Background */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
@@ -96,6 +96,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
             <Head>
                 <title>{title}</title>
+                <link rel="preload" as="image" href="/pillars_seamless.webp" />
                 <meta name="description" content="Amber Bisht - Full Stack Developer and DevOps Portfolio. Building resilient systems and automated pipelines." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="author" content="Amber Bisht" />
@@ -138,6 +139,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                                         fill
                                         sizes="(max-width: 768px) 64px, 80px"
                                         className="object-contain"
+                                        quality={60}
                                     />
                                 </div>
                             )}
@@ -188,6 +190,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                             fill
                             sizes="100vw"
                             className="object-cover object-center"
+                            quality={60}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
                     </div>
@@ -250,7 +253,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-mono text-white/50">
+                <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-mono text-white/70">
                     <p>
                         &copy; {new Date().getFullYear()} Amber Bisht
                     </p>

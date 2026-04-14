@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Inter, Cinzel } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
 
 
@@ -16,19 +17,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider>
             <main className={`${inter.variable} ${cinzel.variable} font-sans`}>
-                {/* Google Analytics - Reverted to standard strategy for reliability */}
-                <Script
-                    src="https://www.googletagmanager.com/gtag/js?id=G-JC7JKNWZ0W"
-                    strategy="lazyOnload"
-                />
-                <Script id="google-analytics" strategy="lazyOnload">
-                    {`
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', 'G-JC7JKNWZ0W');
-                    `}
-                </Script>
+                {/* Google Analytics via next/third-parties */}
+                <GoogleAnalytics gaId="G-JC7JKNWZ0W" />
 
                 {/* Microsoft Clarity */}
                 <Script id="microsoft-clarity" strategy="lazyOnload">
