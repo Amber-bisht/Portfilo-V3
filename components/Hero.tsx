@@ -75,7 +75,7 @@ const Hero = ({ data }: HeroProps) => {
                             src="/hero-profile.webp"
                             alt={data.about.name}
                             fill
-                            sizes="(max-width: 768px) 192px, 192px"
+                            sizes="(max-width: 768px) 200px, 200px"
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                             priority
                             quality={60}
@@ -139,7 +139,7 @@ const Hero = ({ data }: HeroProps) => {
                                 src="/sunflower.webp"
                                 alt="Social Background"
                                 fill
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                sizes="(max-width: 768px) 380px, 380px"
                                 className="object-cover object-center brightness-[1.1]"
                                 quality={60}
                             />
@@ -204,7 +204,7 @@ const Hero = ({ data }: HeroProps) => {
                                 src="/desc.webp"
                                 alt="Description Background"
                                 fill
-                                sizes="100vw"
+                                sizes="(max-width: 1200px) 100vw, 800px"
                                 priority
                                 className="object-cover object-center brightness-[1.1]"
                                 quality={60}

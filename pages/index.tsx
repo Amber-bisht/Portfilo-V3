@@ -10,7 +10,41 @@ const Experience = dynamic(() => import('../components/Experience'));
 const TechStack = dynamic(() => import('../components/TechStack'));
 const Contact = dynamic(() => import('../components/Contact'));
 
-export default function Home() {
+export const getStaticProps = async () => {
+    try {
+        const statsRes = await fetch('https://api.github.com/users/amber-bisht');
+        const statsData = await statsRes.json();
+
+        const calendarRes = await fetch('https://github-contributions-api.jogruber.de/v4/amber-bisht?y=last');
+        const calendarData = await calendarRes.json();
+
+        return {
+            props: {
+                githubStats: {
+                    repos: statsData.public_repos || 33,
+                    followers: statsData.followers || 5,
+                    topLang: "TypeScript",
+                    calendarData: calendarData.contributions || []
+                }
+            },
+            revalidate: 3600
+        };
+    } catch (e) {
+        return {
+            props: {
+                githubStats: {
+                    repos: 33,
+                    followers: 5,
+                    topLang: "TypeScript",
+                    calendarData: []
+                }
+            },
+            revalidate: 3600
+        };
+    }
+}
+
+export default function Home({ githubStats }: { githubStats: any }) {
     return (
         <Layout>
             <Hero data={data} />
@@ -52,7 +86,7 @@ export default function Home() {
                 </div>
             </Section>
 
-            <Contact data={data} />
+            <Contact data={data} githubStats={githubStats} />
         </Layout >
     );
 }

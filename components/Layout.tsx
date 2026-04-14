@@ -96,7 +96,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
             <Head>
                 <title>{title}</title>
-                <link rel="preload" as="image" href="/pillars_seamless.webp" />
+                <link rel="preload" as="image" href="/pillars_seamless.webp" fetchPriority="high" />
                 <meta name="description" content="Amber Bisht - Full Stack Developer and DevOps Portfolio. Building resilient systems and automated pipelines." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="author" content="Amber Bisht" />

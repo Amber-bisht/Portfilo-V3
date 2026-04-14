@@ -24,9 +24,10 @@ interface ContactProps {
             twitter: string;
         };
     };
+    githubStats: any;
 }
 
-const Contact = ({ data }: ContactProps) => {
+const Contact = ({ data, githubStats }: ContactProps) => {
     const { isCinematicMode } = useTheme();
     return (
         <section id="contact" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
@@ -100,7 +101,7 @@ const Contact = ({ data }: ContactProps) => {
                     <div className="flex-1 flex items-center justify-center w-full">
                         <div className="w-full">
                             {/* We just render the graph here. The component might need styling tweaks. */}
-                            <GithubContributions />
+                            <GithubContributions githubStats={githubStats} />
                         </div>
                     </div>
                 </div>
