@@ -6,7 +6,6 @@ import { ReactNode, useState, useEffect } from 'react';
 import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase, FaLinkedin, FaGithub, FaTwitter, FaMusic, FaPause } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
 import data from '../data/data.json';
-import ParticlesBg from './ParticlesBg';
 import { Navbar, NavBody, NavItems, NavbarLogo, NavbarButton, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './Navbar';
 import { useTheme } from '../context/ThemeContext';
 
@@ -69,7 +68,6 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
             </div>
 
-            <ParticlesBg />
 
             {/* Cinematic Theme Pillar Backgrounds - Continuous Aesthetic Frame */}
             {isCinematicMode && (
@@ -138,6 +136,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                                         src="/lattern.webp"
                                         alt="Decorative Lantern"
                                         fill
+                                        sizes="(max-width: 768px) 64px, 80px"
                                         className="object-contain"
                                     />
                                 </div>
@@ -187,6 +186,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                             src="/reze.webp"
                             alt="Footer Background"
                             fill
+                            sizes="100vw"
                             className="object-cover object-center"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
@@ -203,17 +203,17 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                             Full Stack Developer and DevOps Engineer specializing in building redundant systems and automated pipelines with precision and performance.
                         </p>
                         <div className="flex items-center gap-4">
-                            <a href={data.contact.linkedin} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-110">
-                                <FaLinkedin size={20} />
+                            <a href={data.contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn Profile" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
+                                <FaLinkedin size={20} aria-hidden="true" />
                             </a>
-                            <a href={data.contact.twitter} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-110">
-                                <FaTwitter size={20} />
+                            <a href={data.contact.twitter} target="_blank" rel="noreferrer" aria-label="Twitter Profile" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
+                                <FaTwitter size={20} aria-hidden="true" />
                             </a>
-                            <a href={data.contact.github} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-110">
-                                <FaGithub size={20} />
+                            <a href={data.contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Profile" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
+                                <FaGithub size={20} aria-hidden="true" />
                             </a>
-                            <a href={`mailto:${data.contact.email}`} className="text-white/70 hover:text-white transition-all duration-300 hover:scale-110">
-                                <SiGmail size={20} />
+                            <a href={`mailto:${data.contact.email}`} aria-label="Send Email" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
+                                <SiGmail size={20} aria-hidden="true" />
                             </a>
                         </div>
                     </div>
@@ -261,8 +261,9 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
             <button
                 onClick={toggleMusic}
                 className="fixed right-0 top-1/2 -translate-y-1/2 z-[100] group flex items-center"
+                aria-label={isPlaying ? "Pause background music" : "Play background music"}
             >
-                <div className={`flex flex-col items-center gap-4 py-8 px-2 rounded-l-2xl border-y border-l transition-all duration-500 backdrop-blur-xl ${isPlaying ? 'bg-makima-red/20 border-makima-red/30 text-white shadow-[0_0_30px_rgba(239,68,68,0.2)]' : 'bg-white/5 border-white/10 text-white/40 hover:text-white/70'}`}>
+                <div className={`flex flex-col items-center gap-4 py-8 px-2 rounded-l-2xl border-y border-l transition-all duration-500 backdrop-blur-xl ${isPlaying ? 'bg-makima-red/20 border-makima-red/30 text-white shadow-[0_0_30px_rgba(239,68,68,0.2)]' : 'bg-white/10 border-white/20 text-white hover:text-white shadow-2xl'}`}>
                     <div className="flex flex-col gap-1 items-center">
                         {isPlaying ? (
                             <div className="flex flex-col gap-0.5 items-center">

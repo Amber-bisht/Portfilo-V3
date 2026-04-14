@@ -7,8 +7,9 @@ import Script from 'next/script';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel' });
 
-import Mascot from '../components/Mascot';
-import PochitaFollower from '../components/PochitaFollower';
+import dynamic from 'next/dynamic';
+const Mascot = dynamic(() => import('../components/Mascot'), { ssr: false });
+const PochitaFollower = dynamic(() => import('../components/PochitaFollower'), { ssr: false });
 import { ThemeProvider } from '../context/ThemeContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -18,9 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                 {/* Google Analytics - Reverted to standard strategy for reliability */}
                 <Script
                     src="https://www.googletagmanager.com/gtag/js?id=G-JC7JKNWZ0W"
-                    strategy="afterInteractive"
+                    strategy="lazyOnload"
                 />
-                <Script id="google-analytics" strategy="afterInteractive">
+                <Script id="google-analytics" strategy="lazyOnload">
                     {`
                         window.dataLayer = window.dataLayer || [];
                         function gtag(){dataLayer.push(arguments);}
@@ -30,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </Script>
 
                 {/* Microsoft Clarity */}
-                <Script id="microsoft-clarity" strategy="afterInteractive">
+                <Script id="microsoft-clarity" strategy="lazyOnload">
                     {`
                         (function(c,l,a,r,i,t,y){
                             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

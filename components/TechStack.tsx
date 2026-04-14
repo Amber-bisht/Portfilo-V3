@@ -90,13 +90,13 @@ const CustomMoltbotIcon = (props: any) => (
 
 const BullMQIcon = ({ className, style }: any) => (
     <div className={`relative w-[1em] h-[1em] ${className}`} style={style}>
-        <Image src="/images/bullmq-logo.webp" alt="BullMQ" fill className="object-contain" />
+        <Image src="/images/bullmq-logo.webp" alt="BullMQ" fill sizes="40px" className="object-contain" />
     </div>
 );
 
 const MicroservicesIcon = ({ className, style }: any) => (
     <div className={`relative w-[1em] h-[1em] ${className}`} style={style}>
-        <Image src="/images/microservices.webp" alt="Microservices" fill className="object-contain" />
+        <Image src="/images/microservices.webp" alt="Microservices" fill sizes="40px" className="object-contain" />
     </div>
 );
 
@@ -205,6 +205,7 @@ const TechStack = ({ data }: TechStackProps) => {
                             src="/image copy.webp"
                             alt="Full Stack Background"
                             fill
+                            sizes="(max-width: 1200px) 100vw, 1200px"
                             className="object-cover object-center"
                         />
                         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
@@ -231,6 +232,7 @@ const TechStack = ({ data }: TechStackProps) => {
                             src="/image copy.webp"
                             alt="DevOps Background"
                             fill
+                            sizes="(max-width: 1200px) 100vw, 1200px"
                             className="object-cover object-center"
                         />
                         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />

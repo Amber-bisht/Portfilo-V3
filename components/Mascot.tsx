@@ -107,6 +107,7 @@ const Mascot = () => {
                                     src="/reze's.webp"
                                     alt="Background Watermark"
                                     fill
+                                    sizes="400px"
                                     className="object-cover object-center"
                                 />
                             </div>
@@ -121,6 +122,7 @@ const Mascot = () => {
                                         alt="Reze AI Logo"
                                         width={32}
                                         height={32}
+                                        sizes="32px"
                                         className="object-cover"
                                     />
                                 </div>
@@ -242,7 +244,6 @@ const Mascot = () => {
                             src="/reze's.webp"
                             alt="Reze Assistant"
                             fill
-                            priority
                             sizes="(max-width: 768px) 128px, 180px"
                             className="object-contain object-bottom transition-opacity duration-150 ease-in-out"
                         />

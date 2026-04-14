@@ -15,7 +15,7 @@ try {
 const nextConfig = {
   // output: 'export', // Removed to enable API routes for AI chat
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: false, // Enabled for Vercel
     remotePatterns: [
       {
         protocol: 'https',
@@ -30,6 +30,16 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'encrypted-tbn0.gstatic.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.pinimg.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
         pathname: '/**',
       },
     ],

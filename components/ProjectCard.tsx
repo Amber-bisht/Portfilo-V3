@@ -36,6 +36,7 @@ const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps)
                             src="/waves.webp"
                             alt="Project Background"
                             fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-cover object-center"
                         />
                         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
@@ -57,6 +58,7 @@ const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps)
                             src={project.image || "https://placehold.co/600x400/1a1a1a/FFF?text=Project"}
                             alt={project.title}
                             fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-contain transform group-hover:scale-110 transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-[5]" />
@@ -145,6 +147,7 @@ const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps)
                                 src={project.image || "https://placehold.co/600x400/1a1a1a/FFF?text=Project"}
                                 alt={project.title}
                                 fill
+                                sizes="(max-width: 768px) 100vw, 800px"
                                 className="object-cover"
                             />
                             <div className="absolute bottom-6 left-8 z-20">

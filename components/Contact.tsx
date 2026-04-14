@@ -44,6 +44,7 @@ const Contact = ({ data }: ContactProps) => {
                                 src="/makima.webp"
                                 alt="Status Background"
                                 fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 className="object-cover object-center brightness-[1.1]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/10 to-transparent" />
@@ -83,6 +84,7 @@ const Contact = ({ data }: ContactProps) => {
                                 src="/activity.webp"
                                 alt="Activity Background"
                                 fill
+                                sizes="(max-width: 1200px) 100vw, 800px"
                                 className="object-cover object-center brightness-[1.1]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
@@ -106,7 +108,7 @@ const Contact = ({ data }: ContactProps) => {
                 {/* Bottom Left: Profile */}
                 <div className="md:col-span-1 h-full min-h-[240px] bg-neutral-900/50 border border-white/5 rounded-3xl p-4 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors">
                     <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-4 flex-1">
-                        <Image src={data.about.image} alt={data.about.name} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                        <Image src={data.about.image} alt={data.about.name} fill sizes="(max-width: 768px) 100vw, 400px" className="object-cover group-hover:scale-110 transition-transform duration-500" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                         <div className="absolute bottom-4 left-4">
                             <h3 className="text-lg font-bold text-white leading-tight">{data.about.name}</h3>
@@ -140,6 +142,7 @@ const Contact = ({ data }: ContactProps) => {
                                     width={220}
                                     height={220}
                                     className="object-contain brightness-[1.1]"
+                                    style={{ height: 'auto', width: 'auto' }}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-transparent" />
                             </div>

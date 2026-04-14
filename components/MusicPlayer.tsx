@@ -32,9 +32,11 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
     const [currentTime, setCurrentTime] = useState(0);
     const [isPlayerReady, setIsPlayerReady] = useState(false);
     const [isBuffering, setIsBuffering] = useState(false);
+    const [shouldLoadYT, setShouldLoadYT] = useState(false);
     
     const playerRef = useRef<any>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const observerRef = useRef<IntersectionObserver | null>(null);
 
     // Initial load from localStorage
     useEffect(() => {
@@ -49,27 +51,31 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
         }
     }, [tracks.length]);
 
-    const currentTrack = tracks[currentIndex];
-
+    // Intersection Observer to load YT when visible
     useEffect(() => {
-        if (!tracks || tracks.length === 0) return;
+        if (shouldLoadYT) return;
 
-        // Load YouTube Iframe API if not already loaded
-        if (!window.YT) {
-            const tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+        observerRef.current = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setShouldLoadYT(true);
+                observerRef.current?.disconnect();
+            }
+        }, { threshold: 0.1 });
 
-            window.onYouTubeIframeAPIReady = () => {
-                initializePlayer();
-            };
-        } else if (window.YT && window.YT.Player) {
-            initializePlayer();
+        if (containerRef.current) {
+            observerRef.current.observe(containerRef.current);
         }
 
-        function initializePlayer() {
-            // If player already exists, just load the new video
+        return () => observerRef.current?.disconnect();
+    }, [shouldLoadYT]);
+
+    const currentTrack = tracks[currentIndex];
+
+    // YT API Loading Logic
+    useEffect(() => {
+        if (!shouldLoadYT || !tracks || tracks.length === 0) return;
+
+        const initializePlayer = () => {
             if (playerRef.current && playerRef.current.loadVideoById) {
                 playerRef.current.loadVideoById({
                     videoId: currentTrack.videoId,
@@ -81,7 +87,6 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
 
             playerRef.current = new window.YT.Player(`youtube-player-shared`, {
                 host: 'https://www.youtube-nocookie.com',
-
                 videoId: currentTrack.videoId,
                 playerVars: {
                     autoplay: 0,
@@ -94,30 +99,38 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                     showinfo: 0,
                     start: currentTrack.startTime || 0,
                     enablejsapi: 1,
-                    origin: window.location.origin
+                    origin: typeof window !== 'undefined' ? window.location.origin : ''
                 },
                 events: {
                     onReady: (event: any) => {
+                        const iframe = event.target.getIframe();
+                        if (iframe) {
+                            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; compute-pressure');
+                            iframe.setAttribute('title', 'YouTube Music Player');
+                        }
                         setDuration(event.target.getDuration());
                         setIsPlayerReady(true);
                     },
                     onStateChange: (event: any) => {
-                        // YT.PlayerState: -1 (unstarted), 0 (ended), 1 (playing), 2 (paused), 3 (buffering), 5 (cued)
                         setIsPlaying(event.data === 1);
                         setIsBuffering(event.data === 3);
-                        
-                        if (event.data === 0) { // ENDED
-                            handleNext();
-                        }
+                        if (event.data === 0) handleNext();
                     }
                 }
             });
-        }
-
-        return () => {
-            // Don't destroy on every index change, only on unmount
         };
-    }, [tracks]);
+
+        if (!window.YT) {
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+            window.onYouTubeIframeAPIReady = initializePlayer;
+        } else if (window.YT && window.YT.Player) {
+            initializePlayer();
+        }
+    }, [shouldLoadYT, tracks]);
 
     // Handle track changes
     useEffect(() => {
@@ -285,6 +298,7 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                         src={thumbnailUrl} 
                         alt={currentTrack.title} 
                         fill 
+                        sizes="(max-width: 768px) 100px, 120px"
                         className="object-cover"
                         onError={(e: any) => {
                             e.target.src = `https://img.youtube.com/vi/${currentTrack.videoId}/0.jpg`;
@@ -301,24 +315,24 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                     <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
                         <h3 className="text-white font-cinzel font-bold text-base md:text-lg truncate tracking-wider uppercase">{currentTrack.title}</h3>
                         <span className="text-white/20">—</span>
-                        <p className="text-gray-400 text-xs md:text-sm font-medium truncate italic">{currentTrack.artist}</p>
+                        <p className="text-gray-200 text-xs md:text-sm font-medium truncate italic">{currentTrack.artist}</p>
                     </div>
 
                     {/* Progress Bar */}
                     <div className="flex flex-col gap-1.5 w-full max-w-md">
                         <div 
                             ref={containerRef}
-                            className="h-1.5 w-full bg-white/5 rounded-full cursor-pointer relative overflow-hidden group/bar transition-all"
+                            className="h-1.5 w-full bg-white/10 rounded-full cursor-pointer relative overflow-hidden group/bar transition-all"
                             onClick={handleProgressClick}
                         >
                             <div 
-                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-red-800 to-red-600 transition-all duration-300 shadow-[0_0_10px_rgba(220,38,38,0.5)]" 
+                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-red-700 to-red-500 transition-all duration-300 shadow-[0_0_10px_rgba(220,38,38,0.5)]" 
                                 style={{ width: `${progress}%` }} 
                             />
                             <div className="absolute top-0 left-0 h-full w-1 bg-white opacity-0 group-hover/bar:opacity-100 transition-opacity" />
                         </div>
-                        <div className="flex justify-between text-[10px] md:text-xs font-mono text-gray-500 uppercase tracking-tighter">
-                            <span className={isPlaying ? 'text-red-400' : ''}>{formatTime(currentTime)}</span>
+                        <div className="flex justify-between text-[10px] md:text-xs font-mono text-gray-300 uppercase tracking-tighter">
+                            <span className={isPlaying ? 'text-red-300' : ''}>{formatTime(currentTime)}</span>
                             <span>{formatTime(duration)}</span>
                         </div>
                     </div>
@@ -327,14 +341,16 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                     <div className="flex items-center justify-center gap-4 w-full">
                         <button 
                             onClick={handlePrev}
-                            className="p-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all active:scale-90"
+                            className="p-3 text-gray-200 hover:text-white hover:bg-white/10 rounded-xl transition-all active:scale-90"
+                            aria-label="Previous track"
                         >
-                            <SkipBack size={20} fill={currentIndex > 0 ? "currentColor" : "none"} />
+                            <SkipBack size={20} fill={currentIndex > 0 ? "currentColor" : "none"} aria-hidden="true" />
                         </button>
                         
                         <button 
                             onClick={togglePlay}
-                            className="relative group/play px-8 py-3 bg-white/5 border border-white/10 rounded-2xl text-white transition-all active:scale-95 flex items-center justify-center min-w-[100px] hover:bg-white/10 hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(239,68,68,0.1)]"
+                            className="relative group/play px-8 py-3 bg-white/10 border border-white/20 rounded-2xl text-white transition-all active:scale-95 flex items-center justify-center min-w-[100px] hover:bg-white/20 hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(239,68,68,0.1)]"
+                            aria-label={isPlaying ? "Pause music" : "Play music"}
                         >
                             <div className="absolute inset-0 bg-red-600/20 blur-xl opacity-0 group-hover/play:opacity-100 transition-opacity pointer-events-none" />
                             {isBuffering ? (
@@ -342,12 +358,12 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                             ) : (
                                 isPlaying ? (
                                     <div className="flex items-center gap-2">
-                                        <Pause size={18} fill="currentColor" />
+                                        <Pause size={18} fill="currentColor" aria-hidden="true" />
                                         <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Pause</span>
                                     </div>
                                 ) : (
                                     <div className="flex items-center gap-2">
-                                        <Play size={18} fill="currentColor" className="ml-0.5" />
+                                        <Play size={18} fill="currentColor" className="ml-0.5" aria-hidden="true" />
                                         <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Play</span>
                                     </div>
                                 )
@@ -357,8 +373,9 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                         <button 
                             onClick={handleNext}
                             className="p-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all active:scale-90"
+                            aria-label="Next track"
                         >
-                            <SkipForward size={20} fill={currentIndex < tracks.length - 1 ? "currentColor" : "none"} />
+                            <SkipForward size={20} fill={currentIndex < tracks.length - 1 ? "currentColor" : "none"} aria-hidden="true" />
                         </button>
                     </div>
                 </div>
