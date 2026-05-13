@@ -1,9 +1,8 @@
-import { FaLinkedin, FaGithub, FaTwitter, FaImage } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTheme } from '../context/ThemeContext';
 
 interface HeroProps {
     data: {
@@ -23,7 +22,6 @@ interface HeroProps {
 }
 
 const Hero = ({ data }: HeroProps) => {
-    const { isCinematicMode, toggleCinematicMode } = useTheme();
 
     const socialLinks = [
         {
@@ -55,20 +53,7 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* 1. Profile Image Card (Tall) */}
                 <div className="md:col-span-1 md:row-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-4 backdrop-blur-sm relative overflow-hidden flex items-center justify-center group outline outline-1 outline-white/5 w-full max-w-sm mx-auto md:max-w-none md:mx-0 min-h-[350px] md:min-h-0">
-                    {/* Background Image Layer */}
-                    {isCinematicMode && (
-                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
-                            <Image
-                                src="/pfp.webp"
-                                alt="Profile Background"
-                                fill
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                className="object-cover object-center brightness-[1.1]"
-                                quality={60}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
-                        </div>
-                    )}
+
 
                     <div className="relative w-48 h-48 md:w-48 md:h-48 overflow-hidden rounded-2xl z-10 border border-white/10 shadow-2xl">
                         <Image
@@ -85,38 +70,13 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* 2. Personal Data Card */}
                 <div className="md:col-span-3 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 backdrop-blur-sm relative overflow-hidden flex flex-col justify-center">
-                    {/* Background Image Layer */}
-                    {isCinematicMode && (
-                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
-                            <Image
-                                src="/name.webp"
-                                alt="Personal Data Background"
-                                fill
-                                sizes="(max-width: 1200px) 100vw, 1200px"
-                                className="object-cover object-center brightness-[1.1]"
-                                quality={60}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
-                        </div>
-                    )}
+
 
                     <div className="relative z-10">
                         <div className="flex items-center gap-6 mb-2">
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter uppercase">
                                 {data.about.name}
                             </h1>
-
-                            {/* Cinematic Mode Toggle */}
-                            <button
-                                onClick={toggleCinematicMode}
-                                className={`flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all duration-300 ${isCinematicMode ? 'bg-white/20 border-white/30 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]' : 'bg-white/10 border-white/30 text-zinc-200 hover:text-white'}`}
-                                aria-label={isCinematicMode ? "Disable Cinematic Mode" : "Enable Cinematic Mode"}
-                                title={isCinematicMode ? "Disable Cinematic Mode" : "Enable Cinematic Mode"}
-                            >
-                                <span className="text-[10px] font-bold uppercase tracking-[0.3em]">
-                                    {isCinematicMode ? "Cinematic ON" : "Cinematic OFF"}
-                                </span>
-                            </button>
                         </div>
 
                         <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-white/90 font-mono mb-6">
@@ -132,20 +92,7 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* 3. Social Icons Card */}
                 <div className="md:col-span-1 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 backdrop-blur-sm relative overflow-hidden">
-                    {/* Background Image Layer */}
-                    {isCinematicMode && (
-                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
-                            <Image
-                                src="/sunflower.webp"
-                                alt="Social Background"
-                                fill
-                                sizes="(max-width: 768px) 380px, 380px"
-                                className="object-cover object-center brightness-[1.1]"
-                                quality={60}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
-                        </div>
-                    )}
+
 
                     <div className="relative z-10 flex justify-around items-center w-full h-full">
                         {socialLinks.map((link) => (
@@ -166,20 +113,7 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* 4. Quick Actions Card */}
                 <div className="md:col-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 backdrop-blur-sm relative overflow-hidden flex items-center gap-4">
-                    {/* Background Image Layer */}
-                    {isCinematicMode && (
-                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
-                            <Image
-                                src="/spin.webp"
-                                alt="Actions Background"
-                                fill
-                                sizes="(max-width: 1200px) 100vw, 800px"
-                                className="object-cover object-center brightness-[1.1]"
-                                quality={60}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
-                        </div>
-                    )}
+
 
                     <Link
                         href="/blog"
@@ -197,21 +131,7 @@ const Hero = ({ data }: HeroProps) => {
 
                 {/* 5. Description Card */}
                 <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden group">
-                    {/* Background Image Layer */}
-                    {isCinematicMode && (
-                        <div className="absolute inset-0 z-0 opacity-90 transition-all duration-700 pointer-events-none">
-                            <Image
-                                src="/desc.webp"
-                                alt="Description Background"
-                                fill
-                                sizes="(max-width: 1200px) 100vw, 800px"
-                                priority
-                                className="object-cover object-center brightness-[1.1]"
-                                quality={60}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent" />
-                        </div>
-                    )}
+
 
                     <div className="relative z-10">
                         <h2 className="text-xl md:text-3xl lg:text-4xl font-mono leading-relaxed md:leading-snug uppercase transition-all duration-300 text-white tracking-tight">

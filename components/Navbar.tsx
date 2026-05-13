@@ -10,7 +10,6 @@ import {
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { useTheme } from "../context/ThemeContext";
 
 interface NavbarProps {
     children: React.ReactNode;
@@ -52,7 +51,6 @@ interface MobileNavMenuProps {
 
 export const Navbar = ({ children, className }: NavbarProps) => {
     const { scrollY } = useScroll();
-    const { isCinematicMode } = useTheme();
     const [visible, setVisible] = useState<boolean>(true);
     const [isSmall, setIsSmall] = useState<boolean>(false);
     
@@ -98,7 +96,6 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 };
 
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
-    const { isCinematicMode } = useTheme();
     return (
         <motion.div
             animate={{
@@ -295,7 +292,7 @@ export const NavbarButton = ({
         gradient:
             "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]",
         pink: "bg-brand-pink text-brand-bg shadow-lg shadow-brand-pink/20 glow-pink hover:brightness-110",
-        hireme: "text-white bg-transparent border border-white/20 hover:border-white/40 shadow-2xl relative overflow-hidden",
+        hireme: "bg-red-600 text-white hover:bg-red-700 shadow-[0_0_24px_rgba(239,68,68,0.3)] border border-red-500/50",
     };
 
     const Component = Tag as any;
@@ -303,17 +300,9 @@ export const NavbarButton = ({
         <Component
             href={href || undefined}
             className={cn(baseStyles, variantStyles[variant], className)}
-            style={variant === 'hireme' ? { backgroundImage: 'url(/hireme.webp)', backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
             {...props}
         >
-            {variant === 'hireme' ? (
-                <>
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
-                    <span className="relative z-10">{children}</span>
-                </>
-            ) : (
-                children
-            )}
+            {children}
         </Component>
     );
 };

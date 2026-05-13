@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import { Github, ExternalLink, Info, X } from 'lucide-react';
+import { Github, ExternalLink, X } from 'lucide-react';
 import Image from 'next/image';
 import { getTechIcon } from '../utils/techIcons';
-import { useTheme } from '../context/ThemeContext';
 
 interface ProjectProps {
     project: {
@@ -22,26 +21,13 @@ interface ProjectProps {
 }
 
 const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps) => {
-    const { isCinematicMode } = useTheme();
     const [isInternalModalOpen, setIsInternalModalOpen] = useState(false);
     const isHorizontal = orientation === "horizontal";
 
     return (
         <>
             <div className={`group relative bg-neutral-900/50 border border-white/5 rounded-3xl overflow-hidden hover:border-white/10 transition-all duration-300 shadow-xl flex ${isHorizontal ? "md:flex-row flex-col h-full" : "flex-col h-full"}`}>
-                {/* Background Image Layer */}
-                {isCinematicMode && (
-                    <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700 pointer-events-none">
-                        <Image
-                            src="/waves.webp"
-                            alt="Project Background"
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-cover object-center"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
-                    </div>
-                )}
+
 
                 <div className="absolute top-0 right-0 w-32 h-32 bg-makima-red/5 blur-[40px] rounded-full pointer-events-none -mr-8 -mt-8 group-hover:bg-makima-red/10 transition-colors z-[1]" />
 

@@ -115,6 +115,35 @@ export default function Post({ postData }: BlogPostProps) {
     return () => observer.disconnect();
   }, []);
 
+  // Special case for 'how-appx-works' - render raw markdown within Layout
+  if (postData.slug === 'how-appx-works') {
+    return (
+      <Layout title={`${postData.title} | Amber Bisht`}>
+        <div className="min-h-screen bg-neutral-950 text-neutral-200 p-8 md:p-20">
+          <article className="max-w-4xl mx-auto">
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]} 
+              rehypePlugins={[rehypeHighlight]}
+              components={{
+                h1: ({ node, ...props }) => <h1 className="text-4xl font-bold mb-8 text-white" {...props} />,
+                h2: ({ node, ...props }) => <h2 className="text-3xl font-bold mt-12 mb-6 text-white" {...props} />,
+                h3: ({ node, ...props }) => <h3 className="text-2xl font-bold mt-8 mb-4 text-white" {...props} />,
+                p: ({ node, ...props }) => <p className="text-neutral-400 text-lg leading-relaxed mb-6" {...props} />,
+                ul: ({ node, ...props }) => <ul className="list-disc list-inside space-y-2 mb-6 text-neutral-400" {...props} />,
+                ol: ({ node, ...props }) => <ol className="list-decimal list-inside space-y-2 mb-6 text-neutral-400" {...props} />,
+                code: CodeBlock,
+                pre: ({ children }) => <>{children}</>,
+                a: ({ node, ...props }) => <a className="text-makima-red hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+              }}
+            >
+              {postData.content}
+            </ReactMarkdown>
+          </article>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout title={`${postData.title} | Amber Bisht`}>
       <article className="min-h-screen bg-neutral-950 text-neutral-200 selection:bg-makima-red/40 pb-32">

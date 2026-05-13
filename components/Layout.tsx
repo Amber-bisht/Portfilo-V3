@@ -7,7 +7,6 @@ import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase, FaLinkedin, Fa
 import { SiGmail } from 'react-icons/si';
 import data from '../data/data.json';
 import { Navbar, NavBody, NavItems, NavbarLogo, NavbarButton, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './Navbar';
-import { useTheme } from '../context/ThemeContext';
 
 interface LayoutProps {
     children: ReactNode;
@@ -15,7 +14,6 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevOps' }: LayoutProps) => {
-    const { isCinematicMode } = useTheme();
     const [isPlaying, setIsPlaying] = useState(false);
     const router = useRouter();
     const [activeTab, setActiveTab] = useState('Home');
@@ -69,34 +67,12 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
             </div>
 
 
-            {/* Cinematic Theme Pillar Backgrounds - Continuous Aesthetic Frame */}
-            {isCinematicMode && (
-                <div className="fixed inset-0 pointer-events-none z-[5] overflow-hidden">
-                    <div
-                        className="absolute inset-y-0 left-0 w-[200px] opacity-[0.12] transition-opacity duration-1000"
-                        style={{
-                            backgroundImage: 'url(/pillars_seamless.webp)',
-                            backgroundSize: '100% auto',
-                            backgroundRepeat: 'repeat-y',
-                            backgroundPosition: 'top left'
-                        }}
-                    />
-                    <div
-                        className="absolute inset-y-0 right-0 w-[200px] opacity-[0.12] transition-opacity duration-1000"
-                        style={{
-                            backgroundImage: 'url(/pillars_seamless.webp)',
-                            backgroundSize: '100% auto',
-                            backgroundRepeat: 'repeat-y',
-                            backgroundPosition: 'top right'
-                        }}
-                    />
-                </div>
-            )}
+
 
 
             <Head>
                 <title>{title}</title>
-                <link rel="preload" as="image" href="/pillars_seamless.webp" fetchPriority="high" />
+
                 <meta name="description" content="Amber Bisht - DevOps & Full Stack Developer. He builds resilient systems, automated pipelines and production-grade web platforms." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="author" content="Amber Bisht" />
@@ -130,19 +106,6 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                                 Hire Me
                             </NavbarButton>
 
-                            {/* Navbar Decorative Lantern - Hanging under Hire Me */}
-                            {isCinematicMode && (
-                                <div className="absolute top-[95%] left-1/2 -translate-x-1/2 w-16 h-40 md:w-20 md:h-48 opacity-95 pointer-events-none transition-all duration-700 -mt-8">
-                                    <Image
-                                        src="/lattern.webp"
-                                        alt="Decorative Lantern"
-                                        fill
-                                        sizes="(max-width: 768px) 64px, 80px"
-                                        className="object-contain"
-                                        quality={60}
-                                    />
-                                </div>
-                            )}
                         </div>
                     </div>
                 </NavBody>
@@ -181,20 +144,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
             </main>
 
             <footer className="relative z-10 border-t border-white/10 pt-16 pb-8 px-4 md:px-8 mt-20 bg-black/20 backdrop-blur-md overflow-hidden">
-                {/* Footer Background Image */}
-                {isCinematicMode && (
-                    <div className="absolute inset-0 z-[-1] opacity-100 pointer-events-none transition-opacity duration-700">
-                        <Image
-                            src="/reze.webp"
-                            alt="Footer Background"
-                            fill
-                            sizes="100vw"
-                            className="object-cover object-center"
-                            quality={60}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
-                    </div>
-                )}
+
 
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 relative z-10">
                     {/* Column 1: Branding */}
@@ -269,10 +219,10 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                 <div className={`flex flex-col items-center gap-4 py-8 px-2 rounded-l-2xl border-y border-l transition-all duration-500 backdrop-blur-xl ${isPlaying ? 'bg-makima-red/20 border-makima-red/30 text-white shadow-[0_0_30px_rgba(239,68,68,0.2)]' : 'bg-white/10 border-white/20 text-white hover:text-white shadow-2xl'}`}>
                     <div className="flex flex-col gap-1 items-center">
                         {isPlaying ? (
-                            <div className="flex flex-col gap-0.5 items-center">
-                                <div className="w-1 h-3 bg-white rounded-full animate-music-bar-1" />
-                                <div className="w-1 h-5 bg-white rounded-full animate-music-bar-2" />
-                                <div className="w-1 h-2 bg-white rounded-full animate-music-bar-3" />
+                            <div className="flex flex-col gap-1 items-center">
+                                <div className="w-1 h-1 bg-white rounded-full animate-pulse" />
+                                <div className="w-1 h-1 bg-white rounded-full animate-pulse delay-75" />
+                                <div className="w-1 h-1 bg-white rounded-full animate-pulse delay-150" />
                             </div>
                         ) : (
                             <FaMusic size={14} className="opacity-50" />

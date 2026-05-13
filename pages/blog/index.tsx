@@ -44,53 +44,44 @@ export default function BlogIndex({ allPostsData }: BlogIndexProps) {
               transition={{ delay: index * 0.1 + 0.2 }}
             >
               <Link href={`/${post.slug}`} className="group block h-full">
-                <article className="relative h-full bg-neutral-900/40 backdrop-blur-xl border border-white/5 rounded-[2.5rem] p-10 hover:border-makima-red/30 transition-all duration-500 hover:shadow-[0_40px_100px_rgba(0,0,0,0.4)] flex flex-col group overflow-hidden">
-                  {/* Premium Hover Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-makima-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute -top-24 -right-24 w-48 h-48 bg-makima-red/10 blur-[80px] rounded-full group-hover:bg-makima-red/20 transition-all duration-700" />
+                <article className="group relative bg-neutral-900/50 border border-white/5 rounded-3xl overflow-hidden hover:border-white/10 transition-all duration-300 shadow-xl flex flex-col h-full">
                   
-                  {/* Card Image */}
-                  <div className="relative h-64 -mx-10 -mt-10 mb-8 overflow-hidden bg-white flex items-center justify-center p-6">
-                      {post.image ? (
-                        <>
-                            <img 
-                                src={post.image} 
-                                alt={post.title} 
-                                className="relative z-10 w-full h-full object-contain group-hover:scale-110 transition-transform duration-700" 
-                            />
-                        </>
-                      ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-makima-red/10 to-transparent" />
-                      )}
+                  {/* Glowing Effect */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-makima-red/5 blur-[40px] rounded-full pointer-events-none -mr-8 -mt-8 group-hover:bg-makima-red/10 transition-colors z-[1]" />
+                  
+                  {/* Image Section */}
+                  <div className="relative h-64 w-full bg-white/5 overflow-hidden">
+                    <div className="absolute inset-0 bg-transparent z-10" />
+                    {post.image ? (
+                      <img 
+                        src={post.image} 
+                        alt={post.title} 
+                        className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500" 
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-makima-red/10 to-transparent" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-[5]" />
                   </div>
 
-                  <div className="relative z-10">
-                    {/* Meta */}
-                    <div className="flex items-center gap-4 text-[10px] font-black text-neutral-500 mb-6 uppercase tracking-[0.3em]">
-                        <span className="flex items-center gap-2">
-                        <Calendar size={14} className="text-makima-red/60" />
-                        {format(parseISO(post.date), 'MMM dd, yyyy')}
-                        </span>
-                        <span className="w-1.5 h-1.5 bg-neutral-800 rounded-full" />
-                        <span>{Math.ceil(post.content.length / 800)} Min Read</span>
+                  {/* Content Section */}
+                  <div className="px-6 pb-6 pt-4 flex flex-col flex-grow relative z-10">
+                    {/* Title */}
+                    <h2 className="text-xl md:text-2xl font-cinzel font-bold text-white mb-3 group-hover:text-makima-red transition-all duration-300 line-clamp-2 leading-tight tracking-wide">
+                      {post.title}
+                    </h2>
+
+                    {/* Excerpt */}
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Action */}
+                    <div className="mt-auto">
+                      <div className="flex items-center justify-center py-2 bg-white text-black text-xs font-semibold rounded-xl hover:bg-gray-200 transition-colors">
+                        Read Analysis
+                      </div>
                     </div>
-                  </div>
-
-                  {/* Title */}
-                  <h2 className="text-2xl font-black text-white mb-6 group-hover:text-makima-red transition-all duration-300 line-clamp-2 leading-tight relative z-10">
-                    {post.title}
-                  </h2>
-
-                  {/* Excerpt */}
-                  <p className="text-neutral-500 text-sm leading-relaxed mb-10 line-clamp-3 font-medium relative z-10">
-                    {post.excerpt}
-                  </p>
-
-                  {/* Action */}
-                  <div className="mt-auto flex items-center justify-between relative z-10">
-                    <span className="text-[10px] font-black text-white uppercase tracking-[0.3em] group-hover:translate-x-3 transition-transform duration-700 flex items-center gap-3">
-                      View Analysis <ArrowRight size={16} className="text-makima-red" />
-                    </span>
                   </div>
                 </article>
               </Link>

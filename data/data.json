@@ -413,5 +413,38 @@
             "github": "",
             "live": "https://quick-to-services-q8m4.vercel.app/"
         }
+    ],
+    "music": [
+        {
+            "videoId": "WrczwHORF60",
+            "title": "Taaron Se",
+            "artist": "Arpit Bala"
+        },
+        {
+            "videoId": "GbJoSYIECJY",
+            "title": "Natkhat",
+            "artist": "Jigar"
+        },
+        {
+            "videoId": "s4fYA_wkta8",
+            "title": "Iss Tarah",
+            "artist": "Chaar Diwaari ft. Sonu Nigam"
+        },
+        {
+            "videoId": "AXeB1vrz7II",
+            "title": "SHARMEELI",
+            "artist": "Frappe Ash & toorjo dey"
+        },
+        {
+            "videoId": "9CxYG79GTOw",
+            "title": "Maykhana",
+            "artist": "Saar Punch, Bharg"
+        },
+        {
+            "videoId": "7xutG743GJI",
+            "title": "Kaala Teeka",
+            "artist": "Dizlaw",
+            "startTime": 66
+        }
     ]
 }

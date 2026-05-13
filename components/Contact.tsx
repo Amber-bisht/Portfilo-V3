@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic';
 import { ExternalLink, Mail } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTheme } from '../context/ThemeContext';
 import MusicPlayer from './MusicPlayer';
+import globalData from '../data/data.json';
 
 const GithubContributions = dynamic(() => import('./GithubContributions'), { ssr: false });
 
@@ -28,30 +28,11 @@ interface ContactProps {
 }
 
 const Contact = ({ data, githubStats }: ContactProps) => {
-    const { isCinematicMode } = useTheme();
     return (
         <section id="contact" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-
-
-
-            {/* Let's redo the children order to match the visual grid */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-6">
                 {/* Top Left: Status / Location */}
                 <div className="md:col-span-2 h-full min-h-[240px] bg-neutral-900/50 border border-white/5 rounded-3xl p-8 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors">
-                    {/* Background Image Layer */}
-                    {isCinematicMode && (
-                        <div className="absolute inset-0 z-0 opacity-60 transition-all duration-700">
-                            <Image
-                                src="/makima.webp"
-                                alt="Status Background"
-                                fill
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                className="object-cover object-center brightness-[1.1]"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/10 to-transparent" />
-                        </div>
-                    )}
-
                     <div className="absolute top-0 right-0 w-64 h-64 bg-makima-red/10 blur-[80px] rounded-full pointer-events-none -mr-16 -mt-16 z-[1]" />
 
                     <div className="relative z-10 h-full flex flex-col justify-between">
@@ -78,19 +59,6 @@ const Contact = ({ data, githubStats }: ContactProps) => {
 
                 {/* Top Right: Github Graph */}
                 <div className="md:col-span-2 h-full min-h-[240px] bg-neutral-900/50 border border-white/5 rounded-3xl p-6 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors">
-                    {/* Background Image Layer */}
-                    {isCinematicMode && (
-                        <div className="absolute inset-0 z-0 opacity-30 transition-all duration-700">
-                            <Image
-                                src="/activity.webp"
-                                alt="Activity Background"
-                                fill
-                                sizes="(max-width: 1200px) 100vw, 800px"
-                                className="object-cover object-center brightness-[1.1]"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent" />
-                        </div>
-                    )}
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2">
                             <FaGithub className="text-xl text-white" />
@@ -100,7 +68,6 @@ const Contact = ({ data, githubStats }: ContactProps) => {
                     </div>
                     <div className="flex-1 flex items-center justify-center w-full">
                         <div className="w-full">
-                            {/* We just render the graph here. The component might need styling tweaks. */}
                             <GithubContributions githubStats={githubStats} />
                         </div>
                     </div>
@@ -134,21 +101,6 @@ const Contact = ({ data, githubStats }: ContactProps) => {
                 <div className="md:col-span-2 h-full min-h-[240px] flex flex-col gap-4">
                     {/* Mail Part */}
                     <div className="flex-1 relative bg-neutral-900/40 backdrop-blur-xl rounded-3xl p-8 flex flex-col justify-center overflow-hidden group border border-white/5 hover:border-red-500/20 transition-all duration-500">
-                        {/* Background Image Layer */}
-                        {isCinematicMode && (
-                            <div className="absolute top-0 right-0 z-0 opacity-40 transition-all duration-700 pointer-events-none">
-                                <Image
-                                    src="/mail.webp"
-                                    alt="Mail Background"
-                                    width={220}
-                                    height={220}
-                                    className="object-contain brightness-[1.1]"
-                                    style={{ height: 'auto', width: 'auto' }}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-transparent" />
-                            </div>
-                        )}
-
                         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                             <div className="space-y-2">
                                 <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -173,44 +125,9 @@ const Contact = ({ data, githubStats }: ContactProps) => {
 
                     {/* Custom Music Player (Full Playback) */}
                     <div className="h-[152px] bg-[#1e1f22] border border-white/5 rounded-3xl overflow-hidden group hover:border-white/10 transition-colors">
-                        <MusicPlayer
-                            tracks={[
-                                {
-                                    videoId: "WrczwHORF60",
-                                    title: "Taaron Se",
-                                    artist: "Arpit Bala"
-                                },
-                                {
-                                    videoId: "GbJoSYIECJY",
-                                    title: "Natkhat",
-                                    artist: "Jigar"
-                                },
-                                {
-                                    videoId: "s4fYA_wkta8",
-                                    title: "Iss Tarah",
-                                    artist: "Chaar Diwaari ft. Sonu Nigam"
-                                },
-                                {
-                                    videoId: "AXeB1vrz7II",
-                                    title: "SHARMEELI",
-                                    artist: "Frappe Ash & toorjo dey"
-                                },
-                                {
-                                    videoId: "9CxYG79GTOw",
-                                    title: "Maykhana",
-                                    artist: "Saar Punch, Bharg"
-                                },
-                                {
-                                    videoId: "7xutG743GJI",
-                                    title: "Kaala Teeka",
-                                    artist: "Dizlaw",
-                                    startTime: 66
-                                }
-                            ]}
-                        />
+                        <MusicPlayer tracks={globalData.music} />
                     </div>
                 </div>
-
             </div>
         </section>
     );

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { Play, Pause, SkipForward, SkipBack, Volume2, Music, Loader2 } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { Play, Pause, SkipForward, SkipBack, Loader2 } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -19,13 +18,12 @@ export interface Track {
 
 interface MusicPlayerProps {
     tracks: Track[];
+    isGlobal?: boolean;
 }
 
-const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
-    const { isCinematicMode } = useTheme();
+const MusicPlayer = ({ tracks, isGlobal = false }: MusicPlayerProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
-    const isFirstMount = useRef(true);
     const hasRestoredPosition = useRef(false);
     const [progress, setProgress] = useState(0);
     const [duration, setDuration] = useState(0);
@@ -38,42 +36,78 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const observerRef = useRef<IntersectionObserver | null>(null);
 
+    useEffect(() => {
+        if (isGlobal) console.log('Global MusicPlayer mounted');
+        return () => {
+            if (isGlobal) console.log('Global MusicPlayer unmounted');
+        };
+    }, [isGlobal]);
+
     // Initial load from localStorage
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const savedIndex = localStorage.getItem('music-current-index');
+            const savedPlaying = localStorage.getItem('music-is-playing') === 'true';
+            
             if (savedIndex !== null) {
                 const idx = parseInt(savedIndex);
                 if (idx >= 0 && idx < tracks.length) {
                     setCurrentIndex(idx);
                 }
             }
+            // We don't auto-play on new tab due to browser policies, 
+            // but we sync the UI state
+            setIsPlaying(savedPlaying);
         }
     }, [tracks.length]);
 
-    // Intersection Observer to load YT when visible
+    // Cross-tab synchronization
     useEffect(() => {
-        if (shouldLoadYT) return;
-
-        observerRef.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                setShouldLoadYT(true);
-                observerRef.current?.disconnect();
+        const handleStorageChange = (e: StorageEvent) => {
+            if (e.key === 'music-current-index' && e.newValue !== null) {
+                setCurrentIndex(parseInt(e.newValue));
             }
-        }, { threshold: 0.1 });
+            if (e.key === 'music-is-playing') {
+                setIsPlaying(e.newValue === 'true');
+            }
+        };
 
-        if (containerRef.current) {
-            observerRef.current.observe(containerRef.current);
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, []);
+
+    // Broadcast play state
+    useEffect(() => {
+        if (isGlobal && typeof window !== 'undefined') {
+            localStorage.setItem('music-is-playing', isPlaying.toString());
+        }
+    }, [isPlaying, isGlobal]);
+
+    // Intersection Observer to load YT when visible (only for global or if we want to load it early)
+    useEffect(() => {
+        if (!isGlobal && !shouldLoadYT) {
+            observerRef.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    setShouldLoadYT(true);
+                    observerRef.current?.disconnect();
+                }
+            }, { threshold: 0.1 });
+
+            if (containerRef.current) {
+                observerRef.current.observe(containerRef.current);
+            }
+        } else if (isGlobal) {
+            setShouldLoadYT(true);
         }
 
         return () => observerRef.current?.disconnect();
-    }, [shouldLoadYT]);
+    }, [shouldLoadYT, isGlobal]);
 
     const currentTrack = tracks[currentIndex];
 
-    // YT API Loading Logic
+    // YT API Loading Logic (ONLY FOR GLOBAL)
     useEffect(() => {
-        if (!shouldLoadYT || !tracks || tracks.length === 0) return;
+        if (!isGlobal || !shouldLoadYT || !tracks || tracks.length === 0) return;
 
         const initializePlayer = () => {
             if (playerRef.current && playerRef.current.loadVideoById) {
@@ -110,6 +144,10 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                         }
                         setDuration(event.target.getDuration());
                         setIsPlayerReady(true);
+                        // Signal ready to UI components
+                        window.dispatchEvent(new CustomEvent('music-status-update', { 
+                            detail: { isPlayerReady: true } 
+                        }));
                     },
                     onStateChange: (event: any) => {
                         setIsPlaying(event.data === 1);
@@ -120,35 +158,53 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
             });
         };
 
-        if (!window.YT) {
-            const tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+        const loadYT = () => {
+            if (!window.YT) {
+                const tag = document.createElement('script');
+                tag.src = 'https://www.youtube.com/iframe_api';
+                const firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+                window.onYouTubeIframeAPIReady = initializePlayer;
+            } else if (window.YT && window.YT.Player) {
+                initializePlayer();
+            }
+        };
 
-            window.onYouTubeIframeAPIReady = initializePlayer;
-        } else if (window.YT && window.YT.Player) {
-            initializePlayer();
-        }
-    }, [shouldLoadYT, tracks]);
+        // Defer YouTube loading to improve LCP
+        const timer = setTimeout(loadYT, 2000);
+        return () => clearTimeout(timer);
+    }, [shouldLoadYT, tracks, isGlobal]);
 
-    // Handle track changes
+    // Handle track changes (ONLY FOR GLOBAL)
+    const lastVideoId = useRef<string | null>(null);
     useEffect(() => {
-        if (isPlayerReady && playerRef.current && playerRef.current.loadVideoById) {
-            playerRef.current.loadVideoById({
-                videoId: currentTrack.videoId,
-                startSeconds: currentTrack.startTime || 0
-            });
-            setIsPlaying(true);
-            setProgress(0);
-            setCurrentTime(0);
-        }
-    }, [currentIndex]);
+        if (isGlobal && isPlayerReady && playerRef.current && playerRef.current.loadVideoById) {
+            if (lastVideoId.current !== currentTrack.videoId) {
+                const savedTime = localStorage.getItem('music-current-time');
+                const savedIndex = localStorage.getItem('music-current-index');
+                let startTime = currentTrack.startTime || 0;
+                
+                // If it's the same track index as saved, try to resume
+                if (savedIndex !== null && parseInt(savedIndex) === currentIndex && savedTime) {
+                    startTime = parseFloat(savedTime);
+                }
 
-    // Update progress bar and save state
+                playerRef.current.loadVideoById({
+                    videoId: currentTrack.videoId,
+                    startSeconds: startTime
+                });
+                setIsPlaying(true);
+                setProgress(0);
+                setCurrentTime(startTime);
+                lastVideoId.current = currentTrack.videoId;
+            }
+        }
+    }, [currentIndex, isGlobal, isPlayerReady, currentTrack.videoId, currentTrack.startTime]);
+
+    // Update progress bar and save state (ONLY FOR GLOBAL)
     useEffect(() => {
         let interval: NodeJS.Timeout;
-        if (isPlaying && playerRef.current && playerRef.current.getCurrentTime) {
+        if (isGlobal && isPlaying && playerRef.current && playerRef.current.getCurrentTime) {
             interval = setInterval(() => {
                 const current = playerRef.current.getCurrentTime();
                 const total = playerRef.current.getDuration();
@@ -164,52 +220,60 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
             }, 1000);
         }
         return () => clearInterval(interval);
-    }, [isPlaying, currentIndex]);
+    }, [isPlaying, currentIndex, isGlobal]);
 
-    // Initial Seek once ready
+    // Initial Seek once ready (ONLY FOR GLOBAL)
     useEffect(() => {
-        if (isPlayerReady && !hasRestoredPosition.current && playerRef.current && playerRef.current.seekTo) {
+        if (isGlobal && isPlayerReady && !hasRestoredPosition.current && playerRef.current && playerRef.current.seekTo) {
             const savedTime = localStorage.getItem('music-current-time');
-            if (savedTime) {
-                const time = parseFloat(savedTime);
-                playerRef.current.seekTo(time, true);
-                if (isCinematicMode) {
-                    playerRef.current.playVideo();
+                if (savedTime) {
+                    const time = parseFloat(savedTime);
+                    playerRef.current.seekTo(time, true);
                 }
+                hasRestoredPosition.current = true;
             }
-            hasRestoredPosition.current = true;
-        }
-    }, [isPlayerReady, isCinematicMode]);
+        }, [isPlayerReady, isGlobal]);
 
     const togglePlay = () => {
-        if (!isPlayerReady || !playerRef.current) return;
-        
-        if (isPlaying) {
-            playerRef.current.pauseVideo();
+        if (isGlobal) {
+            if (!isPlayerReady || !playerRef.current) return;
+            if (isPlaying) playerRef.current.pauseVideo();
+            else playerRef.current.playVideo();
         } else {
-            playerRef.current.playVideo();
+            const action = isPlaying ? 'pause' : 'play';
+            window.dispatchEvent(new CustomEvent('music-command', { detail: { action } }));
         }
     };
 
     const handleNext = () => {
-        setCurrentIndex((prev) => (prev + 1) % tracks.length);
+        if (isGlobal) {
+            setCurrentIndex((prev) => (prev + 1) % tracks.length);
+        } else {
+            window.dispatchEvent(new CustomEvent('music-command', { detail: { action: 'next' } }));
+        }
     };
 
     const handlePrev = () => {
-        setCurrentIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
+        if (isGlobal) {
+            setCurrentIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
+        } else {
+            window.dispatchEvent(new CustomEvent('music-command', { detail: { action: 'prev' } }));
+        }
     };
 
     const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!isPlayerReady || !playerRef.current || !containerRef.current) return;
-        
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const clickedProgress = x / rect.width;
-        const newTime = clickedProgress * duration;
-        
-        playerRef.current.seekTo(newTime, true);
-        setCurrentTime(newTime);
-        setProgress(clickedProgress * 100);
+        if (isGlobal) {
+            if (!isPlayerReady || !playerRef.current || !containerRef.current) return;
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const clickedProgress = x / rect.width;
+            const newTime = clickedProgress * duration;
+            playerRef.current.seekTo(newTime, true);
+            setCurrentTime(newTime);
+            setProgress(clickedProgress * 100);
+        } else {
+            // UI only - send seek command if we had one, but let's keep it simple for now
+        }
     };
 
     const formatTime = (time: number) => {
@@ -219,75 +283,76 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
-    // Sync with Cinematic Mode transitions - SEAMLESS
+    // Listen for commands (GLOBAL) or status updates (UI)
     useEffect(() => {
-        if (isFirstMount.current) {
-            isFirstMount.current = false;
-            return;
-        }
-
-        if (isPlayerReady && playerRef.current) {
-            try {
-                if (isCinematicMode) {
-                    playerRef.current.unMute();
-                    playerRef.current.playVideo();
-                } else {
-                    playerRef.current.pauseVideo();
+        if (isGlobal) {
+            const handleCommand = (e: any) => {
+                const { action } = e.detail;
+                if (!isPlayerReady || !playerRef.current) return;
+                switch (action) {
+                    case 'play': playerRef.current.playVideo(); break;
+                    case 'pause': playerRef.current.pauseVideo(); break;
+                    case 'next': handleNext(); break;
+                    case 'prev': handlePrev(); break;
                 }
-            } catch (err) {
-                // Silently handle if player state is not ready for playback commands
-            }
+            };
+            window.addEventListener('music-command', handleCommand);
+            return () => window.removeEventListener('music-command', handleCommand);
+        } else {
+            const handleStatus = (e: any) => {
+                const { title, artist, isPlaying, progress, currentTime, duration, trackIndex, isPlayerReady, isBuffering } = e.detail;
+                if (isPlaying !== undefined) setIsPlaying(isPlaying);
+                if (progress !== undefined) setProgress(progress);
+                if (currentTime !== undefined) setCurrentTime(currentTime);
+                if (duration !== undefined) setDuration(duration);
+                if (trackIndex !== undefined) setCurrentIndex(trackIndex - 1);
+                if (isPlayerReady !== undefined) setIsPlayerReady(isPlayerReady);
+                if (isBuffering !== undefined) setIsBuffering(isBuffering);
+            };
+            window.addEventListener('music-status-update', handleStatus);
+            return () => window.removeEventListener('music-status-update', handleStatus);
         }
-    }, [isCinematicMode, isPlayerReady]);
+    }, [isGlobal, isPlayerReady, currentIndex]);
 
-    // Global Command Listener for Mascot interaction
+    // Broadcast status (GLOBAL)
     useEffect(() => {
-        const handleCommand = (e: any) => {
-            const { action } = e.detail;
-            if (!isPlayerReady || !playerRef.current) return;
-
-            switch (action) {
-                case 'play':
-                    playerRef.current.playVideo();
-                    break;
-                case 'pause':
-                    playerRef.current.pauseVideo();
-                    break;
-                case 'next':
-                    handleNext();
-                    break;
-                case 'prev':
-                    handlePrev();
-                    break;
-            }
-        };
-
-        window.addEventListener('music-command', handleCommand);
-        return () => window.removeEventListener('music-command', handleCommand);
-    }, [isPlayerReady, currentIndex]); // currentIndex needed because handleNext/Prev use closure
-
-    // Broadcast status for Mascot awareness
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
+        if (isGlobal && typeof window !== 'undefined') {
             window.dispatchEvent(new CustomEvent('music-status-update', { 
                 detail: { 
                     title: currentTrack.title, 
                     artist: currentTrack.artist,
                     isPlaying,
+                    progress,
+                    currentTime,
+                    duration,
                     trackIndex: currentIndex + 1,
-                    totalTracks: tracks.length
+                    totalTracks: tracks.length,
+                    isPlayerReady,
+                    isBuffering
                 } 
             }));
         }
-    }, [currentIndex, isPlaying, currentTrack, tracks.length]);
+    }, [isGlobal, currentIndex, isPlaying, progress, currentTime, duration, currentTrack, tracks.length, isPlayerReady, isBuffering]);
+
+    // If global, only render the hidden player on client
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (isGlobal) {
+        if (!mounted) return null;
+        return (
+            <div className="hidden h-0 w-0 overflow-hidden pointer-events-none" aria-hidden="true">
+                <div id="youtube-player-shared"></div>
+            </div>
+        );
+    }
 
     const thumbnailUrl = `https://img.youtube.com/vi/${currentTrack.videoId}/maxresdefault.jpg`;
 
     return (
-        <div className="flex h-full w-full bg-neutral-900/40 backdrop-blur-xl overflow-hidden relative group border border-white/5 transition-all duration-500 hover:border-red-500/20">
-            {/* Hidden Player */}
-            <div id="youtube-player-shared" className="hidden opacity-0 pointer-events-none absolute h-0 w-0"></div>
-
+        <div ref={containerRef} className="flex h-full w-full bg-neutral-900/40 backdrop-blur-xl overflow-hidden relative group border border-white/5 transition-all duration-500 hover:border-red-500/20">
             {/* Gradient Background Overlay */}
             <div className="absolute inset-0 z-0 bg-gradient-to-br from-red-500/5 via-transparent to-black/40 pointer-events-none" />
 
@@ -304,7 +369,6 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                             e.target.src = `https://img.youtube.com/vi/${currentTrack.videoId}/0.jpg`;
                         }}
                     />
-                    {/* Vinyl Center Hole Decor */}
                     <div className="absolute inset-0 flex items-center justify-center">
                          <div className="w-6 h-6 bg-neutral-900 rounded-full border-2 border-white/10 shadow-inner" />
                     </div>
@@ -321,7 +385,6 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                     {/* Progress Bar */}
                     <div className="flex flex-col gap-1.5 w-full max-w-md">
                         <div 
-                            ref={containerRef}
                             className="h-1.5 w-full bg-white/10 rounded-full cursor-pointer relative overflow-hidden group/bar transition-all"
                             onClick={handleProgressClick}
                         >
@@ -380,10 +443,8 @@ const MusicPlayer = ({ tracks }: MusicPlayerProps) => {
                     </div>
                 </div>
             </div>
-
         </div>
     );
-
 };
 
 export default MusicPlayer;
