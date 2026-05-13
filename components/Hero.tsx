@@ -52,12 +52,12 @@ const Hero = ({ data }: HeroProps) => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-7xl">
 
                 {/* 1. Profile Image Card (Tall) */}
-                <div className="md:col-span-1 md:row-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-4 backdrop-blur-sm relative overflow-hidden flex items-center justify-center group outline outline-1 outline-white/5 w-full max-w-sm mx-auto md:max-w-none md:mx-0 min-h-[350px] md:min-h-0">
+                <div className="md:col-span-1 md:row-span-2 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 backdrop-blur-sm relative overflow-hidden flex items-center justify-center group outline outline-1 outline-white/5 w-full max-w-sm mx-auto md:max-w-none md:mx-0">
 
 
-                    <div className="relative w-48 h-48 md:w-48 md:h-48 overflow-hidden rounded-2xl z-10 border border-white/10 shadow-2xl">
+                    <div className="relative w-52 h-52 md:w-52 md:h-52 overflow-hidden rounded-2xl z-10 border border-white/10 shadow-2xl">
                         <Image
-                            src="/hero-profile.webp"
+                            src="/amberbisht.webp"
                             alt={data.about.name}
                             fill
                             sizes="(max-width: 768px) 200px, 200px"
