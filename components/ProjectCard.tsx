@@ -18,9 +18,10 @@ interface ProjectProps {
     };
     index: number;
     orientation?: "horizontal" | "vertical";
+    priority?: boolean;
 }
 
-const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps) => {
+const ProjectCard = ({ project, index, orientation = "vertical", priority = false }: ProjectProps) => {
     const [isInternalModalOpen, setIsInternalModalOpen] = useState(false);
     const isHorizontal = orientation === "horizontal";
 
@@ -33,7 +34,7 @@ const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps)
 
                 {/* Image Section */}
                 <div className={`relative overflow-hidden ${isHorizontal ? "md:w-2/5 w-full h-48 md:h-full" : "h-64 w-full"}`}>
-                    <div className="h-full w-full relative bg-white/5">
+                    <div className="h-full w-full relative bg-white/5 border-4 md:border-8 border-black rounded-2xl overflow-hidden shadow-inner">
                         <div className="absolute inset-0 bg-transparent z-10" />
                         {project.tag && (
                             <div className="absolute top-4 left-4 z-20 px-3 py-1 bg-makima-red text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg">
@@ -46,6 +47,7 @@ const ProjectCard = ({ project, index, orientation = "vertical" }: ProjectProps)
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-contain transform group-hover:scale-110 transition-transform duration-500"
+                            priority={priority}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-[5]" />
                     </div>

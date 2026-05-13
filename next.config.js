@@ -17,6 +17,7 @@ const nextConfig = {
   images: {
     unoptimized: false, // Enabled for Vercel
     formats: ['image/avif', 'image/webp'],
+    qualities: [60, 75],
     remotePatterns: [
       {
         protocol: 'https',
@@ -41,6 +42,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'img.youtube.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
         pathname: '/**',
       },
     ],

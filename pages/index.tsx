@@ -61,17 +61,17 @@ export default function Home({ githubStats }: { githubStats: any }) {
                 <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 md:gap-8">
                     {/* Project 1 - Wide */}
                     <div className="md:col-span-2 md:row-span-1">
-                        <ProjectCard project={data.projects[0]} index={0} orientation="horizontal" />
+                        <ProjectCard project={data.projects[0]} index={0} orientation="horizontal" priority={true} />
                     </div>
 
                     {/* Project 3 - Tall (Special placement) */}
                     <div className="md:col-span-1 md:row-span-2 h-full">
-                        <ProjectCard project={data.projects[2]} index={2} orientation="vertical" />
+                        <ProjectCard project={data.projects[2]} index={2} orientation="vertical" priority={true} />
                     </div>
 
                     {/* Project 2 - Wide */}
                     <div className="md:col-span-2 md:row-span-1">
-                        <ProjectCard project={data.projects[1]} index={1} orientation="horizontal" />
+                        <ProjectCard project={data.projects[1]} index={1} orientation="horizontal" priority={true} />
                     </div>
                 </div>
                 {/* View More Button */}

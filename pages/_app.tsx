@@ -5,8 +5,8 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel', display: 'swap' });
 
 const PochitaFollower = dynamic(() => import('../components/PochitaFollower'), { ssr: false });
 const MusicPlayer = dynamic(() => import('../components/MusicPlayer'), { ssr: false });
