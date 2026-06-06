@@ -1,4 +1,4 @@
-import { FaLinkedin, FaGithub, FaTwitter, FaDiscord } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaTwitter, FaDiscord, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
 
 import dynamic from 'next/dynamic';
@@ -22,6 +22,8 @@ interface ContactProps {
             github: string;
             linkedin: string;
             twitter: string;
+            instagram?: string;
+            youtube?: string;
         };
     };
     githubStats: any;
@@ -85,15 +87,23 @@ const Contact = ({ data, githubStats }: ContactProps) => {
                     </div>
                 </div>
 
-                {/* Bottom Mid: Socials */}
-                <div className="md:col-span-1 h-full min-h-[240px] flex flex-col gap-4">
-                    <a href={data.contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="flex-1 bg-[#0a66c2] rounded-3xl flex items-center justify-center relative overflow-hidden group hover:opacity-90 transition-opacity">
-                        <FaLinkedin className="text-4xl text-white" />
-                        <ExternalLink className="absolute top-3 right-3 text-white/50 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                {/* Bottom Mid: Socials - Symmetrical 2x2 Grid */}
+                <div className="md:col-span-1 h-full min-h-[240px] grid grid-cols-2 gap-4">
+                    <a href={data.contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="bg-[#0a66c2] rounded-3xl flex items-center justify-center relative overflow-hidden group hover:opacity-90 transition-opacity aspect-square">
+                        <FaLinkedin className="text-3xl text-white" />
+                        <ExternalLink className="absolute top-2 right-2 text-white/50 w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
-                    <a href={data.contact.twitter} target="_blank" rel="noreferrer" aria-label="Twitter" className="flex-1 bg-black border border-white/10 rounded-3xl flex items-center justify-center relative overflow-hidden group hover:bg-neutral-900 transition-colors">
-                        <FaTwitter className="text-4xl text-white" />
-                        <ExternalLink className="absolute top-3 right-3 text-white/50 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <a href={data.contact.twitter} target="_blank" rel="noreferrer" aria-label="Twitter" className="bg-black border border-white/10 rounded-3xl flex items-center justify-center relative overflow-hidden group hover:bg-neutral-900 transition-colors aspect-square">
+                        <FaTwitter className="text-3xl text-white" />
+                        <ExternalLink className="absolute top-2 right-2 text-white/50 w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                    <a href={data.contact.instagram || "#"} target="_blank" rel="noreferrer" aria-label="Instagram" className="bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rounded-3xl flex items-center justify-center relative overflow-hidden group hover:opacity-90 transition-opacity aspect-square">
+                        <FaInstagram className="text-3xl text-white" />
+                        <ExternalLink className="absolute top-2 right-2 text-white/50 w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                    <a href={data.contact.youtube || "#"} target="_blank" rel="noreferrer" aria-label="YouTube" className="bg-[#ff0000] rounded-3xl flex items-center justify-center relative overflow-hidden group hover:opacity-90 transition-opacity aspect-square">
+                        <FaYoutube className="text-3xl text-white" />
+                        <ExternalLink className="absolute top-2 right-2 text-white/50 w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
                 </div>
 

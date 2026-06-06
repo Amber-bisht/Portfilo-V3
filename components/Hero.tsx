@@ -1,5 +1,4 @@
-import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
-import { SiGmail } from 'react-icons/si';
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,6 +16,8 @@ interface HeroProps {
             linkedin: string;
             twitter: string;
             email: string;
+            instagram?: string;
+            youtube?: string;
         };
     };
 }
@@ -35,14 +36,19 @@ const Hero = ({ data }: HeroProps) => {
             url: data.contact.twitter,
         },
         {
+            name: 'Instagram',
+            icon: FaInstagram,
+            url: data.contact.instagram || '#',
+        },
+        {
+            name: 'YouTube',
+            icon: FaYoutube,
+            url: data.contact.youtube || '#',
+        },
+        {
             name: 'GitHub',
             icon: FaGithub,
             url: data.contact.github,
-        },
-        {
-            name: 'Gmail',
-            icon: SiGmail,
-            url: `mailto:${data.contact.email}`,
         }
     ];
 

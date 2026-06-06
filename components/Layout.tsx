@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode, useState, useEffect } from 'react';
-import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase, FaLinkedin, FaGithub, FaTwitter, FaMusic, FaPause } from 'react-icons/fa';
+import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase, FaLinkedin, FaGithub, FaTwitter, FaMusic, FaPause, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
 import data from '../data/data.json';
 import { Navbar, NavBody, NavItems, NavbarLogo, NavbarButton, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './Navbar';
@@ -144,7 +144,17 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
             </main>
 
             <footer className="relative z-10 border-t border-white/10 pt-16 pb-8 px-4 md:px-8 mt-20 bg-black/20 backdrop-blur-md overflow-hidden">
-
+                {/* Background Image with Gradient Overlays */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/projects/amberbisht.png"
+                        alt="Footer Background"
+                        fill
+                        className="object-cover opacity-50"
+                        priority={false}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-neutral-950/80" />
+                </div>
 
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 relative z-10">
                     {/* Column 1: Branding */}
@@ -162,6 +172,16 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                             <a href={data.contact.twitter} target="_blank" rel="noreferrer" aria-label="Twitter Profile" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
                                 <FaTwitter size={20} aria-hidden="true" />
                             </a>
+                            {data.contact.instagram && (
+                                <a href={data.contact.instagram} target="_blank" rel="noreferrer" aria-label="Instagram Profile" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
+                                    <FaInstagram size={20} aria-hidden="true" />
+                                </a>
+                            )}
+                            {data.contact.youtube && (
+                                <a href={data.contact.youtube} target="_blank" rel="noreferrer" aria-label="YouTube Channel" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
+                                    <FaYoutube size={20} aria-hidden="true" />
+                                </a>
+                            )}
                             <a href={data.contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Profile" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
                                 <FaGithub size={20} aria-hidden="true" />
                             </a>
@@ -203,7 +223,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-mono text-white/70">
+                <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-mono text-white/70 relative z-10">
                     <p>
                         &copy; {new Date().getFullYear()} Amber Bisht
                     </p>
