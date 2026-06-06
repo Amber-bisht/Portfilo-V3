@@ -141,7 +141,7 @@ const Layout = ({ children, title = data.seo.title }: LayoutProps) => {
                 {/* Background Image with Gradient Overlays */}
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/images/projects/amberbisht.png"
+                        src="/images/projects/amberbisht.webp"
                         alt="Footer Background"
                         fill
                         className="object-cover opacity-50"

@@ -145,7 +145,7 @@
                 "Google OAuth",
                 "JavaScript"
             ],
-            "image": "/images/projects/astro.amberbisht.png",
+            "image": "/images/projects/astro.amberbisht.webp",
             "github": "https://github.com/Amber-bisht/astro",
             "live": "https://astro.amberbisht.me/",
             "tag": "Personal Project"
@@ -173,7 +173,7 @@
                 "Docker",
                 "Monaco Editor"
             ],
-            "image": "/images/projects/dsa.amberbisht.png",
+            "image": "/images/projects/dsa.amberbisht.webp",
             "github": "https://github.com/Amber-bisht/dsa.amberbisht.me",
             "live": "",
             "tag": "Personal Project"
@@ -200,7 +200,7 @@
                 "Docker",
                 "GitHub Actions"
             ],
-            "image": "/images/projects/telegram.png",
+            "image": "/images/projects/telegram.webp",
             "github": "https://github.com/Amber-bisht/telegram-ai-bot",
             "live": "",
             "tag": "Personal Project"
@@ -421,7 +421,7 @@
                 "Razorpay",
                 "Microservices"
             ],
-            "image": "/images/projects/jbkadaknathfarm.png",
+            "image": "/images/projects/jbkadaknathfarm.webp",
             "github": "",
             "live": "https://www.jbkadaknathfarm.com/",
             "tag": "Freelance Project"
@@ -446,7 +446,7 @@
                 "TypeScript",
                 "Admin Panel"
             ],
-            "image": "/images/projects/quicktoservices.png",
+            "image": "/images/projects/quicktoservices.webp",
             "github": "",
             "live": "https://www.quicktoservices.com/",
             "tag": "Freelance Project"
@@ -474,7 +474,7 @@
                 "Paytm PG",
                 "WhatsApp API"
             ],
-            "image": "/images/projects/sbdscybercafe.png",
+            "image": "/images/projects/sbdscybercafe.webp",
             "github": "",
             "live": "https://www.sbdsservice.online/",
             "tag": "Freelance Project"
@@ -499,7 +499,7 @@
                 "BullMQ",
                 "Cloudflare Geolocation"
             ],
-            "image": "/images/projects/jbdrench.png",
+            "image": "/images/projects/jbdrench.webp",
             "github": "",
             "live": "https://www.jbdrench.com",
             "tag": "Freelance Project"
@@ -525,7 +525,7 @@
                 "Tailwind CSS",
                 "Markdown"
             ],
-            "image": "/images/projects/notefind.png",
+            "image": "/images/projects/notefind.webp",
             "github": "",
             "live": "https://notesfind.com/",
             "tag": "Freelance Project"
@@ -555,7 +555,7 @@
                 "Docker",
                 "Razorpay"
             ],
-            "image": "/images/projects/tripbazaar.png",
+            "image": "/images/projects/tripbazaar.webp",
             "github": "",
             "live": "https://tripbazaar.in/",
             "tag": "Freelance Project"

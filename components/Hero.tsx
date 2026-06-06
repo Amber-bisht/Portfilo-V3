@@ -77,17 +77,6 @@ const Hero = ({ data }: HeroProps) => {
                 {/* 2. Personal Data Card */}
                 <div className="md:col-span-3 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 backdrop-blur-sm relative overflow-hidden flex flex-col justify-center">
 
-                    {/* Feed Profile in AI — top right */}
-                    <a
-                        href="/api/profile"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="absolute top-5 right-5 z-20 flex items-center gap-2 bg-makima-red text-white font-bold py-2 px-4 rounded-xl transition-all duration-300 active:scale-95 uppercase text-[10px] tracking-widest shadow-lg"
-                        title="Opens full profile JSON — paste into ChatGPT / Claude for AI context"
-                    >
-                        Feed My Data in AI to Evaluate Me Faster
-                    </a>
-
                     <div className="relative z-10">
                         <div className="flex items-center gap-6 mb-2">
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter uppercase">
@@ -95,7 +84,7 @@ const Hero = ({ data }: HeroProps) => {
                             </h1>
                         </div>
 
-                        <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-white/90 font-mono mb-6">
+                        <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-white/90 font-mono mb-6 md:mb-0">
                             <div className="flex items-center gap-1.5 uppercase font-bold">
                                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
                                 {data.about.location}
@@ -104,6 +93,17 @@ const Hero = ({ data }: HeroProps) => {
                             <div className="uppercase tracking-widest font-bold">{data.about.title}</div>
                         </div>
                     </div>
+
+                    {/* Feed Profile in AI */}
+                    <a
+                        href="/api/profile"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative md:absolute top-auto md:top-5 right-auto md:right-5 z-20 flex items-center justify-center gap-2 bg-makima-red text-white font-bold py-2.5 px-4 rounded-xl transition-all duration-300 active:scale-95 uppercase text-[10px] tracking-widest shadow-lg w-full md:w-auto mt-4 md:mt-0 text-center"
+                        title="Opens full profile JSON — paste into ChatGPT / Claude for AI context"
+                    >
+                        Feed My Data in AI to Evaluate Me Faster
+                    </a>
                 </div>
 
                 {/* 3. Social Icons Card */}
