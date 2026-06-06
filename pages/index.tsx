@@ -7,6 +7,20 @@ import Link from 'next/link';
 import { useRef, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+// ── Premium section heading ──────────────────────────────────────────────────
+function SectionHeading({ num, title, sub }: { num: string; title: string; sub?: string }) {
+    return (
+        <div className="mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-none">
+                {title}
+            </h2>
+            {sub && (
+                <p className="mt-3 text-white/40 text-sm md:text-base max-w-xl">{sub}</p>
+            )}
+        </div>
+    );
+}
+
 const ProjectCard = dynamic(() => import('../components/ProjectCard'));
 const Experience = dynamic(() => import('../components/Experience'));
 const TechStack = dynamic(() => import('../components/TechStack'));
@@ -159,13 +173,18 @@ export default function Home({ githubStats }: { githubStats: any }) {
 
             <div id="about" />
 
-            <Experience experiences={data.experience} />
+            <section id="experience" className="relative py-10 px-6 md:px-12 max-w-7xl mx-auto">
+                <SectionHeading num="01" title="Experience" sub="Where I've worked and what I've built along the way." />
+                <Experience experiences={data.experience} />
+            </section>
 
-            <Section id="techstack">
+            <Section id="techstack" className="py-10">
+                <SectionHeading num="02" title="Tech Stack" sub="Tools, languages, and frameworks I rely on every day." />
                 <TechStack data={data.techStack} />
             </Section>
 
-            <Section id="projects">
+            <Section id="projects" className="py-10">
+                <SectionHeading num="03" title="Projects" sub="A selection of things I've designed, built, and shipped." />
                 <div className="relative group/carousel">
                     {/* Left Scroll Button */}
                     <button
@@ -222,7 +241,10 @@ export default function Home({ githubStats }: { githubStats: any }) {
                 </div>
             </Section>
 
-            <Contact data={data} githubStats={githubStats} />
+            <section id="contact" className="relative py-10 px-6 md:px-12 max-w-7xl mx-auto">
+                <SectionHeading num="04" title="Contact" sub="Let's build something great together. Reach out anytime." />
+                <Contact data={data} githubStats={githubStats} />
+            </section>
         </Layout>
     );
 }
