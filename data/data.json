@@ -5,7 +5,42 @@
         "title": "Scalable Systems Engineer | Full-Stack & DevOps",
         "description": "Scalable Systems Engineer focused on building production-grade, end-to-end platforms. He emphasizes backend architecture, performance optimization, and infrastructure reliability.",
         "location": "Uttarakhand, IND",
-        "image": "/amberbisht.webp"
+        "image": "/amberbisht.webp",
+        "fallbackRepos": 33,
+        "fallbackFollowers": 5,
+        "topLang": "TypeScript"
+    },
+    "seo": {
+        "title": "Amber Bisht | Full Stack Developer and DevOps",
+        "description": "Amber Bisht - DevOps & Full Stack Developer. He builds resilient systems, automated pipelines and production-grade web platforms.",
+        "author": "Amber Bisht",
+        "keywords": "DevOps, Amber Bisht, Cloud Engineer, AWS, Kubernetes, Terraform, CI/CD",
+        "ogTitle": "Amber Bisht | Full Stack Developer and DevOps",
+        "ogDescription": "DevOps & Full Stack Developer specializing in AWS, Kubernetes, and automated pipelines. View his portfolio.",
+        "ogImage": "https://amberbisht.me/images/og-image.webp",
+        "siteUrl": "https://amberbisht.me/",
+        "footerTagline": "Full Stack Developer and DevOps Engineer specializing in building redundant systems and automated pipelines with precision and performance."
+    },
+    "sections": {
+        "experience": {
+            "title": "Experience",
+            "subtitle": "Where I've worked and what I've built along the way."
+        },
+        "techStack": {
+            "title": "Tech Stack",
+            "subtitle": "Tools, languages, and frameworks I rely on every day."
+        },
+        "projects": {
+            "title": "Projects",
+            "subtitle": "A selection of things I've designed, built, and shipped."
+        },
+        "contact": {
+            "title": "Contact",
+            "subtitle": "Let's build something great together. Reach out anytime."
+        }
+    },
+    "settings": {
+        "hiddenSlugs": ["telegram-owner-reply-bot"]
     },
     "projects": [
         {

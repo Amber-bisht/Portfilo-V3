@@ -1,11 +1,12 @@
 import { ActivityCalendar } from 'react-activity-calendar';
 import { Book, Users, Code } from 'lucide-react';
+import profileData from '../data/data.json';
 
 const GithubContributions = ({ githubStats }: { githubStats?: any }) => {
     const stats = githubStats || {
-        repos: 33,
-        followers: 5,
-        topLang: "TypeScript",
+        repos: profileData.about.fallbackRepos,
+        followers: profileData.about.fallbackFollowers,
+        topLang: profileData.about.topLang,
         calendarData: []
     };
 

@@ -28,18 +28,19 @@ const Contact = dynamic(() => import('../components/Contact'));
 
 export const getStaticProps = async () => {
     try {
-        const statsRes = await fetch('https://api.github.com/users/amber-bisht');
+        const githubUsername = data.contact.github.replace('https://github.com/', '');
+        const statsRes = await fetch(`https://api.github.com/users/${githubUsername}`);
         const statsData = await statsRes.json();
 
-        const calendarRes = await fetch('https://github-contributions-api.jogruber.de/v4/amber-bisht?y=last');
+        const calendarRes = await fetch(`https://github-contributions-api.jogruber.de/v4/${githubUsername}?y=last`);
         const calendarData = await calendarRes.json();
 
         return {
             props: {
                 githubStats: {
-                    repos: statsData.public_repos || 33,
-                    followers: statsData.followers || 5,
-                    topLang: "TypeScript",
+                    repos: statsData.public_repos || data.about.fallbackRepos,
+                    followers: statsData.followers || data.about.fallbackFollowers,
+                    topLang: data.about.topLang,
                     calendarData: calendarData.contributions || []
                 }
             },
@@ -49,9 +50,9 @@ export const getStaticProps = async () => {
         return {
             props: {
                 githubStats: {
-                    repos: 33,
-                    followers: 5,
-                    topLang: "TypeScript",
+                    repos: data.about.fallbackRepos,
+                    followers: data.about.fallbackFollowers,
+                    topLang: data.about.topLang,
                     calendarData: []
                 }
             },
@@ -165,7 +166,8 @@ export default function Home({ githubStats }: { githubStats: any }) {
         animFrameRef.current = requestAnimationFrame(step);
     }, []);
 
-    const projects = data.projects.filter(p => p.slug !== "telegram-owner-reply-bot");
+    const hiddenSlugs = new Set((data as any).settings?.hiddenSlugs ?? []);
+    const projects = data.projects.filter(p => !hiddenSlugs.has(p.slug));
 
     return (
         <Layout>
@@ -174,17 +176,17 @@ export default function Home({ githubStats }: { githubStats: any }) {
             <div id="about" />
 
             <section id="experience" className="relative py-10 px-6 md:px-12 max-w-7xl mx-auto">
-                <SectionHeading num="01" title="Experience" sub="Where I've worked and what I've built along the way." />
+                <SectionHeading num="01" title={data.sections.experience.title} sub={data.sections.experience.subtitle} />
                 <Experience experiences={data.experience} />
             </section>
 
             <Section id="techstack" className="py-10">
-                <SectionHeading num="02" title="Tech Stack" sub="Tools, languages, and frameworks I rely on every day." />
+                <SectionHeading num="02" title={data.sections.techStack.title} sub={data.sections.techStack.subtitle} />
                 <TechStack data={data.techStack} />
             </Section>
 
             <Section id="projects" className="py-10">
-                <SectionHeading num="03" title="Projects" sub="A selection of things I've designed, built, and shipped." />
+                <SectionHeading num="03" title={data.sections.projects.title} sub={data.sections.projects.subtitle} />
                 <div className="relative group/carousel">
                     {/* Left Scroll Button */}
                     <button
@@ -242,7 +244,7 @@ export default function Home({ githubStats }: { githubStats: any }) {
             </Section>
 
             <section id="contact" className="relative py-10 px-6 md:px-12 max-w-7xl mx-auto">
-                <SectionHeading num="04" title="Contact" sub="Let's build something great together. Reach out anytime." />
+                <SectionHeading num="04" title={data.sections.contact.title} sub={data.sections.contact.subtitle} />
                 <Contact data={data} githubStats={githubStats} />
             </section>
         </Layout>

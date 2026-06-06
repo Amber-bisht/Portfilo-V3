@@ -13,7 +13,7 @@ interface LayoutProps {
     title?: string;
 }
 
-const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevOps' }: LayoutProps) => {
+const Layout = ({ children, title = data.seo.title }: LayoutProps) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const router = useRouter();
     const [activeTab, setActiveTab] = useState('Home');
@@ -73,21 +73,21 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
             <Head>
                 <title>{title}</title>
 
-                <meta name="description" content="Amber Bisht - DevOps & Full Stack Developer. He builds resilient systems, automated pipelines and production-grade web platforms." />
+                <meta name="description" content={data.seo.description} />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="author" content="Amber Bisht" />
-                <meta name="keywords" content="DevOps, Amber Bisht, Cloud Engineer, AWS, Kubernetes, Terraform, CI/CD" />
+                <meta name="author" content={data.seo.author} />
+                <meta name="keywords" content={data.seo.keywords} />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://amberbisht.me/" />
-                <meta property="og:title" content="Amber Bisht | Full Stack Developer and DevOps" />
-                <meta property="og:description" content="DevOps & Full Stack Developer specializing in AWS, Kubernetes, and automated pipelines. View his portfolio." />
-                <meta property="og:image" content="https://amberbisht.me/images/og-image.webp" />
+                <meta property="og:url" content={data.seo.siteUrl} />
+                <meta property="og:title" content={data.seo.ogTitle} />
+                <meta property="og:description" content={data.seo.ogDescription} />
+                <meta property="og:image" content={data.seo.ogImage} />
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="https://amberbisht.me/" />
-                <meta property="twitter:title" content="Amber Bisht | Full Stack Developer and DevOps" />
-                <meta property="twitter:description" content="Full Stack Developer and DevOps specializing in AWS, Kubernetes, and automated pipelines. View my portfolio." />
-                <meta property="twitter:image" content="https://amberbisht.me/images/og-image.webp" />
-                <link rel="canonical" href="https://amberbisht.me/" />
+                <meta property="twitter:url" content={data.seo.siteUrl} />
+                <meta property="twitter:title" content={data.seo.ogTitle} />
+                <meta property="twitter:description" content={data.seo.ogDescription} />
+                <meta property="twitter:image" content={data.seo.ogImage} />
+                <link rel="canonical" href={data.seo.siteUrl} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -154,10 +154,10 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                     {/* Column 1: Branding */}
                     <div className="md:col-span-2">
                         <Link href="/" className="text-2xl font-bold text-white tracking-tighter uppercase mb-4 block">
-                            Amber Bisht
+                            {data.about.name}
                         </Link>
                         <p className="text-white/90 max-w-sm mb-6 text-sm leading-relaxed">
-                            Full Stack Developer and DevOps Engineer specializing in building redundant systems and automated pipelines with precision and performance.
+                            {data.seo.footerTagline}
                         </p>
                         <div className="flex items-center gap-4">
                             <a href={data.contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn Profile" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
@@ -219,7 +219,7 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
 
                 <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-mono text-white/70 relative z-10">
                     <p>
-                        &copy; {new Date().getFullYear()} Amber Bisht
+                        © {new Date().getFullYear()} {data.about.name}
                     </p>
                 </div>
             </footer>
