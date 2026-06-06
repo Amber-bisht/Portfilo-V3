@@ -55,9 +55,8 @@ const MusicPlayer = ({ tracks, isGlobal = false }: MusicPlayerProps) => {
                     setCurrentIndex(idx);
                 }
             }
-            // We don't auto-play on new tab due to browser policies, 
-            // but we sync the UI state
-            setIsPlaying(savedPlaying);
+            // Always start paused on page load — user must click play
+            setIsPlaying(false);
         }
     }, [tracks.length]);
 
@@ -193,7 +192,8 @@ const MusicPlayer = ({ tracks, isGlobal = false }: MusicPlayerProps) => {
                     videoId: currentTrack.videoId,
                     startSeconds: startTime
                 });
-                setIsPlaying(true);
+                // Don't force-play on track change — respect current play state
+                if (!isPlaying) playerRef.current.pauseVideo();
                 setProgress(0);
                 setCurrentTime(startTime);
                 lastVideoId.current = currentTrack.videoId;
