@@ -15,7 +15,7 @@ function SectionHeading({ num, title, sub }: { num: string; title: string; sub?:
                 {title}
             </h2>
             {sub && (
-                <p className="mt-3 text-white/40 text-sm md:text-base max-w-xl">{sub}</p>
+                <p className="mt-3 text-white/60 text-sm md:text-base max-w-xl">{sub}</p>
             )}
         </div>
     );

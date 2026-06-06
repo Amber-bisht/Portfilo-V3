@@ -10,6 +10,7 @@ import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 // Dynamic import for Mermaid to avoid SSR issues
 const Mermaid = dynamic(() => import('@/components/Mermaid'), { ssr: false });
@@ -185,9 +186,11 @@ export default function Post({ postData }: BlogPostProps) {
                   className="hidden lg:block w-72 h-72 rounded-[2.5rem] overflow-hidden bg-white p-12 flex items-center justify-center shadow-[0_50px_100px_rgba(0,0,0,0.5)] border border-white/5 relative group"
                 >
                   <div className="absolute inset-0 bg-neutral-900/5 group-hover:bg-transparent transition-colors duration-500" />
-                  <img
+                  <Image
                     src={postData.image}
                     alt={postData.title}
+                    width={288}
+                    height={288}
                     className="relative z-10 w-full h-full object-contain group-hover:scale-110 transition-transform duration-700"
                   />
                 </motion.div>
@@ -201,7 +204,7 @@ export default function Post({ postData }: BlogPostProps) {
               >
                 <div className="flex flex-wrap items-center justify-center gap-8 w-full">
                   <div className="flex items-center gap-4">
-                    <img src="https://i.pinimg.com/1200x/ad/f8/cb/adf8cbc0c6f2b3f964ce6f6def9658db.jpg" alt="Amber Bisht" className="w-10 h-10 rounded-full object-cover" />
+                    <Image src="https://i.pinimg.com/1200x/ad/f8/cb/adf8cbc0c6f2b3f964ce6f6def9658db.jpg" alt="Amber Bisht" width={40} height={40} className="rounded-full object-cover" />
                     <div className="text-left">
                       <p className="text-xs font-bold text-white tracking-wide">Amber Bisht</p>
                       <p className="text-[10px] text-neutral-600 uppercase tracking-widest font-bold">Research & Architecture</p>
@@ -237,7 +240,7 @@ export default function Post({ postData }: BlogPostProps) {
                 table: ({ node, ...props }) => <div className="overflow-x-auto my-16 bg-neutral-900/50 rounded-[2rem] border border-white/10 shadow-2xl"><table className="w-full border-collapse text-left" {...props} /></div>,
                 th: ({ node, ...props }) => <th className="border-b border-white/10 bg-black/40 px-8 py-6 text-left text-white font-black tracking-[0.2em] uppercase text-xs" {...props} />,
                 td: ({ node, ...props }) => <td className="border-b border-white/5 px-8 py-6 text-neutral-400 font-sans text-sm md:text-base font-medium" {...props} />,
-                img: ({ node, ...props }) => <img className="rounded-[2rem] border border-white/10 my-16 w-full object-cover shadow-2xl hover:scale-[1.02] transition-transform duration-700" {...props} />,
+                img: ({ node, alt, ...props }: any) => <img alt={alt || ""} className="rounded-[2rem] border border-white/10 my-16 w-full object-cover shadow-2xl hover:scale-[1.02] transition-transform duration-700" {...props} />,
                 pre: ({ children }) => <>{children}</>,
                 code: CodeBlock
               }}
