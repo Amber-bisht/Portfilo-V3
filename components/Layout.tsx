@@ -101,12 +101,6 @@ const Layout = ({ children, title = 'Amber Bisht | Full Stack Developer and DevO
                         onItemClick={() => setIsMenuOpen(false)}
                     />
                     <div className="flex items-center gap-4 relative">
-                        <div className="relative group">
-                            <NavbarButton href="mailto:bishtamber0@gmail.com" variant="hireme">
-                                Hire Me
-                            </NavbarButton>
-
-                        </div>
                     </div>
                 </NavBody>
 

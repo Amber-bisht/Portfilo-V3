@@ -4,9 +4,8 @@ import Section from '../components/Section';
 import data from '../data/data.json';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useRef, useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useRef, useEffect, useCallback } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ProjectCard = dynamic(() => import('../components/ProjectCard'));
 const Experience = dynamic(() => import('../components/Experience'));
@@ -49,33 +48,110 @@ export const getStaticProps = async () => {
 
 export default function Home({ githubStats }: { githubStats: any }) {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    // Track ongoing animation frame so rapid clicks don't stack up
+    const animFrameRef = useRef<number | null>(null);
+    const isWarpingRef = useRef(false);
 
-    const slide = (direction: 'left' | 'right') => {
-        if (scrollContainerRef.current) {
-            const container = scrollContainerRef.current;
-            const cardWidth = container.firstElementChild?.getBoundingClientRect().width || 350;
-            const gap = window.innerWidth >= 768 ? 32 : 24; // md:gap-8 is 32px, gap-6 is 24px
-            const scrollAmount = cardWidth + gap;
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (!container) return;
 
-            const { scrollLeft, scrollWidth, clientWidth } = container;
+        // Center on middle set after render
+        const initScroll = () => {
+            const oneSetWidth = container.scrollWidth / 3;
+            if (oneSetWidth > 0) {
+                // Direct assignment — no scroll event triggered, no CSS smooth
+                container.scrollLeft = oneSetWidth;
+            }
+        };
 
-            if (direction === 'right') {
-                // Wrap to start if near the end
-                if (scrollLeft + clientWidth >= scrollWidth - 15) {
-                    container.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                }
-            } else {
-                // Wrap to end if near the start
-                if (scrollLeft <= 15) {
-                    container.scrollTo({ left: scrollWidth - clientWidth, behavior: 'smooth' });
-                } else {
-                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        const timer = setTimeout(initScroll, 80);
+        window.addEventListener('resize', initScroll);
+
+        // The warp listener — fires during user drag / touch scroll
+        const handleScroll = () => {
+            if (isWarpingRef.current) return;
+            const { scrollLeft, scrollWidth } = container;
+            const oneSetWidth = scrollWidth / 3;
+            if (oneSetWidth === 0) return;
+
+            if (scrollLeft >= oneSetWidth * 2) {
+                isWarpingRef.current = true;
+                container.scrollLeft = scrollLeft - oneSetWidth;
+                isWarpingRef.current = false;
+            } else if (scrollLeft < oneSetWidth) {
+                isWarpingRef.current = true;
+                container.scrollLeft = scrollLeft + oneSetWidth;
+                isWarpingRef.current = false;
+            }
+        };
+
+        container.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            container.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', initScroll);
+            clearTimeout(timer);
+        };
+    }, []);
+
+    // Manual eased scroll — bypasses CSS scroll-smooth so we can warp mid-animation
+    const slide = useCallback((direction: 'left' | 'right') => {
+        const container = scrollContainerRef.current;
+        if (!container) return;
+
+        if (animFrameRef.current !== null) {
+            cancelAnimationFrame(animFrameRef.current);
+        }
+
+        const cardEl = container.firstElementChild as HTMLElement | null;
+        const cardWidth = cardEl?.offsetWidth || 350;
+        const gap = window.innerWidth >= 768 ? 32 : 24;
+        const scrollAmount = cardWidth + gap;
+        const delta = direction === 'right' ? scrollAmount : -scrollAmount;
+
+        const start = container.scrollLeft;
+        const target = start + delta;
+        const duration = 420; // ms
+        const startTime = performance.now();
+
+        const easeInOut = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+        const step = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = easeInOut(progress);
+
+            const oneSetWidth = container.scrollWidth / 3;
+
+            // Compute raw target position then warp if it crosses a boundary
+            let newScrollLeft = start + eased * delta;
+
+            // Apply warp mid-animation so it stays within middle set zone
+            if (oneSetWidth > 0) {
+                if (newScrollLeft >= oneSetWidth * 2) {
+                    newScrollLeft -= oneSetWidth;
+                    // Reset start reference to new warped origin
+                } else if (newScrollLeft < oneSetWidth) {
+                    newScrollLeft += oneSetWidth;
                 }
             }
-        }
-    };
+
+            isWarpingRef.current = true;
+            container.scrollLeft = newScrollLeft;
+            isWarpingRef.current = false;
+
+            if (progress < 1) {
+                animFrameRef.current = requestAnimationFrame(step);
+            } else {
+                animFrameRef.current = null;
+            }
+        };
+
+        animFrameRef.current = requestAnimationFrame(step);
+    }, []);
+
+    const projects = data.projects.filter(p => p.slug !== "telegram-owner-reply-bot");
 
     return (
         <Layout>
@@ -90,47 +166,48 @@ export default function Home({ githubStats }: { githubStats: any }) {
             </Section>
 
             <Section id="projects">
-                {/* Relative Wrapper for Floating Arrow Buttons */}
-                <div className="relative w-full group">
-                    {/* Left Floating Button */}
+                <div className="relative group/carousel">
+                    {/* Left Scroll Button */}
                     <button
                         onClick={() => slide('left')}
-                        className="absolute -left-4 md:-left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-neutral-900/80 hover:bg-neutral-800 border border-white/10 hover:border-white/20 text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all hover:scale-110 active:scale-95 cursor-pointer md:opacity-0 md:group-hover:opacity-100 duration-300 flex items-center justify-center"
-                        aria-label="Slide Left"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-20 bg-neutral-900/90 hover:bg-neutral-800 text-white p-3 rounded-full border border-white/10 backdrop-blur-md shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center md:opacity-0 md:group-hover/carousel:opacity-100"
+                        aria-label="Scroll left"
                     >
-                        <ArrowLeft className="w-5 h-5" />
+                        <ChevronLeft size={24} />
                     </button>
 
-                    {/* Right Floating Button */}
-                    <button
-                        onClick={() => slide('right')}
-                        className="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-neutral-900/80 hover:bg-neutral-800 border border-white/10 hover:border-white/20 text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all hover:scale-110 active:scale-95 cursor-pointer md:opacity-0 md:group-hover:opacity-100 duration-300 flex items-center justify-center"
-                        aria-label="Slide Right"
-                    >
-                        <ArrowRight className="w-5 h-5" />
-                    </button>
-
-                    {/* Horizontal Scrolling Projects List */}
-                    <div 
+                    {/* Horizontal Scrolling Projects List — NO scroll-smooth, NO snap (needed for instant warp) */}
+                    <div
                         ref={scrollContainerRef}
-                        className="flex gap-6 md:gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth pb-6"
+                        className="flex gap-6 md:gap-8 overflow-x-auto no-scrollbar pb-6"
+                        style={{ scrollBehavior: 'auto' }}
                     >
-                        {data.projects
-                            .filter(project => project.slug !== "telegram-owner-reply-bot")
-                            .map((project, index) => (
-                                <div 
-                                    key={project.id} 
-                                    className="w-[280px] sm:w-[330px] md:w-[350px] shrink-0 snap-start"
+                        {/* Triple-cloned sets for seamless infinite loop */}
+                        {[0, 1, 2].flatMap((setIndex) =>
+                            projects.map((project, index) => (
+                                <div
+                                    key={`${project.id}-${setIndex}`}
+                                    className="w-[280px] sm:w-[330px] md:w-[350px] shrink-0"
                                 >
-                                    <ProjectCard 
-                                        project={project} 
-                                        index={index} 
-                                        orientation="vertical" 
+                                    <ProjectCard
+                                        project={project}
+                                        index={index}
+                                        orientation="vertical"
                                         showTag={false}
                                     />
                                 </div>
-                            ))}
+                            ))
+                        )}
                     </div>
+
+                    {/* Right Scroll Button */}
+                    <button
+                        onClick={() => slide('right')}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 z-20 bg-neutral-900/90 hover:bg-neutral-800 text-white p-3 rounded-full border border-white/10 backdrop-blur-md shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center md:opacity-0 md:group-hover/carousel:opacity-100"
+                        aria-label="Scroll right"
+                    >
+                        <ChevronRight size={24} />
+                    </button>
                 </div>
 
                 {/* View More Button */}
@@ -146,6 +223,6 @@ export default function Home({ githubStats }: { githubStats: any }) {
             </Section>
 
             <Contact data={data} githubStats={githubStats} />
-        </Layout >
+        </Layout>
     );
 }
