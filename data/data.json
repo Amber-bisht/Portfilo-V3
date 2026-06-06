@@ -86,7 +86,89 @@
             "image": "/images/projects/lms.webp",
             "github": "https://github.com/Amber-bisht/aes128-lms-admin-lambda-nextjs",
             "live": "https://lms.amberbisht.me",
+            "youtube": "https://www.youtube.com/watch?v=twGP0zGlrwE",
             "credit": "Made by [Amber Bisht](https://amberbisht.me). He is a DevOps & Full Stack Developer."
+        },
+        {
+            "id": 4,
+            "title": "Kundali Compatibility Engine",
+            "slug": "kundali-compatibility-engine",
+            "description": "A Vedic astrology marriage compatibility engine that generates astronomically accurate birth charts and AI-ready structured data for two individuals. Built with Swiss Ephemeris for precision and designed so AI (ChatGPT, etc.) can provide deep astrological analysis from the output.",
+            "features": [
+                "Lahiri Ayanamsa + Whole Sign house system using Swiss Ephemeris for sub-arcsecond astronomical precision",
+                "Ashtakoota Guna Milan (scored out of 36) with Manglik, Nadi, and Bhakoot dosha detection & cancellation logic",
+                "Divisional chart (Navamsa D9) computation, planetary aspects (Drishti), transit snapshots, and Vimshottari Dasha timeline",
+                "Dynamic AI Prompt Generator producing 6 customized prompts (Marriage, Career, Health, etc.) for ChatGPT based on raw chart data",
+                "Secure authentication via Google OAuth, geocoding place autocomplete, and MongoDB profile persistence",
+                "Supports pre-1960 historical timezone adjustments (Bombay, Calcutta, and WWII War Time offsets)"
+            ],
+            "technologies": [
+                "Python",
+                "FastAPI",
+                "Swiss Ephemeris",
+                "MongoDB",
+                "Google OAuth",
+                "JavaScript"
+            ],
+            "image": "/images/projects/astro.amberbisht.png",
+            "github": "https://github.com/Amber-bisht/astro",
+            "live": "https://astro.amberbisht.me/",
+            "tag": "Personal Project"
+        },
+        {
+            "id": 5,
+            "title": "DSA Practice Platform",
+            "slug": "dsa-practice-platform",
+            "description": "A professional, high-performance coding practice platform mirroring LeetCode. Provides a split-screen Monaco editor interface, secure Docker-isolated C++ compilation, and BullMQ/Redis async execution.",
+            "features": [
+                "LeetCode-style 3-pane split-screen IDE featuring high-performance Monaco Code Editor",
+                "Structured parameter UI mapping inputs directly to core solution class logic",
+                "Docker-isolated runner compiling and executing user code in secure, resource-capped containers",
+                "Real-time feedback with precise runtime speed and memory usage metrics",
+                "Asynchronous submission execution engine powered by BullMQ and Redis",
+                "Full admin suite for problem management, test case uploads, and submission tracking"
+            ],
+            "technologies": [
+                "Next.js",
+                "Express.js",
+                "Prisma",
+                "PostgreSQL",
+                "BullMQ",
+                "Redis",
+                "Docker",
+                "Monaco Editor"
+            ],
+            "image": "/images/projects/dsa.amberbisht.png",
+            "github": "https://github.com/Amber-bisht/dsa.amberbisht.me",
+            "live": "",
+            "tag": "Personal Project"
+        },
+        {
+            "id": 6,
+            "title": "Telegram Owner-Reply Bot",
+            "slug": "telegram-owner-reply-bot",
+            "description": "An AI-powered Telegram chatbot that replies on behalf of the owner in authorized groups. Features per-user memory persistence, real-time context enrichment, and Rose-bot-like administrative/moderation commands.",
+            "features": [
+                "AI-powered owner-persona replies in groups using Groq SDK with automatic API key failover",
+                "Stores persistent per-user memory signals in MongoDB with a fast in-memory LRU cache index",
+                "Group context awareness remembering the last 15-20 messages to follow conversational flow",
+                "Real-time context enrichment (Open-Meteo weather, NewsAPI headlines, Wikipedia, and Tavily search)",
+                "Group moderation and administration commands (/mute, /unmute, /ban, /unban, /fban, /funban)",
+                "Automated CI/CD deployment workflow using Docker, docker-compose, and GitHub Actions"
+            ],
+            "technologies": [
+                "JavaScript",
+                "Node.js",
+                "Telegram Bot API",
+                "Groq AI",
+                "MongoDB",
+                "Docker",
+                "GitHub Actions"
+            ],
+            "image": "/images/projects/telegram.png",
+            "github": "https://github.com/Amber-bisht/telegram-ai-bot",
+            "live": "",
+            "tag": "Personal Project"
         }
     ],
     "experience": [
@@ -281,137 +363,165 @@
     "freelance": [
         {
             "id": 1,
-            "title": "Makima AI – Telegram Owner-Reply Bot",
-            "description": "A specialized Telegram bot that acts as the owner's virtual assistant. It uses Groq-powered AI (Llama 3.3) to reply in groups when tagged, maintains per-user memory in MongoDB, and supports administrative commands like banning/muting across multiple authorized groups.",
+            "title": "JB Kadaknath Farm",
+            "slug": "jb-kadaknath-farm",
+            "description": "A complete hyperlocal dark store platform (similar to Blinkit) for delivering fresh meat, eggs, and organic foods with a 15-minute delivery promise. Includes 3 separate interfaces: User App, Admin Dashboard, and Rider App. Geolocation-based routing, Google Maps API integration, and microservices architecture.",
             "features": [
-                "AI-powered owner-persona replies via Groq (Llama 3.3)",
-                "Per-user persistent memory with MongoDB + LRU-like in-memory caching",
-                "Real-time context enrichment (Weather, News, Wikipedia, Tavily)",
-                "Multi-group administrative controls (Ban/Mute/Fban)",
-                "Automated failover with multiple Groq API keys",
-                "CI/CD pipeline with Docker + GitHub Actions for VPS deployment"
+                "Hyperlocal delivery routing and maps integration for 15-minute quick delivery of meat and eggs",
+                "Consists of 3 distinct applications: User Ordering App, Rider Delivery App, and Admin Dashboard",
+                "Google Maps API integration for real-time address validation, geocoding, and distance calculations",
+                "Secure online payment flow supporting credit cards, UPI, and refunds integrated with Razorpay",
+                "Cloudflare R2 storage bucket integration for lightning-fast media and product image serving",
+                "Microservices backend backed by PostgreSQL & Prisma ORM, protected by Cloudflare Turnstile CAPTCHA"
             ],
             "technologies": [
-                "Node.js",
-                "JavaScript",
-                "Telegram Bot API",
-                "Groq AI",
-                "MongoDB",
-                "Docker",
-                "GitHub Actions"
+                "Next.js",
+                "PostgreSQL",
+                "Prisma",
+                "Cloudflare Turnstile",
+                "Cloudflare R2",
+                "Google Maps API",
+                "Razorpay",
+                "Microservices"
             ],
-            "image": "/images/projects/makima-bot.webp",
-            "github": "https://github.com/Amber-bisht/makima-ai-chat-bot",
-            "live": ""
+            "image": "/images/projects/jbkadaknathfarm.png",
+            "github": "",
+            "live": "https://www.jbkadaknathfarm.com/",
+            "tag": "Freelance Project"
         },
         {
             "id": 2,
-            "title": "Watch E-Commerce Store",
-            "description": "A full-stack e-commerce platform for selling watches with secure authentication, online payments, order management, and shipping integration.",
+            "title": "Quick to Services",
+            "slug": "quick-to-services",
+            "description": "A booking platform to hire reliable professionals for home and office services (similar to Urban Company). Features an integrated admin panel, city-based dynamic pricing, and secure inquiry forms.",
+            "features": [
+                "Book reliable professionals for home and office service needs",
+                "Robust administrative dashboard for managing services, professionals, and bookings",
+                "Cloudflare Turnstile integration for secure, bot-protected inquiry forms",
+                "MongoDB database backend for storing profiles and service transactions",
+                "City-based dynamic pricing and service category configuration"
+            ],
             "technologies": [
                 "Next.js",
-                "Tailwind CSS",
                 "MongoDB",
-                "OAuth",
-                "Razorpay",
-                "Shiprocket"
+                "Cloudflare Turnstile",
+                "Tailwind CSS",
+                "TypeScript",
+                "Admin Panel"
             ],
-            "image": "/images/projects/e-store.webp",
-            "github": "https://github.com/Amber-bisht/askSync",
-            "live": "https://watch-me-eight.vercel.app/"
+            "image": "/images/projects/quicktoservices.png",
+            "github": "",
+            "live": "https://www.quicktoservices.com/",
+            "tag": "Freelance Project"
         },
         {
             "id": 3,
-            "title": "Novello Hotels",
-            "description": "A high-performance hotel showcase platform. Optimized image uploads and achieved a 95+ performance score using Next.js.",
+            "title": "SBDS Service – Digital Cyber Cafe Platform",
+            "slug": "sbds-service",
+            "description": "A complete end-to-end digital services and cyber cafe platform. Features role-based access control, Paytm payment gateway integration, custom service configurations, WhatsApp notifications, and third-party API integration for direct service bookings.",
+            "features": [
+                "Role-based system allowing agents and users to request and fulfill various online services",
+                "Integrated Paytm payment gateway for secure transactions and automated bookings",
+                "WhatsApp API integration for sending instant order status updates and alerts",
+                "Direct booking of external services connected via third-party APIs",
+                "Admin control panel to configure custom service offerings and markups dynamically",
+                "Prisma ORM with PostgreSQL database, and ImageKit for optimized media storage"
+            ],
             "technologies": [
                 "Next.js",
-                "Image Optimization",
-                "Performance"
+                "Express.js",
+                "Prisma",
+                "PostgreSQL",
+                "Cloudflare Turnstile",
+                "ImageKit",
+                "Paytm PG",
+                "WhatsApp API"
             ],
-            "image": "/images/projects/novello.webp",
+            "image": "/images/projects/sbdscybercafe.png",
             "github": "",
-            "live": "https://novellohotels.vercel.app"
+            "live": "https://www.sbdsservice.online/",
+            "tag": "Freelance Project"
         },
         {
             "id": 4,
-            "title": "Tripbazzar PMS",
-            "description": "Integration with MakeMyTrip and OYO + Your Own Inventory. Internally Used by the company.",
-            "technologies": [
-                "PostgreSQL",
-                "Docker",
-                "AWS"
-            ],
-            "image": "/images/projects/tripbazzar.webp",
-            "github": ""
-        },
-        {
-            "id": 5,
             "title": "jbDrench",
-            "description": "A full-stack platform built with React.js and Node.js. Features include Redis & BullMQ for background jobs, email integration via Resend.com, comprehensive CI/CD pipelines, and a robust admin panel.",
+            "slug": "jbdrench",
+            "description": "A high-performance e-commerce showcase platform for premium bottles. Uses Cloudflare geolocation routing to serve region-specific product links and Amazon affiliate redirects (Amazon India vs Amazon Global).",
+            "features": [
+                "Showcases full range of premium bottles with geolocation-based filtering",
+                "Utilizes Cloudflare edge request headers to detect regional user location",
+                "Dynamic routing redirects Indian visitors to Amazon India and international users to Amazon Global",
+                "Asynchronous email marketing and newsletter subscription system backed by Redis and BullMQ",
+                "Full-featured admin control panel for product links, subscribers, and background queues"
+            ],
             "technologies": [
                 "React.js",
                 "Node.js",
+                "MongoDB",
                 "Redis",
                 "BullMQ",
-                "Resend.com",
-                "CI/CD",
-                "Admin Panel"
+                "Cloudflare Geolocation"
             ],
-            "image": "/images/projects/jbDrench.webp",
+            "image": "/images/projects/jbdrench.png",
             "github": "",
-            "live": "https://jbrench.com"
+            "live": "https://www.jbdrench.com",
+            "tag": "Freelance Project"
+        },
+        {
+            "id": 5,
+            "title": "NotesFind – End-to-End Notes Management Platform",
+            "slug": "notesfind",
+            "description": "A complete end-to-end platform for notes management featuring role-based access control, a banning system, audit logging to track downloads, webinars, and Markdown-to-PDF conversion.",
+            "features": [
+                "Role-based access control (User, Owner, Publisher, Co-owner)",
+                "Banning system and administrative controls",
+                "Audit logs to track and monitor note downloads",
+                "Webinars integration for user engagement",
+                "Markdown-to-PDF (.md to PDF) dynamic conversion",
+                "Publishers can upload notes in .md format for normal online reading and downloading"
+            ],
+            "technologies": [
+                "Next.js",
+                "Cloudflare Turnstile",
+                "MongoDB",
+                "OAuth",
+                "Tailwind CSS",
+                "Markdown"
+            ],
+            "image": "/images/projects/notefind.png",
+            "github": "",
+            "live": "https://notesfind.com/",
+            "tag": "Freelance Project"
         },
         {
             "id": 6,
-            "title": "NotesFind",
-            "description": "A role-based platform built with Next.js. Features include Cloudflare Turnstile protection, OAuth authentication, Cloudinary integration for media, and markdown content display with a dedicated admin panel.",
-            "technologies": [
-                "Next.js",
-                "Cloudflare",
-                "Turnstile",
-                "Admin Panel",
-                "OAuth",
-                "Cloudinary",
-                "Markdown"
+            "title": "TripBazaar – Premium Hotel Booking Platform",
+            "slug": "tripbazaar",
+            "description": "A modern, high-performance hotel booking platform designed for B2C and B2B users. Features multi-channel sourcing (RTX & OYO), ultra-fast search powered by Typesense, and integrated payments.",
+            "features": [
+                "Multi-channel sourcing integrated with RTX (Rakuten Travel Xchange), OYO, and custom B2B inventory",
+                "Ultra-fast, advanced hotel search and filtering engine powered by Typesense",
+                "Secure payments and refunds full integration with Razorpay",
+                "Dedicated B2B Owner Portal for hotel owners to list properties and manage bookings",
+                "Automated email confirmations via SendGrid/Nodemailer and PDF receipt generation",
+                "Containerized Docker architecture with Sentry monitoring and Cloudflare Turnstile security"
             ],
-            "image": "/images/projects/notesfind.webp",
-            "github": "",
-            "live": "https://notesfind.com"
-        },
-        {
-            "id": 7,
-            "title": "JB Kadaknath Farm",
-            "description": "An end-to-end e-commerce platform for a premium meat store. Features integrated Razorpay payments, Cloudinary for media, Cloudflare protection, and a custom delivery/shipping tracking system.",
             "technologies": [
                 "Next.js",
-                "Node.js",
-                "TypeScript",
-                "Cloudinary",
-                "Cloudflare",
-                "Razorpay",
-                "Shipping Integration"
-            ],
-            "image": "/images/projects/kadaknath.webp",
-            "github": "",
-            "live": "https://jbkadaknathfarm.com/"
-        },
-        {
-            "id": 8,
-            "title": "Quick to Services",
-            "description": "A comprehensive service booking and management system. Features an inquiry form, city-based dynamic pricing, and a robust admin dashboard for service configuration and city management.",
-            "technologies": [
-                "Next.js",
-                "TypeScript",
                 "Tailwind CSS",
+                "TypeScript",
+                "Express.js",
                 "Prisma",
                 "PostgreSQL",
-                "Admin Dashboard",
-                "Booking System"
+                "Redis",
+                "Typesense",
+                "Docker",
+                "Razorpay"
             ],
-            "image": "/images/projects/quick-to-services.webp",
+            "image": "/images/projects/tripbazaar.png",
             "github": "",
-            "live": "https://quick-to-services-q8m4.vercel.app/"
+            "live": "https://tripbazaar.in/",
+            "tag": "Freelance Project"
         }
     ],
     "music": [

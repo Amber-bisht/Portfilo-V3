@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Github, ExternalLink, X } from 'lucide-react';
+import { Github, ExternalLink, X, Youtube } from 'lucide-react';
 import Image from 'next/image';
 import { getTechIcon } from '../utils/techIcons';
 
@@ -14,6 +14,7 @@ interface ProjectProps {
         image?: string;
         github?: string;
         live?: string;
+        youtube?: string;
         tag?: string;
     };
     index: number;
@@ -33,11 +34,11 @@ const ProjectCard = ({ project, index, orientation = "vertical", priority = fals
                 <div className="absolute top-0 right-0 w-32 h-32 bg-makima-red/5 blur-[40px] rounded-full pointer-events-none -mr-8 -mt-8 group-hover:bg-makima-red/10 transition-colors z-[1]" />
 
                 {/* Image Section */}
-                <div className={`relative overflow-hidden ${isHorizontal ? "md:w-2/5 w-full h-48 md:h-full" : "h-64 w-full"}`}>
+                <div className={`relative overflow-hidden ${isHorizontal ? "md:w-2/5 w-full h-48 md:h-full" : "h-48 w-full"}`}>
                     <div className="h-full w-full relative bg-white/5 border-4 md:border-8 border-black rounded-2xl overflow-hidden shadow-inner">
                         <div className="absolute inset-0 bg-transparent z-10" />
                         {project.tag && (
-                            <div className="absolute top-4 left-4 z-20 px-3 py-1 bg-makima-red text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg">
+                            <div className="absolute top-4 left-4 z-20 px-3 py-1 bg-black border border-white/10 text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg">
                                 {project.tag}
                             </div>
                         )}
@@ -46,7 +47,7 @@ const ProjectCard = ({ project, index, orientation = "vertical", priority = fals
                             alt={project.title}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-contain transform group-hover:scale-110 transition-transform duration-500"
+                            className="object-contain"
                             priority={priority}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-[5]" />
@@ -56,22 +57,35 @@ const ProjectCard = ({ project, index, orientation = "vertical", priority = fals
                 {/* Content Section */}
                 <div className={`px-6 pb-6 pt-4 flex flex-col flex-grow ${isHorizontal ? "md:w-3/5" : ""}`}>
 
-                    {/* Title and Github */}
+                    {/* Title and Icons */}
                     <div className="flex items-center justify-between mb-2">
                         <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">
                             {project.title}
                         </h3>
-                        {project.github && (
-                            <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-white transition-colors p-1"
-                                aria-label="GitHub Repo"
-                            >
-                                <Github size={20} />
-                            </a>
-                        )}
+                        <div className="flex items-center gap-2">
+                            {project.youtube && (
+                                <a
+                                    href={project.youtube}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-400 hover:text-red-500 transition-colors p-1"
+                                    aria-label="YouTube Video"
+                                >
+                                    <Youtube size={20} />
+                                </a>
+                            )}
+                            {project.github && (
+                                <a
+                                    href={project.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-400 hover:text-white transition-colors p-1"
+                                    aria-label="GitHub Repo"
+                                >
+                                    <Github size={20} />
+                                </a>
+                            )}
+                        </div>
                     </div>
 
                     <p className={`text-gray-400 text-sm leading-relaxed mb-4 ${isHorizontal ? "line-clamp-2 md:line-clamp-4" : "line-clamp-3"}`}>
@@ -96,13 +110,31 @@ const ProjectCard = ({ project, index, orientation = "vertical", priority = fals
 
 
                     {/* Actions */}
-                    <div className={`mt-auto gap-3 grid ${project.live ? "grid-cols-2" : "grid-cols-1"}`}>
+                    <div className={`mt-auto gap-3 grid ${
+                        project.live && project.youtube 
+                            ? "grid-cols-3" 
+                            : (project.live || project.youtube) 
+                                ? "grid-cols-2" 
+                                : "grid-cols-1"
+                    }`}>
                         <button
                             onClick={() => setIsInternalModalOpen(true)}
                             className="flex items-center justify-center py-2 bg-white text-black text-xs font-semibold rounded-xl hover:bg-gray-200 transition-colors"
                         >
                             Details
                         </button>
+
+                        {project.youtube && (
+                            <a
+                                href={project.youtube}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-1.5 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl transition-colors"
+                            >
+                                <Youtube size={14} />
+                                Video
+                            </a>
+                        )}
 
                         {project.live && (
                             <a
@@ -171,7 +203,7 @@ const ProjectCard = ({ project, index, orientation = "vertical", priority = fals
                                 })}
                             </div>
 
-                            <div className="flex gap-4 pt-6 border-t border-white/10">
+                            <div className="flex flex-wrap md:flex-nowrap gap-4 pt-6 border-t border-white/10">
                                 {project.github && (
                                     <a
                                         href={project.github}
@@ -181,6 +213,17 @@ const ProjectCard = ({ project, index, orientation = "vertical", priority = fals
                                     >
                                         <Github size={18} />
                                         Code
+                                    </a>
+                                )}
+                                {project.youtube && (
+                                    <a
+                                        href={project.youtube}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex-1 flex items-center justify-center gap-2 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-colors"
+                                    >
+                                        <Youtube size={18} />
+                                        Watch Video
                                     </a>
                                 )}
                                 {project.live && (

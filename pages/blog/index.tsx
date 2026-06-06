@@ -15,78 +15,87 @@ export default function BlogIndex({ allPostsData }: BlogIndexProps) {
     <Layout title="Blog | Amber Bisht">
       <div className="max-w-7xl mx-auto px-6 py-20">
         {/* Header Section */}
-        <div className="relative mb-16 text-center">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-makima-red/10 blur-[100px] rounded-full pointer-events-none" />
+        <div className="relative mb-16">
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-makima-red/10 blur-[100px] rounded-full pointer-events-none" />
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tighter"
+            className="text-5xl md:text-7xl font-bold text-white tracking-tighter"
           >
-            Insights <span className="text-makima-red">&</span> Research
+            Blogs
           </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
-          >
-            Documenting my journey through reverse engineering, scalable architecture, and the evolving landscape of DevOps.
-          </motion.p>
         </div>
 
-        {/* Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {allPostsData.map((post, index) => (
-            <motion.div
-              key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 + 0.2 }}
-            >
-              <Link href={`/${post.slug}`} className="group block h-full">
-                <article className="group relative bg-neutral-900/50 border border-white/5 rounded-3xl overflow-hidden hover:border-white/10 transition-all duration-300 shadow-xl flex flex-col h-full">
-                  
-                  {/* Glowing Effect */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-makima-red/5 blur-[40px] rounded-full pointer-events-none -mr-8 -mt-8 group-hover:bg-makima-red/10 transition-colors z-[1]" />
-                  
-                  {/* Image Section */}
-                  <div className="relative h-64 w-full bg-white/5 overflow-hidden">
-                    <div className="absolute inset-0 bg-transparent z-10" />
-                    {post.image ? (
-                      <img 
-                        src={post.image} 
-                        alt={post.title} 
-                        className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500" 
-                      />
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-makima-red/10 to-transparent" />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-[5]" />
-                  </div>
+        {/* Blog List */}
+        <div className="max-w-4xl space-y-6">
+          {allPostsData.map((post, index) => {
+            // Calculate reading time dynamically based on content word count
+            const wordsPerMinute = 200;
+            const wordCount = post.content ? post.content.split(/\s+/).length : 0;
+            const readingTime = Math.ceil(wordCount / wordsPerMinute);
 
-                  {/* Content Section */}
-                  <div className="px-6 pb-6 pt-4 flex flex-col flex-grow relative z-10">
-                    {/* Title */}
-                    <h2 className="text-xl md:text-2xl font-cinzel font-bold text-white mb-3 group-hover:text-makima-red transition-all duration-300 line-clamp-2 leading-tight tracking-wide">
-                      {post.title}
-                    </h2>
+            return (
+              <motion.div
+                key={post.slug}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 + 0.1 }}
+              >
+                <Link href={`/${post.slug}`} className="group block">
+                  <article className="relative bg-neutral-900/30 hover:bg-neutral-900/60 border border-white/5 hover:border-white/10 rounded-2xl p-6 transition-all duration-300 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden">
+                    
+                    {/* Glowing Accent on Hover */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-makima-red/5 blur-[40px] rounded-full pointer-events-none -mr-8 -mt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[1]" />
+                    
+                    {/* Left: Content Section */}
+                    <div className="flex-grow relative z-10 space-y-3">
+                      {/* Meta Tags: Date, Category, Reading Time */}
+                      <div className="flex flex-wrap items-center gap-4 text-xs text-gray-400 font-mono">
+                        {post.date && (
+                          <span className="flex items-center gap-1.5">
+                            <Calendar className="w-3.5 h-3.5 text-makima-red" />
+                            {format(parseISO(post.date), 'MMMM dd, yyyy')}
+                          </span>
+                        )}
+                        {readingTime > 0 && (
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5 text-makima-red" />
+                            {readingTime} min read
+                          </span>
+                        )}
+                        {post.category && (
+                          <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-[10px] uppercase tracking-wider font-semibold">
+                            {post.category}
+                          </span>
+                        )}
+                      </div>
 
-                    {/* Excerpt */}
-                    <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
-                      {post.excerpt}
-                    </p>
+                      {/* Title */}
+                      <h2 className="text-xl md:text-2xl font-cinzel font-bold text-white group-hover:text-makima-red transition-all duration-300 leading-tight tracking-wide">
+                        {post.title}
+                      </h2>
 
-                    {/* Action */}
-                    <div className="mt-auto">
-                      <div className="flex items-center justify-center py-2 bg-white text-black text-xs font-semibold rounded-xl hover:bg-gray-200 transition-colors">
-                        Read Analysis
+                      {/* Excerpt */}
+                      <p className="text-gray-400 text-sm leading-relaxed max-w-2xl line-clamp-2">
+                        {post.excerpt}
+                      </p>
+                    </div>
+
+                    {/* Right: Read Button / Arrow */}
+                    <div className="flex items-center gap-3 self-start md:self-center shrink-0 relative z-10">
+                      <span className="text-xs font-mono font-semibold uppercase tracking-wider text-white/60 group-hover:text-makima-red opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 hidden sm:inline">
+                        Read Post
+                      </span>
+                      <div className="p-3 rounded-full bg-white/5 group-hover:bg-makima-red/10 border border-white/5 group-hover:border-makima-red/20 transition-all duration-300">
+                        <ArrowRight className="w-4 h-4 text-white group-hover:text-makima-red transform group-hover:translate-x-1 transition-all duration-300" />
                       </div>
                     </div>
-                  </div>
-                </article>
-              </Link>
-            </motion.div>
-          ))}
+
+                  </article>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
 
         {allPostsData.length === 0 && (

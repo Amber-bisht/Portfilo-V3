@@ -4,6 +4,8 @@ import Section from '../components/Section';
 import data from '../data/data.json';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { useRef } from 'react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const ProjectCard = dynamic(() => import('../components/ProjectCard'));
 const Experience = dynamic(() => import('../components/Experience'));
@@ -45,6 +47,20 @@ export const getStaticProps = async () => {
 }
 
 export default function Home({ githubStats }: { githubStats: any }) {
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    const slideLeft = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({ left: -440, behavior: 'smooth' });
+        }
+    };
+
+    const slideRight = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({ left: 440, behavior: 'smooth' });
+        }
+    };
+
     return (
         <Layout>
             <Hero data={data} />
@@ -58,22 +74,45 @@ export default function Home({ githubStats }: { githubStats: any }) {
             </Section>
 
             <Section id="projects">
-                <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 md:gap-8">
-                    {/* Project 1 - Wide */}
-                    <div className="md:col-span-2 md:row-span-1">
-                        <ProjectCard project={data.projects[0]} index={0} orientation="horizontal" priority={true} />
+                {/* Section Header with Slider Controls */}
+                <div className="flex items-center justify-between mb-10">
+                    <div>
+                        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight uppercase">
+                            Personal <span className="text-makima-red">Projects</span>
+                        </h2>
                     </div>
-
-                    {/* Project 3 - Tall (Special placement) */}
-                    <div className="md:col-span-1 md:row-span-2 h-full">
-                        <ProjectCard project={data.projects[2]} index={2} orientation="vertical" priority={true} />
-                    </div>
-
-                    {/* Project 2 - Wide */}
-                    <div className="md:col-span-2 md:row-span-1">
-                        <ProjectCard project={data.projects[1]} index={1} orientation="horizontal" priority={true} />
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={slideLeft}
+                            className="p-3 rounded-full bg-neutral-900/50 hover:bg-neutral-800 border border-white/5 hover:border-white/10 text-white/60 hover:text-white transition-all active:scale-95 cursor-pointer shadow-lg"
+                            aria-label="Slide Left"
+                        >
+                            <ArrowLeft className="w-5 h-5" />
+                        </button>
+                        <button
+                            onClick={slideRight}
+                            className="p-3 rounded-full bg-neutral-900/50 hover:bg-neutral-800 border border-white/5 hover:border-white/10 text-white/60 hover:text-white transition-all active:scale-95 cursor-pointer shadow-lg"
+                            aria-label="Slide Right"
+                        >
+                            <ArrowRight className="w-5 h-5" />
+                        </button>
                     </div>
                 </div>
+
+                {/* Horizontal Scrolling Projects List */}
+                <div 
+                    ref={scrollContainerRef}
+                    className="flex gap-6 md:gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth pb-6"
+                >
+                    {data.projects
+                        .filter(project => project.slug !== "telegram-owner-reply-bot")
+                        .map((project, index) => (
+                            <div key={project.id} className="w-[300px] sm:w-[380px] md:w-[420px] shrink-0 snap-start">
+                                <ProjectCard project={project} index={index} orientation="vertical" />
+                            </div>
+                        ))}
+                </div>
+
                 {/* View More Button */}
                 <div className="flex justify-center mt-12">
                     <Link
