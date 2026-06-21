@@ -1,5 +1,5 @@
 ---
-title: "Breaking ClassX: How I Reverse-Engineered a 6-Layer Video Encryption System"
+title: "How AES-128 & LMS Works: How I Reverse-Engineered a 6-Layer Video Encryption System"
 date: "2026-03-25"
 category: "Security"
 image: "/images/appx_logo.webp"

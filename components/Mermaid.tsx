@@ -41,12 +41,19 @@ const Mermaid: React.FC<MermaidProps> = ({ chart }) => {
           const { svg } = await mermaid.render(id, chart);
           ref.current.innerHTML = svg;
           
-          // Force SVG to be responsive
+          // Force SVG to be responsive and prevent over-stretching
           const svgElement = ref.current.querySelector('svg');
           if (svgElement) {
-            svgElement.style.width = '100%';
+            const nativeWidth = svgElement.getAttribute('width');
             svgElement.style.height = 'auto';
-            svgElement.style.maxWidth = '100%';
+            svgElement.style.width = '100%';
+            if (nativeWidth && !nativeWidth.includes('%')) {
+              svgElement.style.maxWidth = `${nativeWidth}px`;
+            } else {
+              svgElement.style.maxWidth = '100%';
+            }
+            svgElement.style.display = 'block';
+            svgElement.style.margin = '0 auto';
           }
         } catch (error) {
           console.error('Mermaid render error:', error);

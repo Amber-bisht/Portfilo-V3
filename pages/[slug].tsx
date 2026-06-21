@@ -116,8 +116,8 @@ export default function Post({ postData }: BlogPostProps) {
     return () => observer.disconnect();
   }, []);
 
-  // Special case for 'how-appx-works' - render raw markdown within Layout
-  if (postData.slug === 'how-appx-works') {
+  // Special case for 'how-appx-works' and 'how-captchas-work' - render raw markdown within Layout
+  if (postData.slug === 'how-appx-works' || postData.slug === 'how-captchas-work') {
     return (
       <Layout title={`${postData.title} | Amber Bisht`}>
         <div className="min-h-screen bg-neutral-950 text-neutral-200 p-8 md:p-20">
@@ -135,6 +135,13 @@ export default function Post({ postData }: BlogPostProps) {
                 code: CodeBlock,
                 pre: ({ children }) => <>{children}</>,
                 a: ({ node, ...props }) => <a className="text-makima-red hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+                blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-makima-red bg-neutral-900/50 py-6 px-8 rounded-xl italic text-neutral-300 text-lg my-8" {...props} />,
+                hr: ({ node, ...props }) => <hr className="border-white/10 my-10" {...props} />,
+                table: ({ node, ...props }) => <div className="overflow-x-auto my-8 bg-neutral-900/30 rounded-xl border border-white/5"><table className="w-full border-collapse text-left" {...props} /></div>,
+                th: ({ node, ...props }) => <th className="border-b border-white/10 bg-black/20 px-6 py-4 text-left text-white font-bold text-sm" {...props} />,
+                td: ({ node, ...props }) => <td className="border-b border-white/5 px-6 py-4 text-neutral-400 text-sm" {...props} />,
+                strong: ({ node, ...props }) => <strong className="text-white font-semibold" {...props} />,
+                img: ({ node, alt, ...props }: any) => <img alt={alt || ""} className="rounded-xl border border-white/10 my-8 w-full object-cover" {...props} />,
               }}
             >
               {postData.content}
