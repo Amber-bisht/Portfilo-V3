@@ -167,7 +167,15 @@ export default function Home({ githubStats }: { githubStats: any }) {
     }, []);
 
     const hiddenSlugs = new Set((data as any).settings?.hiddenSlugs ?? []);
-    const projects = data.projects.filter(p => !hiddenSlugs.has(p.slug));
+    const freelanceProjects = (data.freelance || []).map((p: any) => ({
+        ...p,
+        tag: p.tag || "Freelance Project"
+    }));
+    const personalProjects = (data.projects || []).map((p: any) => ({
+        ...p,
+        tag: p.tag || "Personal Project"
+    }));
+    const projects = [...personalProjects, ...freelanceProjects].filter(p => !hiddenSlugs.has(p.slug));
 
     return (
         <Layout>
@@ -207,14 +215,14 @@ export default function Home({ githubStats }: { githubStats: any }) {
                         {[0, 1, 2].flatMap((setIndex) =>
                             projects.map((project, index) => (
                                 <div
-                                    key={`${project.id}-${setIndex}`}
+                                    key={`${project.slug}-${setIndex}`}
                                     className="w-[280px] sm:w-[330px] md:w-[350px] shrink-0"
                                 >
                                     <ProjectCard
                                         project={project}
                                         index={index}
                                         orientation="vertical"
-                                        showTag={false}
+                                        showTag={true}
                                     />
                                 </div>
                             ))
@@ -237,7 +245,7 @@ export default function Home({ githubStats }: { githubStats: any }) {
                         href="/freelance"
                         className="px-8 py-3 bg-neutral-900/50 hover:bg-neutral-800 text-white font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 group border border-white/5 hover:border-white/10 shadow-lg"
                     >
-                        View Freelance Projects
+                        View All Projects
                         <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                     </Link>
                 </div>

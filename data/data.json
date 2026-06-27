@@ -211,6 +211,7 @@
             "id": 3,
             "title": "Full Stack Engineer",
             "company": "Integrated Maritime Exchange (IME)",
+            "logo": "https://media.licdn.com/dms/image/v2/D4D0BAQGp6VvIk_F5AQ/company-logo_200_200/company-logo_200_200/0/1701132132096/integrated_maritime_exchange_logo?e=1784160000&v=beta&t=exOeB_XaABscy5QQDxpUmHZAxMGXZZp69Z_aB92OD2g",
             "duration": "Ongoing",
             "starttime": "Jun 2026",
             "endtime": "Present",
@@ -219,35 +220,16 @@
                 "MySQL",
                 "Google Cloud Platform (GCP)",
                 "Large Language Models (LLM)",
-                "Regular Expressions",
                 "PHP",
                 "Node.js",
                 "pubsub"
             ]
         },
         {
-            "id": 2,
-            "title": "Full Stack Developer",
-            "company": "Freelance",
-            "duration": "Ongoing",
-            "starttime": "Sep 2025",
-            "endtime": "Present",
-            "description": "Delivered 6+ production-grade web platforms across hospitality, EdTech, and SaaS domains using Next.js and Node.js, supporting hundreds of daily active users. Designed modular backend services with Express.js, MongoDB, and PostgreSQL, improving API response times by 25–40% and reducing feature delivery time by 30%. Containerized applications deployed and operated using Docker, CI/CD pipelines, cron jobs, and third-party integrations (Razorpay, OAuth), achieving 99%+ deployment reliability.",
-            "tech used": [
-                "Next.js",
-                "Node.js",
-                "Express.js",
-                "MongoDB",
-                "PostgreSQL",
-                "Docker",
-                "CI/CD",
-                "Razorpay"
-            ]
-        },
-        {
             "id": 1,
             "title": "Software Intern",
             "company": "Delonix Services",
+            "logo": "https://media.licdn.com/dms/image/v2/C510BAQE3-zi1XsBR6g/company-logo_200_200/company-logo_200_200/0/1631432926999?e=1784160000&v=beta&t=CNCVZ19YsNa05iWs-ayUlNfXZhl9BNEKiU43Jz6HXRc",
             "duration": "3 months",
             "starttime": "April 2025",
             "endtime": "July 2025",

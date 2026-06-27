@@ -6,7 +6,7 @@ const Freelance = () => {
     // 1. Prepare and merge data with tags
     const freelanceProjects = (data.freelance || []).map((p: any) => ({
         ...p,
-        tag: p.tag || "Personal Project" // Changed from Freelance Project
+        tag: p.tag || "Freelance Project"
     }));
 
     const personalProjects = (data.projects || []).map(p => ({
