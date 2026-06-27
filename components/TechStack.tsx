@@ -34,9 +34,12 @@ import {
     SiAuth0,
     SiAnthropic,
     SiGithubcopilot,
-    SiOpenai
+    SiOpenai,
+    SiMysql,
+    SiGooglecloud,
+    SiPhp
 } from 'react-icons/si';
-import { FaServer, FaCode, FaLock, FaSpaceShuttle, FaMousePointer, FaRobot } from 'react-icons/fa';
+import { FaServer, FaCode, FaLock, FaSpaceShuttle, FaMousePointer, FaRobot, FaBrain } from 'react-icons/fa';
 import { GiRabbit } from 'react-icons/gi';
 import Image from 'next/image';
 
@@ -142,7 +145,11 @@ const IconData: { [key: string]: { icon: any; color: string; className?: string 
     SiOpenai: { icon: SiOpenai, color: "#00a67e" },
     GiRabbit: { icon: GiRabbit, color: "#ffffff" },
     SiBullmq: { icon: BullMQIcon, color: "" },
-    SiMicroservices: { icon: MicroservicesIcon, color: "" }
+    SiMicroservices: { icon: MicroservicesIcon, color: "" },
+    SiMysql: { icon: SiMysql, color: "#4479A1" },
+    SiGooglecloud: { icon: SiGooglecloud, color: "#4285F4" },
+    SiPhp: { icon: SiPhp, color: "#777BB4" },
+    FaBrain: { icon: FaBrain, color: "#9046FF" }
 };
 
 interface TechStackProps {

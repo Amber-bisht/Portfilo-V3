@@ -34,9 +34,12 @@ import {
     SiHtml5,
     SiCss3,
     SiCloudinary,
-    SiAuth0
+    SiAuth0,
+    SiMysql,
+    SiGooglecloud,
+    SiPhp
 } from 'react-icons/si';
-import { FaDatabase, FaServer, FaCode, FaCloud, FaTerminal, FaLock, FaTruck, FaVideo, FaRobot, FaEnvelope } from 'react-icons/fa';
+import { FaDatabase, FaServer, FaCode, FaCloud, FaTerminal, FaLock, FaTruck, FaVideo, FaRobot, FaEnvelope, FaBrain } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
 interface TechIcon {
@@ -116,7 +119,14 @@ const techIconMap: { [key: string]: TechIcon } = {
     "Django": { icon: SiDjango, color: "#092E20" },
     "HTML": { icon: SiHtml5, color: "#E34F26" },
     "CSS": { icon: SiCss3, color: "#1572B6" },
-    "Markdown": { icon: FaCode, color: "#000000" }
+    "Markdown": { icon: FaCode, color: "#000000" },
+    "MySQL": { icon: SiMysql, color: "#4479A1" },
+    "Google Cloud Platform (GCP)": { icon: SiGooglecloud, color: "#4285F4" },
+    "Large Language Models (LLM)": { icon: FaBrain, color: "#9046FF" },
+    "PHP": { icon: SiPhp, color: "#777BB4" },
+    "pubsub": { icon: FaServer, color: "#4285F4" },
+    "Regular Expressions": { icon: FaCode, color: "#A0A0A0" },
+    "Server Side": { icon: FaServer, color: "#333333" }
 };
 
 export const getTechIcon = (techName: string): TechIcon => {

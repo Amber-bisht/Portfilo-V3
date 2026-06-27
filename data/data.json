@@ -208,6 +208,24 @@
     ],
     "experience": [
         {
+            "id": 3,
+            "title": "Full Stack Engineer",
+            "company": "Integrated Maritime Exchange (IME)",
+            "duration": "Ongoing",
+            "starttime": "Jun 2026",
+            "endtime": "Present",
+            "description": "Developing maritime technology platforms including The Rise, a marketplace for survey, inspection, and audit services, and TonnexCargo, an intelligent cargo-tonnage matching system that combines machine learning, LLMs, and advanced email parsing to convert unstructured maritime communications into actionable business data.",
+            "tech used": [
+                "MySQL",
+                "Google Cloud Platform (GCP)",
+                "Large Language Models (LLM)",
+                "Regular Expressions",
+                "PHP",
+                "Node.js",
+                "pubsub"
+            ]
+        },
+        {
             "id": 2,
             "title": "Full Stack Developer",
             "company": "Freelance",
@@ -324,6 +342,14 @@
             {
                 "name": "S3",
                 "icon": "SiAmazons3"
+            },
+            {
+                "name": "MySQL",
+                "icon": "SiMysql"
+            },
+            {
+                "name": "PHP",
+                "icon": "SiPhp"
             }
         ],
         "devOpsLearning": [
@@ -362,6 +388,10 @@
             {
                 "name": "NGINX",
                 "icon": "SiNginx"
+            },
+            {
+                "name": "Google Cloud Platform (GCP)",
+                "icon": "SiGooglecloud"
             }
         ],
         "ai": [
@@ -376,6 +406,10 @@
             {
                 "name": "Codex",
                 "icon": "SiOpenai"
+            },
+            {
+                "name": "Large Language Models (LLM)",
+                "icon": "FaBrain"
             }
         ]
     },
