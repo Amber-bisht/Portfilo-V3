@@ -89,6 +89,33 @@ const Layout = ({ children, title = data.seo.title }: LayoutProps) => {
                 <meta property="twitter:image" content={data.seo.ogImage} />
                 <link rel="canonical" href={data.seo.siteUrl} />
                 <link rel="icon" href="/favicon.ico" />
+
+                {/* Structured Data (JSON-LD) for Google Knowledge Graph / Panel */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Person",
+                            "name": data.about.name,
+                            "url": data.seo.siteUrl,
+                            "gender": data.about.gender,
+                            "jobTitle": data.about.title,
+                            "description": data.about.description,
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressCountry": data.contact.location
+                            },
+                            "sameAs": [
+                                data.contact.linkedin,
+                                data.contact.github,
+                                data.contact.twitter,
+                                data.contact.instagram,
+                                data.contact.youtube
+                            ].filter(Boolean)
+                        })
+                    }}
+                />
             </Head>
 
             {/* Dynamic Precision Navbar */}

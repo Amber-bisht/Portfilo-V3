@@ -118,7 +118,7 @@ const ProjectCard = ({
                                     key={tech}
                                     className="px-2.5 py-1 bg-[#27272a] text-gray-300 text-[10px] font-medium rounded-full flex items-center gap-1.5"
                                 >
-                                    <Icon style={{ color: color }} className="text-xs" />
+                                    <Icon style={{ color: color }} className="text-xs" aria-hidden="true" />
                                     {tech}
                                 </span>
                             );
@@ -227,7 +227,7 @@ const ProjectCard = ({
                                                     key={tech}
                                                     className="flex items-center gap-2 px-3 py-1.5 bg-[#27272a] rounded-full text-sm text-gray-300"
                                                 >
-                                                    <Icon style={{ color: color }} className="text-base" />
+                                                    <Icon style={{ color: color }} className="text-base" aria-hidden="true" />
                                                     {tech}
                                                 </span>
                                             );

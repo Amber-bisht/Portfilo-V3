@@ -53,7 +53,7 @@ const ExperienceCard = ({ exp }: { exp: any }) => {
                                 key={tech}
                                 className="flex items-center gap-2 px-2.5 py-1 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-colors"
                             >
-                                <Icon style={{ color: color }} className="text-xs" />
+                                <Icon style={{ color: color }} className="text-xs" aria-hidden="true" />
                                 <span className="text-xs text-gray-300">{tech}</span>
                             </div>
                         );

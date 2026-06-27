@@ -179,6 +179,7 @@ const TechStack = ({ data }: TechStackProps) => {
                             <Icon
                                 className={`text-lg ${techData.className || ''}`}
                                 style={{ color: techData.color || undefined }}
+                                aria-hidden="true"
                             />
                             <span className="text-xs font-medium tracking-wide text-gray-200 whitespace-nowrap">
                                 {tech.name}
