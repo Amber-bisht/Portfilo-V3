@@ -668,5 +668,16 @@ The right approach: **move decryption out of JavaScript entirely** using hardwar
 
 *This research was conducted for educational purposes*
 
+## Frequently Asked Questions
+
+### Why is custom key derivation less secure than standard hardware DRM like Widevine?
+Custom key derivation relies on JavaScript executing in the browser runtime to reconstruct cryptographic keys (like AES-128 keys) and perform decryption. Because JavaScript execution, memory heaps, and variables are completely open to inspection by client-side developer tools, custom hooks, and debuggers, keys can always be intercepted. In contrast, standard hardware-backed DRM (like Widevine L1) decrypts content inside a secure processor enclave (TEE) on the hardware layer, ensuring keys never touch the OS or JavaScript memory.
+
+### What is client-side anti-tampering in video players?
+Client-side anti-tampering refers to heuristics designed to detect browser inspection or modification. This includes scripts detecting if developer tools console is open (measuring viewport resize changes or intervals), verifying function integrity (`toString()` prototype checks), looking for browser extension content scripts, or monitoring debugging breakpoints. However, since the client controls the environment, these indicators can be bypassed by hooking or executing headless instances outside standard debug environments.
+
+### How does HLS segment decryption work?
+HTTP Live Streaming (HLS) splits video files into short segments (typically 2-10 seconds long) in `.ts` or `.m4s` format. In AES-128 encrypted HLS streams, the master `.m3u8` playlist references a decryption key URI and initialization vector (IV) via the `#EXT-X-KEY` tag. The player fetches the key, initializes an AES-128 cipher block in CBC mode using the key and IV, and decrypts the segment chunks sequentially before rendering them in the video element.
+
 
 ---

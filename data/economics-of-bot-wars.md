@@ -233,3 +233,14 @@ Maintain state flags using encrypted, edge-validated cookies (e.g., `_abck`). Va
 ---
 
 *This article is written for educational and defensive development purposes. Understanding browser verification layers is key to building resilient, production-grade security architectures.*
+
+## Frequently Asked Questions
+
+### How does JA4 TLS fingerprinting differ from JA3?
+JA3 compiles cipher suites and extensions in the exact order they are received into a single comma-delimited string and hashes the result. This makes it fragile and easy to bypass by reordering extensions. JA4 resolves this by sorting ciphers and extensions alphabetically before hashing, and structuring the output into a human-readable prefix (`JA4a`) representing options/counts, followed by sorted cryptographic hashes (`JA4b`, `JA4c`).
+
+### Why are mobile LTE IP addresses (CGNAT) so difficult for WAFs to block?
+Carrier-Grade NAT (CGNAT) allows mobile network operators to share a single public IPv4 address among thousands of individual cellular mobile devices. If a WAF blocks a mobile IP, it will block not just the automated crawler, but thousands of legitimate mobile phone users. Consequently, security firewalls must assign low risk scores to mobile carrier ASNs.
+
+### Can headless browsers (Puppeteer, Playwright) ever fully bypass Cloudflare Turnstile or Akamai Bot Manager?
+No browser automation framework is fully undetectable. While patched drivers (like Rebrowser or Puppeteer-Stealth) attempt to mask CDP variables and override native method prototype traits, WAFs continually deploy updated scripts looking for V8 debugging protocols, graphics driver virtualization side-channels (like Canvas speed-testing), and mouse curve acceleration dynamics that betray automated execution.

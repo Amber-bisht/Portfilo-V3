@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { ChevronDown } from 'lucide-react';
 
 // Dynamic import for Mermaid to avoid SSR issues
 const Mermaid = dynamic(() => import('@/components/Mermaid'), { ssr: false });
@@ -87,7 +88,64 @@ const CodeBlock = ({ node, inline, className, children, ...props }: any) => {
   );
 };
 
+const FAQAccordionItem = ({ question, answer }: { question: string; answer: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="bg-neutral-900/50 border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 transition-colors duration-300">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between p-6 text-left font-bold text-white hover:text-makima-red transition-colors duration-300 gap-4 cursor-pointer animate-none"
+      >
+        <span className="text-base sm:text-lg">{question}</span>
+        <ChevronDown 
+          size={18} 
+          className={`text-gray-400 shrink-0 transform transition-transform duration-300 ${isOpen ? 'rotate-180 text-makima-red' : ''}`} 
+        />
+      </button>
+      <div 
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${
+          isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="p-6 pt-0 text-sm sm:text-base text-gray-400 leading-relaxed border-t border-white/5 bg-black/10">
+          <ReactMarkdown 
+            remarkPlugins={[remarkGfm]} 
+            rehypePlugins={[rehypeHighlight]}
+            components={{
+              p: ({ node, ...props }) => <p className="mb-0" {...props} />,
+              code: CodeBlock,
+              strong: ({ node, ...props }) => <strong className="text-white font-semibold" {...props} />,
+              a: ({ node, ...props }) => <a className="text-makima-red hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+            }}
+          >
+            {answer}
+          </ReactMarkdown>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function Post({ postData }: BlogPostProps) {
+  // Parse FAQs out of markdown content
+  const parts = postData.content.split('## Frequently Asked Questions');
+  const mainContent = parts[0];
+  const faqContent = parts[1] || '';
+
+  const faqs: { question: string; answer: string }[] = [];
+  if (faqContent) {
+    const faqParts = faqContent.split('### ');
+    for (let i = 1; i < faqParts.length; i++) {
+      const faqPart = faqParts[i].trim();
+      const lines = faqPart.split('\n');
+      const question = lines[0].trim();
+      const answer = lines.slice(1).join('\n').trim();
+      if (question && answer) {
+        faqs.push({ question, answer });
+      }
+    }
+  }
+
   return (
     <Layout title={`${postData.title} | Amber Bisht`}>
       <div className="min-h-screen bg-neutral-950 text-neutral-200 p-8 md:p-20">
@@ -114,8 +172,19 @@ export default function Post({ postData }: BlogPostProps) {
               img: ({ node, alt, ...props }: any) => <img alt={alt || ""} className="rounded-xl border border-white/10 my-8 w-full object-cover" {...props} />,
             }}
           >
-            {postData.content}
+            {mainContent}
           </ReactMarkdown>
+
+          {faqs.length > 0 && (
+            <div className="mt-16 border-t border-white/10 pt-16">
+              <h2 className="text-3xl font-bold mb-8 text-white">Frequently Asked Questions</h2>
+              <div className="space-y-4">
+                {faqs.map((faq, index) => (
+                  <FAQAccordionItem key={index} question={faq.question} answer={faq.answer} />
+                ))}
+              </div>
+            </div>
+          )}
         </article>
       </div>
     </Layout>
