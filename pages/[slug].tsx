@@ -7,6 +7,7 @@ import rehypeHighlight from 'rehype-highlight';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { ChevronDown } from 'lucide-react';
+import Head from 'next/head';
 
 // Dynamic import for Mermaid to avoid SSR issues
 const Mermaid = dynamic(() => import('@/components/Mermaid'), { ssr: false });
@@ -148,6 +149,27 @@ export default function Post({ postData }: BlogPostProps) {
 
   return (
     <Layout title={`${postData.title} | Amber Bisht`}>
+      <Head>
+        {faqs.length > 0 && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": faqs.map(faq => ({
+                  "@type": "Question",
+                  "name": faq.question,
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.answer.replace(/`([^`]+)`/g, '$1')
+                  }
+                }))
+              })
+            }}
+          />
+        )}
+      </Head>
       <div className="min-h-screen bg-neutral-950 text-neutral-200 p-8 md:p-20">
         <article className="max-w-4xl mx-auto">
           <ReactMarkdown 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-const OnekoFollower = () => {
+const PochitaFollower = () => {
     const [isMounted, setIsMounted] = useState(false);
     const nekoEl = useRef<HTMLDivElement>(null);
     
@@ -169,4 +169,4 @@ const OnekoFollower = () => {
     );
 };
 
-export default OnekoFollower;
+export default PochitaFollower;

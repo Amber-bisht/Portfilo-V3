@@ -5,11 +5,7 @@ category: "Security"
 image: "/images/appx_logo.webp"
 excerpt: "A deep dive into the 6-layer video encryption system used by ClassX and how to build a robust decryption pipeline."
 ---
-
-
----
-
-## Introduction
+# Introduction
 
 Most online course platforms use standard DRM solutions like Widevine or FairPlay to protect video content. ClassX took a different approach — they built their own **custom 6-layer encryption architecture** from scratch, wrapping HLS video streams in multiple layers of AES encryption, code obfuscation, and anti-tamper protections.
 

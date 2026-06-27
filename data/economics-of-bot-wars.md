@@ -5,8 +5,7 @@ category: "Security"
 image: "/images/projects/links-asprin-dev.webp"
 excerpt: "An in-depth analysis of modern bot protection mechanisms (Cloudflare, reCAPTCHA, JA3/JA4), how automated bypasses operate, and why bot defense is fundamentally a game of economics rather than pure mathematics."
 ---
-
-## Introduction
+# Introduction
 
 If you look at the raw request logs of any major web platform today, you'll see a quiet, ongoing war. According to recent telemetry from bad-bot research, automated bot traffic consistently accounts for **over 50% of all internet activity**. The web is now a machine-majority landscape.
 
