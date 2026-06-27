@@ -40,7 +40,7 @@ const Contact = ({ data, githubStats }: ContactProps) => {
                     <div className="relative z-10 h-full flex flex-col justify-between">
                         <div>
                             <h3 className="text-gray-400 font-medium mb-1">Current Status</h3>
-                            <p className="text-2xl md:text-3xl font-bold text-white mb-2">Open to Opportunities</p>
+                            <p className="text-2xl md:text-3xl font-bold text-white mb-2">Open for Freelance Work</p>
                             <Link href="/freelance" className="inline-flex items-center gap-2 text-sm text-makima-red hover:text-white transition-colors font-semibold">
                                 View My Freelance Work <ExternalLink size={14} />
                             </Link>
@@ -97,7 +97,7 @@ const Contact = ({ data, githubStats }: ContactProps) => {
                         <FaTwitter className="text-3xl text-white" />
                         <ExternalLink className="absolute top-2 right-2 text-white/50 w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
-                    <a href={data.contact.instagram || "#"} target="_blank" rel="noreferrer" aria-label="Instagram" className="bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rounded-3xl flex items-center justify-center relative overflow-hidden group hover:opacity-90 transition-opacity aspect-square">
+                    <a href={data.contact.instagram || "#"} target="_blank" rel="noreferrer" aria-label="Instagram" className="bg-[#e1306c] rounded-3xl flex items-center justify-center relative overflow-hidden group hover:opacity-90 transition-opacity aspect-square">
                         <FaInstagram className="text-3xl text-white" />
                         <ExternalLink className="absolute top-2 right-2 text-white/50 w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>

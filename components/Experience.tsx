@@ -22,7 +22,7 @@ const ExperienceCard = ({ exp }: { exp: any }) => {
                                 <img
                                     src={exp.logo}
                                     alt={`${exp.company} logo`}
-                                    className="w-12 h-12 rounded-2xl object-cover border border-white/10 bg-white/5"
+                                    className="w-12 h-12 rounded-lg object-cover border border-white/10 bg-white/5"
                                 />
                             )}
                             <div>

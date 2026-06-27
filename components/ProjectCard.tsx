@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Github, ExternalLink, X, Youtube } from 'lucide-react';
 import Image from 'next/image';
 import { getTechIcon } from '../utils/techIcons';
 import { motion, AnimatePresence } from 'framer-motion';
+import { createPortal } from 'react-dom';
 
 
 interface ProjectProps {
@@ -33,6 +34,12 @@ const ProjectCard = ({
 }: ProjectProps & { showTag?: boolean }) => {
     const [isInternalModalOpen, setIsInternalModalOpen] = useState(false);
     const isHorizontal = orientation === "horizontal";
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        return () => setMounted(false);
+    }, []);
 
     return (
         <>
@@ -161,111 +168,114 @@ const ProjectCard = ({
             </div>
 
             {/* Modal */}
-            <AnimatePresence>
-                {isInternalModalOpen && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-                    >
-                        <motion.div
-                            initial={{ scale: 0.95, opacity: 0, y: 15 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.95, opacity: 0, y: 15 }}
-                            transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
-                            className="bg-neutral-900 border border-white/10 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative shadow-2xl backdrop-blur-2xl"
+            {mounted && typeof document !== 'undefined' && createPortal(
+                <AnimatePresence>
+                    {isInternalModalOpen && (
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
                         >
-                            <button
-                                onClick={() => setIsInternalModalOpen(false)}
-                                className="absolute top-4 right-4 p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors z-50"
+                            <motion.div
+                                initial={{ scale: 0.95, opacity: 0, y: 15 }}
+                                animate={{ scale: 1, opacity: 1, y: 0 }}
+                                exit={{ scale: 0.95, opacity: 0, y: 15 }}
+                                transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
+                                className="bg-neutral-900 border border-white/10 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative shadow-2xl backdrop-blur-2xl"
                             >
-                                <X size={20} className="text-gray-400 hover:text-white" />
-                            </button>
+                                <button
+                                    onClick={() => setIsInternalModalOpen(false)}
+                                    className="absolute top-4 right-4 p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors z-50"
+                                >
+                                    <X size={20} className="text-gray-400 hover:text-white" />
+                                </button>
 
-                            <div className="relative h-64 w-full">
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#18181b] to-transparent z-10" />
-                                <Image
-                                    src={project.image || "https://placehold.co/600x400/1a1a1a/FFF?text=Project"}
-                                    alt={project.title}
-                                    fill
-                                    sizes="(max-width: 768px) 100vw, 800px"
-                                    className="object-cover object-top"
-                                />
-                                <div className="absolute bottom-6 left-8 z-20">
-                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                                        {project.title}
-                                    </h2>
+                                <div className="relative h-64 w-full">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#18181b] to-transparent z-10" />
+                                    <Image
+                                        src={project.image || "https://placehold.co/600x400/1a1a1a/FFF?text=Project"}
+                                        alt={project.title}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 800px"
+                                        className="object-cover object-top"
+                                    />
+                                    <div className="absolute bottom-6 left-8 z-20">
+                                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                                            {project.title}
+                                        </h2>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="p-8">
-                                <h4 className="text-white font-semibold mb-3">
-                                    About
-                                </h4>
-                                <p className="text-gray-400 leading-relaxed mb-6">
-                                    {project.description}
-                                </p>
+                                <div className="p-8">
+                                    <h4 className="text-white font-semibold mb-3">
+                                        About
+                                    </h4>
+                                    <p className="text-gray-400 leading-relaxed mb-6">
+                                        {project.description}
+                                    </p>
 
-                                <h4 className="text-white font-semibold mb-3">
-                                    Technologies
-                                </h4>
-                                <div className="flex flex-wrap gap-2 mb-8">
-                                    {(project.technologies || []).map((tech) => {
-                                        const { icon: Icon, color } = getTechIcon(tech);
-                                        return (
-                                            <span
-                                                key={tech}
-                                                className="flex items-center gap-2 px-3 py-1.5 bg-[#27272a] rounded-full text-sm text-gray-300"
+                                    <h4 className="text-white font-semibold mb-3">
+                                        Technologies
+                                    </h4>
+                                    <div className="flex flex-wrap gap-2 mb-8">
+                                        {(project.technologies || []).map((tech) => {
+                                            const { icon: Icon, color } = getTechIcon(tech);
+                                            return (
+                                                <span
+                                                    key={tech}
+                                                    className="flex items-center gap-2 px-3 py-1.5 bg-[#27272a] rounded-full text-sm text-gray-300"
+                                                >
+                                                    <Icon style={{ color: color }} className="text-base" />
+                                                    {tech}
+                                                </span>
+                                            );
+                                        })}
+                                    </div>
+
+                                    <div className="flex flex-wrap md:flex-nowrap gap-4 pt-6 border-t border-white/10">
+                                        {project.github && (
+                                            <a
+                                                href={project.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-1 flex items-center justify-center gap-2 py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors"
                                             >
-                                                <Icon style={{ color: color }} className="text-base" />
-                                                {tech}
-                                            </span>
-                                        );
-                                    })}
+                                                <Github size={18} />
+                                                Code
+                                            </a>
+                                        )}
+                                        {project.youtube && (
+                                            <a
+                                                href={project.youtube}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-1 flex items-center justify-center gap-2 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-colors"
+                                            >
+                                                <Youtube size={18} />
+                                                Watch Video
+                                            </a>
+                                        )}
+                                        {project.live && (
+                                            <a
+                                                href={project.live}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#27272a] text-white font-bold rounded-xl hover:bg-[#3f3f46] transition-colors"
+                                            >
+                                                <ExternalLink size={18} />
+                                                Live Demo
+                                            </a>
+                                        )}
+                                    </div>
                                 </div>
-
-                                <div className="flex flex-wrap md:flex-nowrap gap-4 pt-6 border-t border-white/10">
-                                    {project.github && (
-                                        <a
-                                            href={project.github}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex-1 flex items-center justify-center gap-2 py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors"
-                                        >
-                                            <Github size={18} />
-                                            Code
-                                        </a>
-                                    )}
-                                    {project.youtube && (
-                                        <a
-                                            href={project.youtube}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex-1 flex items-center justify-center gap-2 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-colors"
-                                        >
-                                            <Youtube size={18} />
-                                            Watch Video
-                                        </a>
-                                    )}
-                                    {project.live && (
-                                        <a
-                                            href={project.live}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#27272a] text-white font-bold rounded-xl hover:bg-[#3f3f46] transition-colors"
-                                        >
-                                            <ExternalLink size={18} />
-                                            Live Demo
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </>
     );
 };

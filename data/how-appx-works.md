@@ -15,10 +15,7 @@ Most online course platforms use standard DRM solutions like Widevine or FairPla
 
 This post documents how I systematically reverse-engineered each layer, from the disguised JavaScript player to the final AES-128 segment decryption. The goal isn't to encourage piracy — it's to demonstrate why **security through obscurity fails** and what better alternatives exist.
 
-> **Disclaimer:** This research was conducted as part of a security audit 
----
-
-## The Target
+## Application Flow
 
 ClassX serves premium video courses through a custom-built Next.js frontend. When you open a video, the browser:
 1. Makes an API call to get encrypted video metadata
