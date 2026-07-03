@@ -29,26 +29,31 @@ const Hero = ({ data }: HeroProps) => {
             name: 'LinkedIn',
             icon: FaLinkedin,
             url: data.contact.linkedin,
+            color: '#0a66c2',
         },
         {
             name: 'Twitter',
             icon: FaTwitter,
             url: data.contact.twitter,
+            color: '#1da1f2',
         },
         {
             name: 'Instagram',
             icon: FaInstagram,
             url: data.contact.instagram || '#',
+            color: '#e1306c',
         },
         {
             name: 'YouTube',
             icon: FaYoutube,
             url: data.contact.youtube || '#',
+            color: '#ff0000',
         },
         {
             name: 'GitHub',
             icon: FaGithub,
             url: data.contact.github,
+            color: '#181717',
         }
     ];
 
@@ -87,7 +92,7 @@ const Hero = ({ data }: HeroProps) => {
                         <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-white/90 font-mono mb-6 md:mb-0">
                             <div className="flex items-center gap-1.5 uppercase font-bold">
                                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                {data.about.location}
+                                {data.about.location} 🇮🇳
                             </div>
                             <span className="text-white/60">|</span>
                             <div className="uppercase tracking-widest font-bold">{data.about.title}</div>
@@ -99,7 +104,7 @@ const Hero = ({ data }: HeroProps) => {
                         href="/api/profile"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative md:absolute top-auto md:top-5 right-auto md:right-5 z-20 flex items-center justify-center gap-2 bg-makima-red text-white font-bold py-2.5 px-4 rounded-xl transition-all duration-300 active:scale-95 uppercase text-[10px] tracking-widest shadow-lg w-full md:w-auto mt-4 md:mt-0 text-center"
+                        className="relative md:absolute top-auto md:top-5 right-auto md:right-5 z-20 flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 text-white font-bold py-2.5 px-4 rounded-xl border border-dotted border-white transition-all duration-300 active:scale-95 uppercase text-[10px] tracking-widest shadow-lg w-full md:w-auto mt-4 md:mt-0 text-center"
                         title="Opens full profile JSON — paste into ChatGPT / Claude for AI context"
                     >
                         Feed My Data in AI to Evaluate Me Faster
@@ -117,11 +122,11 @@ const Hero = ({ data }: HeroProps) => {
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-white hover:text-white/80 transition-all duration-300 hover:scale-125 focus:scale-125 outline-none"
+                                className="w-8 h-8 rounded-lg bg-white flex items-center justify-center transition-all duration-300 hover:scale-115 focus:scale-115 outline-none shadow-md"
                                 aria-label={link.name}
                                 title={link.name}
                             >
-                                <link.icon size={22} aria-hidden="true" />
+                                <link.icon size={16} style={{ color: link.color }} aria-hidden="true" />
                             </a>
                         ))}
                     </div>
