@@ -343,6 +343,38 @@
             {
                 "name": "FFmpeg",
                 "icon": "SiFfmpeg"
+            },
+            {
+                "name": "Express.js",
+                "icon": "SiExpress"
+            },
+            {
+                "name": "Prisma",
+                "icon": "SiPrisma"
+            },
+            {
+                "name": "CloudFront",
+                "icon": "SiAmazonaws"
+            },
+            {
+                "name": "Cloudflare R2",
+                "icon": "SiCloudflare"
+            },
+            {
+                "name": "ImageKit",
+                "icon": "SiCloudinary"
+            },
+            {
+                "name": "Sentry",
+                "icon": "SiSentry"
+            },
+            {
+                "name": "Google Maps API",
+                "icon": "SiGooglemaps"
+            },
+            {
+                "name": "SendGrid / Nodemailer",
+                "icon": "FaEnvelope"
             }
         ],
         "devOpsLearning": [
@@ -353,6 +385,10 @@
             {
                 "name": "Docker",
                 "icon": "SiDocker"
+            },
+            {
+                "name": "GitHub Actions",
+                "icon": "SiGithubactions"
             },
             {
                 "name": "Jenkins",
@@ -399,6 +435,22 @@
             {
                 "name": "Codex",
                 "icon": "SiOpenai"
+            },
+            {
+                "name": "RAG",
+                "icon": "FaBrain"
+            },
+            {
+                "name": "Tool Calling",
+                "icon": "FaCogs"
+            },
+            {
+                "name": "Groq AI",
+                "icon": "SiOpenai"
+            },
+            {
+                "name": "Gemini API",
+                "icon": "SiGooglegemini"
             }
         ]
     },

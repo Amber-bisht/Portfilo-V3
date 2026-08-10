@@ -43,9 +43,16 @@ import {
     SiZod,
     SiTelegram,
     SiWhatsapp,
-    SiFfmpeg
+    SiFfmpeg,
+    SiExpress,
+    SiPrisma,
+    SiCloudinary,
+    SiGithubactions,
+    SiSentry,
+    SiGooglemaps,
+    SiGooglegemini
 } from 'react-icons/si';
-import { FaServer, FaCode, FaLock, FaSpaceShuttle, FaMousePointer, FaRobot, FaBrain, FaSearch } from 'react-icons/fa';
+import { FaServer, FaCode, FaLock, FaSpaceShuttle, FaMousePointer, FaRobot, FaBrain, FaSearch, FaEnvelope, FaCogs } from 'react-icons/fa';
 import { GiRabbit } from 'react-icons/gi';
 import Image from 'next/image';
 
@@ -162,7 +169,16 @@ const IconData: { [key: string]: { icon: any; color: string; className?: string 
     SiTelegram: { icon: SiTelegram, color: "#26A5E4" },
     SiWhatsapp: { icon: SiWhatsapp, color: "#25D366" },
     SiFfmpeg: { icon: SiFfmpeg, color: "#007808" },
-    FaSearch: { icon: FaSearch, color: "#E94E4C" }
+    FaSearch: { icon: FaSearch, color: "#E94E4C" },
+    SiExpress: { icon: SiExpress, color: "#ffffff" },
+    SiPrisma: { icon: SiPrisma, color: "#2D3748" },
+    SiCloudinary: { icon: SiCloudinary, color: "#3448C5" },
+    SiGithubactions: { icon: SiGithubactions, color: "#2088FF" },
+    SiSentry: { icon: SiSentry, color: "#362D59" },
+    SiGooglemaps: { icon: SiGooglemaps, color: "#4285F4" },
+    FaEnvelope: { icon: FaEnvelope, color: "#EA4335" },
+    SiGooglegemini: { icon: SiGooglegemini, color: "#8E75B2" },
+    FaCogs: { icon: FaCogs, color: "#38bdf8" }
 };
 
 interface TechStackProps {
@@ -211,12 +227,10 @@ const TechStack = ({ data }: TechStackProps) => {
     };
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
             {/* Full Stack Card - TOP FULL WIDTH */}
-            <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
+            <div className="md:col-span-12 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-makima-red/5 blur-[80px] rounded-full pointer-events-none -mr-16 -mt-16" />
-
-
 
                 <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-6">
@@ -227,11 +241,9 @@ const TechStack = ({ data }: TechStackProps) => {
                 </div>
             </div>
 
-            {/* DevOps Card - BOTTOM LEFT BIGGER */}
-            <div className="md:col-span-3 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
+            {/* DevOps Card - BOTTOM LEFT (WIDER: 7 COLS) */}
+            <div className="md:col-span-7 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-96 h-96 bg-makima-red/5 blur-[100px] rounded-full pointer-events-none -ml-32 -mt-32" />
-
-
 
                 <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-6">
@@ -242,14 +254,13 @@ const TechStack = ({ data }: TechStackProps) => {
                 </div>
             </div>
 
-            {/* AI Card - BOTTOM RIGHT SMALLER */}
+            {/* AI Card - BOTTOM RIGHT (5 COLS) */}
             {data.ai && (
-                <div className="md:col-span-1 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
-
+                <div className="md:col-span-5 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 relative overflow-hidden">
                     <div className="relative z-10">
                         <div className="flex items-center gap-2 mb-6">
                             <div className="w-1.5 h-6 bg-makima-red rounded-full" />
-                            <h3 className="text-xl font-bold text-white tracking-tight uppercase">AI TOOLS</h3>
+                            <h3 className="text-xl font-bold text-white tracking-tight uppercase">GEN AI & AI TOOLS</h3>
                         </div>
                         {renderTechGrid(data.ai)}
                     </div>
