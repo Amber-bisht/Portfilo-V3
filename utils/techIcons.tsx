@@ -50,9 +50,17 @@ import {
     SiReactrouter,
     SiZod,
     SiGooglemaps,
-    SiMarkdown
+    SiMarkdown,
+    SiTelegram,
+    SiWhatsapp,
+    SiElasticsearch,
+    SiFfmpeg,
+    SiTrpc,
+    SiGraphql,
+    SiReactquery,
+    SiApachekafka
 } from 'react-icons/si';
-import { FaDatabase, FaServer, FaCode, FaLock, FaTruck, FaVideo, FaRobot, FaEnvelope, FaBrain, FaTerminal } from 'react-icons/fa';
+import { FaDatabase, FaServer, FaCode, FaLock, FaTruck, FaVideo, FaRobot, FaEnvelope, FaBrain, FaTerminal, FaSearch } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
 export interface TechIcon {
@@ -182,8 +190,27 @@ const techIconMap: { [key: string]: TechIcon } = {
     "ImageKit": { icon: SiCloudinary, color: "#3448C5" },
     "imagekit": { icon: SiCloudinary, color: "#3448C5" },
     "Groq AI": { icon: SiOpenai, color: "#412991" },
+    "Groq API": { icon: SiOpenai, color: "#412991" },
     "Groq SDK": { icon: SiOpenai, color: "#412991" },
-    "Groq": { icon: SiOpenai, color: "#412991" }
+    "Groq": { icon: SiOpenai, color: "#412991" },
+    "Telegram Bot": { icon: SiTelegram, color: "#26A5E4" },
+    "Telegram": { icon: SiTelegram, color: "#26A5E4" },
+    "WhatsApp Integration": { icon: SiWhatsapp, color: "#25D366" },
+    "WhatsApp API": { icon: SiWhatsapp, color: "#25D366" },
+    "WhatsApp": { icon: SiWhatsapp, color: "#25D366" },
+    "Typesense": { icon: FaSearch, color: "#F60000" },
+    "Elasticsearch": { icon: SiElasticsearch, color: "#005571" },
+    "FFmpeg": { icon: SiFfmpeg, color: "#007808" },
+    "Cloudflare Workers": { icon: SiCloudflare, color: "#F38020" },
+    "AWS MediaConvert": { icon: SiAmazon, color: "#FF9900" },
+    "AWS Elemental MediaConvert": { icon: SiAmazon, color: "#FF9900" },
+    "Sharp": { icon: FaVideo, color: "#99CC00" },
+    "tRPC": { icon: SiTrpc, color: "#2596BE" },
+    "GraphQL": { icon: SiGraphql, color: "#E10098" },
+    "TanStack Query": { icon: SiReactquery, color: "#FF4154" },
+    "React Query": { icon: SiReactquery, color: "#FF4154" },
+    "Apache Kafka": { icon: SiApachekafka, color: "#231F20" },
+    "Kafka": { icon: SiApachekafka, color: "#231F20" }
 };
 
 export const getTechIcon = (techName: string): TechIcon => {
