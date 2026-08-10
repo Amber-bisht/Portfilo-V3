@@ -1,106 +1,48 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-
-const postsDirectory = path.join(process.cwd(), 'data');
-
 export interface BlogPost {
   slug: string;
   title: string;
   date: string;
   excerpt: string;
+  category?: string;
+  image?: string;
   content: string;
-  [key: string]: any;
 }
 
+const staticPosts: BlogPost[] = [
+  {
+    slug: 'economics-of-bot-wars',
+    title: 'The Economics of Bot Wars: How CAPTCHAs, Fingerprinting, and Bypass Strategies Shape the Modern Web',
+    date: '2026-06-21',
+    category: 'Security',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop',
+    excerpt: 'An in-depth analysis of modern bot protection mechanisms (Cloudflare, reCAPTCHA, JA3/JA4), how automated bypasses operate, and why bot defense is fundamentally a game of economics rather than pure mathematics.',
+    content: 'An in-depth security analysis of modern bot protection mechanisms, automated bypasses, and low-level web defense.'
+  },
+  {
+    slug: 'how-appx-works',
+    title: 'How AES-128 & LMS Works: How I Reverse-Engineered a 6-Layer Video Encryption System',
+    date: '2026-03-25',
+    category: 'Security',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop',
+    excerpt: 'A deep dive into the 6-layer video encryption system used by ClassX and how to build a robust decryption pipeline.',
+    content: 'A deep dive into the 6-layer video encryption system used by ClassX, key derivation, and how to build a robust decryption pipeline.'
+  }
+];
+
 export function getSortedPostsData(): BlogPost[] {
-  // Get file names under /data
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames
-    .filter((fileName) => fileName.endsWith('.md'))
-    .map((fileName) => {
-      // Remove ".md" from file name to get slug
-      const slug = fileName.replace(/\.md$/, '');
-
-      // Read markdown file as string
-      const fullPath = path.join(postsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-      // Use gray-matter to parse the post metadata section
-      const matterResult = matter(fileContents);
-
-      // Extract title from content if not in frontmatter
-      let title = matterResult.data.title;
-      if (!title) {
-        const titleMatch = matterResult.content.match(/^#\s+(.*)/m);
-        title = titleMatch ? titleMatch[1] : slug;
-      }
-
-      // Extract excerpt if not in frontmatter
-      let excerpt = matterResult.data.excerpt;
-      if (!excerpt) {
-          excerpt = matterResult.content
-            .replace(/^#\s+.*$/m, '') // remove H1
-            .replace(/>\s+.*\n/g, '') // remove blockquotes
-            .trim()
-            .substring(0, 160) + '...';
-      }
-
-      // Combine the data with the slug
-      return {
-        slug,
-        title,
-        date: matterResult.data.date || '2026-03-25', // Fallback date
-        excerpt,
-        content: matterResult.content,
-        ...matterResult.data,
-      } as BlogPost;
-    });
-
-  // Sort posts by date
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
+  return staticPosts;
 }
 
 export function getAllPostSlugs() {
-  const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames
-    .filter((fileName) => fileName.endsWith('.md'))
-    .map((fileName) => {
-      return {
-        params: {
-          slug: fileName.replace(/\.md$/, ''),
-        },
-      };
-    });
+  return staticPosts.map((post) => ({
+    params: { slug: post.slug }
+  }));
 }
 
 export async function getPostData(slug: string): Promise<BlogPost> {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
-
-  // Extract title from content if not in frontmatter
-  let title = matterResult.data.title;
-  if (!title) {
-    const titleMatch = matterResult.content.match(/^#\s+(.*)/m);
-    title = titleMatch ? titleMatch[1] : slug;
+  const post = staticPosts.find((p) => p.slug === slug);
+  if (!post) {
+    throw new Error(`Post not found: ${slug}`);
   }
-
-  // Combine the data with the slug
-  return {
-    slug,
-    title,
-    date: matterResult.data.date || '2026-03-25',
-    excerpt: matterResult.data.excerpt || '',
-    content: matterResult.content,
-    ...matterResult.data,
-  };
+  return post;
 }
