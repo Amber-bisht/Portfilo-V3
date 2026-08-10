@@ -37,14 +37,28 @@ import {
     SiAuth0,
     SiMysql,
     SiGooglecloud,
-    SiPhp
+    SiPhp,
+    SiTypescript,
+    SiBun,
+    SiPrisma,
+    SiTurborepo,
+    SiSentry,
+    SiSocketdotio,
+    SiWebrtc,
+    SiNginx,
+    SiRedux,
+    SiReactrouter,
+    SiZod,
+    SiGooglemaps,
+    SiMarkdown
 } from 'react-icons/si';
-import { FaDatabase, FaServer, FaCode, FaCloud, FaTerminal, FaLock, FaTruck, FaVideo, FaRobot, FaEnvelope, FaBrain } from 'react-icons/fa';
+import { FaDatabase, FaServer, FaCode, FaLock, FaTruck, FaVideo, FaRobot, FaEnvelope, FaBrain, FaTerminal } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
-interface TechIcon {
+export interface TechIcon {
     icon: IconType;
     color: string;
+    isFallback?: boolean;
 }
 
 const techIconMap: { [key: string]: TechIcon } = {
@@ -61,13 +75,13 @@ const techIconMap: { [key: string]: TechIcon } = {
     "AWS": { icon: SiAmazon, color: "#FF9900" },
     "Bash": { icon: SiGnubash, color: "#4EAA25" },
     "Kubernetes": { icon: SiKubernetes, color: "#326CE5" },
-    "AWS EKS": { icon: SiAmazon, color: "#FF9900" }, // Using Amazon icon for EKS
+    "AWS EKS": { icon: SiAmazon, color: "#FF9900" },
     "Terraform": { icon: SiTerraform, color: "#7B42BC" },
     "Prometheus": { icon: SiPrometheus, color: "#E6522C" },
     "Grafana": { icon: SiGrafana, color: "#F46800" },
     "Helm": { icon: SiHelm, color: "#0F1689" },
-    "HCL": { icon: SiTerraform, color: "#7B42BC" }, // Using Terraform icon for HCL
-    "State Management": { icon: FaDatabase, color: "#A0A0A0" }, // Generic database/storage icon
+    "HCL": { icon: SiTerraform, color: "#7B42BC" },
+    "State Management": { icon: FaDatabase, color: "#A0A0A0" },
 
     // Others / Fallbacks
     "Python": { icon: SiPython, color: "#3776AB" },
@@ -94,15 +108,6 @@ const techIconMap: { [key: string]: TechIcon } = {
     "Microservices": { icon: FaServer, color: "#333333" },
     "AES Encryption": { icon: FaLock, color: "#A0A0A0" },
     "Web Worker": { icon: FaTerminal, color: "#F7DF1E" },
-    "Working on it": { icon: FaCode, color: "#FF9900" },
-    "Image Optimization": { icon: FaCode, color: "#FF00FF" },
-    "Performance": { icon: FaCode, color: "#00FF00" },
-    "SSG": { icon: FaCode, color: "#000000" },
-    "Admin Panel": { icon: FaTerminal, color: "#333333" },
-    "VPS": { icon: FaServer, color: "#000000" },
-    "Cipher": { icon: FaLock, color: "#000000" },
-    "Open Source": { icon: FaCode, color: "#000000" },
-    "Integration": { icon: FaCode, color: "#000000" },
     "Express.js": { icon: SiExpress, color: "#000000" },
     "CI/CD": { icon: SiGithubactions, color: "#2088FF" },
     "Moltbot": { icon: FaRobot, color: "#ff4d4d" },
@@ -111,37 +116,89 @@ const techIconMap: { [key: string]: TechIcon } = {
     "React.js": { icon: SiReact, color: "#61DAFB" },
     "Node.js": { icon: SiNodedotjs, color: "#339933" },
     "Redis": { icon: SiRedis, color: "#DC382D" },
-    "BullMQ": { icon: FaServer, color: "#A0A0A0" }, // No direct icon in simple-icons
+    "Redis Pub/Sub": { icon: SiRedis, color: "#DC382D" },
+    "BullMQ": { icon: SiRedis, color: "#DC382D" },
     "Resend.com": { icon: FaEnvelope, color: "#000000" },
     "Turnstile": { icon: SiCloudflare, color: "#F38020" },
     "OAuth": { icon: SiAuth0, color: "#EB5424" },
+    "OAuth 2.0": { icon: SiAuth0, color: "#EB5424" },
+    "reCAPTCHA": { icon: SiGoogle, color: "#4285F4" },
     "Cloudinary": { icon: SiCloudinary, color: "#3448C5" },
     "Django": { icon: SiDjango, color: "#092E20" },
     "HTML": { icon: SiHtml5, color: "#E34F26" },
     "CSS": { icon: SiCss3, color: "#1572B6" },
-    "Markdown": { icon: FaCode, color: "#000000" },
     "MySQL": { icon: SiMysql, color: "#4479A1" },
     "Google Cloud Platform (GCP)": { icon: SiGooglecloud, color: "#4285F4" },
     "Large Language Models (LLM)": { icon: FaBrain, color: "#9046FF" },
     "PHP": { icon: SiPhp, color: "#777BB4" },
-    "pubsub": { icon: FaServer, color: "#4285F4" },
-    "Regular Expressions": { icon: FaCode, color: "#A0A0A0" },
-    "Server Side": { icon: FaServer, color: "#333333" }
+    "pubsub": { icon: SiRedis, color: "#DC382D" },
+
+    // Roadmap additions
+    "TypeScript": { icon: SiTypescript, color: "#3178C6" },
+    "TypeScript 5+": { icon: SiTypescript, color: "#3178C6" },
+    "Strict Mode": { icon: SiTypescript, color: "#3178C6" },
+    "Generics": { icon: SiTypescript, color: "#3178C6" },
+    "Type Declarations": { icon: SiTypescript, color: "#3178C6" },
+    "Bun": { icon: SiBun, color: "#FBF0DF" },
+    "Hono": { icon: FaServer, color: "#E36002" },
+    "Prisma": { icon: SiPrisma, color: "#2D3748" },
+    "Prisma ORM": { icon: SiPrisma, color: "#2D3748" },
+    "Turborepo": { icon: SiTurborepo, color: "#EF4444" },
+    "Sentry": { icon: SiSentry, color: "#362D59" },
+    "Socket.io": { icon: SiSocketdotio, color: "#010101" },
+    "WebSockets": { icon: FaServer, color: "#010101" },
+    "WebRTC": { icon: SiWebrtc, color: "#333333" },
+    "HTML5": { icon: SiHtml5, color: "#E34F26" },
+    "CSS3": { icon: SiCss3, color: "#1572B6" },
+    "Flexbox/Grid": { icon: SiCss3, color: "#1572B6" },
+    "ARIA": { icon: SiHtml5, color: "#E34F26" },
+    "JavaScript ES6+": { icon: SiJavascript, color: "#F7DF1E" },
+    "Fetch API": { icon: SiJavascript, color: "#F7DF1E" },
+    "DOM APIs": { icon: SiJavascript, color: "#F7DF1E" },
+    "LocalStorage": { icon: SiJavascript, color: "#F7DF1E" },
+    "React 19": { icon: SiReact, color: "#61DAFB" },
+    "Redux Toolkit/Zustand": { icon: SiRedux, color: "#764ABC" },
+    "Redux Toolkit": { icon: SiRedux, color: "#764ABC" },
+    "Zustand": { icon: SiReact, color: "#61DAFB" },
+    "React Router": { icon: SiReactrouter, color: "#CA4245" },
+    "Next.js App Router": { icon: SiNextdotjs, color: "#000000" },
+    "NextAuth": { icon: SiNextdotjs, color: "#000000" },
+    "Server Actions": { icon: SiNextdotjs, color: "#000000" },
+    "ISR": { icon: SiNextdotjs, color: "#000000" },
+    "Zod": { icon: SiZod, color: "#3E67B1" },
+    "Rate Limiting": { icon: SiCloudflare, color: "#F38020" },
+    "Cookies": { icon: FaLock, color: "#F7DF1E" },
+    "Nginx": { icon: SiNginx, color: "#009639" },
+    "AWS EC2/S3/CloudFront": { icon: SiAmazon, color: "#FF9900" },
+    "AWS Lambda/MediaConvert": { icon: SiAmazon, color: "#FF9900" },
+
+    // Additional requested brand mappings
+    "Google Maps API": { icon: SiGooglemaps, color: "#4285F4" },
+    "Google Maps": { icon: SiGooglemaps, color: "#4285F4" },
+    "Cloudflare R2": { icon: SiCloudflare, color: "#F38020" },
+    "Cloudflare Geolocation": { icon: SiCloudflare, color: "#F38020" },
+    "Markdown": { icon: SiMarkdown, color: "#000000" },
+    "AWS Lambda": { icon: SiAmazon, color: "#FF9900" },
+    "ImageKit": { icon: SiCloudinary, color: "#3448C5" },
+    "imagekit": { icon: SiCloudinary, color: "#3448C5" },
+    "Groq AI": { icon: SiOpenai, color: "#412991" },
+    "Groq SDK": { icon: SiOpenai, color: "#412991" },
+    "Groq": { icon: SiOpenai, color: "#412991" }
 };
 
 export const getTechIcon = (techName: string): TechIcon => {
     // Direct match
     if (techIconMap[techName]) {
-        return techIconMap[techName];
+        return { ...techIconMap[techName], isFallback: false };
     }
 
     // Normalized match (case insensitive)
     const lowerName = techName.toLowerCase();
     const foundKey = Object.keys(techIconMap).find(key => key.toLowerCase() === lowerName);
     if (foundKey) {
-        return techIconMap[foundKey];
+        return { ...techIconMap[foundKey], isFallback: false };
     }
 
-    // Default fallback
-    return { icon: FaCode, color: "#888888" };
+    // Default fallback (flagged as fallback so pages can suppress it if desired)
+    return { icon: FaCode, color: "#888888", isFallback: true };
 };

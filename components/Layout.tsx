@@ -37,6 +37,7 @@ const Layout = ({ children, title = data.seo.title }: LayoutProps) => {
         { name: 'Home', icon: FaHome, href: '/#' },
         { name: 'Projects', icon: FaFolder, href: '/#projects' },
         { name: 'Blog', icon: FaLayerGroup, href: '/blog' },
+        { name: 'Roadmap', icon: FaLayerGroup, href: '/fullstack' },
         { name: 'Freelance', icon: FaBriefcase, href: '/freelance' },
         { name: 'Tech Stack', icon: FaLayerGroup, href: '/#techstack' },
         { name: 'Contact', icon: FaEnvelope, href: '/#contact' },

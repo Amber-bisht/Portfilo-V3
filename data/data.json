@@ -140,7 +140,6 @@
             "technologies": [
                 "Python",
                 "FastAPI",
-                "Swiss Ephemeris",
                 "MongoDB",
                 "Google OAuth",
                 "JavaScript"
@@ -441,8 +440,7 @@
                 "MongoDB",
                 "Cloudflare Turnstile",
                 "Tailwind CSS",
-                "TypeScript",
-                "Admin Panel"
+                "TypeScript"
             ],
             "image": "/images/projects/quicktoservices.webp",
             "github": "",
