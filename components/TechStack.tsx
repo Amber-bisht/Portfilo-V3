@@ -37,9 +37,15 @@ import {
     SiOpenai,
     SiMysql,
     SiGooglecloud,
-    SiPhp
+    SiPhp,
+    SiBun,
+    SiHono,
+    SiZod,
+    SiTelegram,
+    SiWhatsapp,
+    SiFfmpeg
 } from 'react-icons/si';
-import { FaServer, FaCode, FaLock, FaSpaceShuttle, FaMousePointer, FaRobot, FaBrain } from 'react-icons/fa';
+import { FaServer, FaCode, FaLock, FaSpaceShuttle, FaMousePointer, FaRobot, FaBrain, FaSearch } from 'react-icons/fa';
 import { GiRabbit } from 'react-icons/gi';
 import Image from 'next/image';
 
@@ -149,7 +155,14 @@ const IconData: { [key: string]: { icon: any; color: string; className?: string 
     SiMysql: { icon: SiMysql, color: "#4479A1" },
     SiGooglecloud: { icon: SiGooglecloud, color: "#4285F4" },
     SiPhp: { icon: SiPhp, color: "#777BB4" },
-    FaBrain: { icon: FaBrain, color: "#9046FF" }
+    FaBrain: { icon: FaBrain, color: "#9046FF" },
+    SiBun: { icon: SiBun, color: "#FBF0DF" },
+    SiHono: { icon: SiHono, color: "#E36002" },
+    SiZod: { icon: SiZod, color: "#3E67B1" },
+    SiTelegram: { icon: SiTelegram, color: "#26A5E4" },
+    SiWhatsapp: { icon: SiWhatsapp, color: "#25D366" },
+    SiFfmpeg: { icon: SiFfmpeg, color: "#007808" },
+    FaSearch: { icon: FaSearch, color: "#E94E4C" }
 };
 
 interface TechStackProps {

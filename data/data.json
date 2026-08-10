@@ -40,7 +40,9 @@
         }
     },
     "settings": {
-        "hiddenSlugs": ["telegram-owner-reply-bot"]
+        "hiddenSlugs": [
+            "telegram-owner-reply-bot"
+        ]
     },
     "projects": [
         {
@@ -210,7 +212,7 @@
             "id": 1,
             "title": "Software Intern",
             "company": "Delonix Services",
-            "logo": "https://i0.wp.com/delonixtravel.com/wp-content/uploads/2025/03/lg-removebg-preview.png?fit=500%2C500&ssl=1",
+            "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWrpO0Y9WAxssIeqkxtSv45V0Eij3SFbuymTIor5lse6fGxucfTwEG35Q&s=10",
             "duration": "3 months",
             "starttime": "April 2025",
             "endtime": "July 2025",
@@ -313,6 +315,34 @@
             {
                 "name": "PHP",
                 "icon": "SiPhp"
+            },
+            {
+                "name": "Bun",
+                "icon": "SiBun"
+            },
+            {
+                "name": "Hono",
+                "icon": "SiHono"
+            },
+            {
+                "name": "Typesense",
+                "icon": "FaSearch"
+            },
+            {
+                "name": "Zod",
+                "icon": "SiZod"
+            },
+            {
+                "name": "Telegram Bot",
+                "icon": "SiTelegram"
+            },
+            {
+                "name": "WhatsApp API",
+                "icon": "SiWhatsapp"
+            },
+            {
+                "name": "FFmpeg",
+                "icon": "SiFfmpeg"
             }
         ],
         "devOpsLearning": [
@@ -369,10 +399,6 @@
             {
                 "name": "Codex",
                 "icon": "SiOpenai"
-            },
-            {
-                "name": "Large Language Models (LLM)",
-                "icon": "FaBrain"
             }
         ]
     },

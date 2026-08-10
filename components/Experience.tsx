@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { getTechIcon } from '../utils/techIcons';
+import { ChevronDown } from 'lucide-react';
 
 const ExperienceCard = ({ exp }: { exp: any }) => {
     const isOngoing = exp.duration === 'Ongoing' || exp.endtime === 'Present';
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
 
     return (
         <div
@@ -32,17 +33,27 @@ const ExperienceCard = ({ exp }: { exp: any }) => {
                                 <h4 className="text-makima-red font-medium text-lg">{exp.company}</h4>
                             </div>
                         </div>
-                        <div className="mt-2 md:mt-0 flex flex-col md:items-end">
-                            <span className="text-gray-400 font-mono text-sm">{exp.duration}</span>
-                            <span className="text-gray-400 text-xs">{exp.starttime} - {exp.endtime}</span>
+                        <div className="mt-2 md:mt-0 flex items-center gap-3 md:items-end">
+                            <div className="flex flex-col md:items-end">
+                                <span className="text-gray-400 font-mono text-sm">{exp.duration}</span>
+                                <span className="text-gray-400 text-xs">{exp.starttime} - {exp.endtime}</span>
+                            </div>
+                            <ChevronDown 
+                                size={18} 
+                                className={`text-gray-400 shrink-0 transform transition-transform duration-300 ${isExpanded ? 'rotate-180 text-makima-red' : ''}`} 
+                            />
                         </div>
                     </div>
 
-                    {isExpanded && exp.description && (
-                        <p className="text-gray-300 mb-6 leading-relaxed max-w-4xl text-base transition-all duration-300">
-                            {exp.description}
-                        </p>
-                    )}
+                    <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                        isExpanded ? 'max-h-[500px] opacity-100 mb-6' : 'max-h-0 opacity-0 mb-0'
+                    }`}>
+                        {exp.description && (
+                            <p className="text-gray-300 leading-relaxed max-w-4xl text-base">
+                                {exp.description}
+                            </p>
+                        )}
+                    </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2.5 mt-auto">
