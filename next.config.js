@@ -56,7 +56,7 @@ const nextConfig = {
       },
     ],
   },
-  trailingSlash: true,
+  // trailingSlash: true, // Removed as Vercel handles trailing slashes natively and causes 404.html chmod build error
   // Optimize for modern browsers - reduce polyfills
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
