@@ -1,4 +1,5 @@
 import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { SiHuggingface } from 'react-icons/si';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,6 +19,7 @@ interface HeroProps {
             email: string;
             instagram?: string;
             youtube?: string;
+            huggingface?: string;
         };
     };
 }
@@ -48,6 +50,12 @@ const Hero = ({ data }: HeroProps) => {
             icon: FaYoutube,
             url: data.contact.youtube || '#',
             color: '#ff0000',
+        },
+        {
+            name: 'HuggingFace',
+            icon: SiHuggingface,
+            url: data.contact.huggingface || '#',
+            color: '#ff9d00',
         },
         {
             name: 'GitHub',

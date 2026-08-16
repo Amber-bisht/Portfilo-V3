@@ -1,5 +1,5 @@
 import { FaLinkedin, FaGithub, FaTwitter, FaDiscord, FaInstagram, FaYoutube } from 'react-icons/fa';
-import { SiGmail } from 'react-icons/si';
+import { SiGmail, SiHuggingface } from 'react-icons/si';
 
 import dynamic from 'next/dynamic';
 import { ExternalLink, Mail } from 'lucide-react';
@@ -24,6 +24,7 @@ interface ContactProps {
             twitter: string;
             instagram?: string;
             youtube?: string;
+            huggingface?: string;
         };
     };
     githubStats: any;
@@ -87,7 +88,7 @@ const Contact = ({ data, githubStats }: ContactProps) => {
                     </div>
                 </div>
 
-                {/* Bottom Mid: Socials - Symmetrical 2x2 Grid */}
+                {/* Bottom Mid: Socials Grid */}
                 <div className="md:col-span-1 h-full min-h-[240px] grid grid-cols-2 gap-4">
                     <a href={data.contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="bg-[#0a66c2] rounded-3xl flex items-center justify-center relative overflow-hidden group hover:opacity-90 transition-opacity aspect-square">
                         <FaLinkedin className="text-3xl text-white" />
@@ -105,6 +106,13 @@ const Contact = ({ data, githubStats }: ContactProps) => {
                         <FaYoutube className="text-3xl text-white" />
                         <ExternalLink className="absolute top-2 right-2 text-white/50 w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
+                    {data.contact.huggingface && (
+                        <a href={data.contact.huggingface} target="_blank" rel="noreferrer" aria-label="HuggingFace" className="col-span-2 bg-[#ff9d00] rounded-3xl flex items-center justify-center gap-2 relative overflow-hidden group hover:opacity-90 transition-opacity py-3">
+                            <SiHuggingface className="text-2xl text-white" />
+                            <span className="text-white text-sm font-semibold">HuggingFace</span>
+                            <ExternalLink className="absolute top-2 right-2 text-white/50 w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
+                    )}
                 </div>
 
                 {/* Bottom Right: Stacked Mail & Spotify */}

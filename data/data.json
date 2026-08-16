@@ -205,6 +205,62 @@
             "github": "https://github.com/Amber-bisht/telegram-ai-bot",
             "live": "",
             "tag": "Personal Project"
+        },
+        {
+            "id": 7,
+            "title": "DistroPay – P2P UPI Payment Gateway",
+            "slug": "distropay",
+            "description": "A P2P UPI payment gateway that lets users pay directly to the owner without intermediary delays or percentage charges. No business PAN card or GST number required. Provides API access, a hosted payment screen, real-time payment verification, and webhook callbacks — built for easy integration.",
+            "features": [
+                "Direct P2P UPI payments — zero percentage cuts, no secondary delays",
+                "No business PAN card or GST number required for onboarding",
+                "Simple REST API for seamless integration into any product",
+                "Hosted payment screen — redirect users, collect payment, redirect back",
+                "Real-time payment verification via polling or webhook callback",
+                "Google OAuth for secure merchant authentication"
+            ],
+            "technologies": [
+                "Next.js",
+                "Hono",
+                "Bun",
+                "Prisma",
+                "PostgreSQL",
+                "Google OAuth"
+            ],
+            "image": "/images/projects/distropay.online.png",
+            "github": "",
+            "live": "https://distropay.online",
+            "tag": "Personal Project"
+        },
+        {
+            "id": 8,
+            "title": "Automation – Visual Workflow Node Editor",
+            "slug": "automation",
+            "description": "An n8n-inspired visual automation platform with a drag-and-drop node editor. Supports Telegram bot integration, email (Resend) workflows, AI agents with RAG, and a Razorpay credit system for metered execution — all authenticated with Google OAuth.",
+            "features": [
+                "Drag-and-drop visual node editor for building automation workflows",
+                "Telegram bot integration — send messages, trigger flows on events",
+                "Email automation via Resend for transactional and marketing workflows",
+                "AI agent integration with RAG (Retrieval-Augmented Generation) support",
+                "Razorpay credit system for metered, pay-as-you-go workflow execution",
+                "Google OAuth authentication for secure user access"
+            ],
+            "technologies": [
+                "Next.js",
+                "Hono",
+                "Bun",
+                "Prisma",
+                "PostgreSQL",
+                "Razorpay",
+                "Resend",
+                "Telegram Bot API",
+                "RAG",
+                "Google OAuth"
+            ],
+            "image": "/images/projects/automation.png",
+            "github": "",
+            "live": "https://automation.amberbisht.me/",
+            "tag": "Personal Project"
         }
     ],
     "experience": [
@@ -461,6 +517,7 @@
         "twitter": "https://x.com/amber_bisht",
         "instagram": "https://www.instagram.com/amber_bisht/",
         "youtube": "https://www.youtube.com/@amber_bisht",
+        "huggingface": "https://huggingface.co/amber-bisht",
         "location": "India"
     },
     "certifications": [

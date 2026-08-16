@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode, useState, useEffect } from 'react';
 import { FaHome, FaFolder, FaEnvelope, FaLayerGroup, FaBriefcase, FaLinkedin, FaGithub, FaTwitter, FaMusic, FaPause, FaInstagram, FaYoutube } from 'react-icons/fa';
-import { SiGmail } from 'react-icons/si';
+import { SiGmail, SiHuggingface } from 'react-icons/si';
 import data from '../data/data.json';
 import { Navbar, NavBody, NavItems, NavbarLogo, NavbarButton, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './Navbar';
 
@@ -112,7 +112,8 @@ const Layout = ({ children, title = data.seo.title }: LayoutProps) => {
                                 data.contact.github,
                                 data.contact.twitter,
                                 data.contact.instagram,
-                                data.contact.youtube
+                                data.contact.youtube,
+                                (data.contact as any).huggingface
                             ].filter(Boolean)
                         })
                     }}
@@ -202,6 +203,11 @@ const Layout = ({ children, title = data.seo.title }: LayoutProps) => {
                             {data.contact.youtube && (
                                 <a href={data.contact.youtube} target="_blank" rel="noreferrer" aria-label="YouTube Channel" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
                                     <FaYoutube size={20} aria-hidden="true" />
+                                </a>
+                            )}
+                            {(data.contact as any).huggingface && (
+                                <a href={(data.contact as any).huggingface} target="_blank" rel="noreferrer" aria-label="HuggingFace Profile" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
+                                    <SiHuggingface size={20} aria-hidden="true" />
                                 </a>
                             )}
                             <a href={data.contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Profile" className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110">
