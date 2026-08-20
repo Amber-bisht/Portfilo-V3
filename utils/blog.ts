@@ -6,6 +6,7 @@ export interface BlogPost {
   category?: string;
   image?: string;
   content: string;
+  readTime?: string;
 }
 
 const staticPosts: BlogPost[] = [
@@ -15,17 +16,19 @@ const staticPosts: BlogPost[] = [
     date: '2026-06-21',
     category: 'Security',
     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop',
+    readTime: '9 min read',
     excerpt: 'An in-depth analysis of modern bot protection mechanisms (Cloudflare, reCAPTCHA, JA3/JA4), how automated bypasses operate, and why bot defense is fundamentally a game of economics rather than pure mathematics.',
     content: 'An in-depth security analysis of modern bot protection mechanisms, automated bypasses, and low-level web defense.'
   },
   {
-    slug: 'how-appx-works',
-    title: 'How AES-128 & LMS Works: How I Reverse-Engineered a 6-Layer Video Encryption System',
+    slug: 'how-i-secured-video-streaming-lms',
+    title: 'Building a Piracy-Resistant Video LMS: Architecture Behind AES-128 HLS Delivery',
     date: '2026-03-25',
-    category: 'Security',
+    category: 'Engineering',
     image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop',
-    excerpt: 'A deep dive into the 6-layer video encryption system used by ClassX and how to build a robust decryption pipeline.',
-    content: 'A deep dive into the 6-layer video encryption system used by ClassX, key derivation, and how to build a robust decryption pipeline.'
+    readTime: '5 min read',
+    excerpt: 'An architectural deep dive into designing a cost-effective, piracy-resistant video delivery pipeline using AES-128 HLS encryption, CloudFront signed URLs, and Web Worker decryption.',
+    content: 'An engineering deep dive into the architecture of a piracy-resistant video LMS using AES-128 HLS delivery, AWS Elemental MediaConvert, CloudFront signed URLs, and Web Worker decryption.'
   }
 ];
 

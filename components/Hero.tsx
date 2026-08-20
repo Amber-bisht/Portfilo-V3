@@ -97,26 +97,11 @@ const Hero = ({ data }: HeroProps) => {
                             </h1>
                         </div>
 
-                        <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-white/90 font-mono mb-6 md:mb-0">
-                            <div className="flex items-center gap-1.5 uppercase font-bold">
-                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                {data.about.location} 🇮🇳
-                            </div>
-                            <span className="text-white/60">|</span>
+                        <div className="flex items-center gap-2 text-xs sm:text-sm md:text-sm lg:text-base text-white/90 font-mono">
+                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse shrink-0" />
                             <div className="uppercase tracking-widest font-bold">{data.about.title}</div>
                         </div>
                     </div>
-
-                    {/* Feed Profile in AI */}
-                    <a
-                        href="/api/profile"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="relative md:absolute top-auto md:top-5 right-auto md:right-5 z-20 flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 text-white font-bold py-2.5 px-4 rounded-xl border border-dotted border-white transition-all duration-300 active:scale-95 uppercase text-[10px] tracking-widest shadow-lg w-full md:w-auto mt-4 md:mt-0 text-center"
-                        title="Opens full profile JSON — paste into ChatGPT / Claude for AI context"
-                    >
-                        Feed My Data in AI to Evaluate Me Faster
-                    </a>
                 </div>
 
                 {/* 3. Social Icons Card */}
@@ -159,13 +144,14 @@ const Hero = ({ data }: HeroProps) => {
                 </div>
 
                 {/* 5. Description Card */}
-                <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden group">
+                <div className="md:col-span-4 bg-neutral-900/50 border border-white/5 rounded-3xl p-6 md:p-8 backdrop-blur-sm relative overflow-hidden group">
 
-
-                    <div className="relative z-10">
-                        <h2 className="text-xl md:text-3xl lg:text-4xl font-mono leading-relaxed md:leading-snug uppercase transition-all duration-300 text-white tracking-tight">
-                            {data.about.description || "Scalable Systems Engineer focused on building production-grade, end-to-end platforms with emphasis on backend architecture, performance optimization, and infrastructure reliability."}
-                        </h2>
+                    <div className="relative z-10 space-y-3 text-sm md:text-base lg:text-lg font-mono leading-relaxed text-white">
+                        {(data.about.description || "").split('\n\n').map((paragraph: string, idx: number) => (
+                            <p key={idx} className="leading-relaxed">
+                                {paragraph}
+                            </p>
+                        ))}
                     </div>
                 </div>
 

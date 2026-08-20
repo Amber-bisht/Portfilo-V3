@@ -1,33 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
-import { motion } from 'framer-motion';
 import Head from 'next/head';
-import Image from 'next/image';
+import Link from 'next/link';
+import BlogAudioPlayer from '@/components/BlogAudioPlayer';
 import { 
-  ShieldCheck, 
-  Terminal, 
-  Cpu, 
-  Server, 
-  Lock, 
-  Zap, 
-  Globe, 
-  Code, 
-  ChevronDown, 
-  CheckCircle2, 
-  AlertTriangle,
-  Copy,
-  Check,
+  Play, 
+  Pause, 
+  RotateCcw, 
+  Volume2, 
+  Copy, 
+  Check, 
+  ChevronRight,
+  Shield,
   Layers,
-  ArrowRight,
-  Radio
+  Terminal,
+  AlertCircle
 } from 'lucide-react';
 
 interface CodeSnippetProps {
   code: string;
-  language: string;
+  language?: string;
 }
 
-const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language }) => {
+const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language = 'text' }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -37,509 +32,343 @@ const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language }) => {
   };
 
   return (
-    <div className="my-6 rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 shadow-2xl">
-      <div className="flex items-center justify-between px-4 py-3 bg-neutral-900 border-b border-white/10 font-mono text-xs">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-500/80" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <div className="w-3 h-3 rounded-full bg-green-500/80" />
-        </div>
-        <span className="text-gray-400 font-bold uppercase tracking-widest">{language}</span>
+    <div className="my-6 rounded-xl overflow-hidden bg-neutral-950 border border-white/10">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-900/90 border-b border-white/10 font-mono text-xs text-zinc-400">
+        <span className="uppercase tracking-wider text-[11px] font-semibold">{language}</span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors text-xs cursor-pointer"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white transition-colors text-xs cursor-pointer"
         >
           {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
           <span>{copied ? 'Copied' : 'Copy'}</span>
         </button>
       </div>
-      <pre className="p-5 text-xs md:text-sm font-mono text-gray-200 overflow-x-auto leading-relaxed">
+      <pre className="p-4 md:p-5 text-xs md:text-sm font-mono text-zinc-200 overflow-x-auto leading-relaxed">
         <code>{code}</code>
       </pre>
     </div>
   );
 };
 
-interface FAQItemProps {
-  question: string;
-  answer: string;
-}
-
-const FAQAccordion: React.FC<FAQItemProps> = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="border-b border-white/10 py-4">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-2 text-left font-bold text-white hover:text-makima-red transition-colors gap-4 cursor-pointer"
-      >
-        <span className="text-base font-cinzel">{question}</span>
-        <ChevronDown className={`w-5 h-5 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-makima-red' : 'text-gray-400'}`} />
-      </button>
-      {isOpen && (
-        <div className="py-3 text-gray-300 text-sm leading-relaxed">
-          {answer}
-        </div>
-      )}
-    </div>
-  );
-};
-
 export default function EconomicsOfBotWarsPage() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [activeSection, setActiveSection] = useState('intro');
+
+  const tocItems = [
+    { id: 'intro', title: 'Introduction' },
+    { id: 'edge-layers', title: 'Edge validation in layers' },
+    { id: 'tcp-fingerprinting', title: 'TCP/IP fingerprinting (p0f)' },
+    { id: 'tls-fingerprinting', title: 'TLS fingerprinting: JA3 to JA4' },
+    { id: 'http2-fingerprinting', title: 'HTTP/2 fingerprinting' },
+    { id: 'browser-interrogation', title: 'Runtime browser interrogation' },
+    { id: 'evasion-strategies', title: 'How the other side responds' },
+    { id: 'ip-reputation', title: 'Proxies & IP reputation' },
+    { id: 'defensive-architecture', title: 'Building defenses that hold up' }
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+      for (const item of tocItems) {
+        const element = document.getElementById(item.id);
+        if (element) {
+          const top = element.offsetTop;
+          const height = element.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(item.id);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <Layout title="The Economics of Bot Wars | Security Analysis | Amber Bisht">
+    <Layout title="The Economics of Bot Wars | Amber Bisht">
       <Head>
-        <title>The Economics of Bot Wars: CAPTCHAs, Fingerprinting & Bypass Mechanics</title>
-        <meta name="description" content="An in-depth security analysis of modern bot protection mechanisms (Cloudflare, reCAPTCHA, JA3/JA4), automated bypasses, and low-level web defense." />
+        <title>The Economics of Bot Wars: How CAPTCHAs, Fingerprinting, and Bypass Strategies Shape the Modern Web</title>
+        <meta 
+          name="description" 
+          content="An in-depth security engineering analysis of how modern bot defense layers operate (TCP, TLS JA4, HTTP/2, DOM telemetry) and why bot mitigation is fundamentally an economic problem." 
+        />
       </Head>
 
-      <article className="py-16 px-4 md:px-8 max-w-5xl mx-auto text-gray-200">
+      <div className="bg-black text-white min-h-screen">
         
-        {/* Header Hero */}
-        <header className="mb-12 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-makima-red/15 blur-[120px] rounded-full pointer-events-none" />
-
-          {/* Category & Metadata Pills */}
-          <div className="flex items-center gap-3 mb-4 flex-wrap">
-            <span className="px-3 py-1 bg-makima-red/10 border border-makima-red/30 text-makima-red rounded-full text-xs font-mono font-bold tracking-wider uppercase">
-              Security Deep Dive
-            </span>
-            <span className="text-white/20">•</span>
-            <span className="text-gray-400 font-mono text-xs">Published 2026-06-21</span>
-            <span className="text-white/20">•</span>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-white/5 text-gray-300 border border-white/10 rounded-full text-xs font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-makima-red animate-pulse" />
-              <span>15 Min Read</span>
-            </span>
+        {/* Top Header Hero */}
+        <div className="pt-20 pb-12 px-6 max-w-5xl mx-auto text-center">
+          
+          {/* Metadata row */}
+          <div className="flex items-center justify-center gap-3 text-xs md:text-sm font-sans text-zinc-400 mb-6">
+            <span>January 22, 2026</span>
+            <span className="text-zinc-600">·</span>
+            <span className="text-zinc-300 font-medium">Security Deep Dive</span>
+            <span className="text-zinc-600">·</span>
+            <span>9 min read</span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-cinzel font-bold text-white leading-tight mb-6">
-            The Economics of <span className="text-makima-red">Bot Wars</span>: How CAPTCHAs, Fingerprinting, and Bypass Strategies Shape the Modern Web
+          {/* Title */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.12] max-w-4xl mx-auto mb-6">
+            The Economics of Bot Wars: How CAPTCHAs, Fingerprinting, and Bypass Strategies Shape the Modern Web
           </h1>
 
-          <p className="text-lg text-gray-300 leading-relaxed font-light mb-8">
-            An in-depth analysis of modern bot protection mechanisms (Cloudflare, reCAPTCHA, JA3/JA4), how automated bypasses operate, and why bot defense is fundamentally a game of economics rather than pure mathematics.
+          {/* Byline */}
+          <p className="text-sm md:text-base text-zinc-400 font-sans mb-10">
+            By <span className="text-zinc-200 font-medium">Amber Bisht</span>, Full-Stack & Systems Engineer
           </p>
 
-          {/* Web Image Hero Banner */}
-          <div className="relative w-full h-[320px] md:h-[450px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl mb-12">
-            <Image
-              src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop"
-              alt="Cybersecurity Bot Wars Server Matrix"
-              fill
-              className="object-cover object-center transform hover:scale-105 transition-transform duration-700"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
-          </div>
-        </header>
+          {/* Minimalist Audio / Listen Bar with live audio playback */}
+          <BlogAudioPlayer 
+            audioSrc={['/bot1.mp3', '/bot2.mp3']} 
+            trackLabels={['Part 1', 'Part 2']}
+            initialDuration={525} 
+          />
+        </div>
 
-        {/* Section 1: Introduction */}
-        <section className="mb-14">
-          <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white mb-4 border-l-4 border-makima-red pl-4">
-            Introduction
-          </h2>
-          <p className="text-gray-300 leading-relaxed mb-4 text-base">
-            If you look at the raw request logs of any major web platform today, you'll see a quiet, ongoing war. According to recent telemetry from bad-bot research, automated bot traffic consistently accounts for <strong className="text-white">over 50% of all internet activity</strong>. The web is now a machine-majority landscape.
-          </p>
-          <p className="text-gray-300 leading-relaxed mb-6">
-            To defend their infrastructure, prevent ad revenue fraud, stop credential stuffing, and protect free API tiers, platforms implement complex Web Application Firewall (WAF) services and anti-bot systems like <strong className="text-white">Cloudflare Turnstile, Akamai Bot Manager, hCaptcha, and Datadome</strong>.
-          </p>
+        {/* Divider */}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="border-b border-zinc-800/80 mb-12" />
+        </div>
 
-          <p className="text-gray-300 leading-relaxed mb-8">
-            In this deep dive, we'll analyze the low-level mechanics of these defense layers, explore how modern automation bypasses them, and explain why bot defense is fundamentally a game of economics rather than pure cryptography.
-          </p>
-
-          {/* Merged Network Stack: Edge Validation Lifecycle (Unboxed & Monochrome) */}
-          <div className="py-6 border-t border-b border-white/10 my-8">
-            <h3 className="text-base font-bold text-white mb-2 font-mono flex items-center gap-2">
-              <Layers className="w-5 h-5 text-makima-red" />
-              <span>The Network Stack: Edge Validation Lifecycle</span>
-            </h3>
-            <p className="text-xs text-gray-400 mb-6 leading-relaxed">
-              When an incoming connection hits a WAF-protected edge server, validation executes sequentially from Layer 4 up to Layer 7 before the application backend ever sees the request.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-xs font-mono">
-              <div>
-                <span className="text-makima-red font-bold block mb-1 uppercase tracking-wider">01 / L4 Transport</span>
-                <h4 className="text-white font-bold mb-1">TCP SYN Check (p0f)</h4>
-                <p className="text-gray-400 text-[11px] leading-relaxed">TTL & Window Size verification at the OS kernel level.</p>
+        {/* Main Content Area with Sticky Left Sidebar */}
+        <div className="max-w-7xl mx-auto px-6 pb-28 flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16 relative">
+          
+          {/* Left Sticky Sidebar (Table of Contents) */}
+          <aside className="lg:w-64 shrink-0 hidden lg:block self-stretch relative">
+            <div className="sticky top-28 space-y-4">
+              <div className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 mb-3">
+                Contents
               </div>
-
-              <div>
-                <span className="text-makima-red font-bold block mb-1 uppercase tracking-wider">02 / L5 Session</span>
-                <h4 className="text-white font-bold mb-1">TLS Client Hello</h4>
-                <p className="text-gray-400 text-[11px] leading-relaxed">JA4 fingerprint extraction & GREASE cipher validation.</p>
-              </div>
-
-              <div>
-                <span className="text-makima-red font-bold block mb-1 uppercase tracking-wider">03 / L7 Application</span>
-                <h4 className="text-white font-bold mb-1">HTTP/2 Settings</h4>
-                <p className="text-gray-400 text-[11px] leading-relaxed">H2 stream priority tree & initial window update verification.</p>
-              </div>
-
-              <div>
-                <span className="text-makima-red font-bold block mb-1 uppercase tracking-wider">04 / Runtime V8</span>
-                <h4 className="text-white font-bold mb-1">JS DOM Telemetry</h4>
-                <p className="text-gray-400 text-[11px] leading-relaxed">Executes JS runtime challenges inspecting prototypes & WebGL hardware.</p>
-              </div>
+              <nav className="space-y-2.5 text-xs font-sans">
+                {tocItems.map((item) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    className={`block transition-colors leading-relaxed ${
+                      activeSection === item.id 
+                        ? 'text-white font-semibold' 
+                        : 'text-zinc-400 hover:text-zinc-200'
+                    }`}
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </nav>
             </div>
-          </div>
-        </section>
+          </aside>
 
-        {/* Section 1. TCP/IP Fingerprinting (L4 p0f) */}
-        <section className="mb-14">
-          <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white mb-4 border-l-4 border-makima-red pl-4">
-            1. TCP/IP Fingerprinting (L4 p0f)
-          </h2>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            Before a single byte of TLS payload is decrypted, the WAF analyzes TCP connection parameters. This is called <strong className="text-white">Passive OS Fingerprinting (p0f)</strong>.
-          </p>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            During the initial three-way handshake, the client sends a <code className="text-makima-gold font-mono">SYN</code> packet. The WAF inspects:
-          </p>
-
-          <ul className="space-y-3 mb-6 pl-4 text-sm text-gray-300">
-            <li className="flex items-start gap-2">
-              <span className="text-makima-red font-mono">•</span>
-              <span><strong className="text-white">Initial Time to Live (TTL):</strong> Operating systems initialize packets with specific TTL values (Linux: <code className="text-makima-gold font-mono">64</code>, Windows: <code className="text-makima-gold font-mono">128</code>, macOS: <code className="text-makima-gold font-mono">64</code>).</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-makima-red font-mono">•</span>
-              <span><strong className="text-white">Maximum Segment Size (MSS):</strong> Dictated by network hardware and OS routing defaults.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-makima-red font-mono">•</span>
-              <span><strong className="text-white">Window Size ($W$):</strong> Initial TCP buffer capacity.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-makima-red font-mono">•</span>
-              <span><strong className="text-white">TCP Options & Layout Order:</strong> Sequence of parameters like MSS, Window Scale (WS), SACK-Permitted, NOP, and Timestamps (TS).</span>
-            </li>
-          </ul>
-
-          <div className="py-4 border-l-2 border-makima-red pl-4 my-4">
-            <h4 className="text-xs font-bold text-white font-mono uppercase tracking-wider mb-1 flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-makima-red" />
-              <span>The Threat Signature</span>
-            </h4>
-            <p className="text-xs text-gray-400 leading-relaxed">
-              If a scraper modifies headers to claim Chrome on Windows 11, but the underlying TCP <code className="text-white font-mono">SYN</code> packet arrives with a TTL of <code className="text-white font-mono">64</code> and Linux TCP options, the WAF drops the connection as a forged client at the kernel layer.
-            </p>
-          </div>
-        </section>
-
-        {/* Section 2. TLS Fingerprinting (L5 JA3 / JA4) */}
-        <section className="mb-14">
-          <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white mb-4 border-l-4 border-makima-red pl-4">
-            2. TLS Fingerprinting (L5 JA3 / JA4)
-          </h2>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            Once the TCP socket is established, the client initiates the TLS handshake by sending a <code className="text-makima-gold font-mono">Client Hello</code> packet containing the browser's cryptographic options.
-          </p>
-
-          <h3 className="text-xl font-bold text-white mt-6 mb-3">The JA4 Spec Breakdown</h3>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            JA4 introduces human-readable, deterministic groupings structured as <strong className="font-mono text-white">JA4a_JA4b_JA4c</strong>:
-          </p>
-
-          <div className="py-4 border-t border-b border-white/10 text-center font-mono text-xs md:text-sm text-gray-200 my-6">
-            <span className="text-white font-bold">JA4 Formula</span> = <span className="text-makima-red font-bold">JA4a (Protocol/Settings)</span> _ <span className="text-gray-300">JA4b (Ciphers Hash)</span> _ <span className="text-gray-400">JA4c (Extensions Hash)</span>
-            <div className="mt-2 text-xs text-gray-400">
-              Example JA4 Hash: <code className="text-makima-gold font-bold">t13d1516h2_8daaf6152771_0b6e1b6f0012</code>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs font-mono my-6 py-4 border-b border-white/10">
-            <div>
-              <span className="text-makima-red font-bold block mb-1 uppercase tracking-wider">01. JA4a (Transport & ALPN)</span>
-              <p className="text-gray-400 text-[11px] leading-relaxed">
-                <code className="text-white font-bold">t</code> (TCP) | <code className="text-white font-bold">13</code> (TLS 1.3) | <code className="text-white font-bold">d</code> (SNI present) | <code className="text-white font-bold">15</code> (Cipher count) | <code className="text-white font-bold">16</code> (Extension count) | <code className="text-white font-bold">h2</code> (ALPN HTTP/2).
+          {/* Right Main Article */}
+          <article className="max-w-3xl flex-1 text-zinc-300 text-base md:text-[17px] leading-[1.8] font-normal">
+            
+            {/* Section: Intro */}
+            <section id="intro" className="mb-14 scroll-mt-24">
+              <p className="mb-6">
+                If you look at the raw request logs of any major web platform today, you&apos;ll see a quiet, ongoing war. Automated bot traffic now accounts for more than half of all internet activity, according to recent bad-bot telemetry. The web has quietly become a machine-majority landscape, and every major platform has had to build infrastructure to cope with it.
               </p>
-            </div>
-
-            <div>
-              <span className="text-makima-red font-bold block mb-1 uppercase tracking-wider">02. JA4b (Ciphers)</span>
-              <p className="text-gray-400 text-[11px] leading-relaxed">
-                A SHA-256 hash of the list of cipher suites supported by the client, sorted alphabetically to eliminate false positives caused by cipher reordering.
+              <p>
+                To protect infrastructure, prevent ad revenue fraud, stop credential stuffing, and keep free API tiers from being drained, platforms deploy Web Application Firewalls and anti-bot systems — Cloudflare Turnstile, Akamai Bot Manager, hCaptcha, Datadome, and others. In this piece, we look at how these defense layers work mechanically, how modern automation gets around them, and why bot defense ultimately comes down to economics rather than pure cryptography.
               </p>
-            </div>
+            </section>
 
-            <div>
-              <span className="text-makima-red font-bold block mb-1 uppercase tracking-wider">03. JA4c (Extensions)</span>
-              <p className="text-gray-400 text-[11px] leading-relaxed">
-                A SHA-256 hash of TLS extensions and signature algorithms, sorted alphabetically.
+            {/* Section: Edge validation happens in layers */}
+            <section id="edge-layers" className="mb-14 scroll-mt-24">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-6">
+                Edge validation happens in layers
+              </h2>
+              <p className="mb-6">
+                When a connection hits a WAF-protected edge server, validation runs sequentially from the transport layer up through the application layer, long before your backend ever sees the request:
               </p>
-            </div>
-          </div>
 
-          <h3 className="text-xl font-bold text-white mt-8 mb-3">Cryptographic GREASE Detection</h3>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            Chromium-based browsers use <strong className="text-white">GREASE (Generate Random Extensions And Sustain Extensibility)</strong> to inject dummy values (such as <code className="text-makima-gold font-mono">0x0a0a</code> or <code className="text-makima-gold font-mono">0x1a1a</code>) into ciphers and extensions. Standard HTTP libraries (<code className="text-gray-400 font-mono">axios</code> or <code className="text-gray-400 font-mono">requests</code>) omit GREASE values. When a request presents a Chrome User-Agent but lacks GREASE, it is rejected instantly.
-          </p>
-        </section>
+              <ul className="space-y-3 mb-6 pl-5 list-disc text-zinc-300">
+                <li>
+                  <strong className="text-white">L4 Transport</strong> — a TCP SYN check (p0f-style) verifying TTL and window size at the kernel level.
+                </li>
+                <li>
+                  <strong className="text-white">L5 Session</strong> — the TLS Client Hello, where a JA4 fingerprint is extracted and GREASE ciphers are validated.
+                </li>
+                <li>
+                  <strong className="text-white">L7 Application</strong> — HTTP/2 SETTINGS frames, checked for stream priority tree structure and initial window updates.
+                </li>
+                <li>
+                  <strong className="text-white">Runtime (V8)</strong> — JavaScript DOM telemetry that inspects browser prototypes and WebGL hardware reporting.
+                </li>
+              </ul>
 
-        {/* Section 3. HTTP/2 Fingerprinting */}
-        <section className="mb-14">
-          <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white mb-4 border-l-4 border-makima-red pl-4">
-            3. HTTP/2 Fingerprinting (L7 Protocol Heuristics)
-          </h2>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            If the client negotiates HTTP/2 via ALPN, it sends an HTTP/2 connection preface followed by a <code className="text-makima-gold font-mono">SETTINGS</code> frame.
-          </p>
+              <p>
+                Each of these layers catches a different class of forged client. Let&apos;s go through them one at a time.
+              </p>
+            </section>
 
-          <CodeSnippet
-            language="text"
-            code={`Chromium HTTP/2 SETTINGS Frame Profile:
-[SETTINGS_HEADER_TABLE_SIZE: 65536]
+            {/* Section: TCP/IP fingerprinting */}
+            <section id="tcp-fingerprinting" className="mb-14 scroll-mt-24">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-6">
+                TCP/IP fingerprinting happens before a single byte of TLS is read
+              </h2>
+              <p className="mb-6">
+                Before any encrypted payload is touched, a WAF can already profile a connection using Passive OS Fingerprinting, or p0f. During the three-way TCP handshake, the client&apos;s SYN packet reveals its initial TTL (Linux typically ships 64, Windows 128), its maximum segment size, its initial window size, and the order in which it lists TCP options like MSS, window scale, SACK-permitted, NOP, and timestamps.
+              </p>
+              <p>
+                This is why header spoofing alone doesn&apos;t work. If a scraper sets its headers to claim it&apos;s Chrome on Windows 11, but its SYN packet carries a TTL of 64 and Linux-ordered TCP options, the WAF can drop the connection at the kernel layer before the forged headers are ever inspected.
+              </p>
+            </section>
+
+            {/* Section: TLS fingerprinting */}
+            <section id="tls-fingerprinting" className="mb-14 scroll-mt-24">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-6">
+                TLS fingerprinting: JA3 gave way to JA4
+              </h2>
+              <p className="mb-6">
+                Once the TCP socket is up, the client sends a TLS Client Hello containing its cryptographic preferences — and this, too, is a fingerprint. JA4 succeeded the older JA3 scheme with a more structured, human-readable format built as three parts: JA4a, JA4b, and JA4c.
+              </p>
+              <p className="mb-6">
+                JA4a encodes the transport and negotiated protocol — for example, TCP, TLS 1.3, SNI presence, cipher count, extension count, and ALPN (HTTP/2). JA4b is a SHA-256 hash of the client&apos;s supported cipher suites, sorted alphabetically so that reordering doesn&apos;t create false mismatches. JA4c is a similar hash, but of the TLS extensions and signature algorithms.
+              </p>
+              <p>
+                One detail trips up a lot of scraping tools: GREASE. Chromium-based browsers deliberately inject meaningless placeholder values into their cipher and extension lists — a mechanism designed to keep the protocol extensible without breaking on unexpected values. Standard HTTP client libraries like axios or Python&apos;s requests don&apos;t do this. So when a request shows up with a Chrome user-agent but no GREASE values in its TLS handshake, that mismatch alone is often enough to flag it instantly.
+              </p>
+            </section>
+
+            {/* Section: HTTP/2 fingerprinting */}
+            <section id="http2-fingerprinting" className="mb-14 scroll-mt-24">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-6">
+                HTTP/2 has its own fingerprint too
+              </h2>
+              <p className="mb-6">
+                If the connection negotiates HTTP/2, the client sends a SETTINGS frame right after the connection preface — and the exact values and ordering in that frame are characteristic of the client software that generated them. Real Chromium sends a specific, consistent profile (header table size, push settings, max concurrent streams, initial window size, and so on), produced by its underlying nghttp2 engine.
+              </p>
+
+              <CodeSnippet
+                language="text"
+                code={`[SETTINGS_HEADER_TABLE_SIZE: 65536]
 [SETTINGS_ENABLE_PUSH: 0]
 [SETTINGS_MAX_CONCURRENT_STREAMS: 1000]
 [SETTINGS_INITIAL_WINDOW_SIZE: 6291456]
 [SETTINGS_MAX_FRAME_SIZE: 16384]
 [SETTINGS_MAX_HEADER_LIST_SIZE: 262144]`}
-          />
+              />
 
-          <p className="text-gray-300 leading-relaxed mb-4">
-            Modern anti-bot engines analyze the parameters of this frame:
-          </p>
-          <ul className="space-y-2 mb-6 pl-4 text-sm text-gray-300">
-            <li className="flex items-start gap-2">
-              <span className="text-makima-red font-mono">•</span>
-              <span><strong className="text-white">H2 Settings Order & Values:</strong> Analyzes exact parameter order from Chromium's <code className="text-makima-gold font-mono">nghttp2</code> engine.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-makima-red font-mono">•</span>
-              <span><strong className="text-white">H2 Stream Prioritization Trees (RFC 7540):</strong> Verifies custom dependency trees used to prioritize CSS/JS assets.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-makima-red font-mono">•</span>
-              <span><strong className="text-white">WINDOW_UPDATE Frames:</strong> Tracks initial TCP/HTTP flow window capacity adjustments.</span>
-            </li>
-          </ul>
-        </section>
+              <p className="mb-6">
+                Anti-bot systems check the order and values of these settings, the structure of the HTTP/2 stream priority tree used to sequence asset loading, and how WINDOW_UPDATE frames adjust flow-control capacity over time. Automation frameworks that build HTTP/2 requests from scratch, rather than through a real browser engine, tend to produce settings frames that don&apos;t match any known browser — another tell.
+              </p>
+              <p>
+                As one security researcher put it: bot defense isn&apos;t a mathematical cryptography puzzle. It&apos;s a game of computational and financial economics.
+              </p>
+            </section>
 
-        {/* Web Image Interstitial */}
-        <div className="relative w-full h-[280px] rounded-3xl overflow-hidden border border-white/10 mb-14">
-          <Image
-            src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop"
-            alt="Matrix Code Data Security"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-neutral-950/70 flex items-center justify-center p-6 text-center">
-            <blockquote className="text-lg md:text-xl font-cinzel font-bold text-white max-w-2xl">
-              "Bot defense is not a mathematical cryptography puzzle; it is a game of computational and financial economics."
-            </blockquote>
-          </div>
+            {/* Section: Runtime browser interrogation */}
+            <section id="browser-interrogation" className="mb-14 scroll-mt-24">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-6">
+                When the network layer passes, the browser gets interrogated
+              </h2>
+              <p className="mb-6">
+                If a connection clears the network-level checks, many WAFs still serve a client-side JavaScript challenge that runs inside V8 and probes the browser environment directly.
+              </p>
+              <p className="mb-6">
+                This looks for automation artifacts left behind by tools like Chrome DevTools Protocol drivers — properties such as <code className="text-zinc-200 bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-sm">navigator.webdriver</code>, CDP-injected globals, or DOM properties prefixed with <code className="text-zinc-200 bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-sm">__webdriver</code>, <code className="text-zinc-200 bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-sm">__selenium</code>, or <code className="text-zinc-200 bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-sm">$cdc_</code>. It also checks whether native methods have been tampered with: if a script has patched something like <code className="text-zinc-200 bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-sm">document.createElement</code> using <code className="text-zinc-200 bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-sm">Object.defineProperty</code> or a <code className="text-zinc-200 bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-sm">Proxy</code>, calling <code className="text-zinc-200 bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-sm">Function.prototype.toString</code> on it won&apos;t return the expected <code className="text-zinc-200 bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-sm">[native code]</code> signature. Some scripts even parse the JavaScript error stack trace looking for file paths that reveal Puppeteer or Playwright.
+              </p>
+              <p>
+                Hardware-level checks round this out. Canvas fingerprinting draws hidden shapes and text and hashes the resulting pixels, which vary subtly by GPU and anti-aliasing driver. WebGL renderer queries can reveal software renderers like SwiftShader or LLVMpipe, which are common inside virtual machines. And font enumeration measures the pixel bounds of fallback fonts rendered in a hidden iframe, which differs across real operating systems.
+              </p>
+            </section>
+
+            {/* Section: How the other side responds */}
+            <section id="evasion-strategies" className="mb-14 scroll-mt-24">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-6">
+                How the other side responds
+              </h2>
+              <p className="mb-6">
+                Operators building large-scale automation respond to each of these layers directly. Low-level network spoofing tools — compiled in Go or Rust, such as tls-client or curl-impersonate — reproduce a real browser&apos;s TLS cipher list, extension ordering, GREASE distribution, and HTTP/2 settings frame without the overhead of actually rendering a page. Browser-patching tools like Rebrowser modify Chromium at the V8 debugger level before any page script runs, which removes the prototype-tampering traces and CDP indicators that DOM telemetry checks look for.
+              </p>
+            </section>
+
+            {/* Section: Proxies & ASN reputation */}
+            <section id="ip-reputation" className="mb-14 scroll-mt-24">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-6">
+                Proxies & IP reputation hierarchy
+              </h2>
+              <p className="mb-6">
+                Then there&apos;s IP reputation, which is arguably the more decisive factor in practice. WAFs score incoming requests partly by the autonomous system network the IP belongs to:
+              </p>
+
+              {/* Minimalist OpenAI-Style Table */}
+              <div className="overflow-x-auto my-8">
+                <table className="w-full text-left text-sm font-sans border-collapse">
+                  <thead>
+                    <tr className="border-b border-zinc-800 text-zinc-400 text-xs font-medium uppercase tracking-wider">
+                      <th className="py-3 px-4">Proxy type</th>
+                      <th className="py-3 px-4">Cost</th>
+                      <th className="py-3 px-4">ASN type</th>
+                      <th className="py-3 px-4">Block risk</th>
+                      <th className="py-3 px-4">Typical use</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-900 text-zinc-300 text-[13px]">
+                    <tr>
+                      <td className="py-3.5 px-4 font-medium text-white">Datacenter</td>
+                      <td className="py-3.5 px-4 font-mono">$0.10–$0.50/GB</td>
+                      <td className="py-3.5 px-4">Hosting providers (AWS, DigitalOcean, OVH)</td>
+                      <td className="py-3.5 px-4 text-red-400 font-medium">Very high</td>
+                      <td className="py-3.5 px-4 text-zinc-400">High-speed API queries on lightly protected targets</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3.5 px-4 font-medium text-white">Residential</td>
+                      <td className="py-3.5 px-4 font-mono">$2–$12/GB</td>
+                      <td className="py-3.5 px-4">Consumer ISPs (Comcast, BT)</td>
+                      <td className="py-3.5 px-4 text-yellow-400 font-medium">Medium</td>
+                      <td className="py-3.5 px-4 text-zinc-400">Standard web scraping and search</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3.5 px-4 font-medium text-white">Mobile LTE</td>
+                      <td className="py-3.5 px-4 font-mono">$5–$20/GB</td>
+                      <td className="py-3.5 px-4">Cellular carriers (AT&T, Verizon)</td>
+                      <td className="py-3.5 px-4 text-emerald-400 font-medium">Very low</td>
+                      <td className="py-3.5 px-4 text-zinc-400">Bypassing strict logins and CGNAT-protected endpoints</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>
+                Mobile proxies are the hardest to block for a structural reason: carrier-grade NAT means a single public IPv4 address is shared by thousands of real devices at once. Blocking a mobile IP risks blocking a huge number of legitimate users along with it, so WAFs are systematically more lenient toward cellular ASNs.
+              </p>
+            </section>
+
+            {/* Section: Building defenses that hold up */}
+            <section id="defensive-architecture" className="mb-14 scroll-mt-24">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-12 mb-6">
+                Building defenses that hold up
+              </h2>
+              <p className="mb-6">
+                None of this means defenders are stuck. A few architectural choices meaningfully raise the cost of automation:
+              </p>
+
+              <ul className="space-y-4 mb-8 pl-5 list-disc text-zinc-300">
+                <li>
+                  <strong className="text-white">Push validation to the edge.</strong> Serving JS challenges and validating TLS signatures inside edge workers (Cloudflare Workers, AWS CloudFront Functions) keeps this load off your database and application tier entirely.
+                </li>
+                <li>
+                  <strong className="text-white">Cross-check identity claims.</strong> Verify that a request&apos;s TLS fingerprint actually matches the user-agent it claims — a &quot;Chrome&quot; request arriving with Python&apos;s TLS cipher list should be dropped at the edge, not deeper in the stack.
+                </li>
+                <li>
+                  <strong className="text-white">Plant honeypots in the DOM.</strong> Hidden fields that real users never interact with, but that naive HTML-parsing scrapers will happily fill in or click, are a cheap and effective tripwire.
+                </li>
+                <li>
+                  <strong className="text-white">Use edge-validated session cookies.</strong> Encrypted state flags checked continuously through a session make it expensive for automation to simply replay a single successful handshake indefinitely.
+                </li>
+              </ul>
+
+              <p className="border-t border-zinc-800 pt-8 text-zinc-300">
+                The throughline across all of this is that no single layer is decisive on its own. TCP fingerprinting, TLS fingerprinting, HTTP/2 fingerprinting, and JS-level telemetry each catch a different class of mismatch, and serious anti-bot systems layer them together. Automation, in turn, has to get every layer right simultaneously — which is precisely why this remains a game of raising the other side&apos;s cost, not a puzzle with a final, permanent solution.
+              </p>
+            </section>
+
+          </article>
         </div>
 
-        {/* Section 4. JS Challenge: DOM Telemetry & V8 Sandboxing */}
-        <section className="mb-14">
-          <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white mb-4 border-l-4 border-makima-red pl-4">
-            4. JS Challenge: DOM Telemetry & V8 Sandboxing
-          </h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
-            If the network layer looks legitimate, the WAF serves a client-side JavaScript challenge that executes inside V8 to gather deep environmental telemetry.
-          </p>
-
-          <h3 className="text-lg font-bold text-white mb-3">Advanced DOM Detection Vectors</h3>
-
-          <div className="space-y-6">
-            <div>
-              <h4 className="text-sm font-bold text-makima-red font-mono mb-2">1. CDP & WebDriver Injections</h4>
-              <p className="text-xs text-gray-300 leading-relaxed mb-2">
-                Headless browsers controlled via Chrome DevTools Protocol (CDP) inject variables into the page runtime:
-              </p>
-              <ul className="list-disc pl-5 text-xs text-gray-400 space-y-1 font-mono">
-                <li><code className="text-white">window.navigator.webdriver</code> (must be false or undefined).</li>
-                <li>CDP functions like <code className="text-white">window.cdc_adoQy2ioDncZgoDYjhxTcjfq_Array</code>.</li>
-                <li>Properties on document/window starting with <code className="text-white">__webdriver</code>, <code className="text-white">__selenium</code>, or <code className="text-white">$cdc_</code>.</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-makima-red font-mono mb-2">2. Native Method Prototype Verification</h4>
-              <p className="text-xs text-gray-300 leading-relaxed mb-3">
-                If automation scripts spoof properties using <code className="text-makima-gold font-mono">Object.defineProperty</code> or <code className="text-makima-gold font-mono">Proxy</code>, anti-bot scripts inspect prototype chains:
-              </p>
-
-              <CodeSnippet
-                language="javascript"
-                code={`// 1. Receiver Validation
-Navigator.prototype.__lookupGetter__('languages').call(navigator);
-
-// 2. Function Stringification (toString)
-if (Function.prototype.toString.call(document.createElement) !== "function createElement() { [native code] }") {
-  // Native code was intercepted!
-}
-
-// 3. V8 Call Stack Profiling
-// Parses error.stack string for Puppeteer or Playwright file references`}
-              />
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-makima-red font-mono mb-2">3. Hardware Rendering & VM Checks</h4>
-              <ul className="space-y-2 text-xs text-gray-300 pl-4">
-                <li><strong className="text-white">• Canvas Fingerprinting:</strong> Draws hidden text/shapes; PNG hash varies per GPU anti-aliasing driver.</li>
-                <li><strong className="text-white">• WebGL Renderer Inspection:</strong> Queries <code className="text-makima-gold font-mono">WEBGL_debug_renderer_info</code>. Words like <code className="text-white font-mono">SwiftShader</code>, <code className="text-white font-mono">LLVMpipe</code>, or <code className="text-white font-mono">VirtualBox</code> betray virtual machines.</li>
-                <li><strong className="text-white">• Font Enumeration:</strong> Measures pixel bounds across fallback fonts inside a hidden <code className="text-makima-gold font-mono">&lt;iframe&gt;</code>.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Section: The Evasion Stack */}
-        <section className="mb-14">
-          <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white mb-4 border-l-4 border-makima-red pl-4">
-            The Evasion Stack: Bypassing Advanced Heuristics
-          </h2>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            To bypass deep inspection layers, operators deploy low-level evasion frameworks:
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 py-4 border-t border-b border-white/10">
-            <div>
-              <h4 className="text-sm font-bold text-white font-mono mb-2">Low-Level Network Spoofing</h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                High-throughput crawlers compile custom Go/Rust networking binaries (<code className="text-makima-gold font-mono">tls-client</code> or <code className="text-makima-gold font-mono">curl-impersonate</code>) to spoof TLS ciphers, extension layouts, GREASE distribution profiles, and HTTP/2 settings frames without rendering overhead.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-white font-mono mb-2">V8 Engine Patching (e.g., Rebrowser)</h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                Tools like Rebrowser patch Chromium at the V8 debugger level before page scripts load, eliminating prototype trace leaks and blocking CDP automated script indicators.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Section: Proxies & CGNAT */}
-        <section className="mb-14">
-          <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white mb-4 border-l-4 border-makima-red pl-4">
-            Proxies: The IP Reputation Hierarchy
-          </h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
-            The core of any automation campaign is IP routing. Anti-bot firewalls score requests based on their autonomous system network (ASN) classification.
-          </p>
-
-          {/* Full Proxy Table from MD */}
-          <div className="overflow-x-auto rounded-2xl border border-white/10 mb-6">
-            <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-neutral-900 text-gray-300 border-b border-white/10">
-                <tr>
-                  <th className="p-4">Proxy Type</th>
-                  <th className="p-4">Cost per GB</th>
-                  <th className="p-4">Target ASN Type</th>
-                  <th className="p-4">Block Risk</th>
-                  <th className="p-4">Best Use Case</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5 bg-black/40 text-gray-300">
-                <tr>
-                  <td className="p-4 font-bold text-white">Datacenter</td>
-                  <td className="p-4 text-gray-300">$0.10 - $0.50</td>
-                  <td className="p-4">Hostings (AWS, DigitalOcean, OVH)</td>
-                  <td className="p-4 text-makima-red font-bold">Very High</td>
-                  <td className="p-4">High-speed API queries on basic platforms</td>
-                </tr>
-                <tr>
-                  <td className="p-4 font-bold text-white">Residential</td>
-                  <td className="p-4 text-gray-300">$2.00 - $12.00</td>
-                  <td className="p-4">Consumer ISPs (Comcast, BT)</td>
-                  <td className="p-4 text-gray-300 font-bold">Medium</td>
-                  <td className="p-4">Standard web scraping & search engines</td>
-                </tr>
-                <tr>
-                  <td className="p-4 font-bold text-white">Mobile LTE</td>
-                  <td className="p-4 text-gray-300">$5.00 - $20.00</td>
-                  <td className="p-4">Cellular Carriers (AT&T, Verizon)</td>
-                  <td className="p-4 text-white font-bold">Very Low</td>
-                  <td className="p-4">Bypassing strict logins / CGNAT protection</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3 className="text-xl font-bold text-white mt-6 mb-3">The Power of CGNAT Mobile IPs</h3>
-          <p className="text-gray-300 leading-relaxed">
-            Mobile LTE proxies rely on <strong className="text-white">Carrier-Grade NAT (CGNAT)</strong>, which assigns a single public IPv4 address to thousands of devices simultaneously. If a WAF blocks a mobile IP, it risks blocking thousands of real human clients. Consequently, WAF engines assign exceptionally low risk scores to cellular ASNs.
-          </p>
-        </section>
-
-        {/* Section: Defensive Strategy (Merged Unboxed Grid) */}
-        <section className="mb-14">
-          <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white mb-6 border-l-4 border-makima-red pl-4">
-            Defensive Strategy: Building Resilient Architectures
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 border-t border-b border-white/10">
-            <div>
-              <h4 className="font-bold text-white text-sm font-mono mb-1 flex items-center gap-2">
-                <span className="text-makima-red">01.</span> Edge Validation Workers
-              </h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                Serve JS challenges and validate TLS signatures inside Edge Workers (Cloudflare Workers / AWS CloudFront Functions) to preserve database and application capacity.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white text-sm font-mono mb-1 flex items-center gap-2">
-                <span className="text-makima-red">02.</span> JA3/JA4 Edge Verification
-              </h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                Validate that the user's TLS profile matches the User-Agent claimed. Drop requests at the edge if Chrome User-Agent presents Python TLS ciphers.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white text-sm font-mono mb-1 flex items-center gap-2">
-                <span className="text-makima-red">03.</span> DOM Honeypot Anchors
-              </h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                Inject hidden HTML fields (<code className="text-makima-gold font-mono">display: none</code>). Real users never click hidden elements; crawlers parsing raw HTML get blacklisted immediately.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white text-sm font-mono mb-1 flex items-center gap-2">
-                <span className="text-makima-red">04.</span> Edge-Validated Session Cookies
-              </h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                Maintain state flags using encrypted, edge-validated cookies (<code className="text-makima-gold font-mono">_abck</code>) verified regularly during browsing sessions.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Section: Frequently Asked Questions */}
-        <section className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white mb-6 border-l-4 border-makima-red pl-4">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-2">
-            <FAQAccordion
-              question="How does JA4 TLS fingerprinting differ from legacy JA3?"
-              answer="JA3 compiled cipher suites and extensions in the exact order they were received into a single comma-delimited string and hashed the result. This made it fragile and easy to bypass by reordering extensions. JA4 resolves this by sorting ciphers and extensions alphabetically before hashing, and structuring the output into a human-readable prefix (JA4a) representing options/counts, followed by sorted cryptographic hashes (JA4b, JA4c)."
-            />
-
-            <FAQAccordion
-              question="Why are mobile LTE IP addresses (CGNAT) so difficult for WAFs to block?"
-              answer="Carrier-Grade NAT (CGNAT) allows mobile network operators to share a single public IPv4 address among thousands of individual cellular mobile devices. If a WAF blocks a mobile IP, it will block not just the automated crawler, but thousands of legitimate mobile phone users. Consequently, security firewalls must assign low risk scores to mobile carrier ASNs."
-            />
-
-            <FAQAccordion
-              question="Can headless browsers (Puppeteer, Playwright) ever fully bypass Cloudflare Turnstile or Akamai Bot Manager?"
-              answer="No browser automation framework is fully undetectable. While patched drivers (like Rebrowser or Puppeteer-Stealth) attempt to mask CDP variables and override native method prototype traits, WAFs continually deploy updated scripts looking for V8 debugging protocols, graphics driver virtualization side-channels (like Canvas speed-testing), and mouse curve acceleration dynamics that betray automated execution."
-            />
-          </div>
-        </section>
-
-      </article>
+      </div>
     </Layout>
   );
 }

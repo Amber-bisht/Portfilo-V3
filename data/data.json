@@ -2,8 +2,8 @@
     "about": {
         "name": "Amber Bisht",
         "gender": "Male",
-        "title": "Scalable Systems Engineer | Full-Stack & DevOps",
-        "description": "Scalable Systems Engineer focused on building production-grade, end-to-end platforms. He emphasizes backend architecture, performance optimization, and infrastructure reliability.",
+        "title": "Full-Stack Engineer | Backend Systems | Cloud Infrastructure",
+        "description": "I'm someone who can single-handedly manage the server, code, product, and UI. Throw anything at me — I can deep-dive into it and fix every bit.\n\nI love working with AI — yup, I read every line of its thinking lol.\n\nCurrently working as a Full-Stack Engineering Intern at Tensorik. My primary stack is Next.js, Bun, TypeScript, PostgreSQL, Docker, and AWS — still exploring every new tech and field.\n\nI'm interested in backend-heavy SDE roles where I can work on difficult engineering problems rather than spending six hours figuring out how to center a div lol.",
         "location": "Uttarakhand, IND",
         "image": "/amberbisht.webp",
         "fallbackRepos": 33,
@@ -265,6 +265,21 @@
     ],
     "experience": [
         {
+            "id": 2,
+            "title": "Full Stack Engineer Intern",
+            "company": "Tensorik",
+            "logo": "https://tensorik.in/favicon.png",
+            "duration": "Ongoing",
+            "starttime": "August 2026",
+            "endtime": "Present",
+            "description": "Just started — detailed description will be added soon.",
+            "tech used": [
+                "Next.js",
+                "Postgres",
+                "GCP"
+            ]
+        },
+        {
             "id": 1,
             "title": "Software Intern",
             "company": "Delonix Services",
@@ -272,13 +287,14 @@
             "duration": "3 months",
             "starttime": "April 2025",
             "endtime": "July 2025",
-            "description": "Contributed to the design and development of a custom internal CRM system using ReactJS for the frontend and NodeJS for the backend, focusing on modular architecture and maintainable code practices. Implemented reusable UI components, integrated RESTful APIs, and collaborated closely with backend services to ensure smooth data flow and performance optimization. Containerized the entire application using Docker, creating consistent and reproducible development, testing, and production environments, which simplified deployments, reduced environment-specific issues, and improved overall release reliability.",
+            "description": "I worked on a custom internal CRM system. It was a traveling sales CRM where we had to integrate external APIs in the CRM, display data well. Its primary stack was ReactJS - NodeJS Express for backend and MongoDB for storing leads. I mostly worked in backend integration and API creation, and making PDF designs via Puppeteer HTML ones. Also worked with my senior on moving from PM2 to Docker services to keep the same environment in both prod and dev. Also improved API latency by optimizing API calls, added a new role \"manager\" in the already existing RBAC, pagination, search, sorting, etc.",
             "tech used": [
                 "ReactJS",
                 "NodeJS",
+                "Express.js",
+                "MongoDB",
                 "Docker",
-                "Hostinger",
-                "MongoDB"
+                "Puppeteer"
             ]
         }
     ],

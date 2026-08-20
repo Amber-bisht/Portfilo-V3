@@ -59,7 +59,8 @@ import {
     SiTrpc,
     SiGraphql,
     SiReactquery,
-    SiApachekafka
+    SiApachekafka,
+    SiPuppeteer
 } from 'react-icons/si';
 import { FaDatabase, FaServer, FaCode, FaLock, FaTruck, FaVideo, FaRobot, FaEnvelope, FaBrain, FaTerminal, FaSearch } from 'react-icons/fa';
 import { IconType } from 'react-icons';
@@ -77,6 +78,7 @@ const techIconMap: { [key: string]: TechIcon } = {
     "Docker": { icon: SiDocker, color: "#2496ED" },
     "Hostinger": { icon: SiHostinger, color: "#673DE6" },
     "MongoDB": { icon: SiMongodb, color: "#47A248" },
+    "Puppeteer": { icon: SiPuppeteer, color: "#00D8A2" },
 
     // Projects
     "Jenkins": { icon: SiJenkins, color: "#D24939" },
@@ -138,6 +140,8 @@ const techIconMap: { [key: string]: TechIcon } = {
     "CSS": { icon: SiCss3, color: "#1572B6" },
     "MySQL": { icon: SiMysql, color: "#4479A1" },
     "Google Cloud Platform (GCP)": { icon: SiGooglecloud, color: "#4285F4" },
+    "GCP": { icon: SiGooglecloud, color: "#4285F4" },
+    "Postgres": { icon: SiPostgresql, color: "#4169E1" },
     "Large Language Models (LLM)": { icon: FaBrain, color: "#9046FF" },
     "PHP": { icon: SiPhp, color: "#777BB4" },
     "pubsub": { icon: SiRedis, color: "#DC382D" },

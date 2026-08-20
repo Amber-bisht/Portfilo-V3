@@ -37,14 +37,13 @@ const Layout = ({ children, title = data.seo.title }: LayoutProps) => {
         { name: 'Home', icon: FaHome, href: '/#' },
         { name: 'Projects', icon: FaFolder, href: '/#projects' },
         { name: 'Blog', icon: FaLayerGroup, href: '/blog' },
-        { name: 'Roadmap', icon: FaLayerGroup, href: '/fullstack-roadmap' },
         { name: 'Freelance', icon: FaBriefcase, href: '/freelance' },
         { name: 'Tech Stack', icon: FaLayerGroup, href: '/#techstack' },
         { name: 'Contact', icon: FaEnvelope, href: '/#contact' },
     ];
 
     return (
-        <div className="min-h-screen bg-neutral-950 text-zinc-100 relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw]">
+        <div className="min-h-screen bg-neutral-950 text-zinc-100 relative selection:bg-makima-gold selection:text-neutral-950 transition-colors duration-300 overflow-x-clip w-full max-w-[100vw]">
 
             {/* Layered Atmospheric Background */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
@@ -173,10 +172,10 @@ const Layout = ({ children, title = data.seo.title }: LayoutProps) => {
                         src="/images/projects/amberbisht.webp"
                         alt="Footer Background"
                         fill
-                        className="object-cover opacity-50"
+                        className="object-cover object-[90%_center] opacity-35 md:opacity-70"
                         priority={false}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-neutral-950/80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-neutral-950/80" />
                 </div>
 
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 relative z-10">

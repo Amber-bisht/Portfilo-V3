@@ -54,6 +54,11 @@ const nextConfig = {
         hostname: 'images.unsplash.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'tensorik.in',
+        pathname: '/**',
+      },
     ],
   },
   // trailingSlash: true, // Removed as Vercel handles trailing slashes natively and causes 404.html chmod build error
@@ -65,7 +70,23 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'react-icons'],
   },
-
+  async headers() {
+    return [
+      {
+        source: '/:all*(mp3|wav|ogg)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Accept-Ranges',
+            value: 'bytes',
+          },
+        ],
+      },
+    ];
+  },
 }
 
 module.exports = withBundleAnalyzer(nextConfig)
